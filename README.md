@@ -16,8 +16,8 @@ This repository has 5 primary branches. One for each team member and a master br
 - Oscar Lopez : Product Manager
 - Anthony Karapetian : Scrum Master
 - Alek Peratoner  
-- Luke 
-- Yuchen
+- Luke Schrezenmeier
+- Yuchen Yao
 
 # To Do
 
