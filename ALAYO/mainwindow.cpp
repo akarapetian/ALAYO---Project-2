@@ -4,6 +4,7 @@
 #include "QDesktopWidget"
 #include "QTextStream"
 
+
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow)
@@ -23,6 +24,7 @@ MainWindow::MainWindow(QWidget *parent) :
         thisMap.atIndex(i).value.addSouvenir(souvenir("Team jersey", 199.99));
     }
 
+
     //resize(QDesktopWidget().availableGeometry(this).size() * 0.7);
 }
 
@@ -31,8 +33,8 @@ MainWindow::~MainWindow()
     delete ui;
 }
 
-
 //************************************ PARSING ************************************************
+
 void MainWindow::reinitialize()
 {
     // creates a blank map and sets it to the main window map, so it is all deleted
@@ -51,6 +53,7 @@ void MainWindow::reinitialize()
     string iRoofType;
 
     ifstream csvFile1;
+
 
     QTextStream(stdout) << "opening csv1\n";
     csvFile1.open("C:/ALAYO---Project-2-master/ALAYO/inputMLBInformation.csv");
@@ -92,6 +95,7 @@ void MainWindow::reinitialize()
     }
 
     csvFile1.close();
+
     string iStadium1;
     string iStadium2;
     string iDistance;
@@ -102,6 +106,7 @@ void MainWindow::reinitialize()
     bool found;
 
     ifstream csvFile2;
+
     csvFile2.open("C:/ALAYO---Project-2-master/ALAYO/inputDistance.csv");
     if(csvFile2.is_open())
     {
@@ -154,16 +159,20 @@ void MainWindow::reinitialize()
     else {
         QTextStream(stdout) << "file2 opening failed...";
     }
+
     csvFile2.close();
 
 }
 
+
 //************************************ LOGIN ************************************************
+
 void MainWindow::on_loginPushButton_clicked()
 {
     if(ui->usernameLineEdit->text() == "admin" && ui->passwordLineEdit->text() == "admin")
     {
         ui->primaryPageStackedWidget->setCurrentIndex(1);
+
         isAdmin = true;
     }
     else if(ui->usernameLineEdit->text() == "user" && ui->passwordLineEdit->text() == "user")
@@ -324,8 +333,4 @@ void MainWindow::on_takeTripButton_admin_clicked()
     ui->primaryPageStackedWidget->setCurrentIndex(2);
     ui->userStackedWidget->setCurrentIndex(1);
 }
-
-
-
-
 

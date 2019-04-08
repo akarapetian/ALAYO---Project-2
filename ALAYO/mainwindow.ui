@@ -18,6 +18,7 @@
   </property>
   <property name="minimumSize">
    <size>
+
     <width>1200</width>
     <height>800</height>
    </size>
@@ -62,6 +63,7 @@
      <widget class="QPushButton" name="loginPushButton">
       <property name="geometry">
        <rect>
+
         <x>490</x>
         <y>390</y>
         <width>191</width>

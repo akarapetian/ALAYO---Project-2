@@ -28,12 +28,16 @@ SOURCES += \
         main.cpp \
         mainwindow.cpp \
     map.cpp \
+
     mlb.cpp
+
 
 HEADERS += \
         mainwindow.h \
     map.h \
+
     mlb.h
+
 
 FORMS += \
         mainwindow.ui

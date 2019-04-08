@@ -34,8 +34,6 @@ class Map
         // returns entry of the map
         entry& atIndex(int index);
 
-
-
         // returns the size of the map
         int mapSize();
 

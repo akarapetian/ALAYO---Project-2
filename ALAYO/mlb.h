@@ -21,7 +21,6 @@ struct souvenir
     float  itemPrice;
 };
 
-
 class MLB
 {
 public:
