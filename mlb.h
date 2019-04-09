@@ -7,6 +7,20 @@
 #include <iostream>
 using namespace std;
 
+struct souvenir
+{
+    souvenir(){}
+    souvenir(string nItemName, float nItemPrice)
+    {
+        itemName = nItemName;
+        itemPrice = nItemPrice;
+    }
+    ~souvenir(){}
+
+    string itemName;
+    float  itemPrice;
+};
+
 class MLB
 {
 public:
@@ -28,6 +42,11 @@ public:
     string getRoofType();
     int getDistanceSize();
 
+    int getSouvenirListSize() const;
+    souvenir getSouvenir(int index) const;
+
+    void addSouvenir(souvenir newSouvenir);
+
     void setInitialDistances(int size);
     void setDistance(int i, int distance);
     void printDistances();
@@ -42,6 +61,9 @@ private:
     int distanceToCenterField;
     string ballparkTypology;
     string roofType;
+
+    vector<souvenir> souvenirs;
+
     vector<int> distances;
 };
 

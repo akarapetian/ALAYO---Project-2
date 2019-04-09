@@ -87,6 +87,22 @@ int MLB::getDistanceSize()
     return distances.size();
 }
 
+int MLB::getSouvenirListSize() const
+{
+    return souvenirs.size();
+}
+
+souvenir MLB::getSouvenir(int index) const
+{
+    return souvenirs[index];
+}
+
+
+void MLB::addSouvenir(souvenir newSouvenir)
+{
+    souvenirs.push_back(newSouvenir);
+}
+
 void MLB::setInitialDistances(int size)
 {
     for(int i = 0; i < size; i++)

@@ -36,6 +36,7 @@ void Map::deleteAll()
     {
         thisTable.pop_back();
     }
+    currentSize = 0;
 }
 
 void Map::popBack()

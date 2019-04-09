@@ -1,6 +1,6 @@
 #-------------------------------------------------
 #
-# Project created by QtCreator 2019-04-05T12:34:47
+# Project created by QtCreator 2019-04-02T13:36:39
 #
 #-------------------------------------------------
 
@@ -27,15 +27,21 @@ CONFIG += c++11
 SOURCES += \
         main.cpp \
         mainwindow.cpp \
+    map.cpp \
     mlb.cpp \
-    souvenirs.cpp \
-    map.cpp
+    souvenirs.cpp
+
+    mlb.cpp
+
 
 HEADERS += \
         mainwindow.h \
+    map.h \
     mlb.h \
-    souvenirs.h \
-    map.h
+    souvenirs.h
+
+    mlb.h
+
 
 FORMS += \
         mainwindow.ui
