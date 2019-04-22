@@ -17,6 +17,11 @@ struct souvenir
     }
     ~souvenir(){}
 
+    void setItemPrice(float newPrice)
+    {
+        this->itemPrice = newPrice;
+    }
+
     string itemName;
     float  itemPrice;
 };
@@ -41,6 +46,19 @@ public:
     string getBallParkTypology();
     string getRoofType();
     int getDistanceSize();
+
+    void setID(int newID);
+    void setStadiumName(string newStadiumName);
+    void setSeatingCapacity(int newSeatingCapacity);
+    void setLocation(string newLocation);
+    void setPlayingSurface(string newPlayingSurface);
+    void setLeague(string newLeague);
+    void setDateOpened(int newDate);
+    void setDistanceToCenterField(int newDistance);
+    void setTypology(string newTypology);
+    void setRoofType(string newRoofType);
+
+
 
     int getSouvenirListSize() const;
     souvenir getSouvenir(int index) const;

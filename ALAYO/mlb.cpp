@@ -87,6 +87,62 @@ int MLB::getDistanceSize()
     return distances.size();
 }
 
+void MLB::setID(int newID)
+{
+    this->ID = newID;
+}
+
+void MLB::setStadiumName(string newStadiumName)
+{
+    this->stadiumName = newStadiumName;
+}
+
+void MLB::setSeatingCapacity(int newSeatingCapacity)
+{
+    this->seatingCapacity = newSeatingCapacity;
+}
+
+void MLB::setLocation(string newLocation)
+{
+    this->location = newLocation;
+}
+
+void MLB::setPlayingSurface(string newPlayingSurface)
+{
+    this->playingSurface = newPlayingSurface;
+}
+
+void MLB::setLeague(string newLeague)
+{
+    this->league = newLeague;
+}
+
+void MLB::setDateOpened(int newDate)
+{
+    this->dateOpened = newDate;
+}
+
+void MLB::setDistanceToCenterField(int newDistance)
+{
+    this->distanceToCenterField = newDistance;
+}
+
+void MLB::setTypology(string newTypology)
+{
+    this->ballparkTypology = newTypology;
+}
+
+void MLB::setRoofType(string newRoofType)
+{
+    this->roofType = newRoofType;
+}
+
+
+
+
+
+
+
 int MLB::getSouvenirListSize() const
 {
     return souvenirs.size();

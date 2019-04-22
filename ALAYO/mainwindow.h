@@ -3,7 +3,9 @@
 
 #include <QMainWindow>
 #include <QListWidget>
+#include <QTableWidget>
 #include <QDebug>
+#include <QVector>
 
 #include "mlb.h"
 #include "map.h"
@@ -11,6 +13,7 @@
 #include <fstream>
 #include <string>
 #include <iostream>
+#include <vector>
 
 
 namespace Ui {
@@ -50,10 +53,49 @@ private slots:
 
     void on_stadiumListWidget_2_currentItemChanged(QListWidgetItem *current, QListWidgetItem *previous);
 
+    void on_stadiumListWidget_itemDoubleClicked(QListWidgetItem *item);
+
+    void on_souvenirListWidget_itemDoubleClicked(QListWidgetItem *item);
+
+    void on_souvenirListWidget_currentItemChanged(QListWidgetItem *current, QListWidgetItem *previous);
+
+    void on_souvenirPriceListWidget_itemDoubleClicked(QListWidgetItem *item);
+
+    void on_souvenirPriceListWidget_currentItemChanged(QListWidgetItem *current, QListWidgetItem *previous);
+
+    bool isFloatNumber(const QString& Qstring);
+    bool isInteger(const QString &mystring);
+
+    void on_capacityLineEdit_editingFinished();
+
+    void on_capacityLineEdit_textEdited(const QString &arg1);
+
+    void on_surfaceLineEdit_textEdited(const QString &arg1);
+
+    void on_roofTypeLineEdit_textEdited(const QString &arg1);
+
+    void on_typologyLineEdit_textEdited(const QString &arg1);
+
+    void on_dateOpenedLineEdit_textEdited(const QString &arg1);
+
+    void on_distToCenterLineEdit_textEdited(const QString &arg1);
+
+    void on_newLocationLineEdit_textEdited(const QString &arg1);
+
 private:
     Ui::MainWindow *ui;
     Map thisMap;
     bool isAdmin;
+    QVector<entry> v1;
+    QVector<entry> v2;
+    QVector<entry> v3;
+    QVector<entry> v4;
+    QVector<entry> v5;
+    QVector<entry> v6;
+    QVector<entry> v7;
+    QVector<entry> v8;
+    QVector<entry> v9;
+    QVector<entry> v10;
 };
 
 #endif // MAINWINDOW_H

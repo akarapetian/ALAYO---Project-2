@@ -18,7 +18,6 @@
   </property>
   <property name="minimumSize">
    <size>
-
     <width>1200</width>
     <height>800</height>
    </size>
@@ -47,8 +46,8 @@
    <widget class="QStackedWidget" name="primaryPageStackedWidget">
     <property name="geometry">
      <rect>
-      <x>0</x>
-      <y>0</y>
+      <x>20</x>
+      <y>10</y>
       <width>1201</width>
       <height>761</height>
      </rect>
@@ -59,11 +58,13 @@
       <verstretch>0</verstretch>
      </sizepolicy>
     </property>
+    <property name="currentIndex">
+     <number>1</number>
+    </property>
     <widget class="QWidget" name="loginPage">
      <widget class="QPushButton" name="loginPushButton">
       <property name="geometry">
        <rect>
-
         <x>490</x>
         <y>390</y>
         <width>191</width>
@@ -77,14 +78,14 @@
      <widget class="QLabel" name="label">
       <property name="geometry">
        <rect>
-        <x>520</x>
-        <y>100</y>
+        <x>530</x>
+        <y>110</y>
         <width>141</width>
         <height>16</height>
        </rect>
       </property>
       <property name="text">
-       <string>Application Name Here</string>
+       <string>Ballgame Boogaloo</string>
       </property>
      </widget>
      <widget class="QLabel" name="label_2">
@@ -97,7 +98,7 @@
        </rect>
       </property>
       <property name="text">
-       <string>welcome</string>
+       <string>Welcome</string>
       </property>
      </widget>
      <widget class="QWidget" name="layoutWidget">
@@ -521,7 +522,7 @@
          </rect>
         </property>
         <property name="text">
-         <string>welcome regular user</string>
+         <string>Welcome Regular User</string>
         </property>
        </widget>
        <widget class="QPushButton" name="viewStadiumsButton">
@@ -566,52 +567,597 @@
          <enum>QTabWidget::North</enum>
         </property>
         <property name="currentIndex">
-         <number>0</number>
+         <number>7</number>
         </property>
-        <widget class="QWidget" name="tab">
+        <widget class="QWidget" name="MajorLeagueTeam">
          <attribute name="title">
-          <string>Tab 1</string>
+          <string>American-Name</string>
          </attribute>
+         <widget class="QLabel" name="label_5">
+          <property name="geometry">
+           <rect>
+            <x>890</x>
+            <y>30</y>
+            <width>111</width>
+            <height>16</height>
+           </rect>
+          </property>
+          <property name="text">
+           <string>Size:</string>
+          </property>
+         </widget>
+         <widget class="QLabel" name="label_19">
+          <property name="geometry">
+           <rect>
+            <x>920</x>
+            <y>30</y>
+            <width>111</width>
+            <height>16</height>
+           </rect>
+          </property>
+          <property name="text">
+           <string/>
+          </property>
+         </widget>
+         <widget class="QTableWidget" name="teamTableWidget_1">
+          <property name="geometry">
+           <rect>
+            <x>10</x>
+            <y>30</y>
+            <width>881</width>
+            <height>311</height>
+           </rect>
+          </property>
+          <property name="minimumSize">
+           <size>
+            <width>741</width>
+            <height>0</height>
+           </size>
+          </property>
+          <property name="maximumSize">
+           <size>
+            <width>16777215</width>
+            <height>311</height>
+           </size>
+          </property>
+          <attribute name="horizontalHeaderDefaultSectionSize">
+           <number>440</number>
+          </attribute>
+          <attribute name="horizontalHeaderMinimumSectionSize">
+           <number>100</number>
+          </attribute>
+         </widget>
         </widget>
-        <widget class="QWidget" name="tab_6">
+        <widget class="QWidget" name="MajorLeagueStadium">
          <attribute name="title">
-          <string>Page</string>
+          <string>American-Stadium</string>
          </attribute>
+         <widget class="QLabel" name="label_6">
+          <property name="geometry">
+           <rect>
+            <x>890</x>
+            <y>30</y>
+            <width>111</width>
+            <height>16</height>
+           </rect>
+          </property>
+          <property name="text">
+           <string>Size:</string>
+          </property>
+         </widget>
+         <widget class="QLabel" name="label_20">
+          <property name="geometry">
+           <rect>
+            <x>920</x>
+            <y>30</y>
+            <width>111</width>
+            <height>16</height>
+           </rect>
+          </property>
+          <property name="text">
+           <string/>
+          </property>
+         </widget>
+         <widget class="QTableWidget" name="teamTableWidget_2">
+          <property name="geometry">
+           <rect>
+            <x>10</x>
+            <y>30</y>
+            <width>881</width>
+            <height>311</height>
+           </rect>
+          </property>
+          <property name="minimumSize">
+           <size>
+            <width>741</width>
+            <height>0</height>
+           </size>
+          </property>
+          <property name="maximumSize">
+           <size>
+            <width>16777215</width>
+            <height>311</height>
+           </size>
+          </property>
+          <attribute name="horizontalHeaderDefaultSectionSize">
+           <number>440</number>
+          </attribute>
+          <attribute name="horizontalHeaderMinimumSectionSize">
+           <number>100</number>
+          </attribute>
+         </widget>
         </widget>
-        <widget class="QWidget" name="tab_7">
+        <widget class="QWidget" name="AmericanLeagueTeam">
          <attribute name="title">
-          <string>Page</string>
+          <string>National-Name</string>
          </attribute>
+         <widget class="QLabel" name="label_7">
+          <property name="geometry">
+           <rect>
+            <x>900</x>
+            <y>30</y>
+            <width>111</width>
+            <height>16</height>
+           </rect>
+          </property>
+          <property name="text">
+           <string>Size:</string>
+          </property>
+         </widget>
+         <widget class="QLabel" name="label_21">
+          <property name="geometry">
+           <rect>
+            <x>930</x>
+            <y>30</y>
+            <width>111</width>
+            <height>16</height>
+           </rect>
+          </property>
+          <property name="text">
+           <string/>
+          </property>
+         </widget>
+         <widget class="QTableWidget" name="teamTableWidget_3">
+          <property name="geometry">
+           <rect>
+            <x>10</x>
+            <y>30</y>
+            <width>881</width>
+            <height>311</height>
+           </rect>
+          </property>
+          <property name="minimumSize">
+           <size>
+            <width>741</width>
+            <height>0</height>
+           </size>
+          </property>
+          <property name="maximumSize">
+           <size>
+            <width>16777215</width>
+            <height>311</height>
+           </size>
+          </property>
+          <attribute name="horizontalHeaderDefaultSectionSize">
+           <number>440</number>
+          </attribute>
+          <attribute name="horizontalHeaderMinimumSectionSize">
+           <number>100</number>
+          </attribute>
+         </widget>
         </widget>
-        <widget class="QWidget" name="tab_8">
+        <widget class="QWidget" name="NationalLeagueStadium">
          <attribute name="title">
-          <string>Page</string>
+          <string>National-Stadium</string>
          </attribute>
+         <widget class="QLabel" name="label_4">
+          <property name="geometry">
+           <rect>
+            <x>890</x>
+            <y>30</y>
+            <width>111</width>
+            <height>16</height>
+           </rect>
+          </property>
+          <property name="text">
+           <string>Size:</string>
+          </property>
+         </widget>
+         <widget class="QLabel" name="label_22">
+          <property name="geometry">
+           <rect>
+            <x>920</x>
+            <y>30</y>
+            <width>111</width>
+            <height>16</height>
+           </rect>
+          </property>
+          <property name="text">
+           <string/>
+          </property>
+         </widget>
+         <widget class="QTableWidget" name="teamTableWidget_4">
+          <property name="geometry">
+           <rect>
+            <x>10</x>
+            <y>30</y>
+            <width>881</width>
+            <height>311</height>
+           </rect>
+          </property>
+          <property name="minimumSize">
+           <size>
+            <width>741</width>
+            <height>0</height>
+           </size>
+          </property>
+          <property name="maximumSize">
+           <size>
+            <width>16777215</width>
+            <height>311</height>
+           </size>
+          </property>
+          <attribute name="horizontalHeaderDefaultSectionSize">
+           <number>440</number>
+          </attribute>
+          <attribute name="horizontalHeaderMinimumSectionSize">
+           <number>100</number>
+          </attribute>
+         </widget>
         </widget>
-        <widget class="QWidget" name="tab_9">
+        <widget class="QWidget" name="typology">
          <attribute name="title">
-          <string>Page</string>
+          <string>Park Typology</string>
          </attribute>
+         <widget class="QLabel" name="label_8">
+          <property name="geometry">
+           <rect>
+            <x>890</x>
+            <y>30</y>
+            <width>111</width>
+            <height>16</height>
+           </rect>
+          </property>
+          <property name="text">
+           <string>Size:</string>
+          </property>
+         </widget>
+         <widget class="QLabel" name="label_23">
+          <property name="geometry">
+           <rect>
+            <x>930</x>
+            <y>30</y>
+            <width>111</width>
+            <height>16</height>
+           </rect>
+          </property>
+          <property name="text">
+           <string/>
+          </property>
+         </widget>
+         <widget class="QTableWidget" name="teamTableWidget_5">
+          <property name="geometry">
+           <rect>
+            <x>10</x>
+            <y>30</y>
+            <width>881</width>
+            <height>311</height>
+           </rect>
+          </property>
+          <property name="minimumSize">
+           <size>
+            <width>741</width>
+            <height>0</height>
+           </size>
+          </property>
+          <property name="maximumSize">
+           <size>
+            <width>16777215</width>
+            <height>311</height>
+           </size>
+          </property>
+          <attribute name="horizontalHeaderDefaultSectionSize">
+           <number>293</number>
+          </attribute>
+          <attribute name="horizontalHeaderMinimumSectionSize">
+           <number>100</number>
+          </attribute>
+         </widget>
         </widget>
-        <widget class="QWidget" name="tab_3">
+        <widget class="QWidget" name="openRoofType">
          <attribute name="title">
-          <string>Page</string>
+          <string>Roof Type</string>
          </attribute>
+         <widget class="QLabel" name="label_9">
+          <property name="geometry">
+           <rect>
+            <x>900</x>
+            <y>30</y>
+            <width>111</width>
+            <height>16</height>
+           </rect>
+          </property>
+          <property name="text">
+           <string>Size:</string>
+          </property>
+         </widget>
+         <widget class="QLabel" name="label_24">
+          <property name="geometry">
+           <rect>
+            <x>950</x>
+            <y>30</y>
+            <width>111</width>
+            <height>16</height>
+           </rect>
+          </property>
+          <property name="text">
+           <string/>
+          </property>
+         </widget>
+         <widget class="QTableWidget" name="teamTableWidget_6">
+          <property name="geometry">
+           <rect>
+            <x>10</x>
+            <y>30</y>
+            <width>881</width>
+            <height>311</height>
+           </rect>
+          </property>
+          <property name="minimumSize">
+           <size>
+            <width>741</width>
+            <height>0</height>
+           </size>
+          </property>
+          <property name="maximumSize">
+           <size>
+            <width>16777215</width>
+            <height>311</height>
+           </size>
+          </property>
+          <attribute name="horizontalHeaderDefaultSectionSize">
+           <number>293</number>
+          </attribute>
+          <attribute name="horizontalHeaderMinimumSectionSize">
+           <number>100</number>
+          </attribute>
+         </widget>
         </widget>
-        <widget class="QWidget" name="tab_4">
+        <widget class="QWidget" name="dateOpened">
          <attribute name="title">
-          <string>Page</string>
+          <string>Date</string>
          </attribute>
+         <widget class="QLabel" name="label_15">
+          <property name="geometry">
+           <rect>
+            <x>900</x>
+            <y>30</y>
+            <width>111</width>
+            <height>16</height>
+           </rect>
+          </property>
+          <property name="text">
+           <string>Size:</string>
+          </property>
+         </widget>
+         <widget class="QLabel" name="label_25">
+          <property name="geometry">
+           <rect>
+            <x>940</x>
+            <y>30</y>
+            <width>111</width>
+            <height>16</height>
+           </rect>
+          </property>
+          <property name="text">
+           <string/>
+          </property>
+         </widget>
+         <widget class="QTableWidget" name="teamTableWidget_7">
+          <property name="geometry">
+           <rect>
+            <x>10</x>
+            <y>30</y>
+            <width>881</width>
+            <height>311</height>
+           </rect>
+          </property>
+          <property name="minimumSize">
+           <size>
+            <width>741</width>
+            <height>0</height>
+           </size>
+          </property>
+          <property name="maximumSize">
+           <size>
+            <width>16777215</width>
+            <height>311</height>
+           </size>
+          </property>
+          <attribute name="horizontalHeaderDefaultSectionSize">
+           <number>293</number>
+          </attribute>
+          <attribute name="horizontalHeaderMinimumSectionSize">
+           <number>100</number>
+          </attribute>
+         </widget>
         </widget>
-        <widget class="QWidget" name="tab_5">
+        <widget class="QWidget" name="seatingCapacity">
          <attribute name="title">
-          <string>Page</string>
+          <string>Seating Capacity</string>
          </attribute>
+         <widget class="QLabel" name="label_16">
+          <property name="geometry">
+           <rect>
+            <x>900</x>
+            <y>70</y>
+            <width>111</width>
+            <height>16</height>
+           </rect>
+          </property>
+          <property name="text">
+           <string>Size:</string>
+          </property>
+         </widget>
+         <widget class="QLabel" name="label_26">
+          <property name="geometry">
+           <rect>
+            <x>960</x>
+            <y>70</y>
+            <width>111</width>
+            <height>16</height>
+           </rect>
+          </property>
+          <property name="text">
+           <string/>
+          </property>
+         </widget>
+         <widget class="QTableWidget" name="teamTableWidget_8">
+          <property name="geometry">
+           <rect>
+            <x>10</x>
+            <y>30</y>
+            <width>881</width>
+            <height>311</height>
+           </rect>
+          </property>
+          <property name="minimumSize">
+           <size>
+            <width>741</width>
+            <height>0</height>
+           </size>
+          </property>
+          <property name="maximumSize">
+           <size>
+            <width>16777215</width>
+            <height>311</height>
+           </size>
+          </property>
+          <attribute name="horizontalHeaderDefaultSectionSize">
+           <number>293</number>
+          </attribute>
+          <attribute name="horizontalHeaderMinimumSectionSize">
+           <number>100</number>
+          </attribute>
+         </widget>
         </widget>
-        <widget class="QWidget" name="tab_2">
+        <widget class="QWidget" name="greatestDistanceCenter">
          <attribute name="title">
           <string>Tab 2</string>
          </attribute>
+         <widget class="QTableWidget" name="teamTableWidget_9">
+          <property name="geometry">
+           <rect>
+            <x>10</x>
+            <y>30</y>
+            <width>881</width>
+            <height>311</height>
+           </rect>
+          </property>
+          <property name="minimumSize">
+           <size>
+            <width>741</width>
+            <height>0</height>
+           </size>
+          </property>
+          <property name="maximumSize">
+           <size>
+            <width>16777215</width>
+            <height>311</height>
+           </size>
+          </property>
+          <attribute name="horizontalHeaderDefaultSectionSize">
+           <number>293</number>
+          </attribute>
+          <attribute name="horizontalHeaderMinimumSectionSize">
+           <number>100</number>
+          </attribute>
+         </widget>
+         <widget class="QLabel" name="label_17">
+          <property name="geometry">
+           <rect>
+            <x>900</x>
+            <y>30</y>
+            <width>111</width>
+            <height>16</height>
+           </rect>
+          </property>
+          <property name="text">
+           <string>Size:</string>
+          </property>
+         </widget>
+         <widget class="QLabel" name="label_27">
+          <property name="geometry">
+           <rect>
+            <x>970</x>
+            <y>30</y>
+            <width>111</width>
+            <height>16</height>
+           </rect>
+          </property>
+          <property name="text">
+           <string/>
+          </property>
+         </widget>
+        </widget>
+        <widget class="QWidget" name="smallestDistanceCenter">
+         <attribute name="title">
+          <string>Page</string>
+         </attribute>
+         <widget class="QLabel" name="label_18">
+          <property name="geometry">
+           <rect>
+            <x>890</x>
+            <y>30</y>
+            <width>111</width>
+            <height>16</height>
+           </rect>
+          </property>
+          <property name="text">
+           <string>Size:</string>
+          </property>
+         </widget>
+         <widget class="QLabel" name="label_28">
+          <property name="geometry">
+           <rect>
+            <x>920</x>
+            <y>30</y>
+            <width>111</width>
+            <height>16</height>
+           </rect>
+          </property>
+          <property name="text">
+           <string/>
+          </property>
+         </widget>
+         <widget class="QTableWidget" name="teamTableWidget_10">
+          <property name="geometry">
+           <rect>
+            <x>10</x>
+            <y>30</y>
+            <width>881</width>
+            <height>311</height>
+           </rect>
+          </property>
+          <property name="minimumSize">
+           <size>
+            <width>741</width>
+            <height>0</height>
+           </size>
+          </property>
+          <property name="maximumSize">
+           <size>
+            <width>16777215</width>
+            <height>311</height>
+           </size>
+          </property>
+          <attribute name="horizontalHeaderDefaultSectionSize">
+           <number>293</number>
+          </attribute>
+          <attribute name="horizontalHeaderMinimumSectionSize">
+           <number>100</number>
+          </attribute>
+         </widget>
         </widget>
        </widget>
        <widget class="QLabel" name="label_12">
