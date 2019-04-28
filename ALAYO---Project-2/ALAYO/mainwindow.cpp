@@ -214,6 +214,11 @@ void MainWindow::on_loginPushButton_clicked()
 {
     if(ui->usernameLineEdit->text() == "admin" && ui->passwordLineEdit->text() == "admin")
     {
+        string value = "admin";
+        int hash_key = rand() % 100 + 1;
+
+        encryptionTable.putQuadraticHash(hash_key, value);
+
         ui->primaryPageStackedWidget->setCurrentIndex(1);
 
         isAdmin = true;
@@ -222,6 +227,11 @@ void MainWindow::on_loginPushButton_clicked()
     {
         ui->primaryPageStackedWidget->setCurrentIndex(2);
         isAdmin = false;
+
+        string value = "user";
+        int hash_key = rand() % 100 + 1;
+
+        encryptionTable.putQuadraticHash(hash_key, value);
     }
     else
     {
@@ -237,6 +247,7 @@ void MainWindow::on_loginPushButton_clicked()
 void MainWindow::on_actionLogout_triggered()
 {
     ui->primaryPageStackedWidget->setCurrentIndex(0);
+    //encryptionTable.clearTable();
 }
 
 //************************************ MANAGING STADIUMS (admin) ************************************************

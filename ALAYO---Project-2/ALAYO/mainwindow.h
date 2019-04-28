@@ -6,9 +6,11 @@
 #include <QTableWidget>
 #include <QDebug>
 #include <QVector>
+#include <random>
 
 #include "mlb.h"
 #include "map.h"
+#include "hashmap.h"
 
 #include <fstream>
 #include <string>
@@ -89,6 +91,7 @@ private slots:
 private:
     Ui::MainWindow *ui;
     Map thisMap;
+    HashMap encryptionTable;
     bool isAdmin;
     QVector<entry> v1;
     QVector<entry> v2;

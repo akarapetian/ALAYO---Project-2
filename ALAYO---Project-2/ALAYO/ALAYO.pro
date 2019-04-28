@@ -29,7 +29,9 @@ SOURCES += \
         mainwindow.cpp \
     map.cpp \
     mlb.cpp \
-    souvenirs.cpp
+    souvenirs.cpp \
+    entry.cpp \
+    hashmap.cpp
 
     mlb.cpp
 
@@ -38,7 +40,9 @@ HEADERS += \
         mainwindow.h \
     map.h \
     mlb.h \
-    souvenirs.h
+    souvenirs.h \
+    entry.h \
+    hashmap.h
 
     mlb.h
 
