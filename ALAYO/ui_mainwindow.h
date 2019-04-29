@@ -10,7 +10,9 @@
 #define UI_MAINWINDOW_H
 
 #include <QtCore/QVariant>
+#include <QtWidgets/QAction>
 #include <QtWidgets/QApplication>
+#include <QtWidgets/QCheckBox>
 #include <QtWidgets/QGroupBox>
 #include <QtWidgets/QHBoxLayout>
 #include <QtWidgets/QHeaderView>
@@ -18,6 +20,7 @@
 #include <QtWidgets/QLineEdit>
 #include <QtWidgets/QListWidget>
 #include <QtWidgets/QMainWindow>
+#include <QtWidgets/QMenu>
 #include <QtWidgets/QMenuBar>
 #include <QtWidgets/QPushButton>
 #include <QtWidgets/QStackedWidget>
@@ -32,6 +35,7 @@ QT_BEGIN_NAMESPACE
 class Ui_MainWindow
 {
 public:
+    QAction *actionLogout;
     QWidget *centralWidget;
     QStackedWidget *primaryPageStackedWidget;
     QWidget *loginPage;
@@ -46,6 +50,7 @@ public:
     QHBoxLayout *horizontalLayout;
     QLabel *passwordLabel;
     QLineEdit *passwordLineEdit;
+    QCheckBox *checkBox_showPW;
     QWidget *adminPage;
     QStackedWidget *adminStackedWidget;
     QWidget *welcomePage_admin;
@@ -150,6 +155,7 @@ public:
     QListWidget *souvenirPriceListWidget_2;
     QLabel *label_14;
     QMenuBar *menuBar;
+    QMenu *menuFile;
     QToolBar *mainToolBar;
     QStatusBar *statusBar;
 
@@ -169,11 +175,13 @@ public:
         QFont font;
         font.setPointSize(10);
         MainWindow->setFont(font);
+        actionLogout = new QAction(MainWindow);
+        actionLogout->setObjectName(QString::fromUtf8("actionLogout"));
         centralWidget = new QWidget(MainWindow);
         centralWidget->setObjectName(QString::fromUtf8("centralWidget"));
         primaryPageStackedWidget = new QStackedWidget(centralWidget);
         primaryPageStackedWidget->setObjectName(QString::fromUtf8("primaryPageStackedWidget"));
-        primaryPageStackedWidget->setGeometry(QRect(20, 10, 1201, 761));
+        primaryPageStackedWidget->setGeometry(QRect(70, 10, 1201, 761));
         QSizePolicy sizePolicy1(QSizePolicy::Fixed, QSizePolicy::Preferred);
         sizePolicy1.setHorizontalStretch(0);
         sizePolicy1.setVerticalStretch(0);
@@ -223,9 +231,13 @@ public:
 
         passwordLineEdit = new QLineEdit(layoutWidget1);
         passwordLineEdit->setObjectName(QString::fromUtf8("passwordLineEdit"));
+        passwordLineEdit->setEchoMode(QLineEdit::Password);
 
         horizontalLayout->addWidget(passwordLineEdit);
 
+        checkBox_showPW = new QCheckBox(loginPage);
+        checkBox_showPW->setObjectName(QString::fromUtf8("checkBox_showPW"));
+        checkBox_showPW->setGeometry(QRect(710, 356, 91, 21));
         primaryPageStackedWidget->addWidget(loginPage);
         adminPage = new QWidget();
         adminPage->setObjectName(QString::fromUtf8("adminPage"));
@@ -586,7 +598,9 @@ public:
         MainWindow->setCentralWidget(centralWidget);
         menuBar = new QMenuBar(MainWindow);
         menuBar->setObjectName(QString::fromUtf8("menuBar"));
-        menuBar->setGeometry(QRect(0, 0, 1200, 21));
+        menuBar->setGeometry(QRect(0, 0, 1200, 19));
+        menuFile = new QMenu(menuBar);
+        menuFile->setObjectName(QString::fromUtf8("menuFile"));
         MainWindow->setMenuBar(menuBar);
         mainToolBar = new QToolBar(MainWindow);
         mainToolBar->setObjectName(QString::fromUtf8("mainToolBar"));
@@ -595,10 +609,13 @@ public:
         statusBar->setObjectName(QString::fromUtf8("statusBar"));
         MainWindow->setStatusBar(statusBar);
 
+        menuBar->addAction(menuFile->menuAction());
+        menuFile->addAction(actionLogout);
+
         retranslateUi(MainWindow);
 
-        primaryPageStackedWidget->setCurrentIndex(2);
-        tabWidget->setCurrentIndex(9);
+        primaryPageStackedWidget->setCurrentIndex(0);
+        tabWidget->setCurrentIndex(7);
 
 
         QMetaObject::connectSlotsByName(MainWindow);
@@ -607,11 +624,13 @@ public:
     void retranslateUi(QMainWindow *MainWindow)
     {
         MainWindow->setWindowTitle(QApplication::translate("MainWindow", "MainWindow", nullptr));
+        actionLogout->setText(QApplication::translate("MainWindow", "Logout", nullptr));
         loginPushButton->setText(QApplication::translate("MainWindow", "Login", nullptr));
         label->setText(QApplication::translate("MainWindow", "Ballgame Boogaloo", nullptr));
         label_2->setText(QApplication::translate("MainWindow", "Welcome", nullptr));
         usernameLabel->setText(QApplication::translate("MainWindow", "Username", nullptr));
         passwordLabel->setText(QApplication::translate("MainWindow", "Password", nullptr));
+        checkBox_showPW->setText(QApplication::translate("MainWindow", "Show", nullptr));
         welcomeLabel_admin->setText(QApplication::translate("MainWindow", "Welcome Admin", nullptr));
         informationButton_admin->setText(QApplication::translate("MainWindow", "View Stadiums", nullptr));
         takeTripButton_admin->setText(QApplication::translate("MainWindow", "Take a Trip", nullptr));
@@ -674,6 +693,7 @@ public:
         label_13->setText(QApplication::translate("MainWindow", "Souvenirs", nullptr));
         viewStadiumsBackButton->setText(QApplication::translate("MainWindow", "Back", nullptr));
         label_14->setText(QApplication::translate("MainWindow", "Stadium", nullptr));
+        menuFile->setTitle(QApplication::translate("MainWindow", "File", nullptr));
     } // retranslateUi
 
 };

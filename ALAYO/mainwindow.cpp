@@ -193,12 +193,32 @@ void MainWindow::reinitialize()
     csvFile2.close();
 }
 
+
+//This method handles if the check box for show password has been clicked or not
+void MainWindow::on_checkBox_showPW_stateChanged(int)
+{
+    if(ui->checkBox_showPW->checkState() == Qt::CheckState::Checked)
+    {
+        ui->passwordLineEdit->setEchoMode(QLineEdit::EchoMode::Normal);
+    }
+    else
+    {
+        ui->passwordLineEdit->setEchoMode(QLineEdit::EchoMode::Password);
+    }
+}
+
+
 //************************************ LOGIN ************************************************
 
 void MainWindow::on_loginPushButton_clicked()
 {
     if(ui->usernameLineEdit->text() == "admin" && ui->passwordLineEdit->text() == "admin")
     {
+        string value = "admin";
+        int hash_key = rand() % 100 + 1;
+
+        encryptionTable.putQuadraticHash(hash_key, value);
+
         ui->primaryPageStackedWidget->setCurrentIndex(1);
 
         isAdmin = true;
@@ -207,12 +227,27 @@ void MainWindow::on_loginPushButton_clicked()
     {
         ui->primaryPageStackedWidget->setCurrentIndex(2);
         isAdmin = false;
+
+        string value = "user";
+        int hash_key = rand() % 100 + 1;
+
+        encryptionTable.putQuadraticHash(hash_key, value);
     }
     else
     {
         //error
-//        QMessageBox::Warning(nullptr, "error", "Wrong login information! Please try again.");
+        QMessageBox::critical(nullptr, "error", "Wrong login information! Please try again.");
     }
+
+    ui->passwordLineEdit->clear();
+    ui->usernameLineEdit->clear();
+}
+
+//************************************ LOGOUT ************************************************
+void MainWindow::on_actionLogout_triggered()
+{
+    ui->primaryPageStackedWidget->setCurrentIndex(0);
+    //encryptionTable.clearTable();
 }
 
 //************************************ MANAGING STADIUMS (admin) ************************************************
@@ -727,12 +762,17 @@ void MainWindow::on_takeTripButton_admin_clicked()
 }
 
 
+void MainWindow::on_visitMultipleButton_clicked()
+{
 
+}
 
+void MainWindow::on_visitSingleButton_clicked()
+{
 
+}
 
-
-
-
-
-
+void MainWindow::on_takeTripButton_user_clicked()
+{
+    ui->userStackedWidget->setCurrentIndex(1);
+}

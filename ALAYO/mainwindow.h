@@ -6,9 +6,11 @@
 #include <QTableWidget>
 #include <QDebug>
 #include <QVector>
+#include <random>
 
 #include "mlb.h"
 #include "map.h"
+#include "hashmap.h"
 
 #include <fstream>
 #include <string>
@@ -31,6 +33,8 @@ public:
     void reinitialize();
 
 private slots:
+    void on_checkBox_showPW_stateChanged(int);
+
     void on_loginPushButton_clicked();
 
     void on_manageStadiumsButton_clicked();
@@ -66,8 +70,6 @@ private slots:
     bool isFloatNumber(const QString& Qstring);
     bool isInteger(const QString &mystring);
 
-    void on_capacityLineEdit_editingFinished();
-
     void on_capacityLineEdit_textEdited(const QString &arg1);
 
     void on_surfaceLineEdit_textEdited(const QString &arg1);
@@ -82,9 +84,18 @@ private slots:
 
     void on_newLocationLineEdit_textEdited(const QString &arg1);
 
+    void on_actionLogout_triggered();
+
+    void on_visitMultipleButton_clicked();
+
+    void on_visitSingleButton_clicked();
+
+    void on_takeTripButton_user_clicked();
+
 private:
     Ui::MainWindow *ui;
     Map thisMap;
+    HashMap encryptionTable;
     bool isAdmin;
     QVector<entry> v1;
     QVector<entry> v2;
