@@ -20,6 +20,12 @@ This repository has 5 primary branches. One for each team member and a master br
 - Yuchen
 
 # To Do
-
+- Finish Color Schemes - Alek
+- Finish All Display Tabs - Alek
+- Fix edit souvenirs - Anthony?
+- Implement BFS/DFS/Take a trip - Luke and Anthony
+- Implement add/delete/edit stadium information - Oscar and Alek
+- Implement read from csv files for extension - Oscar
 
 # Bugs
+- Souvenirs not saving correctly after editing them as an admin
