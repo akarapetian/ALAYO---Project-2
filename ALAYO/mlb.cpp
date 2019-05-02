@@ -87,6 +87,11 @@ int MLB::getDistanceSize()
     return distances.size();
 }
 
+int MLB::getDistance(int i)
+{
+    return distances.at(i);
+}
+
 void MLB::setID(int newID)
 {
     this->ID = newID;
