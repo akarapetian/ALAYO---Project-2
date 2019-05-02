@@ -32,6 +32,12 @@ public:
 
     void reinitialize();
 
+    void readFromFiles(bool readOriginal);
+
+    void writeToFiles();
+
+    void updateVectors();
+
 private slots:
     void on_checkBox_showPW_stateChanged(int);
 
@@ -91,8 +97,6 @@ private slots:
     void on_visitSingleButton_clicked();
 
     void on_takeTripButton_user_clicked();
-
-    void on_availibleTeamsStackedWidget_itemChanged(QListWidgetItem *item);
 
 private:
     Ui::MainWindow *ui;

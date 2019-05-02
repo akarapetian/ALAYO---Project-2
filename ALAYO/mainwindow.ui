@@ -46,7 +46,7 @@
    <widget class="QStackedWidget" name="primaryPageStackedWidget">
     <property name="geometry">
      <rect>
-      <x>0</x>
+      <x>-20</x>
       <y>0</y>
       <width>1201</width>
       <height>761</height>
@@ -59,7 +59,7 @@
      </sizepolicy>
     </property>
     <property name="currentIndex">
-     <number>1</number>
+     <number>0</number>
     </property>
     <widget class="QWidget" name="loginPage">
      <widget class="QPushButton" name="loginPushButton">
@@ -674,7 +674,6 @@
           </property>
          </widget>
         </widget>
-        <widget class="QWidget" name="singleSelectionPage"/>
        </widget>
       </widget>
       <widget class="QWidget" name="informationPage">
@@ -1571,7 +1570,7 @@
    </property>
    <widget class="QMenu" name="menuFile">
     <property name="title">
-     <string>File</string>
+     <string>Logout</string>
     </property>
     <addaction name="actionLogout"/>
    </widget>
