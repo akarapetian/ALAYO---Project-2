@@ -92,6 +92,8 @@ private slots:
 
     void on_takeTripButton_user_clicked();
 
+    void on_availibleTeamsStackedWidget_itemChanged(QListWidgetItem *item);
+
 private:
     Ui::MainWindow *ui;
     Map thisMap;

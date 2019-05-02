@@ -220,12 +220,14 @@ void MainWindow::on_loginPushButton_clicked()
         encryptionTable.putQuadraticHash(hash_key, value);
 
         ui->primaryPageStackedWidget->setCurrentIndex(1);
+        ui->adminStackedWidget->setCurrentIndex(0);
 
         isAdmin = true;
     }
     else if(ui->usernameLineEdit->text() == "user" && ui->passwordLineEdit->text() == "user")
     {
         ui->primaryPageStackedWidget->setCurrentIndex(2);
+        ui->userStackedWidget->setCurrentIndex(0);
         isAdmin = false;
 
         string value = "user";
@@ -761,18 +763,71 @@ void MainWindow::on_takeTripButton_admin_clicked()
     ui->userStackedWidget->setCurrentIndex(1);
 }
 
+void MainWindow::on_takeTripButton_user_clicked()
+{
+    ui->userStackedWidget->setCurrentIndex(1);
+    ui->takeTripStackedWidget->setCurrentIndex(0);
+}
 
 void MainWindow::on_visitMultipleButton_clicked()
 {
+    ui->availibleTeamsStackedWidget->clear();
+    ui->selectedTeamsStackedWidget->clear();
 
+    for(int i = 0; i < thisMap.mapSize(); i++)
+    {
+        //fill up the availible teams stacked widget
+        ui->availibleTeamsStackedWidget->addItem(QString::fromStdString(thisMap.atIndex(i).key));
+        ui->availibleTeamsStackedWidget->item(i)->setCheckState(Qt::Unchecked);
+        ui->availibleTeamsStackedWidget->item(i)->setFlags(Qt::ItemIsUserCheckable | Qt::ItemIsUserCheckable | Qt::ItemIsEnabled);
+    }
+
+    ui->takeTripStackedWidget->setCurrentIndex(1);
 }
 
 void MainWindow::on_visitSingleButton_clicked()
 {
+    ui->takeTripStackedWidget->setCurrentIndex(2);
 
+    for(int i = 0; i < thisMap.mapSize(); i++)
+    {
+        //fill up the availible teams stacked widget
+        ui->availibleTeamsStackedWidget->addItem(QString::fromStdString(thisMap.atIndex(i).key));
+        ui->availibleTeamsStackedWidget->item(i)->setCheckState(Qt::Unchecked);
+        ui->availibleTeamsStackedWidget->item(i)->setFlags(Qt::ItemIsUserCheckable | Qt::ItemIsUserCheckable | Qt::ItemIsEnabled);
+    }
 }
 
-void MainWindow::on_takeTripButton_user_clicked()
+
+
+
+
+
+void MainWindow::on_availibleTeamsStackedWidget_itemChanged(QListWidgetItem *item)
 {
-    ui->userStackedWidget->setCurrentIndex(1);
+    //when user checks a team, it moves it into the next list widget
+    if(item->checkState() == 2)
+    {
+        //item is checked
+        ui->selectedTeamsStackedWidget->addItem(item->text());
+    }
+    else if(item->checkState() == 0)
+    {
+        //perform sequential search for the item
+
+        bool found = false;
+        unsigned int k = 0;
+        while(!found && k < ui->selectedTeamsStackedWidget->count())
+        {
+            if(item->text() == ui->selectedTeamsStackedWidget->item(k)->text())
+            {
+                found = true;
+            }
+            else {
+                ++k;
+            }
+        }
+
+        ui->selectedTeamsStackedWidget->takeItem(k);
+    }
 }
