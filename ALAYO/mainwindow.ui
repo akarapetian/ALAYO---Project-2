@@ -174,7 +174,7 @@
        </rect>
       </property>
       <property name="currentIndex">
-       <number>0</number>
+       <number>1</number>
       </property>
       <widget class="QWidget" name="welcomePage_admin">
        <widget class="QLabel" name="welcomeLabel_admin">
@@ -500,7 +500,7 @@
        </rect>
       </property>
       <property name="currentIndex">
-       <number>0</number>
+       <number>1</number>
       </property>
       <widget class="QWidget" name="welcomePage_user">
        <widget class="QPushButton" name="takeTripButton_user">
