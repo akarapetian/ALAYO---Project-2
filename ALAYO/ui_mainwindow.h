@@ -1,7 +1,7 @@
 /********************************************************************************
 ** Form generated from reading UI file 'mainwindow.ui'
 **
-** Created by: Qt User Interface Compiler version 5.12.0
+** Created by: Qt User Interface Compiler version 5.12.1
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
 ********************************************************************************/
@@ -99,6 +99,7 @@ public:
     QPushButton *optimizeButton;
     QPushButton *goButton;
     QListWidget *selectedTeamsStackedWidget;
+    QWidget *singleSelectionPage;
     QWidget *informationPage;
     QPushButton *informationBackButton;
     QTabWidget *tabWidget;
@@ -192,7 +193,7 @@ public:
         centralWidget->setObjectName(QString::fromUtf8("centralWidget"));
         primaryPageStackedWidget = new QStackedWidget(centralWidget);
         primaryPageStackedWidget->setObjectName(QString::fromUtf8("primaryPageStackedWidget"));
-        primaryPageStackedWidget->setGeometry(QRect(-20, 0, 1201, 761));
+        primaryPageStackedWidget->setGeometry(QRect(0, 0, 1201, 761));
         QSizePolicy sizePolicy1(QSizePolicy::Fixed, QSizePolicy::Preferred);
         sizePolicy1.setHorizontalStretch(0);
         sizePolicy1.setVerticalStretch(0);
@@ -398,6 +399,9 @@ public:
         selectedTeamsStackedWidget->setObjectName(QString::fromUtf8("selectedTeamsStackedWidget"));
         selectedTeamsStackedWidget->setGeometry(QRect(440, 50, 291, 591));
         takeTripStackedWidget->addWidget(multipleSelectionPage);
+        singleSelectionPage = new QWidget();
+        singleSelectionPage->setObjectName(QString::fromUtf8("singleSelectionPage"));
+        takeTripStackedWidget->addWidget(singleSelectionPage);
         userStackedWidget->addWidget(takeTripPage);
         informationPage = new QWidget();
         informationPage->setObjectName(QString::fromUtf8("informationPage"));
@@ -658,9 +662,9 @@ public:
 
         retranslateUi(MainWindow);
 
-        primaryPageStackedWidget->setCurrentIndex(0);
+        primaryPageStackedWidget->setCurrentIndex(1);
         adminStackedWidget->setCurrentIndex(0);
-        userStackedWidget->setCurrentIndex(1);
+        userStackedWidget->setCurrentIndex(0);
         tabWidget->setCurrentIndex(0);
 
 
@@ -745,7 +749,7 @@ public:
         label_13->setText(QApplication::translate("MainWindow", "Souvenirs", nullptr));
         viewStadiumsBackButton->setText(QApplication::translate("MainWindow", "Back", nullptr));
         label_14->setText(QApplication::translate("MainWindow", "Stadium", nullptr));
-        menuFile->setTitle(QApplication::translate("MainWindow", "Logout", nullptr));
+        menuFile->setTitle(QApplication::translate("MainWindow", "File", nullptr));
     } // retranslateUi
 
 };
