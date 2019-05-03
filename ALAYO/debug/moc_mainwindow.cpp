@@ -21,8 +21,8 @@ QT_BEGIN_MOC_NAMESPACE
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_DEPRECATED
 struct qt_meta_stringdata_MainWindow_t {
-    QByteArrayData data[40];
-    char stringdata0[1203];
+    QByteArrayData data[42];
+    char stringdata0[1258];
 };
 #define QT_MOC_LITERAL(idx, ofs, len) \
     Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
@@ -70,7 +70,9 @@ QT_MOC_LITERAL(35, 1016, 33), // "on_takeTripPageBackButton_cli..."
 QT_MOC_LITERAL(36, 1050, 40), // "on_singleSelectionPageBackBut..."
 QT_MOC_LITERAL(37, 1091, 25), // "on_optimizeButton_clicked"
 QT_MOC_LITERAL(38, 1117, 42), // "on_multipleSelectionPageBackB..."
-QT_MOC_LITERAL(39, 1160, 42) // "on_availibleTeamsStackedWidge..."
+QT_MOC_LITERAL(39, 1160, 42), // "on_availibleTeamsStackedWidge..."
+QT_MOC_LITERAL(40, 1203, 24), // "on_AddTeamButton_clicked"
+QT_MOC_LITERAL(41, 1228, 29) // "on_ReinitializeButton_clicked"
 
     },
     "MainWindow\0on_checkBox_showPW_stateChanged\0"
@@ -106,7 +108,9 @@ QT_MOC_LITERAL(39, 1160, 42) // "on_availibleTeamsStackedWidge..."
     "on_singleSelectionPageBackButton_clicked\0"
     "on_optimizeButton_clicked\0"
     "on_multipleSelectionPageBackButton_clicked\0"
-    "on_availibleTeamsStackedWidget_itemChanged"
+    "on_availibleTeamsStackedWidget_itemChanged\0"
+    "on_AddTeamButton_clicked\0"
+    "on_ReinitializeButton_clicked"
 };
 #undef QT_MOC_LITERAL
 
@@ -116,7 +120,7 @@ static const uint qt_meta_data_MainWindow[] = {
        8,       // revision
        0,       // classname
        0,    0, // classinfo
-      33,   14, // methods
+      35,   14, // methods
        0,    0, // properties
        0,    0, // enums/sets
        0,    0, // constructors
@@ -124,39 +128,41 @@ static const uint qt_meta_data_MainWindow[] = {
        0,       // signalCount
 
  // slots: name, argc, parameters, tag, flags
-       1,    1,  179,    2, 0x08 /* Private */,
-       3,    0,  182,    2, 0x08 /* Private */,
-       4,    0,  183,    2, 0x08 /* Private */,
-       5,    0,  184,    2, 0x08 /* Private */,
-       6,    0,  185,    2, 0x08 /* Private */,
-       7,    2,  186,    2, 0x08 /* Private */,
-      11,    0,  191,    2, 0x08 /* Private */,
-      12,    0,  192,    2, 0x08 /* Private */,
-      13,    0,  193,    2, 0x08 /* Private */,
-      14,    0,  194,    2, 0x08 /* Private */,
-      15,    0,  195,    2, 0x08 /* Private */,
-      16,    2,  196,    2, 0x08 /* Private */,
-      17,    1,  201,    2, 0x08 /* Private */,
-      19,    1,  204,    2, 0x08 /* Private */,
-      20,    2,  207,    2, 0x08 /* Private */,
-      21,    1,  212,    2, 0x08 /* Private */,
-      22,    2,  215,    2, 0x08 /* Private */,
-      23,    1,  220,    2, 0x08 /* Private */,
-      25,    1,  223,    2, 0x08 /* Private */,
-      26,    1,  226,    2, 0x08 /* Private */,
-      27,    1,  229,    2, 0x08 /* Private */,
-      28,    1,  232,    2, 0x08 /* Private */,
-      29,    1,  235,    2, 0x08 /* Private */,
-      30,    1,  238,    2, 0x08 /* Private */,
-      31,    0,  241,    2, 0x08 /* Private */,
-      32,    0,  242,    2, 0x08 /* Private */,
-      33,    0,  243,    2, 0x08 /* Private */,
-      34,    0,  244,    2, 0x08 /* Private */,
-      35,    0,  245,    2, 0x08 /* Private */,
-      36,    0,  246,    2, 0x08 /* Private */,
-      37,    0,  247,    2, 0x08 /* Private */,
-      38,    0,  248,    2, 0x08 /* Private */,
-      39,    1,  249,    2, 0x08 /* Private */,
+       1,    1,  189,    2, 0x08 /* Private */,
+       3,    0,  192,    2, 0x08 /* Private */,
+       4,    0,  193,    2, 0x08 /* Private */,
+       5,    0,  194,    2, 0x08 /* Private */,
+       6,    0,  195,    2, 0x08 /* Private */,
+       7,    2,  196,    2, 0x08 /* Private */,
+      11,    0,  201,    2, 0x08 /* Private */,
+      12,    0,  202,    2, 0x08 /* Private */,
+      13,    0,  203,    2, 0x08 /* Private */,
+      14,    0,  204,    2, 0x08 /* Private */,
+      15,    0,  205,    2, 0x08 /* Private */,
+      16,    2,  206,    2, 0x08 /* Private */,
+      17,    1,  211,    2, 0x08 /* Private */,
+      19,    1,  214,    2, 0x08 /* Private */,
+      20,    2,  217,    2, 0x08 /* Private */,
+      21,    1,  222,    2, 0x08 /* Private */,
+      22,    2,  225,    2, 0x08 /* Private */,
+      23,    1,  230,    2, 0x08 /* Private */,
+      25,    1,  233,    2, 0x08 /* Private */,
+      26,    1,  236,    2, 0x08 /* Private */,
+      27,    1,  239,    2, 0x08 /* Private */,
+      28,    1,  242,    2, 0x08 /* Private */,
+      29,    1,  245,    2, 0x08 /* Private */,
+      30,    1,  248,    2, 0x08 /* Private */,
+      31,    0,  251,    2, 0x08 /* Private */,
+      32,    0,  252,    2, 0x08 /* Private */,
+      33,    0,  253,    2, 0x08 /* Private */,
+      34,    0,  254,    2, 0x08 /* Private */,
+      35,    0,  255,    2, 0x08 /* Private */,
+      36,    0,  256,    2, 0x08 /* Private */,
+      37,    0,  257,    2, 0x08 /* Private */,
+      38,    0,  258,    2, 0x08 /* Private */,
+      39,    1,  259,    2, 0x08 /* Private */,
+      40,    0,  262,    2, 0x08 /* Private */,
+      41,    0,  263,    2, 0x08 /* Private */,
 
  // slots: parameters
     QMetaType::Void, QMetaType::Int,    2,
@@ -192,6 +198,8 @@ static const uint qt_meta_data_MainWindow[] = {
     QMetaType::Void,
     QMetaType::Void,
     QMetaType::Void, 0x80000000 | 8,   18,
+    QMetaType::Void,
+    QMetaType::Void,
 
        0        // eod
 };
@@ -235,6 +243,8 @@ void MainWindow::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, 
         case 30: _t->on_optimizeButton_clicked(); break;
         case 31: _t->on_multipleSelectionPageBackButton_clicked(); break;
         case 32: _t->on_availibleTeamsStackedWidget_itemChanged((*reinterpret_cast< QListWidgetItem*(*)>(_a[1]))); break;
+        case 33: _t->on_AddTeamButton_clicked(); break;
+        case 34: _t->on_ReinitializeButton_clicked(); break;
         default: ;
         }
     }
@@ -269,13 +279,13 @@ int MainWindow::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
     if (_id < 0)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {
-        if (_id < 33)
+        if (_id < 35)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 33;
+        _id -= 35;
     } else if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
-        if (_id < 33)
+        if (_id < 35)
             *reinterpret_cast<int*>(_a[0]) = -1;
-        _id -= 33;
+        _id -= 35;
     }
     return _id;
 }

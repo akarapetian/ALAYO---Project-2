@@ -79,6 +79,8 @@ public:
     QLabel *distToCenterLabel;
     QLineEdit *newLocationLineEdit;
     QLabel *newLocationLabel;
+    QPushButton *AddTeamButton;
+    QPushButton *ReinitializeButton;
     QListWidget *souvenirPriceListWidget;
     QWidget *userPage;
     QStackedWidget *userStackedWidget;
@@ -165,8 +167,6 @@ public:
     QLabel *dateLabel_2;
     QLineEdit *typologyLineEdit_2;
     QLabel *distToCenterLabel_2;
-    QLineEdit *newLocationLineEdit_2;
-    QLabel *newLocationLabel_2;
     QLabel *label_13;
     QPushButton *viewStadiumsBackButton;
     QListWidget *souvenirPriceListWidget_2;
@@ -376,6 +376,12 @@ public:
         newLocationLabel = new QLabel(groupBox);
         newLocationLabel->setObjectName(QString::fromUtf8("newLocationLabel"));
         newLocationLabel->setGeometry(QRect(40, 230, 81, 16));
+        AddTeamButton = new QPushButton(groupBox);
+        AddTeamButton->setObjectName(QString::fromUtf8("AddTeamButton"));
+        AddTeamButton->setGeometry(QRect(500, 230, 101, 41));
+        ReinitializeButton = new QPushButton(groupBox);
+        ReinitializeButton->setObjectName(QString::fromUtf8("ReinitializeButton"));
+        ReinitializeButton->setGeometry(QRect(360, 230, 101, 41));
         souvenirPriceListWidget = new QListWidget(manageStadiumsPage);
         souvenirPriceListWidget->setObjectName(QString::fromUtf8("souvenirPriceListWidget"));
         souvenirPriceListWidget->setGeometry(QRect(1110, 120, 51, 271));
@@ -677,12 +683,6 @@ public:
         distToCenterLabel_2 = new QLabel(groupBox_2);
         distToCenterLabel_2->setObjectName(QString::fromUtf8("distToCenterLabel_2"));
         distToCenterLabel_2->setGeometry(QRect(360, 130, 131, 16));
-        newLocationLineEdit_2 = new QLineEdit(groupBox_2);
-        newLocationLineEdit_2->setObjectName(QString::fromUtf8("newLocationLineEdit_2"));
-        newLocationLineEdit_2->setGeometry(QRect(20, 260, 113, 20));
-        newLocationLabel_2 = new QLabel(groupBox_2);
-        newLocationLabel_2->setObjectName(QString::fromUtf8("newLocationLabel_2"));
-        newLocationLabel_2->setGeometry(QRect(40, 230, 81, 16));
         label_13 = new QLabel(viewStadiumsPage);
         label_13->setObjectName(QString::fromUtf8("label_13"));
         label_13->setGeometry(QRect(980, 90, 61, 16));
@@ -716,9 +716,9 @@ public:
 
         retranslateUi(MainWindow);
 
-        primaryPageStackedWidget->setCurrentIndex(2);
+        primaryPageStackedWidget->setCurrentIndex(1);
         adminStackedWidget->setCurrentIndex(1);
-        userStackedWidget->setCurrentIndex(1);
+        userStackedWidget->setCurrentIndex(3);
         tabWidget->setCurrentIndex(9);
 
 
@@ -750,6 +750,8 @@ public:
         dateLabel->setText(QApplication::translate("MainWindow", "Date Opened", nullptr));
         distToCenterLabel->setText(QApplication::translate("MainWindow", "Dist. to Center Field", nullptr));
         newLocationLabel->setText(QApplication::translate("MainWindow", "New Location", nullptr));
+        AddTeamButton->setText(QApplication::translate("MainWindow", "Add Team", nullptr));
+        ReinitializeButton->setText(QApplication::translate("MainWindow", "Reinitialize", nullptr));
         takeTripButton_user->setText(QApplication::translate("MainWindow", "Take a Trip", nullptr));
         informationButton_user->setText(QApplication::translate("MainWindow", "Information", nullptr));
         label_11->setText(QApplication::translate("MainWindow", "Welcome Regular User", nullptr));
@@ -804,7 +806,6 @@ public:
         surfaceLabel_2->setText(QApplication::translate("MainWindow", "Surface", nullptr));
         dateLabel_2->setText(QApplication::translate("MainWindow", "Date Opened", nullptr));
         distToCenterLabel_2->setText(QApplication::translate("MainWindow", "Dist. to Center Field", nullptr));
-        newLocationLabel_2->setText(QApplication::translate("MainWindow", "New Location", nullptr));
         label_13->setText(QApplication::translate("MainWindow", "Souvenirs", nullptr));
         viewStadiumsBackButton->setText(QApplication::translate("MainWindow", "Back", nullptr));
         label_14->setText(QApplication::translate("MainWindow", "Stadium", nullptr));

@@ -1,5 +1,6 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
+#include "graph.h"
 #include "QMessageBox"
 #include "QDesktopWidget"
 #include "QTextStream"
@@ -325,6 +326,113 @@ void MainWindow::readFromFiles(bool readOriginal)
             }
         }
     }
+    if(readOriginal)
+    {
+        writeToFiles();
+    }
+}
+
+void MainWindow::readExpansionFiles()
+{
+    ifstream csvFile1;
+    csvFile1.open(MLB_INFORMATION_EXPANSION_INPUT_FILE);
+
+    bool exists = false;
+    int min = 1000000000, max = 0;
+    string iStadiumName;
+    string iName;
+    string iSeatingCapacity;
+    string iLocation;
+    string iPlayingSurface;
+    string iLeague;
+    string iDateOpened;
+    string iDistanceToCenterField;
+    string iBallparkTypology;
+    string iRoofType;
+
+    entry thisEntry;
+
+    int index = 0;
+
+    while(!csvFile1.eof())
+    {
+        getline(csvFile1, iName, ',');
+
+        for(int i = 0; i < thisMap.mapSize(); i++)
+        {
+            if(iName == thisMap.atIndex(i).key)
+            {
+                QMessageBox::critical(nullptr, "error", "You can't add a team that already exists!");
+                exists = true;
+            }
+        }
+
+        if(iName == "" || exists)
+        {
+            break;
+        }
+        getline(csvFile1, iStadiumName, ',');
+        getline(csvFile1, iSeatingCapacity, ',');
+        int iSeatingcapacity = stoi(iSeatingCapacity);
+        csvFile1.ignore(1);
+        getline(csvFile1, iLocation, '"');
+        csvFile1.ignore(1);
+        getline(csvFile1, iPlayingSurface, ',');
+        getline(csvFile1, iLeague, ',');
+        getline(csvFile1, iDateOpened, ',');
+        int iDateopened = stoi(iDateOpened);
+        getline(csvFile1, iDistanceToCenterField, ',');
+        int idistanceToCenterField = stoi(iDistanceToCenterField);
+        getline(csvFile1, iBallparkTypology, ',');
+        getline(csvFile1, iRoofType, '\n');
+
+        MLB thisMLB(index, iStadiumName, iSeatingcapacity,
+                    iLocation, iPlayingSurface, iLeague,
+                    iDateopened, idistanceToCenterField,
+                    iBallparkTypology, iRoofType);
+
+        thisMap.insert(iName, thisMLB);
+        thisEntry.key = iName;
+        thisEntry.value = thisMLB;
+
+        //this makes it so vector 3 contains only american
+        if(thisMLB.getLeague() == "American")
+        {
+            v1.push_back(thisEntry);
+            v2.push_back(thisEntry);
+            v3.push_back(thisEntry);
+            v5.push_back(thisEntry);
+            v7 = v5;
+            v8 = v5;
+        }
+        //this makes it so vector 4 contain only national teams
+        else if(thisMLB.getLeague() == "National")
+        {
+            v1.push_back(thisEntry);
+            v2.push_back(thisEntry);
+            v4.push_back(thisEntry);
+            v5.push_back(thisEntry);
+            v7 = v5;
+            v8 = v5;
+        }
+        if(thisMLB.getRoofType() == "Open")
+        {
+            v6.push_back(thisEntry);
+        }
+
+        if(thisMLB.getDistanceToCenterField() <= min){
+            min = thisMLB.getDistanceToCenterField();
+        }
+        if(thisMLB.getDistanceToCenterField() >= max){
+            max = thisMLB.getDistanceToCenterField();
+        }
+
+        index++;
+
+        ui->stadiumListWidget->addItem(QString::fromStdString(thisMap.atIndex(thisMap.mapSize()-1).key));
+    }
+
+    writeToFiles();
 }
 
 void MainWindow::writeToFiles()
@@ -406,12 +514,15 @@ void MainWindow::on_loginPushButton_clicked()
         encryptionTable.putQuadraticHash(hash_key, value);
 
         ui->primaryPageStackedWidget->setCurrentIndex(1);
+        ui->adminStackedWidget->setCurrentIndex(0);
 
         isAdmin = true;
     }
     else if(ui->usernameLineEdit->text() == "user" && ui->passwordLineEdit->text() == "user")
     {
         ui->primaryPageStackedWidget->setCurrentIndex(2);
+        ui->userStackedWidget->setCurrentIndex(0);
+
         isAdmin = false;
 
         string value = "user";
@@ -437,6 +548,16 @@ void MainWindow::on_actionLogout_triggered()
 }
 
 //************************************ MANAGING STADIUMS (admin) ************************************************
+
+void MainWindow::on_AddTeamButton_clicked()
+{
+    readExpansionFiles();
+}
+
+void MainWindow::on_ReinitializeButton_clicked()
+{
+    readFromFiles(true);
+}
 
 //this updates all the information in the vectors from the map
 void MainWindow::updateVectors(){
@@ -504,6 +625,16 @@ void MainWindow::updateVectors(){
 void MainWindow::on_manageStadiumsButton_clicked()
 {
     ui->adminStackedWidget->setCurrentIndex(1);
+
+    ui->groupBox->setTitle("Stadium Attributes");
+    ui->capacityLineEdit->clear();
+    ui->surfaceLineEdit->clear();
+    ui->roofTypeLineEdit->clear();
+    ui->typologyLineEdit->clear();
+    ui->dateOpenedLineEdit->clear();
+    ui->distToCenterLineEdit->clear();
+    ui->newLocationLineEdit->clear();
+    ui->roofTypeLineEdit->clear();
 
     //initialize all the data in the list widgets
     for(int i = 0; i < thisMap.mapSize(); i++)
@@ -1145,31 +1276,60 @@ vector<vector<int>> MainWindow::createAdjacencyMatrix()
     vector<vector<int>> matrix;
 
     //reads the selected teams matrix and creates the matrix from distances
-    for(int i = 0; i < ui->selectedTeamsStackedWidget->count(); i++)
+    for(int i = 0; i < thisMap.mapSize(); i++)
     {
-//        matrix.push_back();
-//        matrix.push_back(thisMap);
+       // matrix.push_back(thisMap.atIndex(i).value.getDistanceVector());
     }
 
+    return matrix;
 }
 
+void MainWindow::createGraph()
+{
+   ifstream file;
+   string startingLocation;
+   string endingLocation;
+   string distanceBetweenString;
+   int distanceBetween;
 
+   file.open(MODIFIED_DISTANCES_OUTPUT_FILE);
+   if(file.is_open())
+   {
+      while(!file.eof())
+      {
+          getline(file, startingLocation, ',');
+          getline(file, endingLocation, ',');
+          getline(file, distanceBetweenString, '\n');
+
+          distanceBetween = stoi(distanceBetweenString);
+
+          graph.insert(startingLocation, endingLocation, distanceBetween);
+      }
+   }
+
+
+}
 
 void MainWindow::on_optimizeButton_clicked()
 {
     //run optimization algorithm, return
     //steps to the shortest path algo
 
-    //1: create the distance matrix explicity, iterate across the whole map, add distance vectors as columns to the matrix
-    //   after adding all columns, track which stadiums are not being visited, and delete their indexes from the matrix
-    //   The resulting matrix will be an NxN symmetric matrix, where n is the number of stadiums to be visted
-    //   This same process will be used for the bfs, dfs
 
-    //2: Use distance matrix to "visit" (actually visiting comes later) each stadium, recursively "visiting" the closest one,
-    //   creating an ordered vector of stadiums
 
-    //3: write the vectors contents to the selected teams stacked widget
+
+    if(ui->selectedTeamsStackedWidget->count() > 0)
+    {
+        string startingCity;
+        vector<string> vertexList;
+        vector<int> weights;
+        vector<int> nextLocation;
+
+        startingCity = ui->selectedTeamsStackedWidget->item(0)->text().toStdString();
+
+        //graph.dijkstraAlgorithm(startingCity, vertexList, )
+
+
+    }
 
 }
-
-

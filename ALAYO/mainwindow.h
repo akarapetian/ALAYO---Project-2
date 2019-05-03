@@ -11,6 +11,7 @@
 #include "mlb.h"
 #include "map.h"
 #include "hashmap.h"
+#include "graph.h"
 
 #include <fstream>
 #include <string>
@@ -34,12 +35,16 @@ public:
 
     void readFromFiles(bool readOriginal);
 
+    void readExpansionFiles();
+
     void writeToFiles();
 
     void updateVectors();
 
     bool isFloatNumber(const QString& Qstring);
     bool isInteger(const QString &mystring);
+
+    void createGraph();
 
     vector<vector<int>> createAdjacencyMatrix();
 
@@ -110,11 +115,17 @@ private slots:
 
     void on_availibleTeamsStackedWidget_itemChanged(QListWidgetItem *item);
 
+    void on_AddTeamButton_clicked();
+
+    void on_ReinitializeButton_clicked();
+
 private:
     Ui::MainWindow *ui;
     Map thisMap;
     HashMap encryptionTable;
     bool isAdmin;
+
+    Graph graph;
 
     QVector<MLB> allMLBTeamsAvailable;
     QVector<entry> v1;

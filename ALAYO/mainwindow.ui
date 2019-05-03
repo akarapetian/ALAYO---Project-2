@@ -241,7 +241,7 @@
      </palette>
     </property>
     <property name="currentIndex">
-     <number>2</number>
+     <number>1</number>
     </property>
     <widget class="QWidget" name="loginPage">
      <widget class="QPushButton" name="loginPushButton">
@@ -657,6 +657,32 @@
           <string>New Location</string>
          </property>
         </widget>
+        <widget class="QPushButton" name="AddTeamButton">
+         <property name="geometry">
+          <rect>
+           <x>500</x>
+           <y>230</y>
+           <width>101</width>
+           <height>41</height>
+          </rect>
+         </property>
+         <property name="text">
+          <string>Add Team</string>
+         </property>
+        </widget>
+        <widget class="QPushButton" name="ReinitializeButton">
+         <property name="geometry">
+          <rect>
+           <x>360</x>
+           <y>230</y>
+           <width>101</width>
+           <height>41</height>
+          </rect>
+         </property>
+         <property name="text">
+          <string>Reinitialize</string>
+         </property>
+        </widget>
        </widget>
        <widget class="QListWidget" name="souvenirPriceListWidget">
         <property name="geometry">
@@ -682,7 +708,7 @@
        </rect>
       </property>
       <property name="currentIndex">
-       <number>1</number>
+       <number>3</number>
       </property>
       <widget class="QWidget" name="welcomePage_user">
        <widget class="QPushButton" name="takeTripButton_user">
@@ -1728,29 +1754,6 @@
          </property>
          <property name="text">
           <string>Dist. to Center Field</string>
-         </property>
-        </widget>
-        <widget class="QLineEdit" name="newLocationLineEdit_2">
-         <property name="geometry">
-          <rect>
-           <x>20</x>
-           <y>260</y>
-           <width>113</width>
-           <height>20</height>
-          </rect>
-         </property>
-        </widget>
-        <widget class="QLabel" name="newLocationLabel_2">
-         <property name="geometry">
-          <rect>
-           <x>40</x>
-           <y>230</y>
-           <width>81</width>
-           <height>16</height>
-          </rect>
-         </property>
-         <property name="text">
-          <string>New Location</string>
          </property>
         </widget>
        </widget>

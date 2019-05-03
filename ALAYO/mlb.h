@@ -81,7 +81,6 @@ private:
     string roofType;
 
     vector<souvenir> souvenirs;
-
     vector<int> distances;
 };
 
