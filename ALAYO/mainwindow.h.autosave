@@ -31,6 +31,11 @@ public:
     ~MainWindow();
 
     void reinitialize();
+    
+    bool isFloatNumber(const QString& Qstring);
+    bool isInteger(const QString &mystring);
+    
+    vector<vector<int>> createAdjacencyMatrix(); 
 
 private slots:
     void on_checkBox_showPW_stateChanged(int);
@@ -67,8 +72,7 @@ private slots:
 
     void on_souvenirPriceListWidget_currentItemChanged(QListWidgetItem *current, QListWidgetItem *previous);
 
-    bool isFloatNumber(const QString& Qstring);
-    bool isInteger(const QString &mystring);
+
 
     void on_capacityLineEdit_textEdited(const QString &arg1);
 
@@ -100,6 +104,8 @@ private slots:
 
     void on_takeTripPageBackButton_2_clicked();
 
+    void on_optimizeButton_clicked();
+    
 private:
     Ui::MainWindow *ui;
     Map thisMap;

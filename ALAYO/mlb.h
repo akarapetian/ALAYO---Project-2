@@ -17,6 +17,11 @@ struct souvenir
     }
     ~souvenir(){}
 
+    void setItemName(string newName)
+    {
+        this->itemName = newName;
+    }
+
     void setItemPrice(float newPrice)
     {
         this->itemPrice = newPrice;

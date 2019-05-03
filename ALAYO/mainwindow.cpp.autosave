@@ -858,6 +858,36 @@ void MainWindow::on_availibleTeamsStackedWidget_itemChanged(QListWidgetItem *ite
 
 
 
+vector<vector<int>> MainWindow::createAdjacencyMatrix()
+{
+    vector<vector<int>> matrix; 
+    //reads the selected teams matrix and creates the matrix from distances
+    for(int i = 0; i < ui->selectedTeamsStackedWidget->count(); i++)
+    {
+        matrix.push_back(thisMap)
+    }
+    
+}
 
 
 
+void MainWindow::on_optimizeButton_clicked()
+{
+    //run optimization algorithm, return 
+    //steps to the shortest path algo
+    
+    //1: create the distance matrix explicity, iterate across the whole map, add distance vectors as columns to the matrix
+    //   after adding all columns, track which stadiums are not being visited, and delete their indexes from the matrix
+    //   The resulting matrix will be an NxN symmetric matrix, where n is the number of stadiums to be visted
+    //   This same process will be used for the bfs, dfs 
+    
+    //2: Use distance matrix to "visit" (actually visiting comes later) each stadium, recursively "visiting" the closest one, 
+    //   creating an ordered vector of stadiums
+    
+    //3: write the vectors contents to the selected teams stacked widget
+    
+    
+    
+    
+    
+}
