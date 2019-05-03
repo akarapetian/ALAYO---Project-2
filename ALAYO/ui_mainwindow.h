@@ -1,7 +1,7 @@
 /********************************************************************************
 ** Form generated from reading UI file 'mainwindow.ui'
 **
-** Created by: Qt User Interface Compiler version 5.12.1
+** Created by: Qt User Interface Compiler version 5.12.0
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
 ********************************************************************************/
@@ -93,12 +93,16 @@ public:
     QPushButton *visitSingleButton;
     QPushButton *visitMultipleButton;
     QLabel *label_29;
+    QPushButton *takeTripPageBackButton;
     QWidget *multipleSelectionPage;
     QListWidget *availibleTeamsStackedWidget;
     QLabel *label_30;
     QPushButton *optimizeButton;
     QPushButton *goButton;
     QListWidget *selectedTeamsStackedWidget;
+    QPushButton *multipleSelectionPageBackButton;
+    QWidget *singleSelectionPage;
+    QPushButton *singleSelectionPageBackButton;
     QWidget *informationPage;
     QPushButton *informationBackButton;
     QTabWidget *tabWidget;
@@ -415,15 +419,18 @@ public:
         label_29 = new QLabel(tripTypeSelectionPage);
         label_29->setObjectName(QString::fromUtf8("label_29"));
         label_29->setGeometry(QRect(550, 30, 91, 16));
+        takeTripPageBackButton = new QPushButton(tripTypeSelectionPage);
+        takeTripPageBackButton->setObjectName(QString::fromUtf8("takeTripPageBackButton"));
+        takeTripPageBackButton->setGeometry(QRect(50, 50, 121, 41));
         takeTripStackedWidget->addWidget(tripTypeSelectionPage);
         multipleSelectionPage = new QWidget();
         multipleSelectionPage->setObjectName(QString::fromUtf8("multipleSelectionPage"));
         availibleTeamsStackedWidget = new QListWidget(multipleSelectionPage);
         availibleTeamsStackedWidget->setObjectName(QString::fromUtf8("availibleTeamsStackedWidget"));
-        availibleTeamsStackedWidget->setGeometry(QRect(60, 50, 291, 591));
+        availibleTeamsStackedWidget->setGeometry(QRect(60, 140, 291, 591));
         label_30 = new QLabel(multipleSelectionPage);
         label_30->setObjectName(QString::fromUtf8("label_30"));
-        label_30->setGeometry(QRect(180, 30, 61, 16));
+        label_30->setGeometry(QRect(180, 120, 61, 16));
         optimizeButton = new QPushButton(multipleSelectionPage);
         optimizeButton->setObjectName(QString::fromUtf8("optimizeButton"));
         optimizeButton->setGeometry(QRect(970, 450, 161, 71));
@@ -432,8 +439,17 @@ public:
         goButton->setGeometry(QRect(970, 560, 161, 71));
         selectedTeamsStackedWidget = new QListWidget(multipleSelectionPage);
         selectedTeamsStackedWidget->setObjectName(QString::fromUtf8("selectedTeamsStackedWidget"));
-        selectedTeamsStackedWidget->setGeometry(QRect(440, 50, 291, 591));
+        selectedTeamsStackedWidget->setGeometry(QRect(440, 140, 291, 591));
+        multipleSelectionPageBackButton = new QPushButton(multipleSelectionPage);
+        multipleSelectionPageBackButton->setObjectName(QString::fromUtf8("multipleSelectionPageBackButton"));
+        multipleSelectionPageBackButton->setGeometry(QRect(50, 30, 121, 41));
         takeTripStackedWidget->addWidget(multipleSelectionPage);
+        singleSelectionPage = new QWidget();
+        singleSelectionPage->setObjectName(QString::fromUtf8("singleSelectionPage"));
+        singleSelectionPageBackButton = new QPushButton(singleSelectionPage);
+        singleSelectionPageBackButton->setObjectName(QString::fromUtf8("singleSelectionPageBackButton"));
+        singleSelectionPageBackButton->setGeometry(QRect(90, 60, 121, 41));
+        takeTripStackedWidget->addWidget(singleSelectionPage);
         userStackedWidget->addWidget(takeTripPage);
         informationPage = new QWidget();
         informationPage->setObjectName(QString::fromUtf8("informationPage"));
@@ -701,8 +717,8 @@ public:
         retranslateUi(MainWindow);
 
         primaryPageStackedWidget->setCurrentIndex(2);
-        adminStackedWidget->setCurrentIndex(0);
-        userStackedWidget->setCurrentIndex(2);
+        adminStackedWidget->setCurrentIndex(1);
+        userStackedWidget->setCurrentIndex(1);
         tabWidget->setCurrentIndex(9);
 
 
@@ -741,9 +757,12 @@ public:
         visitSingleButton->setText(QApplication::translate("MainWindow", "Visit A Stadium", nullptr));
         visitMultipleButton->setText(QApplication::translate("MainWindow", "Visit Multiple Stadiums", nullptr));
         label_29->setText(QApplication::translate("MainWindow", "Take Trip Page", nullptr));
+        takeTripPageBackButton->setText(QApplication::translate("MainWindow", "Back", nullptr));
         label_30->setText(QApplication::translate("MainWindow", "Teams", nullptr));
         optimizeButton->setText(QApplication::translate("MainWindow", "Optimize", nullptr));
         goButton->setText(QApplication::translate("MainWindow", "Go", nullptr));
+        multipleSelectionPageBackButton->setText(QApplication::translate("MainWindow", "Back", nullptr));
+        singleSelectionPageBackButton->setText(QApplication::translate("MainWindow", "Back", nullptr));
         informationBackButton->setText(QApplication::translate("MainWindow", "Back", nullptr));
         label_5->setText(QApplication::translate("MainWindow", "Size:", nullptr));
         label_19->setText(QString());

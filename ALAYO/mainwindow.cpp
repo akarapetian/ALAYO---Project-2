@@ -8,23 +8,23 @@
 // ORIGINAL INPUT FILES
 //******************************
 // original MLB Information const
-const string MLB_INFORMATION_INPUT_FILE = "C:/Users/Alek/Desktop/CS1D/ALAYO---Project-2-master/inputMLBInformation.csv";
+const string MLB_INFORMATION_INPUT_FILE = "C:/Users/Oscar/Desktop/ALAYOAlek/ALAYO---Project-2-Alek/ALAYO/inputMLBInformation.csv";
 // original Distances const
-const string DISTANCES_INPUT_FILE = "C:/Users/Alek/Desktop/CS1D/ALAYO---Project-2-master/inputDistance.csv";
+const string DISTANCES_INPUT_FILE = "C:/Users/Oscar/Desktop/ALAYOAlek/ALAYO---Project-2-Alek/ALAYO/inputDistance.csv";
 //original MLB Information expansion const
-const string MLB_INFORMATION_EXPANSION_INPUT_FILE = "C:/Users/Alek/Desktop/CS1D/ALAYO---Project-2-master/inputMLBInformationExpansion.csv";
+const string MLB_INFORMATION_EXPANSION_INPUT_FILE = "C:/Users/Oscar/Desktop/ALAYOAlek/ALAYO---Project-2-Alek/ALAYO/inputMLBInformationExpansion.csv";
 //original Distances expansion const
-const string DISTANCES_EXPANSION_INPUT_FILE = "C:/Users/Alek/Desktop/CS1D/ALAYO---Project-2-master/inputDistanceExpansion.csv";
+const string DISTANCES_EXPANSION_INPUT_FILE = "C:/Users/Oscar/Desktop/ALAYOAlek/ALAYO---Project-2-Alek/ALAYO/inputDistanceExpansion.csv";
 
 //******************************
 // WRITE TO FILES
 //******************************
 // written to MLB Information const
-const string MODIFIED_MLB_INFORMATION_OUTPUT_FILE = "C:/Users/Alek/Desktop/CS1D/ALAYO---Project-2-master/inputModifiedMLBInformation.csv";
+const string MODIFIED_MLB_INFORMATION_OUTPUT_FILE = "C:/Users/Oscar/Desktop/ALAYOAlek/ALAYO---Project-2-Alek/ALAYO/inputModifiedMLBInformation.csv";
 // written to Distances const
-const string MODIFIED_DISTANCES_OUTPUT_FILE = "C:/Users/Alek/Desktop/CS1D/ALAYO---Project-2-master/inputModifiedDistances.csv";
+const string MODIFIED_DISTANCES_OUTPUT_FILE = "C:/Users/Oscar/Desktop/ALAYOAlek/ALAYO---Project-2-Alek/ALAYO/inputModifiedDistances.csv";
 // written to souvenirs const
-const string MODIFIED_SOUVENIRS_OUTPUT_FILE = "C:/Users/Alek/Desktop/CS1D/ALAYO---Project-2-master/inputSouvenirs.csv";
+const string MODIFIED_SOUVENIRS_OUTPUT_FILE = "C:/Users/Oscar/Desktop/ALAYOAlek/ALAYO---Project-2-Alek/ALAYO/inputSouvenirs.csv";
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -34,8 +34,14 @@ MainWindow::MainWindow(QWidget *parent) :
 
     readFromFiles(false);
 
+    //allows user to move around items in the selected locations when taking a trip
+    ui->selectedTeamsStackedWidget->setSelectionMode(QAbstractItemView::SingleSelection);
+    ui->selectedTeamsStackedWidget->setDragEnabled(true);
+    ui->selectedTeamsStackedWidget->setDragDropMode(QAbstractItemView::InternalMove);
+    ui->selectedTeamsStackedWidget->viewport()->setAcceptDrops(true);
+    ui->selectedTeamsStackedWidget->setDropIndicatorShown(true);
+
     ui->primaryPageStackedWidget->setCurrentIndex(0);
-    //resize(QDesktopWidget().availableGeometry(this).size() * 0.7);
 }
 
 MainWindow::~MainWindow()
@@ -132,6 +138,8 @@ void MainWindow::readFromFiles(bool readOriginal)
             thisMap.insert(iName, thisMLB);
             thisEntry.key = iName;
             thisEntry.value = thisMLB;
+            
+            allMLBTeamsAvailable.push_back(thisMLB);
 
             //this makes it so vector 3 contains only american
             if(thisMLB.getLeague() == "American")
@@ -1046,18 +1054,122 @@ void MainWindow::on_takeTripButton_admin_clicked()
     ui->userStackedWidget->setCurrentIndex(1);
 }
 
+void MainWindow::on_takeTripButton_user_clicked()
+{
+    ui->userStackedWidget->setCurrentIndex(1);
+    ui->takeTripStackedWidget->setCurrentIndex(0);
+}
+
+void MainWindow::on_takeTripPageBackButton_clicked()
+{
+    if(isAdmin)
+    {
+        //return to admin
+        ui->primaryPageStackedWidget->setCurrentIndex(1);
+        ui->adminStackedWidget->setCurrentIndex(0);
+    }
+
+    ui->userStackedWidget->setCurrentIndex(0);
+}
 
 void MainWindow::on_visitMultipleButton_clicked()
 {
+    ui->availibleTeamsStackedWidget->clear();
+    ui->selectedTeamsStackedWidget->clear();
 
+    for(int i = 0; i < thisMap.mapSize(); i++)
+    {
+        //fill up the availible teams stacked widget
+        ui->availibleTeamsStackedWidget->addItem(QString::fromStdString(thisMap.atIndex(i).key));
+        ui->availibleTeamsStackedWidget->item(i)->setCheckState(Qt::Unchecked);
+        ui->availibleTeamsStackedWidget->item(i)->setFlags(Qt::ItemIsUserCheckable | Qt::ItemIsUserCheckable | Qt::ItemIsEnabled);
+    }
+
+    ui->takeTripStackedWidget->setCurrentIndex(1);
 }
 
 void MainWindow::on_visitSingleButton_clicked()
 {
+    ui->takeTripStackedWidget->setCurrentIndex(2);
 
+    for(int i = 0; i < thisMap.mapSize(); i++)
+    {
+        //fill up the availible teams stacked widget
+        ui->availibleTeamsStackedWidget->addItem(QString::fromStdString(thisMap.atIndex(i).key));
+        ui->availibleTeamsStackedWidget->item(i)->setCheckState(Qt::Unchecked);
+        ui->availibleTeamsStackedWidget->item(i)->setFlags(Qt::ItemIsUserCheckable | Qt::ItemIsUserCheckable | Qt::ItemIsEnabled);
+    }
 }
 
-void MainWindow::on_takeTripButton_user_clicked()
+void MainWindow::on_multipleSelectionPageBackButton_clicked()
 {
-    ui->userStackedWidget->setCurrentIndex(1);
+    ui->takeTripStackedWidget->setCurrentIndex(0);
 }
+
+void MainWindow::on_availibleTeamsStackedWidget_itemChanged(QListWidgetItem *item)
+{
+    //when user checks a team, it moves it into the next list widget
+    if(item->checkState() == 2)
+    {
+        //item is checked
+        ui->selectedTeamsStackedWidget->addItem(item->text());
+    }
+    else if(item->checkState() == 0)
+    {
+        //perform sequential search for the item
+
+        bool found = false;
+        unsigned int k = 0;
+        while(!found && k < ui->selectedTeamsStackedWidget->count())
+        {
+            if(item->text() == ui->selectedTeamsStackedWidget->item(k)->text())
+            {
+                found = true;
+            }
+            else {
+                ++k;
+            }
+        }
+
+        ui->selectedTeamsStackedWidget->takeItem(k);
+    }
+}
+
+void MainWindow::on_singleSelectionPageBackButton_clicked()
+{
+     ui->takeTripStackedWidget->setCurrentIndex(0);
+}
+
+vector<vector<int>> MainWindow::createAdjacencyMatrix()
+{
+    vector<vector<int>> matrix;
+
+    //reads the selected teams matrix and creates the matrix from distances
+    for(int i = 0; i < ui->selectedTeamsStackedWidget->count(); i++)
+    {
+//        matrix.push_back();
+//        matrix.push_back(thisMap);
+    }
+
+}
+
+
+
+void MainWindow::on_optimizeButton_clicked()
+{
+    //run optimization algorithm, return
+    //steps to the shortest path algo
+
+    //1: create the distance matrix explicity, iterate across the whole map, add distance vectors as columns to the matrix
+    //   after adding all columns, track which stadiums are not being visited, and delete their indexes from the matrix
+    //   The resulting matrix will be an NxN symmetric matrix, where n is the number of stadiums to be visted
+    //   This same process will be used for the bfs, dfs
+
+    //2: Use distance matrix to "visit" (actually visiting comes later) each stadium, recursively "visiting" the closest one,
+    //   creating an ordered vector of stadiums
+
+    //3: write the vectors contents to the selected teams stacked widget
+
+}
+
+

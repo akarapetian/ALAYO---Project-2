@@ -356,7 +356,7 @@
        </rect>
       </property>
       <property name="currentIndex">
-       <number>0</number>
+       <number>1</number>
       </property>
       <widget class="QWidget" name="welcomePage_admin">
        <widget class="QLabel" name="welcomeLabel_admin">
@@ -682,7 +682,7 @@
        </rect>
       </property>
       <property name="currentIndex">
-       <number>2</number>
+       <number>1</number>
       </property>
       <widget class="QWidget" name="welcomePage_user">
        <widget class="QPushButton" name="takeTripButton_user">
@@ -794,13 +794,26 @@
            <string>Take Trip Page</string>
           </property>
          </widget>
+         <widget class="QPushButton" name="takeTripPageBackButton">
+          <property name="geometry">
+           <rect>
+            <x>50</x>
+            <y>50</y>
+            <width>121</width>
+            <height>41</height>
+           </rect>
+          </property>
+          <property name="text">
+           <string>Back</string>
+          </property>
+         </widget>
         </widget>
         <widget class="QWidget" name="multipleSelectionPage">
          <widget class="QListWidget" name="availibleTeamsStackedWidget">
           <property name="geometry">
            <rect>
             <x>60</x>
-            <y>50</y>
+            <y>140</y>
             <width>291</width>
             <height>591</height>
            </rect>
@@ -810,7 +823,7 @@
           <property name="geometry">
            <rect>
             <x>180</x>
-            <y>30</y>
+            <y>120</y>
             <width>61</width>
             <height>16</height>
            </rect>
@@ -849,10 +862,38 @@
           <property name="geometry">
            <rect>
             <x>440</x>
-            <y>50</y>
+            <y>140</y>
             <width>291</width>
             <height>591</height>
            </rect>
+          </property>
+         </widget>
+         <widget class="QPushButton" name="multipleSelectionPageBackButton">
+          <property name="geometry">
+           <rect>
+            <x>50</x>
+            <y>30</y>
+            <width>121</width>
+            <height>41</height>
+           </rect>
+          </property>
+          <property name="text">
+           <string>Back</string>
+          </property>
+         </widget>
+        </widget>
+        <widget class="QWidget" name="singleSelectionPage">
+         <widget class="QPushButton" name="singleSelectionPageBackButton">
+          <property name="geometry">
+           <rect>
+            <x>90</x>
+            <y>60</y>
+            <width>121</width>
+            <height>41</height>
+           </rect>
+          </property>
+          <property name="text">
+           <string>Back</string>
           </property>
          </widget>
         </widget>
