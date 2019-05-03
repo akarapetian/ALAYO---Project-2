@@ -23,7 +23,7 @@ struct souvenir
     }
 
     string itemName;
-    float  itemPrice;
+    double  itemPrice;
 };
 
 class MLB
@@ -46,6 +46,7 @@ public:
     string getBallParkTypology();
     string getRoofType();
     int getDistanceSize();
+    int getDistance(int i);
 
     void setID(int newID);
     void setStadiumName(string newStadiumName);
@@ -62,12 +63,13 @@ public:
 
     int getSouvenirListSize() const;
     souvenir getSouvenir(int index) const;
-
     void addSouvenir(souvenir newSouvenir);
-
     void setInitialDistances(int size);
     void setDistance(int i, int distance);
     void printDistances();
+
+    vector<int> getDistanceVector();
+
 private:
     int ID;
     string stadiumName;

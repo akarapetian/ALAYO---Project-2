@@ -11,6 +11,7 @@
 #include "mlb.h"
 #include "map.h"
 #include "hashmap.h"
+#include "graph.h"
 
 #include <fstream>
 #include <string>
@@ -31,6 +32,19 @@ public:
     ~MainWindow();
 
     void reinitialize();
+
+    void readFromFiles(bool readOriginal);
+
+    void writeToFiles();
+
+    void updateVectors();
+
+    bool isFloatNumber(const QString& Qstring);
+    bool isInteger(const QString &mystring);
+
+    vector<vector<int>> createAdjacencyMatrix();
+
+    void createGraph();
 
 private slots:
     void on_checkBox_showPW_stateChanged(int);
@@ -67,11 +81,6 @@ private slots:
 
     void on_souvenirPriceListWidget_currentItemChanged(QListWidgetItem *current, QListWidgetItem *previous);
 
-    bool isFloatNumber(const QString& Qstring);
-    bool isInteger(const QString &mystring);
-
-    void on_capacityLineEdit_editingFinished();
-
     void on_capacityLineEdit_textEdited(const QString &arg1);
 
     void on_surfaceLineEdit_textEdited(const QString &arg1);
@@ -88,11 +97,31 @@ private slots:
 
     void on_actionLogout_triggered();
 
+    void on_visitMultipleButton_clicked();
+
+    void on_visitSingleButton_clicked();
+
+    void on_takeTripButton_user_clicked();
+
+    void on_takeTripPageBackButton_clicked();
+
+    void on_singleSelectionPageBackButton_clicked();
+
+    void on_optimizeButton_clicked();
+
+    void on_multipleSelectionPageBackButton_clicked();
+
+    void on_availibleTeamsStackedWidget_itemChanged(QListWidgetItem *item);
+
 private:
     Ui::MainWindow *ui;
     Map thisMap;
     HashMap encryptionTable;
     bool isAdmin;
+
+    Graph graph;
+
+    QVector<MLB> allMLBTeamsAvailable;
     QVector<entry> v1;
     QVector<entry> v2;
     QVector<entry> v3;
