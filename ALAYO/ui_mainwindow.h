@@ -99,7 +99,6 @@ public:
     QPushButton *optimizeButton;
     QPushButton *goButton;
     QListWidget *selectedTeamsStackedWidget;
-    QWidget *singleSelectionPage;
     QWidget *informationPage;
     QPushButton *informationBackButton;
     QTabWidget *tabWidget;
@@ -135,6 +134,8 @@ public:
     QLabel *label_16;
     QLabel *label_26;
     QTableWidget *teamTableWidget_8;
+    QLabel *label_31;
+    QLabel *label_32;
     QWidget *greatestDistanceCenter;
     QTableWidget *teamTableWidget_9;
     QLabel *label_17;
@@ -184,6 +185,18 @@ public:
         MainWindow->setMinimumSize(QSize(1200, 800));
         MainWindow->setMaximumSize(QSize(1200, 800));
         MainWindow->setBaseSize(QSize(1000, 700));
+        QPalette palette;
+        QBrush brush(QColor(163, 22, 33, 255));
+        brush.setStyle(Qt::SolidPattern);
+        palette.setBrush(QPalette::Active, QPalette::Base, brush);
+        QBrush brush1(QColor(0, 116, 188, 255));
+        brush1.setStyle(Qt::SolidPattern);
+        palette.setBrush(QPalette::Active, QPalette::Window, brush1);
+        palette.setBrush(QPalette::Inactive, QPalette::Base, brush);
+        palette.setBrush(QPalette::Inactive, QPalette::Window, brush1);
+        palette.setBrush(QPalette::Disabled, QPalette::Base, brush1);
+        palette.setBrush(QPalette::Disabled, QPalette::Window, brush1);
+        MainWindow->setPalette(palette);
         QFont font;
         font.setPointSize(10);
         MainWindow->setFont(font);
@@ -193,12 +206,34 @@ public:
         centralWidget->setObjectName(QString::fromUtf8("centralWidget"));
         primaryPageStackedWidget = new QStackedWidget(centralWidget);
         primaryPageStackedWidget->setObjectName(QString::fromUtf8("primaryPageStackedWidget"));
-        primaryPageStackedWidget->setGeometry(QRect(0, 0, 1201, 761));
+        primaryPageStackedWidget->setGeometry(QRect(-20, 0, 1201, 761));
         QSizePolicy sizePolicy1(QSizePolicy::Fixed, QSizePolicy::Preferred);
         sizePolicy1.setHorizontalStretch(0);
         sizePolicy1.setVerticalStretch(0);
         sizePolicy1.setHeightForWidth(primaryPageStackedWidget->sizePolicy().hasHeightForWidth());
         primaryPageStackedWidget->setSizePolicy(sizePolicy1);
+        QPalette palette1;
+        QBrush brush2(QColor(247, 247, 247, 255));
+        brush2.setStyle(Qt::SolidPattern);
+        palette1.setBrush(QPalette::Active, QPalette::Base, brush2);
+        QBrush brush3(QColor(40, 38, 40, 255));
+        brush3.setStyle(Qt::SolidPattern);
+        palette1.setBrush(QPalette::Active, QPalette::Shadow, brush3);
+        palette1.setBrush(QPalette::Active, QPalette::Highlight, brush);
+        QBrush brush4(QColor(170, 0, 0, 255));
+        brush4.setStyle(Qt::SolidPattern);
+        palette1.setBrush(QPalette::Active, QPalette::AlternateBase, brush4);
+        palette1.setBrush(QPalette::Inactive, QPalette::Base, brush2);
+        palette1.setBrush(QPalette::Inactive, QPalette::Shadow, brush3);
+        palette1.setBrush(QPalette::Inactive, QPalette::Highlight, brush);
+        palette1.setBrush(QPalette::Inactive, QPalette::AlternateBase, brush4);
+        palette1.setBrush(QPalette::Disabled, QPalette::Base, brush1);
+        palette1.setBrush(QPalette::Disabled, QPalette::Shadow, brush3);
+        QBrush brush5(QColor(0, 120, 215, 255));
+        brush5.setStyle(Qt::SolidPattern);
+        palette1.setBrush(QPalette::Disabled, QPalette::Highlight, brush5);
+        palette1.setBrush(QPalette::Disabled, QPalette::AlternateBase, brush4);
+        primaryPageStackedWidget->setPalette(palette1);
         loginPage = new QWidget();
         loginPage->setObjectName(QString::fromUtf8("loginPage"));
         loginPushButton = new QPushButton(loginPage);
@@ -399,9 +434,6 @@ public:
         selectedTeamsStackedWidget->setObjectName(QString::fromUtf8("selectedTeamsStackedWidget"));
         selectedTeamsStackedWidget->setGeometry(QRect(440, 50, 291, 591));
         takeTripStackedWidget->addWidget(multipleSelectionPage);
-        singleSelectionPage = new QWidget();
-        singleSelectionPage->setObjectName(QString::fromUtf8("singleSelectionPage"));
-        takeTripStackedWidget->addWidget(singleSelectionPage);
         userStackedWidget->addWidget(takeTripPage);
         informationPage = new QWidget();
         informationPage->setObjectName(QString::fromUtf8("informationPage"));
@@ -410,7 +442,7 @@ public:
         informationBackButton->setGeometry(QRect(30, 20, 121, 41));
         tabWidget = new QTabWidget(informationPage);
         tabWidget->setObjectName(QString::fromUtf8("tabWidget"));
-        tabWidget->setGeometry(QRect(40, 100, 1101, 421));
+        tabWidget->setGeometry(QRect(40, 100, 1141, 421));
         tabWidget->setTabPosition(QTabWidget::North);
         MajorLeagueTeam = new QWidget();
         MajorLeagueTeam->setObjectName(QString::fromUtf8("MajorLeagueTeam"));
@@ -448,10 +480,10 @@ public:
         AmericanLeagueTeam->setObjectName(QString::fromUtf8("AmericanLeagueTeam"));
         label_7 = new QLabel(AmericanLeagueTeam);
         label_7->setObjectName(QString::fromUtf8("label_7"));
-        label_7->setGeometry(QRect(900, 30, 111, 16));
+        label_7->setGeometry(QRect(890, 30, 111, 16));
         label_21 = new QLabel(AmericanLeagueTeam);
         label_21->setObjectName(QString::fromUtf8("label_21"));
-        label_21->setGeometry(QRect(930, 30, 111, 16));
+        label_21->setGeometry(QRect(920, 30, 111, 16));
         teamTableWidget_3 = new QTableWidget(AmericanLeagueTeam);
         teamTableWidget_3->setObjectName(QString::fromUtf8("teamTableWidget_3"));
         teamTableWidget_3->setGeometry(QRect(10, 30, 881, 311));
@@ -483,7 +515,7 @@ public:
         label_8->setGeometry(QRect(890, 30, 111, 16));
         label_23 = new QLabel(typology);
         label_23->setObjectName(QString::fromUtf8("label_23"));
-        label_23->setGeometry(QRect(930, 30, 111, 16));
+        label_23->setGeometry(QRect(920, 30, 111, 16));
         teamTableWidget_5 = new QTableWidget(typology);
         teamTableWidget_5->setObjectName(QString::fromUtf8("teamTableWidget_5"));
         teamTableWidget_5->setGeometry(QRect(10, 30, 881, 311));
@@ -496,10 +528,10 @@ public:
         openRoofType->setObjectName(QString::fromUtf8("openRoofType"));
         label_9 = new QLabel(openRoofType);
         label_9->setObjectName(QString::fromUtf8("label_9"));
-        label_9->setGeometry(QRect(900, 30, 111, 16));
+        label_9->setGeometry(QRect(890, 30, 111, 16));
         label_24 = new QLabel(openRoofType);
         label_24->setObjectName(QString::fromUtf8("label_24"));
-        label_24->setGeometry(QRect(950, 30, 111, 16));
+        label_24->setGeometry(QRect(920, 30, 111, 16));
         teamTableWidget_6 = new QTableWidget(openRoofType);
         teamTableWidget_6->setObjectName(QString::fromUtf8("teamTableWidget_6"));
         teamTableWidget_6->setGeometry(QRect(10, 30, 881, 311));
@@ -512,10 +544,10 @@ public:
         dateOpened->setObjectName(QString::fromUtf8("dateOpened"));
         label_15 = new QLabel(dateOpened);
         label_15->setObjectName(QString::fromUtf8("label_15"));
-        label_15->setGeometry(QRect(900, 30, 111, 16));
+        label_15->setGeometry(QRect(890, 30, 111, 16));
         label_25 = new QLabel(dateOpened);
         label_25->setObjectName(QString::fromUtf8("label_25"));
-        label_25->setGeometry(QRect(940, 30, 111, 16));
+        label_25->setGeometry(QRect(920, 30, 111, 16));
         teamTableWidget_7 = new QTableWidget(dateOpened);
         teamTableWidget_7->setObjectName(QString::fromUtf8("teamTableWidget_7"));
         teamTableWidget_7->setGeometry(QRect(10, 30, 881, 311));
@@ -528,10 +560,10 @@ public:
         seatingCapacity->setObjectName(QString::fromUtf8("seatingCapacity"));
         label_16 = new QLabel(seatingCapacity);
         label_16->setObjectName(QString::fromUtf8("label_16"));
-        label_16->setGeometry(QRect(900, 70, 111, 16));
+        label_16->setGeometry(QRect(890, 30, 111, 16));
         label_26 = new QLabel(seatingCapacity);
         label_26->setObjectName(QString::fromUtf8("label_26"));
-        label_26->setGeometry(QRect(960, 70, 111, 16));
+        label_26->setGeometry(QRect(920, 30, 111, 16));
         teamTableWidget_8 = new QTableWidget(seatingCapacity);
         teamTableWidget_8->setObjectName(QString::fromUtf8("teamTableWidget_8"));
         teamTableWidget_8->setGeometry(QRect(10, 30, 881, 311));
@@ -539,6 +571,12 @@ public:
         teamTableWidget_8->setMaximumSize(QSize(16777215, 311));
         teamTableWidget_8->horizontalHeader()->setDefaultSectionSize(293);
         teamTableWidget_8->horizontalHeader()->setMinimumSectionSize(100);
+        label_31 = new QLabel(seatingCapacity);
+        label_31->setObjectName(QString::fromUtf8("label_31"));
+        label_31->setGeometry(QRect(890, 50, 141, 16));
+        label_32 = new QLabel(seatingCapacity);
+        label_32->setObjectName(QString::fromUtf8("label_32"));
+        label_32->setGeometry(QRect(1030, 50, 141, 16));
         tabWidget->addTab(seatingCapacity, QString());
         greatestDistanceCenter = new QWidget();
         greatestDistanceCenter->setObjectName(QString::fromUtf8("greatestDistanceCenter"));
@@ -551,10 +589,10 @@ public:
         teamTableWidget_9->horizontalHeader()->setMinimumSectionSize(100);
         label_17 = new QLabel(greatestDistanceCenter);
         label_17->setObjectName(QString::fromUtf8("label_17"));
-        label_17->setGeometry(QRect(900, 30, 111, 16));
+        label_17->setGeometry(QRect(890, 30, 111, 16));
         label_27 = new QLabel(greatestDistanceCenter);
         label_27->setObjectName(QString::fromUtf8("label_27"));
-        label_27->setGeometry(QRect(970, 30, 111, 16));
+        label_27->setGeometry(QRect(920, 30, 111, 16));
         tabWidget->addTab(greatestDistanceCenter, QString());
         smallestDistanceCenter = new QWidget();
         smallestDistanceCenter->setObjectName(QString::fromUtf8("smallestDistanceCenter"));
@@ -662,10 +700,10 @@ public:
 
         retranslateUi(MainWindow);
 
-        primaryPageStackedWidget->setCurrentIndex(1);
+        primaryPageStackedWidget->setCurrentIndex(2);
         adminStackedWidget->setCurrentIndex(0);
-        userStackedWidget->setCurrentIndex(0);
-        tabWidget->setCurrentIndex(0);
+        userStackedWidget->setCurrentIndex(2);
+        tabWidget->setCurrentIndex(9);
 
 
         QMetaObject::connectSlotsByName(MainWindow);
@@ -709,13 +747,13 @@ public:
         informationBackButton->setText(QApplication::translate("MainWindow", "Back", nullptr));
         label_5->setText(QApplication::translate("MainWindow", "Size:", nullptr));
         label_19->setText(QString());
-        tabWidget->setTabText(tabWidget->indexOf(MajorLeagueTeam), QApplication::translate("MainWindow", "American-Name", nullptr));
+        tabWidget->setTabText(tabWidget->indexOf(MajorLeagueTeam), QApplication::translate("MainWindow", "Major-Name", nullptr));
         label_6->setText(QApplication::translate("MainWindow", "Size:", nullptr));
         label_20->setText(QString());
-        tabWidget->setTabText(tabWidget->indexOf(MajorLeagueStadium), QApplication::translate("MainWindow", "American-Stadium", nullptr));
+        tabWidget->setTabText(tabWidget->indexOf(MajorLeagueStadium), QApplication::translate("MainWindow", "Major-Stadium", nullptr));
         label_7->setText(QApplication::translate("MainWindow", "Size:", nullptr));
         label_21->setText(QString());
-        tabWidget->setTabText(tabWidget->indexOf(AmericanLeagueTeam), QApplication::translate("MainWindow", "National-Name", nullptr));
+        tabWidget->setTabText(tabWidget->indexOf(AmericanLeagueTeam), QApplication::translate("MainWindow", "American-Name", nullptr));
         label_4->setText(QApplication::translate("MainWindow", "Size:", nullptr));
         label_22->setText(QString());
         tabWidget->setTabText(tabWidget->indexOf(NationalLeagueStadium), QApplication::translate("MainWindow", "National-Stadium", nullptr));
@@ -730,13 +768,15 @@ public:
         tabWidget->setTabText(tabWidget->indexOf(dateOpened), QApplication::translate("MainWindow", "Date", nullptr));
         label_16->setText(QApplication::translate("MainWindow", "Size:", nullptr));
         label_26->setText(QString());
+        label_31->setText(QApplication::translate("MainWindow", "Total Seating Capacity: ", nullptr));
+        label_32->setText(QString());
         tabWidget->setTabText(tabWidget->indexOf(seatingCapacity), QApplication::translate("MainWindow", "Seating Capacity", nullptr));
         label_17->setText(QApplication::translate("MainWindow", "Size:", nullptr));
         label_27->setText(QString());
-        tabWidget->setTabText(tabWidget->indexOf(greatestDistanceCenter), QApplication::translate("MainWindow", "Tab 2", nullptr));
+        tabWidget->setTabText(tabWidget->indexOf(greatestDistanceCenter), QApplication::translate("MainWindow", "Greatest Center Field", nullptr));
         label_18->setText(QApplication::translate("MainWindow", "Size:", nullptr));
         label_28->setText(QString());
-        tabWidget->setTabText(tabWidget->indexOf(smallestDistanceCenter), QApplication::translate("MainWindow", "Page", nullptr));
+        tabWidget->setTabText(tabWidget->indexOf(smallestDistanceCenter), QApplication::translate("MainWindow", "Smallest Center Field", nullptr));
         label_12->setText(QApplication::translate("MainWindow", "View Information by Category", nullptr));
         groupBox_2->setTitle(QApplication::translate("MainWindow", "Stadium Attributes", nullptr));
         capacityLabel_2->setText(QApplication::translate("MainWindow", "Capacity", nullptr));
@@ -749,7 +789,7 @@ public:
         label_13->setText(QApplication::translate("MainWindow", "Souvenirs", nullptr));
         viewStadiumsBackButton->setText(QApplication::translate("MainWindow", "Back", nullptr));
         label_14->setText(QApplication::translate("MainWindow", "Stadium", nullptr));
-        menuFile->setTitle(QApplication::translate("MainWindow", "File", nullptr));
+        menuFile->setTitle(QApplication::translate("MainWindow", "Logout", nullptr));
     } // retranslateUi
 
 };

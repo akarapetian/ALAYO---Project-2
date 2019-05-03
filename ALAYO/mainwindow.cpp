@@ -4,6 +4,27 @@
 #include "QDesktopWidget"
 #include "QTextStream"
 
+//******************************
+// ORIGINAL INPUT FILES
+//******************************
+// original MLB Information const
+const string MLB_INFORMATION_INPUT_FILE = "C:/Users/Alek/Desktop/CS1D/ALAYO---Project-2-master/inputMLBInformation.csv";
+// original Distances const
+const string DISTANCES_INPUT_FILE = "C:/Users/Alek/Desktop/CS1D/ALAYO---Project-2-master/inputDistance.csv";
+//original MLB Information expansion const
+const string MLB_INFORMATION_EXPANSION_INPUT_FILE = "C:/Users/Alek/Desktop/CS1D/ALAYO---Project-2-master/inputMLBInformationExpansion.csv";
+//original Distances expansion const
+const string DISTANCES_EXPANSION_INPUT_FILE = "C:/Users/Alek/Desktop/CS1D/ALAYO---Project-2-master/inputDistanceExpansion.csv";
+
+//******************************
+// WRITE TO FILES
+//******************************
+// written to MLB Information const
+const string MODIFIED_MLB_INFORMATION_OUTPUT_FILE = "C:/Users/Alek/Desktop/CS1D/ALAYO---Project-2-master/inputModifiedMLBInformation.csv";
+// written to Distances const
+const string MODIFIED_DISTANCES_OUTPUT_FILE = "C:/Users/Alek/Desktop/CS1D/ALAYO---Project-2-master/inputModifiedDistances.csv";
+// written to souvenirs const
+const string MODIFIED_SOUVENIRS_OUTPUT_FILE = "C:/Users/Alek/Desktop/CS1D/ALAYO---Project-2-master/inputSouvenirs.csv";
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -11,17 +32,7 @@ MainWindow::MainWindow(QWidget *parent) :
 {
     ui->setupUi(this);
 
-    reinitialize();
-
-    //add default souvenir items to each baseball stadium
-    for(int i = 0; i < thisMap.mapSize(); i++)
-    {
-        thisMap.atIndex(i).value.addSouvenir(souvenir("Baseball cap", 22.99));
-        thisMap.atIndex(i).value.addSouvenir(souvenir("Baseball bat", 89.93));
-        thisMap.atIndex(i).value.addSouvenir(souvenir("Team pennant", 17.99));
-        thisMap.atIndex(i).value.addSouvenir(souvenir("Autographed baseball", 25.99));
-        thisMap.atIndex(i).value.addSouvenir(souvenir("Team jersey", 199.99));
-    }
+    readFromFiles(false);
 
     ui->primaryPageStackedWidget->setCurrentIndex(0);
     //resize(QDesktopWidget().availableGeometry(this).size() * 0.7);
@@ -34,8 +45,32 @@ MainWindow::~MainWindow()
 
 //************************************ PARSING ************************************************
 
-void MainWindow::reinitialize()
+// reads from the input files
+// if readOriginal = true  - reads from original files (used for reinitializing)
+// if readOriginal = false - checks whether files exist, if so reads from those. (used for startup)
+void MainWindow::readFromFiles(bool readOriginal)
 {
+    bool original;
+    int min = 1000000000, max = 0;
+
+    if(readOriginal)
+    {
+        original = true;
+    }
+    else
+    {
+        ifstream csvFile1;
+        csvFile1.open(MODIFIED_MLB_INFORMATION_OUTPUT_FILE);
+        if(csvFile1.is_open())
+        {
+            original = false;
+            csvFile1.close();
+        }
+        else
+        {
+            original = true;
+        }
+    }
     // creates a blank map and sets it to the main window map, so it is all deleted
     Map blankMap;
     thisMap = blankMap;
@@ -54,15 +89,21 @@ void MainWindow::reinitialize()
 
     ifstream csvFile1;
 
-    QTextStream(stdout) << "opening csv1\n";
-    csvFile1.open("C:/Users/anth.oni/Documents/ALAYO---Project-2-Alek/ALAYO/inputMLBInformation.csv");
+    if(original)
+    {
+        csvFile1.open(MLB_INFORMATION_INPUT_FILE);
+    }
+    else
+    {
+        csvFile1.open(MODIFIED_MLB_INFORMATION_OUTPUT_FILE);
+    }
+
     if(csvFile1.is_open())
     {
         int index = 0;
 
         while(!csvFile1.eof())
         {
-            QTextStream(stdout) << "filling up map\n";
             getline(csvFile1, iName, ',');
             if(iName == "")
             {
@@ -92,36 +133,54 @@ void MainWindow::reinitialize()
             thisEntry.key = iName;
             thisEntry.value = thisMLB;
 
-            //this makes it so vectors 1 and 2 contain only american teams
-            if(thisMLB.getLeague() == "American"){
+            //this makes it so vector 3 contains only american
+            if(thisMLB.getLeague() == "American")
+            {
                 v1.push_back(thisEntry);
                 v2.push_back(thisEntry);
+                v3.push_back(thisEntry);
                 v5.push_back(thisEntry);
                 v7 = v5;
                 v8 = v5;
-                v9 = v5;
-                v10 = v5;
             }
-            //this makes it so vectors 3 and 4 contain only national teams
-            else if(thisMLB.getLeague() == "National"){
-                v3.push_back(thisEntry);
+            //this makes it so vector 4 contain only national teams
+            else if(thisMLB.getLeague() == "National")
+            {
+                v1.push_back(thisEntry);
+                v2.push_back(thisEntry);
                 v4.push_back(thisEntry);
                 v5.push_back(thisEntry);
                 v7 = v5;
                 v8 = v5;
-                v9 = v5;
-                v10 = v5;
             }
-            if(thisMLB.getRoofType() == "Open"){
+            if(thisMLB.getRoofType() == "Open")
+            {
                 v6.push_back(thisEntry);
             }
+            if(thisMLB.getDistanceToCenterField() <= min){
+                min = thisMLB.getDistanceToCenterField();
+            }
+            if(thisMLB.getDistanceToCenterField() >= max){
+                max = thisMLB.getDistanceToCenterField();
+            }
+
 
             index++;
         }
-//        thisMap.popBack();
     }
-    else {
+    else
+    {
         QTextStream(stdout) << "file1 opening failed...\n";
+    }
+    for(int i = 0; i < thisMap.mapSize(); i++){
+        thisEntry.key = thisMap.atIndex(i).key;
+        thisEntry.value = thisMap.atIndex(i).value;
+        if(thisMap.atIndex(i).value.getDistanceToCenterField() == min){
+            v9.push_back(thisEntry);
+        }
+        if(thisMap.atIndex(i).value.getDistanceToCenterField() == max){
+            v10.push_back(thisEntry);
+        }
     }
 
     csvFile1.close();
@@ -137,7 +196,15 @@ void MainWindow::reinitialize()
 
     ifstream csvFile2;
 
-    csvFile2.open("C:/Users/anth.oni/Documents/ALAYO---Project-2-Alek/ALAYO/inputDistance.csv");
+    if(original)
+    {
+        csvFile2.open(DISTANCES_INPUT_FILE);
+    }
+    else
+    {
+        csvFile2.open(MODIFIED_DISTANCES_OUTPUT_FILE);
+    }
+
     if(csvFile2.is_open())
     {
         getline(csvFile2, iStadium1, ',');
@@ -183,7 +250,6 @@ void MainWindow::reinitialize()
                 }
                 getline(csvFile2, iStadium1, ',');
             }
-            thisMap.atIndex(index1).value.printDistances();
         }
     }
     else {
@@ -191,8 +257,123 @@ void MainWindow::reinitialize()
     }
 
     csvFile2.close();
+
+    int index3;
+    string souvenirName;
+    string souvenirPriceString;
+    double souvenirPrice;
+
+    ifstream csvFile3;
+
+    if(original)
+    {
+        //add default souvenir items to each baseball stadium
+        for(int i = 0; i < thisMap.mapSize(); i++)
+        {
+            thisMap.atIndex(i).value.addSouvenir(souvenir("Baseball cap", 22.99));
+            thisMap.atIndex(i).value.addSouvenir(souvenir("Baseball bat", 89.93));
+            thisMap.atIndex(i).value.addSouvenir(souvenir("Team pennant", 17.99));
+            thisMap.atIndex(i).value.addSouvenir(souvenir("Autographed baseball", 25.99));
+            thisMap.atIndex(i).value.addSouvenir(souvenir("Team jersey", 199.99));
+        }
+    }
+    else
+    {
+        csvFile3.open(MODIFIED_SOUVENIRS_OUTPUT_FILE);
+
+        if(csvFile3.is_open())
+        {
+            getline(csvFile3, iStadium1, ',');
+            while(!csvFile3.eof())
+            {
+                found = false;
+                index3 = 0;
+
+                previous = iStadium1;
+
+                while(!found)
+                {
+                    if(iStadium1 == thisMap.atIndex(index3).value.getStadiumName())
+                    {
+                        found = true;
+                    }
+                    else
+                    {
+                        index3++;
+                    }
+                }
+
+
+                while(iStadium1 == previous)
+                {
+                    getline(csvFile3, souvenirName, ',');
+                    getline(csvFile3, souvenirPriceString, '\n');
+                    souvenirPrice = stod(souvenirPriceString);
+
+                    thisMap.atIndex(index3).value.addSouvenir(souvenir(souvenirName, souvenirPrice));
+
+                    getline(csvFile3, iStadium1, ',');
+                }
+            }
+        }
+    }
 }
 
+void MainWindow::writeToFiles()
+{
+    ofstream csvFile1;
+
+    csvFile1.open(MODIFIED_MLB_INFORMATION_OUTPUT_FILE);
+
+    for(int i = 0; i < thisMap.mapSize(); i++)
+    {
+       csvFile1 << thisMap.atIndex(i).key << ","
+                << thisMap.atIndex(i).value.getStadiumName() << ","
+                << thisMap.atIndex(i).value.getSeatingCapacity() << ","
+                << "\"" << thisMap.atIndex(i).value.getLocation() << "\"" << ","
+                << thisMap.atIndex(i).value.getPlayingSurface() << ","
+                << thisMap.atIndex(i).value.getLeague() << ","
+                << thisMap.atIndex(i).value.getDateOpened() << ","
+                << thisMap.atIndex(i).value.getDistanceToCenterField() << ","
+                << thisMap.atIndex(i).value.getBallParkTypology() << ","
+                << thisMap.atIndex(i).value.getRoofType() << "\n";
+    }
+    csvFile1.close();
+
+    ofstream csvFile2;
+
+    csvFile2.open(MODIFIED_DISTANCES_OUTPUT_FILE);
+
+    for(int i = 0; i < thisMap.mapSize(); i++)
+    {
+        for(int k = 0; k < thisMap.atIndex(i).value.getDistanceSize(); k++)
+        {
+            if(thisMap.atIndex(i).value.getDistance(k) != 0)
+            {
+                csvFile2 << thisMap.atIndex(i).value.getStadiumName() << ","
+                         << thisMap.atIndex(k).value.getStadiumName() << ","
+                         << thisMap.atIndex(i).value.getDistance(k) << "\n";
+            }
+        }
+    }
+    csvFile2.close();
+
+    ofstream csvFile3;
+
+    csvFile3.open(MODIFIED_SOUVENIRS_OUTPUT_FILE);
+
+    for(int i = 0; i < thisMap.mapSize(); i++)
+    {
+        for(int k = 0; k < thisMap.atIndex(i).value.getSouvenirListSize(); k++)
+        {
+            csvFile3 << thisMap.atIndex(i).value.getStadiumName() << ","
+                     << thisMap.atIndex(i).value.getSouvenir(k).itemName << ","
+                     << thisMap.atIndex(i).value.getSouvenir(k).itemPrice << "\n";
+        }
+    }
+    csvFile3.close();
+}
+//************************************ LOGIN ************************************************
 
 //This method handles if the check box for show password has been clicked or not
 void MainWindow::on_checkBox_showPW_stateChanged(int)
@@ -207,9 +388,6 @@ void MainWindow::on_checkBox_showPW_stateChanged(int)
     }
 }
 
-
-//************************************ LOGIN ************************************************
-
 void MainWindow::on_loginPushButton_clicked()
 {
     if(ui->usernameLineEdit->text() == "admin" && ui->passwordLineEdit->text() == "admin")
@@ -220,14 +398,12 @@ void MainWindow::on_loginPushButton_clicked()
         encryptionTable.putQuadraticHash(hash_key, value);
 
         ui->primaryPageStackedWidget->setCurrentIndex(1);
-        ui->adminStackedWidget->setCurrentIndex(0);
 
         isAdmin = true;
     }
     else if(ui->usernameLineEdit->text() == "user" && ui->passwordLineEdit->text() == "user")
     {
         ui->primaryPageStackedWidget->setCurrentIndex(2);
-        ui->userStackedWidget->setCurrentIndex(0);
         isAdmin = false;
 
         string value = "user";
@@ -254,6 +430,68 @@ void MainWindow::on_actionLogout_triggered()
 
 //************************************ MANAGING STADIUMS (admin) ************************************************
 
+//this updates all the information in the vectors from the map
+void MainWindow::updateVectors(){
+
+    entry thisEntry;
+    int min = 100000, max = 0;
+
+    v1.clear();
+    v2.clear();
+    v3.clear();
+    v4.clear();
+    v5.clear();
+    v6.clear();
+    v7.clear();
+    v8.clear();
+    v9.clear();
+    v10.clear();
+
+    for(int i = 0; i < thisMap.mapSize(); i++)
+    {
+        thisEntry.key = thisMap.atIndex(i).key;
+        thisEntry.value = thisMap.atIndex(i).value;
+
+        //this makes it so vector 3 contains only american teams
+        if(thisMap.atIndex(i).value.getLeague() == "American"){
+            v1.push_back(thisEntry);
+            v2.push_back(thisEntry);
+            v3.push_back(thisEntry);
+            v5.push_back(thisEntry);
+            v7 = v5;
+            v8 = v5;
+        }
+        //this makes it so vectors 4 containes national teams
+        else if(thisMap.atIndex(i).value.getLeague() == "National"){
+            v1.push_back(thisEntry);
+            v2.push_back(thisEntry);
+            v4.push_back(thisEntry);
+            v5.push_back(thisEntry);
+            v7 = v5;
+            v8 = v5;
+        }
+        if(thisMap.atIndex(i).value.getRoofType() == "Open"){
+            v6.push_back(thisEntry);
+        }
+        if(thisMap.atIndex(i).value.getDistanceToCenterField() <= min){
+            min = thisMap.atIndex(i).value.getDistanceToCenterField();
+        }
+        if(thisMap.atIndex(i).value.getDistanceToCenterField() >= max){
+            max = thisMap.atIndex(i).value.getDistanceToCenterField();
+        }
+    }
+    for(int i = 0; i < thisMap.mapSize(); i++){
+        thisEntry.key = thisMap.atIndex(i).key;
+        thisEntry.value = thisMap.atIndex(i).value;
+        if(thisMap.atIndex(i).value.getDistanceToCenterField() == max){
+            v9.push_back(thisEntry);
+        }
+        if(thisMap.atIndex(i).value.getDistanceToCenterField() == min){
+            v10.push_back(thisEntry);
+        }
+    }
+}
+
 //if the user presses the manage stadiums button, this method changes the page
 void MainWindow::on_manageStadiumsButton_clicked()
 {
@@ -262,12 +500,13 @@ void MainWindow::on_manageStadiumsButton_clicked()
     //initialize all the data in the list widgets
     for(int i = 0; i < thisMap.mapSize(); i++)
     {
-        ui->stadiumListWidget->addItem(QString::fromStdString(thisMap.atIndex(i).value.getStadiumName()));
+        ui->stadiumListWidget->addItem(QString::fromStdString(thisMap.atIndex(i).key));
     }
 }
 
 void MainWindow::on_manageStadiumsBackButton_clicked()
 {
+    writeToFiles();
     //returns to welcome screen
     ui->adminStackedWidget->setCurrentIndex(0);
 
@@ -275,6 +514,16 @@ void MainWindow::on_manageStadiumsBackButton_clicked()
     ui->stadiumListWidget->blockSignals(true);
     ui->stadiumListWidget->clear();
     ui->stadiumListWidget->blockSignals(false);
+
+    ui->groupBox->setTitle("Stadium Attributes");
+    ui->capacityLineEdit->clear();
+    ui->surfaceLineEdit->clear();
+    ui->roofTypeLineEdit->clear();
+    ui->typologyLineEdit->clear();
+    ui->dateOpenedLineEdit->clear();
+    ui->distToCenterLineEdit->clear();
+    ui->newLocationLineEdit->clear();
+    ui->roofTypeLineEdit->clear();
 }
 
 void MainWindow::on_stadiumListWidget_itemDoubleClicked(QListWidgetItem *item)
@@ -331,6 +580,7 @@ void MainWindow::on_stadiumListWidget_currentItemChanged(QListWidgetItem *curren
         ui->souvenirPriceListWidget->addItem(QString::number(thisMap.atIndex(current->listWidget()->currentRow()).value.getSouvenir(i).itemPrice));
     }
 
+    ui->groupBox->setTitle(QString::fromStdString(thisMap.atIndex(current->listWidget()->currentRow()).value.getStadiumName()));
     ui->capacityLineEdit->setText(QString::number(thisMap.atIndex(current->listWidget()->currentRow()).value.getSeatingCapacity()));
     ui->surfaceLineEdit->setText(QString::fromStdString(thisMap.atIndex(current->listWidget()->currentRow()).value.getPlayingSurface()));
     ui->roofTypeLineEdit->setText(QString::fromStdString(thisMap.atIndex(current->listWidget()->currentRow()).value.getRoofType()));
@@ -474,10 +724,19 @@ void MainWindow::on_viewStadiumsButton_clicked()
 {
     ui->userStackedWidget->setCurrentIndex(3);
 
+    ui->capacityLineEdit_2->setReadOnly(true);
+    ui->surfaceLineEdit_2->setReadOnly(true);
+    ui->roofTypeLineEdit_2->setReadOnly(true);
+    ui->typologyLineEdit_2->setReadOnly(true);
+    ui->dateOpenedLineEdit_2->setReadOnly(true);
+    ui->distToCenterLineEdit_2->setReadOnly(true);
+
     //initialize all the data in the list widgets
     for(int i = 0; i < thisMap.mapSize(); i++)
     {
-        ui->stadiumListWidget_2->addItem(QString::fromStdString(thisMap.atIndex(i).value.getStadiumName()));
+//        ui->stadiumListWidget_2->addItem(QString::fromStdString(thisMap.atIndex(i).value.getStadiumName()));
+        ui->stadiumListWidget_2->addItem(QString::fromStdString(thisMap.atIndex(i).key));
+
     }
 }
 
@@ -489,6 +748,14 @@ void MainWindow::on_viewStadiumsBackButton_clicked()
     ui->stadiumListWidget_2->blockSignals(true);
     ui->stadiumListWidget_2->clear();
     ui->stadiumListWidget_2->blockSignals(false);
+
+    ui->groupBox_2->setTitle("Stadium Attributes");
+    ui->capacityLineEdit_2->clear();
+    ui->surfaceLineEdit_2->clear();
+    ui->roofTypeLineEdit_2->clear();
+    ui->typologyLineEdit_2->clear();
+    ui->dateOpenedLineEdit_2->clear();
+    ui->distToCenterLineEdit_2->clear();
 }
 
 void MainWindow::on_stadiumListWidget_2_currentItemChanged(QListWidgetItem *current, QListWidgetItem *previous)
@@ -502,6 +769,7 @@ void MainWindow::on_stadiumListWidget_2_currentItemChanged(QListWidgetItem *curr
         ui->souvenirPriceListWidget_2->addItem(QString::number(thisMap.atIndex(current->listWidget()->currentRow()).value.getSouvenir(i).itemPrice));
     }
 
+    ui->groupBox_2->setTitle(QString::fromStdString(thisMap.atIndex(current->listWidget()->currentRow()).value.getStadiumName()));
     ui->capacityLineEdit_2->setText(QString::number(thisMap.atIndex(current->listWidget()->currentRow()).value.getSeatingCapacity()));
     ui->surfaceLineEdit_2->setText(QString::fromStdString(thisMap.atIndex(current->listWidget()->currentRow()).value.getPlayingSurface()));
     ui->roofTypeLineEdit_2->setText(QString::fromStdString(thisMap.atIndex(current->listWidget()->currentRow()).value.getRoofType()));
@@ -527,6 +795,11 @@ void MainWindow::on_informationButton_admin_clicked()
 //regular user has requested to view stadiums
 void MainWindow::on_informationButton_user_clicked()
 {
+
+    int totalSeatingCapacity = 0;
+
+    updateVectors();
+
     QStringList tableHeader1;
     tableHeader1 << "Team Name" << "Stadium Name";
     QStringList tableHeader2;
@@ -544,12 +817,12 @@ void MainWindow::on_informationButton_user_clicked()
     QStringList tableHeader8;
     tableHeader8 << "Team Name" << "Stadium Name" << "Stadium Seating Capacity";
     QStringList tableHeader9;
-    tableHeader9 << "Team Name" << "Stadium Name" << "Test";
+    tableHeader9 << "Team Name" << "Stadium Name" << "Distance To Center";
     QStringList tableHeader10;
-    tableHeader10 << "Team Name" << "Stadium Name" << "Test";
+    tableHeader10 << "Team Name" << "Stadium Name" << "Distance To Center";
 
     int min;
-    //sorting for american teams via team name
+    //sorting for major teams via team name
     for(int i = 0; i < v1.size()-1; i++){
 
         min = i;
@@ -560,7 +833,7 @@ void MainWindow::on_informationButton_user_clicked()
         }
         swap(v1[min], v1[i]);
     }
-    //sorting for american teams via stadium name
+    //sorting for major teams via stadium name
     for(int i = 0; i < v2.size()-1; i++){
 
         min = i;
@@ -571,7 +844,7 @@ void MainWindow::on_informationButton_user_clicked()
         }
         swap(v2[min], v2[i]);
     }
-    //sorting for national teams via team name
+    //sorting for american teams via team name
     for(int i = 0; i < v3.size()-1; i++){
 
         min = i;
@@ -637,6 +910,9 @@ void MainWindow::on_informationButton_user_clicked()
         }
         swap(v8[min], v8[i]);
     }
+    for(int i = 0; i < v8.size(); i++){
+        totalSeatingCapacity = totalSeatingCapacity + v8[i].value.getSeatingCapacity();
+    }
 
     //empties all the table widgets so there is no double stacking of information
     ui->teamTableWidget_1->clear();
@@ -683,6 +959,7 @@ void MainWindow::on_informationButton_user_clicked()
     ui->teamTableWidget_8->setColumnCount(3);
     ui->teamTableWidget_8->setHorizontalHeaderLabels(tableHeader8);
     ui->label_26->setText(QString::number(v8.size()));
+    ui->label_32->setText(QString::number(totalSeatingCapacity));
     ui->teamTableWidget_9->setRowCount(v9.size());
     ui->teamTableWidget_9->setColumnCount(3);
     ui->teamTableWidget_9->setHorizontalHeaderLabels(tableHeader9);
@@ -692,17 +969,20 @@ void MainWindow::on_informationButton_user_clicked()
     ui->teamTableWidget_10->setHorizontalHeaderLabels(tableHeader10);
     ui->label_28->setText(QString::number(v10.size()));
 
-    //for american teams
+    //for major teams
     for(int i = 0; i < v1.size(); i++){
         ui->teamTableWidget_1->setItem(i, 0, new QTableWidgetItem(QString::fromStdString(v1[i].key)));
         ui->teamTableWidget_1->setItem(i, 1, new QTableWidgetItem(QString::fromStdString(v1[i].value.getStadiumName())));
         ui->teamTableWidget_2->setItem(i, 0, new QTableWidgetItem(QString::fromStdString(v2[i].key)));
         ui->teamTableWidget_2->setItem(i, 1, new QTableWidgetItem(QString::fromStdString(v2[i].value.getStadiumName())));
     }
-    //for national teams
+    //for american teams
     for(int i = 0; i < v3.size(); i++){
         ui->teamTableWidget_3->setItem(i, 0, new QTableWidgetItem(QString::fromStdString(v3[i].key)));
         ui->teamTableWidget_3->setItem(i, 1, new QTableWidgetItem(QString::fromStdString(v3[i].value.getStadiumName())));
+    }
+    //for national teams
+    for(int i = 0; i < v4.size(); i++){
         ui->teamTableWidget_4->setItem(i, 0, new QTableWidgetItem(QString::fromStdString(v4[i].key)));
         ui->teamTableWidget_4->setItem(i, 1, new QTableWidgetItem(QString::fromStdString(v4[i].value.getStadiumName())));
     }
@@ -713,8 +993,7 @@ void MainWindow::on_informationButton_user_clicked()
         ui->teamTableWidget_6->setItem(i, 2, new QTableWidgetItem(QString::fromStdString(v6[i].value.getRoofType())));
     }
     //for everything else
-    for(int i = 0; i < v5.size(); i++)
-    {
+    for(int i = 0; i < v5.size(); i++){
         ui->teamTableWidget_5->setItem(i, 0, new QTableWidgetItem(QString::fromStdString(v5[i].key)));
         ui->teamTableWidget_5->setItem(i, 1, new QTableWidgetItem(QString::fromStdString(v5[i].value.getStadiumName())));
         ui->teamTableWidget_5->setItem(i, 2, new QTableWidgetItem(QString::fromStdString(v5[i].value.getBallParkTypology())));
@@ -726,14 +1005,18 @@ void MainWindow::on_informationButton_user_clicked()
         ui->teamTableWidget_8->setItem(i, 0, new QTableWidgetItem(QString::fromStdString(v8[i].key)));
         ui->teamTableWidget_8->setItem(i, 1, new QTableWidgetItem(QString::fromStdString(v8[i].value.getStadiumName())));
         ui->teamTableWidget_8->setItem(i, 2, new QTableWidgetItem(QString::number(v8[i].value.getSeatingCapacity())));
-
+    }
+    //for greatest distance to center field
+    for(int i = 0; i < v9.size(); i++){
         ui->teamTableWidget_9->setItem(i, 0, new QTableWidgetItem(QString::fromStdString(v9[i].key)));
         ui->teamTableWidget_9->setItem(i, 1, new QTableWidgetItem(QString::fromStdString(v9[i].value.getStadiumName())));
-        ui->teamTableWidget_9->setItem(i, 2, new QTableWidgetItem(QString("yeet")));
-
+        ui->teamTableWidget_9->setItem(i, 2, new QTableWidgetItem(QString::number(v9[i].value.getDistanceToCenterField())));
+    }
+    //for least distance to center field
+    for(int i = 0; i < v10.size(); i++){
         ui->teamTableWidget_10->setItem(i, 0, new QTableWidgetItem(QString::fromStdString(v10[i].key)));
         ui->teamTableWidget_10->setItem(i, 1, new QTableWidgetItem(QString::fromStdString(v10[i].value.getStadiumName())));
-        ui->teamTableWidget_10->setItem(i, 2, new QTableWidgetItem(QString("yeet")));
+        ui->teamTableWidget_10->setItem(i, 2, new QTableWidgetItem(QString::number(v10[i].value.getDistanceToCenterField())));
     }
 
 
@@ -763,71 +1046,18 @@ void MainWindow::on_takeTripButton_admin_clicked()
     ui->userStackedWidget->setCurrentIndex(1);
 }
 
-void MainWindow::on_takeTripButton_user_clicked()
-{
-    ui->userStackedWidget->setCurrentIndex(1);
-    ui->takeTripStackedWidget->setCurrentIndex(0);
-}
 
 void MainWindow::on_visitMultipleButton_clicked()
 {
-    ui->availibleTeamsStackedWidget->clear();
-    ui->selectedTeamsStackedWidget->clear();
 
-    for(int i = 0; i < thisMap.mapSize(); i++)
-    {
-        //fill up the availible teams stacked widget
-        ui->availibleTeamsStackedWidget->addItem(QString::fromStdString(thisMap.atIndex(i).key));
-        ui->availibleTeamsStackedWidget->item(i)->setCheckState(Qt::Unchecked);
-        ui->availibleTeamsStackedWidget->item(i)->setFlags(Qt::ItemIsUserCheckable | Qt::ItemIsUserCheckable | Qt::ItemIsEnabled);
-    }
-
-    ui->takeTripStackedWidget->setCurrentIndex(1);
 }
 
 void MainWindow::on_visitSingleButton_clicked()
 {
-    ui->takeTripStackedWidget->setCurrentIndex(2);
 
-    for(int i = 0; i < thisMap.mapSize(); i++)
-    {
-        //fill up the availible teams stacked widget
-        ui->availibleTeamsStackedWidget->addItem(QString::fromStdString(thisMap.atIndex(i).key));
-        ui->availibleTeamsStackedWidget->item(i)->setCheckState(Qt::Unchecked);
-        ui->availibleTeamsStackedWidget->item(i)->setFlags(Qt::ItemIsUserCheckable | Qt::ItemIsUserCheckable | Qt::ItemIsEnabled);
-    }
 }
 
-
-
-
-
-
-void MainWindow::on_availibleTeamsStackedWidget_itemChanged(QListWidgetItem *item)
+void MainWindow::on_takeTripButton_user_clicked()
 {
-    //when user checks a team, it moves it into the next list widget
-    if(item->checkState() == 2)
-    {
-        //item is checked
-        ui->selectedTeamsStackedWidget->addItem(item->text());
-    }
-    else if(item->checkState() == 0)
-    {
-        //perform sequential search for the item
-
-        bool found = false;
-        unsigned int k = 0;
-        while(!found && k < ui->selectedTeamsStackedWidget->count())
-        {
-            if(item->text() == ui->selectedTeamsStackedWidget->item(k)->text())
-            {
-                found = true;
-            }
-            else {
-                ++k;
-            }
-        }
-
-        ui->selectedTeamsStackedWidget->takeItem(k);
-    }
+    ui->userStackedWidget->setCurrentIndex(1);
 }
