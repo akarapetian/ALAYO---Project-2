@@ -30,7 +30,8 @@ SOURCES += \
     map.cpp \
     mlb.cpp \
     entry.cpp \
-    hashmap.cpp
+    hashmap.cpp \
+    graph.cpp
 
     mlb.cpp
 
@@ -40,7 +41,8 @@ HEADERS += \
     map.h \
     mlb.h \
     entry.h \
-    hashmap.h
+    hashmap.h \
+    graph.h
 
     mlb.h
 

@@ -1,5 +1,6 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
+#include "graph.h"
 #include "QMessageBox"
 #include "QDesktopWidget"
 #include "QTextStream"
@@ -106,8 +107,6 @@ void MainWindow::readFromFiles(bool readOriginal)
 
     if(csvFile1.is_open())
     {
-        int index = 0;
-
         while(!csvFile1.eof())
         {
             getline(csvFile1, iName, ',');
@@ -130,7 +129,7 @@ void MainWindow::readFromFiles(bool readOriginal)
             getline(csvFile1, iBallparkTypology, ',');
             getline(csvFile1, iRoofType, '\n');
 
-            MLB thisMLB(index, iStadiumName, iSeatingcapacity,
+            MLB thisMLB(iStadiumName, iSeatingcapacity,
                         iLocation, iPlayingSurface, iLeague,
                         iDateopened, idistanceToCenterField,
                         iBallparkTypology, iRoofType);
@@ -171,9 +170,6 @@ void MainWindow::readFromFiles(bool readOriginal)
             if(thisMLB.getDistanceToCenterField() >= max){
                 max = thisMLB.getDistanceToCenterField();
             }
-
-
-            index++;
         }
     }
     else
@@ -327,6 +323,7 @@ void MainWindow::readFromFiles(bool readOriginal)
     }
     if(readOriginal)
     {
+        QMessageBox::information(nullptr, "Success!", "All MLB teams have been reinitialized!");
         writeToFiles();
     }
 }
@@ -351,8 +348,6 @@ void MainWindow::readExpansionFiles()
 
     entry thisEntry;
 
-    int index = 0;
-
     while(!csvFile1.eof())
     {
         getline(csvFile1, iName, ',');
@@ -361,7 +356,6 @@ void MainWindow::readExpansionFiles()
         {
             if(iName == thisMap.atIndex(i).key)
             {
-                QMessageBox::critical(nullptr, "error", "You can't add a team that already exists!");
                 exists = true;
             }
         }
@@ -385,7 +379,7 @@ void MainWindow::readExpansionFiles()
         getline(csvFile1, iBallparkTypology, ',');
         getline(csvFile1, iRoofType, '\n');
 
-        MLB thisMLB(index, iStadiumName, iSeatingcapacity,
+        MLB thisMLB(iStadiumName, iSeatingcapacity,
                     iLocation, iPlayingSurface, iLeague,
                     iDateopened, idistanceToCenterField,
                     iBallparkTypology, iRoofType);
@@ -426,12 +420,22 @@ void MainWindow::readExpansionFiles()
             max = thisMLB.getDistanceToCenterField();
         }
 
-        index++;
-
-        ui->stadiumListWidget->addItem(QString::fromStdString(thisMap.atIndex(thisMap.mapSize()-1).key));
+        thisMap.atIndex(thisMap.mapSize()-1).value.addSouvenir(souvenir("Baseball cap", 22.99));
+        thisMap.atIndex(thisMap.mapSize()-1).value.addSouvenir(souvenir("Baseball bat", 89.93));
+        thisMap.atIndex(thisMap.mapSize()-1).value.addSouvenir(souvenir("Team pennant", 17.99));
+        thisMap.atIndex(thisMap.mapSize()-1).value.addSouvenir(souvenir("Autographed baseball", 25.99));
+        thisMap.atIndex(thisMap.mapSize()-1).value.addSouvenir(souvenir("Team jersey", 199.99));
     }
 
-    writeToFiles();
+    if(!exists)
+    {
+        QMessageBox::information(nullptr, "Success!", "Additional team(s) have been added!");
+        writeToFiles();
+    }
+    else
+    {
+        QMessageBox::critical(nullptr, "Error!", "You can't add a team that already exists!");
+    }
 }
 
 void MainWindow::writeToFiles()
@@ -543,7 +547,6 @@ void MainWindow::on_loginPushButton_clicked()
 void MainWindow::on_actionLogout_triggered()
 {
     ui->primaryPageStackedWidget->setCurrentIndex(0);
-    //encryptionTable.clearTable();
 }
 
 //************************************ MANAGING STADIUMS (admin) ************************************************
@@ -551,11 +554,74 @@ void MainWindow::on_actionLogout_triggered()
 void MainWindow::on_AddTeamButton_clicked()
 {
     readExpansionFiles();
+
+    ui->stadiumListWidget->blockSignals(true);
+    ui->stadiumListWidget->clear();
+    ui->stadiumListWidget->blockSignals(false);
+
+    ui->groupBox->setTitle("Stadium Attributes");
+
+    ui->capacityLineEdit->clear();
+    ui->surfaceLineEdit->clear();
+    ui->roofTypeLineEdit->clear();
+    ui->typologyLineEdit->clear();
+    ui->dateOpenedLineEdit->clear();
+    ui->distToCenterLineEdit->clear();
+    ui->newLocationLineEdit->clear();
+    ui->roofTypeLineEdit->clear();
+    ui->capacityLineEdit->setReadOnly(true);
+    ui->surfaceLineEdit->setReadOnly(true);
+    ui->roofTypeLineEdit->setReadOnly(true);
+    ui->typologyLineEdit->setReadOnly(true);
+    ui->dateOpenedLineEdit->setReadOnly(true);
+    ui->distToCenterLineEdit->setReadOnly(true);
+    ui->newLocationLineEdit->setReadOnly(true);
+    ui->roofTypeLineEdit->setReadOnly(true);
+
+    ui->souvenirListWidget->clear();
+    ui->souvenirPriceListWidget->clear();
+
+    //initialize all the data in the list widgets
+    for(int i = 0; i < thisMap.mapSize(); i++)
+    {
+        ui->stadiumListWidget->addItem(QString::fromStdString(thisMap.atIndex(i).key));
+    }
 }
 
 void MainWindow::on_ReinitializeButton_clicked()
 {
     readFromFiles(true);
+
+    ui->stadiumListWidget->blockSignals(true);
+    ui->stadiumListWidget->clear();
+    ui->stadiumListWidget->blockSignals(false);
+
+    ui->groupBox->setTitle("Stadium Attributes");
+    ui->capacityLineEdit->clear();
+    ui->surfaceLineEdit->clear();
+    ui->roofTypeLineEdit->clear();
+    ui->typologyLineEdit->clear();
+    ui->dateOpenedLineEdit->clear();
+    ui->distToCenterLineEdit->clear();
+    ui->newLocationLineEdit->clear();
+    ui->roofTypeLineEdit->clear();
+    ui->capacityLineEdit->setReadOnly(true);
+    ui->surfaceLineEdit->setReadOnly(true);
+    ui->roofTypeLineEdit->setReadOnly(true);
+    ui->typologyLineEdit->setReadOnly(true);
+    ui->dateOpenedLineEdit->setReadOnly(true);
+    ui->distToCenterLineEdit->setReadOnly(true);
+    ui->newLocationLineEdit->setReadOnly(true);
+    ui->roofTypeLineEdit->setReadOnly(true);
+
+    ui->souvenirListWidget->clear();
+    ui->souvenirPriceListWidget->clear();
+
+    //initialize all the data in the list widgets
+    for(int i = 0; i < thisMap.mapSize(); i++)
+    {
+        ui->stadiumListWidget->addItem(QString::fromStdString(thisMap.atIndex(i).key));
+    }
 }
 
 //this updates all the information in the vectors from the map
@@ -625,30 +691,6 @@ void MainWindow::on_manageStadiumsButton_clicked()
 {
     ui->adminStackedWidget->setCurrentIndex(1);
 
-    ui->groupBox->setTitle("Stadium Attributes");
-    ui->capacityLineEdit->clear();
-    ui->surfaceLineEdit->clear();
-    ui->roofTypeLineEdit->clear();
-    ui->typologyLineEdit->clear();
-    ui->dateOpenedLineEdit->clear();
-    ui->distToCenterLineEdit->clear();
-    ui->newLocationLineEdit->clear();
-    ui->roofTypeLineEdit->clear();
-
-    //initialize all the data in the list widgets
-    for(int i = 0; i < thisMap.mapSize(); i++)
-    {
-        ui->stadiumListWidget->addItem(QString::fromStdString(thisMap.atIndex(i).key));
-    }
-}
-
-void MainWindow::on_manageStadiumsBackButton_clicked()
-{
-    writeToFiles();
-    //returns to welcome screen
-    ui->adminStackedWidget->setCurrentIndex(0);
-
-
     ui->stadiumListWidget->blockSignals(true);
     ui->stadiumListWidget->clear();
     ui->stadiumListWidget->blockSignals(false);
@@ -662,6 +704,30 @@ void MainWindow::on_manageStadiumsBackButton_clicked()
     ui->distToCenterLineEdit->clear();
     ui->newLocationLineEdit->clear();
     ui->roofTypeLineEdit->clear();
+    ui->capacityLineEdit->setReadOnly(true);
+    ui->surfaceLineEdit->setReadOnly(true);
+    ui->roofTypeLineEdit->setReadOnly(true);
+    ui->typologyLineEdit->setReadOnly(true);
+    ui->dateOpenedLineEdit->setReadOnly(true);
+    ui->distToCenterLineEdit->setReadOnly(true);
+    ui->newLocationLineEdit->setReadOnly(true);
+    ui->roofTypeLineEdit->setReadOnly(true);
+
+    ui->souvenirListWidget->clear();
+    ui->souvenirPriceListWidget->clear();
+
+    //initialize all the data in the list widgets
+    for(int i = 0; i < thisMap.mapSize(); i++)
+    {
+        ui->stadiumListWidget->addItem(QString::fromStdString(thisMap.atIndex(i).key));
+    }
+}
+
+void MainWindow::on_manageStadiumsBackButton_clicked()
+{
+    writeToFiles();
+    //returns to welcome screen
+    ui->adminStackedWidget->setCurrentIndex(0);
 }
 
 void MainWindow::on_stadiumListWidget_itemDoubleClicked(QListWidgetItem *item)
@@ -687,7 +753,7 @@ void MainWindow::on_stadiumListWidget_currentItemChanged(QListWidgetItem *curren
     {
          if(isFloatNumber(previous->text()))
          {
-            thisMap.atIndex(previous->listWidget()->currentRow()).value.getSouvenir(previous->listWidget()->row(previous)).setItemPrice(previous->text().toFloat());
+            thisMap.atIndex(previous->listWidget()->currentRow()).value.getSouvenir(previous->listWidget()->row(previous)).setItemPrice(previous->text().toDouble());
          }
          else {
              QMessageBox::warning(nullptr, "Error", "Invalid Price Input! Please Enter a float");
@@ -697,7 +763,6 @@ void MainWindow::on_stadiumListWidget_currentItemChanged(QListWidgetItem *curren
         ui->souvenirPriceListWidget->closePersistentEditor(previous);
     }
 
-
     ui->souvenirListWidget->blockSignals(true);
     ui->souvenirPriceListWidget->blockSignals(true);
     ui->souvenirListWidget->clear();
@@ -705,11 +770,7 @@ void MainWindow::on_stadiumListWidget_currentItemChanged(QListWidgetItem *curren
     ui->souvenirListWidget->blockSignals(false);
     ui->souvenirPriceListWidget->blockSignals(false);
 
-
     ui->souvenirPriceListWidget->setCurrentRow(current->listWidget()->currentRow());
-
-
-
 
     //if the user clicks on an item, the values in the souvenir list widget, along with all other attributes need to be updated
     for(int i = 0; i < thisMap.atIndex(current->listWidget()->currentRow()).value.getSouvenirListSize(); i++)
@@ -718,6 +779,14 @@ void MainWindow::on_stadiumListWidget_currentItemChanged(QListWidgetItem *curren
         ui->souvenirPriceListWidget->addItem(QString::number(thisMap.atIndex(current->listWidget()->currentRow()).value.getSouvenir(i).itemPrice));
     }
 
+    ui->capacityLineEdit->setReadOnly(false);
+    ui->surfaceLineEdit->setReadOnly(false);
+    ui->roofTypeLineEdit->setReadOnly(false);
+    ui->typologyLineEdit->setReadOnly(false);
+    ui->dateOpenedLineEdit->setReadOnly(false);
+    ui->distToCenterLineEdit->setReadOnly(false);
+    ui->newLocationLineEdit->setReadOnly(false);
+    ui->roofTypeLineEdit->setReadOnly(false);
     ui->groupBox->setTitle(QString::fromStdString(thisMap.atIndex(current->listWidget()->currentRow()).value.getStadiumName()));
     ui->capacityLineEdit->setText(QString::number(thisMap.atIndex(current->listWidget()->currentRow()).value.getSeatingCapacity()));
     ui->surfaceLineEdit->setText(QString::fromStdString(thisMap.atIndex(current->listWidget()->currentRow()).value.getPlayingSurface()));
@@ -725,7 +794,6 @@ void MainWindow::on_stadiumListWidget_currentItemChanged(QListWidgetItem *curren
     ui->typologyLineEdit->setText(QString::fromStdString(thisMap.atIndex(current->listWidget()->currentRow()).value.getBallParkTypology()));
     ui->dateOpenedLineEdit->setText(QString::number(thisMap.atIndex(current->listWidget()->currentRow()).value.getDateOpened()));
     ui->distToCenterLineEdit->setText(QString::number(thisMap.atIndex(current->listWidget()->currentRow()).value.getDistanceToCenterField()));
-    //ui->newLocationLineEdit->setText(QString::number(thisMap.atIndex(current->listWidget()->currentRow()).value.()));
 }
 
 void MainWindow::on_souvenirListWidget_itemDoubleClicked(QListWidgetItem *item)
@@ -754,7 +822,7 @@ void MainWindow::on_souvenirPriceListWidget_currentItemChanged(QListWidgetItem *
     {
          if(isFloatNumber(previous->text()))
          {
-            thisMap.atIndex(previous->listWidget()->currentRow()).value.getSouvenir(previous->listWidget()->row(previous)).setItemPrice(previous->text().toFloat());
+            thisMap.atIndex(previous->listWidget()->currentRow()).value.getSouvenir(previous->listWidget()->row(previous)).setItemPrice(previous->text().toDouble());
          }
          else {
              QMessageBox::warning(nullptr, "Error", "Invalid Price Input! Please Enter a float");
@@ -869,6 +937,22 @@ void MainWindow::on_viewStadiumsButton_clicked()
     ui->dateOpenedLineEdit_2->setReadOnly(true);
     ui->distToCenterLineEdit_2->setReadOnly(true);
 
+    ui->stadiumListWidget_2->blockSignals(true);
+    ui->stadiumListWidget_2->clear();
+    ui->stadiumListWidget_2->blockSignals(false);
+
+    ui->groupBox->setTitle("Stadium Attributes");
+    ui->capacityLineEdit_2->clear();
+    ui->surfaceLineEdit_2->clear();
+    ui->roofTypeLineEdit_2->clear();
+    ui->typologyLineEdit_2->clear();
+    ui->dateOpenedLineEdit_2->clear();
+    ui->distToCenterLineEdit_2->clear();
+    ui->roofTypeLineEdit_2->clear();
+
+    ui->souvenirListWidget_2->clear();
+    ui->souvenirPriceListWidget_2->clear();
+
     //initialize all the data in the list widgets
     for(int i = 0; i < thisMap.mapSize(); i++)
     {
@@ -882,18 +966,6 @@ void MainWindow::on_viewStadiumsBackButton_clicked()
 {
     //returns to welcome screen
     ui->userStackedWidget->setCurrentIndex(0);
-
-    ui->stadiumListWidget_2->blockSignals(true);
-    ui->stadiumListWidget_2->clear();
-    ui->stadiumListWidget_2->blockSignals(false);
-
-    ui->groupBox_2->setTitle("Stadium Attributes");
-    ui->capacityLineEdit_2->clear();
-    ui->surfaceLineEdit_2->clear();
-    ui->roofTypeLineEdit_2->clear();
-    ui->typologyLineEdit_2->clear();
-    ui->dateOpenedLineEdit_2->clear();
-    ui->distToCenterLineEdit_2->clear();
 }
 
 void MainWindow::on_stadiumListWidget_2_currentItemChanged(QListWidgetItem *current, QListWidgetItem *previous)
@@ -1249,7 +1321,7 @@ void MainWindow::on_availibleTeamsStackedWidget_itemChanged(QListWidgetItem *ite
         //perform sequential search for the item
 
         bool found = false;
-        unsigned int k = 0;
+        int k = 0;
         while(!found && k < ui->selectedTeamsStackedWidget->count())
         {
             if(item->text() == ui->selectedTeamsStackedWidget->item(k)->text())
@@ -1275,29 +1347,60 @@ vector<vector<int>> MainWindow::createAdjacencyMatrix()
     vector<vector<int>> matrix;
 
     //reads the selected teams matrix and creates the matrix from distances
-    for(int i = 0; i < ui->selectedTeamsStackedWidget->count(); i++)
+    for(int i = 0; i < thisMap.mapSize(); i++)
     {
-//        matrix.push_back();
-//        matrix.push_back(thisMap);
+       // matrix.push_back(thisMap.atIndex(i).value.getDistanceVector());
     }
 
+    return matrix;
 }
 
+void MainWindow::createGraph()
+{
+   ifstream file;
+   string startingLocation;
+   string endingLocation;
+   string distanceBetweenString;
+   int distanceBetween;
 
+   file.open(MODIFIED_DISTANCES_OUTPUT_FILE);
+   if(file.is_open())
+   {
+      while(!file.eof())
+      {
+          getline(file, startingLocation, ',');
+          getline(file, endingLocation, ',');
+          getline(file, distanceBetweenString, '\n');
+
+          distanceBetween = stoi(distanceBetweenString);
+
+          graph.insert(startingLocation, endingLocation, distanceBetween);
+      }
+   }
+
+
+}
 
 void MainWindow::on_optimizeButton_clicked()
 {
     //run optimization algorithm, return
     //steps to the shortest path algo
 
-    //1: create the distance matrix explicity, iterate across the whole map, add distance vectors as columns to the matrix
-    //   after adding all columns, track which stadiums are not being visited, and delete their indexes from the matrix
-    //   The resulting matrix will be an NxN symmetric matrix, where n is the number of stadiums to be visted
-    //   This same process will be used for the bfs, dfs
 
-    //2: Use distance matrix to "visit" (actually visiting comes later) each stadium, recursively "visiting" the closest one,
-    //   creating an ordered vector of stadiums
 
-    //3: write the vectors contents to the selected teams stacked widget
+
+    if(ui->selectedTeamsStackedWidget->count() > 0)
+    {
+        string startingCity;
+        vector<string> vertexList;
+        vector<int> weights;
+        vector<int> nextLocation;
+
+        startingCity = ui->selectedTeamsStackedWidget->item(0)->text().toStdString();
+
+        //graph.dijkstraAlgorithm(startingCity, vertexList, )
+
+
+    }
 
 }

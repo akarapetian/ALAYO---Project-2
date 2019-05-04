@@ -11,6 +11,7 @@
 #include "mlb.h"
 #include "map.h"
 #include "hashmap.h"
+#include "graph.h"
 
 #include <fstream>
 #include <string>
@@ -42,6 +43,8 @@ public:
 
     bool isFloatNumber(const QString& Qstring);
     bool isInteger(const QString &mystring);
+
+    void createGraph();
 
     vector<vector<int>> createAdjacencyMatrix();
 
@@ -121,6 +124,8 @@ private:
     Map thisMap;
     HashMap encryptionTable;
     bool isAdmin;
+
+    Graph graph;
 
     QVector<MLB> allMLBTeamsAvailable;
     QVector<entry> v1;

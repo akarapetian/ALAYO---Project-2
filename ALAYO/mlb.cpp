@@ -13,10 +13,9 @@ MLB::MLB()
     roofType = "";    
 }
 
-MLB::MLB(int nID, string nStadiumName, int nSeatingCapacity, string nLocation, string nPlayingSurface,
+MLB::MLB(string nStadiumName, int nSeatingCapacity, string nLocation, string nPlayingSurface,
          string nLeague, int nDateOpened, int nDistanceToCenterField, string nBallParkTypology, string nRoofType)
 {
-    ID = nID;
     stadiumName = nStadiumName;
     seatingCapacity = nSeatingCapacity;
     location = nLocation;
@@ -30,11 +29,6 @@ MLB::MLB(int nID, string nStadiumName, int nSeatingCapacity, string nLocation, s
 
 MLB::~MLB()
 {
-}
-
-int MLB:: getID()
-{
-    return ID;
 }
 
 string MLB::getStadiumName()
@@ -90,11 +84,6 @@ int MLB::getDistanceSize()
 int MLB::getDistance(int i)
 {
     return distances.at(i);
-}
-
-void MLB::setID(int newID)
-{
-    this->ID = newID;
 }
 
 void MLB::setStadiumName(string newStadiumName)

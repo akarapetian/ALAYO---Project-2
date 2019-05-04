@@ -220,6 +220,7 @@ Makefile: ALAYO.pro ../../../../qt/5.12.0/mingw73_64/mkspecs/win32-g++/qmake.con
 		../../../../qt/5.12.0/mingw73_64/mkspecs/features/qt_config.prf \
 		../../../../qt/5.12.0/mingw73_64/mkspecs/win32-g++/qmake.conf \
 		../../../../qt/5.12.0/mingw73_64/mkspecs/features/spec_post.prf \
+		.qmake.stash \
 		../../../../qt/5.12.0/mingw73_64/mkspecs/features/exclusive_builds.prf \
 		../../../../qt/5.12.0/mingw73_64/mkspecs/features/toolchain.prf \
 		../../../../qt/5.12.0/mingw73_64/mkspecs/features/default_pre.prf \
@@ -407,6 +408,7 @@ Makefile: ALAYO.pro ../../../../qt/5.12.0/mingw73_64/mkspecs/win32-g++/qmake.con
 ../../../../qt/5.12.0/mingw73_64/mkspecs/features/qt_config.prf:
 ../../../../qt/5.12.0/mingw73_64/mkspecs/win32-g++/qmake.conf:
 ../../../../qt/5.12.0/mingw73_64/mkspecs/features/spec_post.prf:
+.qmake.stash:
 ../../../../qt/5.12.0/mingw73_64/mkspecs/features/exclusive_builds.prf:
 ../../../../qt/5.12.0/mingw73_64/mkspecs/features/toolchain.prf:
 ../../../../qt/5.12.0/mingw73_64/mkspecs/features/default_pre.prf:
