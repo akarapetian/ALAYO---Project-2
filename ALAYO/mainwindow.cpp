@@ -1422,6 +1422,10 @@ void MainWindow::on_dfsPageBackButton_clicked()
 
 void MainWindow::on_dfsStadiumsListWidget_currentItemChanged(QListWidgetItem *current, QListWidgetItem *previous)
 {
+    ui->dfsResultsListWidget->clear();
+    ui->dfsTotalDistanceTraveledLineEdit->clear();
+
+
     //place the current item into the desired starting location line edit
     ui->startingStadiumLineEdit->clear();
     ui->startingStadiumLineEdit->setText(current->text());
@@ -1429,6 +1433,7 @@ void MainWindow::on_dfsStadiumsListWidget_currentItemChanged(QListWidgetItem *cu
 
 void MainWindow::on_dfsPushButton_clicked()
 {
+    ui->dfsResultsListWidget->clear();
     createGraph();
     vector<string> vertexList;
     //RUN DFS ALGORITHM ON STARTING LOCATION
