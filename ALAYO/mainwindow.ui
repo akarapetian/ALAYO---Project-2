@@ -1385,7 +1385,7 @@
      </palette>
     </property>
     <property name="currentIndex">
-     <number>0</number>
+     <number>2</number>
     </property>
     <widget class="QWidget" name="loginPage">
      <widget class="QLabel" name="label">
@@ -1507,7 +1507,7 @@
        </rect>
       </property>
       <property name="currentIndex">
-       <number>1</number>
+       <number>0</number>
       </property>
       <widget class="QWidget" name="welcomePage_admin">
        <widget class="QLabel" name="welcomeLabel_admin">
@@ -1866,7 +1866,7 @@
        </rect>
       </property>
       <property name="currentIndex">
-       <number>3</number>
+       <number>1</number>
       </property>
       <widget class="QWidget" name="welcomePage_user">
        <widget class="QPushButton" name="takeTripButton_user">
@@ -1938,12 +1938,15 @@
           <height>761</height>
          </rect>
         </property>
+        <property name="currentIndex">
+         <number>3</number>
+        </property>
         <widget class="QWidget" name="tripTypeSelectionPage">
          <widget class="QPushButton" name="visitSingleButton">
           <property name="geometry">
            <rect>
-            <x>90</x>
-            <y>560</y>
+            <x>420</x>
+            <y>110</y>
             <width>351</width>
             <height>101</height>
            </rect>
@@ -1955,8 +1958,8 @@
          <widget class="QPushButton" name="visitMultipleButton">
           <property name="geometry">
            <rect>
-            <x>760</x>
-            <y>560</y>
+            <x>420</x>
+            <y>240</y>
             <width>351</width>
             <height>101</height>
            </rect>
@@ -1991,9 +1994,22 @@
            <string>Back</string>
           </property>
          </widget>
+         <widget class="QPushButton" name="performdfsButton">
+          <property name="geometry">
+           <rect>
+            <x>420</x>
+            <y>360</y>
+            <width>351</width>
+            <height>101</height>
+           </rect>
+          </property>
+          <property name="text">
+           <string>Perform DFS</string>
+          </property>
+         </widget>
         </widget>
         <widget class="QWidget" name="multipleSelectionPage">
-         <widget class="QListWidget" name="availibleTeamsStackedWidget">
+         <widget class="QListWidget" name="availibleStadiumsListWidget">
           <property name="geometry">
            <rect>
             <x>60</x>
@@ -2013,7 +2029,7 @@
            </rect>
           </property>
           <property name="text">
-           <string>Teams</string>
+           <string>Stadiums</string>
           </property>
          </widget>
          <widget class="QPushButton" name="optimizeButton">
@@ -2042,7 +2058,7 @@
            <string>Go</string>
           </property>
          </widget>
-         <widget class="QListWidget" name="selectedTeamsStackedWidget">
+         <widget class="QListWidget" name="selectedStadiumsListWidget">
           <property name="geometry">
            <rect>
             <x>440</x>
@@ -2081,6 +2097,116 @@
           </property>
          </widget>
         </widget>
+        <widget class="QWidget" name="dfsPage">
+         <widget class="QListWidget" name="dfsStadiumsListWidget">
+          <property name="geometry">
+           <rect>
+            <x>160</x>
+            <y>80</y>
+            <width>291</width>
+            <height>591</height>
+           </rect>
+          </property>
+         </widget>
+         <widget class="QPushButton" name="dfsPageBackButton">
+          <property name="geometry">
+           <rect>
+            <x>20</x>
+            <y>50</y>
+            <width>121</width>
+            <height>41</height>
+           </rect>
+          </property>
+          <property name="text">
+           <string>Back</string>
+          </property>
+         </widget>
+         <widget class="QLabel" name="label_33">
+          <property name="geometry">
+           <rect>
+            <x>160</x>
+            <y>55</y>
+            <width>211</width>
+            <height>21</height>
+           </rect>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">font: 75 11pt &quot;MS Shell Dlg 2&quot;;</string>
+          </property>
+          <property name="text">
+           <string>Choose a starting stadium:</string>
+          </property>
+         </widget>
+         <widget class="QLabel" name="label_34">
+          <property name="geometry">
+           <rect>
+            <x>740</x>
+            <y>60</y>
+            <width>121</width>
+            <height>31</height>
+           </rect>
+          </property>
+          <property name="text">
+           <string>Starting Stadium</string>
+          </property>
+         </widget>
+         <widget class="QLineEdit" name="startingStadiumLineEdit">
+          <property name="geometry">
+           <rect>
+            <x>640</x>
+            <y>110</y>
+            <width>321</width>
+            <height>21</height>
+           </rect>
+          </property>
+         </widget>
+         <widget class="QPushButton" name="dfsPushButton">
+          <property name="geometry">
+           <rect>
+            <x>680</x>
+            <y>160</y>
+            <width>241</width>
+            <height>61</height>
+           </rect>
+          </property>
+          <property name="text">
+           <string>Perform DFS</string>
+          </property>
+         </widget>
+         <widget class="QListWidget" name="dfsResultsListWidget">
+          <property name="geometry">
+           <rect>
+            <x>670</x>
+            <y>230</y>
+            <width>256</width>
+            <height>381</height>
+           </rect>
+          </property>
+         </widget>
+         <widget class="QLabel" name="label_35">
+          <property name="geometry">
+           <rect>
+            <x>670</x>
+            <y>650</y>
+            <width>141</width>
+            <height>16</height>
+           </rect>
+          </property>
+          <property name="text">
+           <string>Total Distance Traveleld</string>
+          </property>
+         </widget>
+         <widget class="QLineEdit" name="dfsTotalDistanceTraveledLineEdit">
+          <property name="geometry">
+           <rect>
+            <x>830</x>
+            <y>650</y>
+            <width>113</width>
+            <height>20</height>
+           </rect>
+          </property>
+         </widget>
+        </widget>
        </widget>
       </widget>
       <widget class="QWidget" name="informationPage">
@@ -2088,7 +2214,7 @@
         <property name="geometry">
          <rect>
           <x>30</x>
-          <y>20</y>
+          <y>40</y>
           <width>121</width>
           <height>41</height>
          </rect>
@@ -2110,7 +2236,7 @@
          <enum>QTabWidget::North</enum>
         </property>
         <property name="currentIndex">
-         <number>9</number>
+         <number>5</number>
         </property>
         <widget class="QWidget" name="MajorLeagueTeam">
          <attribute name="title">

@@ -31,13 +31,13 @@ public:
     explicit MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
 
-    void reinitialize();
-
     void readFromFiles(bool readOriginal);
 
     void readExpansionFiles();
 
     void writeToFiles();
+
+    void resetManageStadiumsInformation();
 
     void updateVectors();
 
@@ -113,11 +113,19 @@ private slots:
 
     void on_multipleSelectionPageBackButton_clicked();
 
-    void on_availibleTeamsStackedWidget_itemChanged(QListWidgetItem *item);
+    void on_availibleStadiumsListWidget_itemChanged(QListWidgetItem *item);
 
     void on_AddTeamButton_clicked();
 
     void on_ReinitializeButton_clicked();
+
+    void on_performdfsButton_clicked();
+
+    void on_dfsPageBackButton_clicked();
+
+    void on_dfsStadiumsListWidget_currentItemChanged(QListWidgetItem *current, QListWidgetItem *previous);
+
+    void on_dfsPushButton_clicked();
 
 private:
     Ui::MainWindow *ui;

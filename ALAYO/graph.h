@@ -88,6 +88,9 @@ class Graph
                     string end,
                     int    distanceBetween);
 
+        //erases all entries in the graph
+        void clear();
+
         //Performs the dijkstras algorithm and finds the shortest distance
         //from dallas to other cities
         void dijkstraAlgorithm(string startVertex,
@@ -131,6 +134,28 @@ class Graph
 
         //Returns a vector of all the visited edges in the dijkstras algorithm
         vector<string> determineTripVector(string start, string end, int next[]);
+
+
+        //DFS***********************************************************************
+        //Performs the DFS search and returns the total distance traveled to main
+        int DepthFirstSearch(string begin, vector<string> &theGraph);
+
+        //Helper function for method DFS that finds the smallest possible
+        //distance between each edge
+        int dfsHelper(int vertex, vector<string> &theGraph);
+
+        //Prints the entire DFS list after sorting
+        void printDFSList(int distance, vector<string> &theGraph);
+
+        //Will return a vector of all the discovery edges back to main
+        void printDiscoveryEdges(vector<string> &theGraph);
+
+        //Will return a vector of all of the back edges back to main
+        void printBackEdges(vector<string> &theGraph);
+
+        //Reinitializes traversal distance back to 0
+        void reinitializeTraversalDistance();
+
 
     private:
 
