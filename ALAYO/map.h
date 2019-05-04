@@ -42,9 +42,6 @@ class Map
 
         void printStadium(int index);
 
-        // Prints all the values
-        void printAll();
-
     private:
 
     vector<entry> thisTable;

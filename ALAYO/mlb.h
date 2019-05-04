@@ -10,25 +10,20 @@ using namespace std;
 struct souvenir
 {
     souvenir(){}
-    souvenir(string nItemName, float nItemPrice)
+    souvenir(string nItemName, double nItemPrice)
     {
         itemName = nItemName;
         itemPrice = nItemPrice;
     }
     ~souvenir(){}
 
-    void setItemName(string newName)
-    {
-        this->itemName = newName;
-    }
-
-    void setItemPrice(float newPrice)
+    void setItemPrice(double newPrice)
     {
         this->itemPrice = newPrice;
     }
 
     string itemName;
-    float  itemPrice;
+    double  itemPrice;
 };
 
 class MLB
@@ -36,11 +31,10 @@ class MLB
 public:
     //constructor
     MLB();
-    MLB(int id, string nStadiumName, int nSeatingCapacity, string nLocation, string nPlayingSurface,
+    MLB(string nStadiumName, int nSeatingCapacity, string nLocation, string nPlayingSurface,
         string nLeague, int nDateOpened, int nDistanceToCenterField, string nBallParkTypology, string nRoofType);
     ~MLB();
     // Getters
-    int getID();
     string getStadiumName();
     int getSeatingCapacity();
     string getLocation();
@@ -51,8 +45,8 @@ public:
     string getBallParkTypology();
     string getRoofType();
     int getDistanceSize();
+    int getDistance(int i);
 
-    void setID(int newID);
     void setStadiumName(string newStadiumName);
     void setSeatingCapacity(int newSeatingCapacity);
     void setLocation(string newLocation);
@@ -67,14 +61,12 @@ public:
 
     int getSouvenirListSize() const;
     souvenir getSouvenir(int index) const;
-
     void addSouvenir(souvenir newSouvenir);
-
     void setInitialDistances(int size);
     void setDistance(int i, int distance);
     void printDistances();
+
 private:
-    int ID;
     string stadiumName;
     int seatingCapacity;
     string location;
@@ -86,7 +78,6 @@ private:
     string roofType;
 
     vector<souvenir> souvenirs;
-
     vector<int> distances;
 };
 
