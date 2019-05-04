@@ -9,23 +9,23 @@
 // ORIGINAL INPUT FILES
 //******************************
 // original MLB Information const
-const string MLB_INFORMATION_INPUT_FILE = "D:/Programming/CS1D/ALAYO---Project-2-master/ALAYO/inputMLBInformation.csv";
+const string MLB_INFORMATION_INPUT_FILE = "C:/Users/Oscar/Desktop/ALAYO-May5-AnthonyVersion/ALAYO/inputMLBInformation.csv";
 // original Distances const
-const string DISTANCES_INPUT_FILE = "D:/Programming/CS1D/ALAYO---Project-2-master/ALAYO/inputDistance.csv";
+const string DISTANCES_INPUT_FILE = "C:/Users/Oscar/Desktop/ALAYO-May5-AnthonyVersion/ALAYO/inputDistance.csv";
 //original MLB Information expansion const
-const string MLB_INFORMATION_EXPANSION_INPUT_FILE = "D:/Programming/CS1D/ALAYO---Project-2-master/ALAYO/inputDistanceExpansion.csv";
+const string MLB_INFORMATION_EXPANSION_INPUT_FILE = "C:/Users/Oscar/Desktop/ALAYO-May5-AnthonyVersion/ALAYO/inputMLBInformationExpansion.csv";
 //original Distances expansion const
-const string DISTANCES_EXPANSION_INPUT_FILE = "D:/Programming/CS1D/ALAYO---Project-2-master/ALAYO/inputDistanceExpansion.csv";
+const string DISTANCES_EXPANSION_INPUT_FILE = "C:/Users/Oscar/Desktop/ALAYO-May5-AnthonyVersion/ALAYO/inputDistanceExpansion.csv";
 
 //******************************
 // WRITE TO FILES
 //******************************
 // written to MLB Information const
-const string MODIFIED_MLB_INFORMATION_OUTPUT_FILE = "D:/Programming/CS1D/ALAYO---Project-2-master/ALAYO/inputModifiedMLBInformation.csv";
+const string MODIFIED_MLB_INFORMATION_OUTPUT_FILE = "C:/Users/Oscar/Desktop/ALAYO-May5-AnthonyVersion/ALAYO/inputModifiedMLBInformation.csv";
 // written to Distances const
-const string MODIFIED_DISTANCES_OUTPUT_FILE = "D:/Programming/CS1D/ALAYO---Project-2-master/ALAYO/inputModifiedDistances.csv";
+const string MODIFIED_DISTANCES_OUTPUT_FILE = "C:/Users/Oscar/Desktop/ALAYO-May5-AnthonyVersion/ALAYO/inputModifiedDistances.csv";
 // written to souvenirs const
-const string MODIFIED_SOUVENIRS_OUTPUT_FILE = "D:/Programming/CS1D/ALAYO---Project-2-master/ALAYO/inputSouvenirs.csv";
+const string MODIFIED_SOUVENIRS_OUTPUT_FILE = "C:/Users/Oscar/Desktop/ALAYO-May5-AnthonyVersion/ALAYO/inputSouvenirs.csv";
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -174,7 +174,7 @@ void MainWindow::readFromFiles(bool readOriginal)
     }
     else
     {
-        QTextStream(stdout) << "file1 opening failed...\n";
+        QTextStream(stdout) << "***CHANGE FILE DIRECTORY IN \"mainwindow.cpp\"***\n";
     }
     for(int i = 0; i < thisMap.mapSize(); i++){
         thisEntry.key = thisMap.atIndex(i).key;
@@ -256,8 +256,9 @@ void MainWindow::readFromFiles(bool readOriginal)
             }
         }
     }
-    else {
-        QTextStream(stdout) << "file2 opening failed...";
+    else
+    {
+        QTextStream(stdout) << "***CHANGE FILE DIRECTORY IN \"mainwindow.cpp\"***\n";;
     }
 
     csvFile2.close();
@@ -333,6 +334,7 @@ void MainWindow::readExpansionFiles()
     ifstream csvFile1;
     csvFile1.open(MLB_INFORMATION_EXPANSION_INPUT_FILE);
 
+    int newTeamCount = 0;
     bool exists = false;
     int min = 1000000000, max = 0;
     string iStadiumName;
@@ -413,10 +415,12 @@ void MainWindow::readExpansionFiles()
             v6.push_back(thisEntry);
         }
 
-        if(thisMLB.getDistanceToCenterField() <= min){
+        if(thisMLB.getDistanceToCenterField() <= min)
+        {
             min = thisMLB.getDistanceToCenterField();
         }
-        if(thisMLB.getDistanceToCenterField() >= max){
+        if(thisMLB.getDistanceToCenterField() >= max)
+        {
             max = thisMLB.getDistanceToCenterField();
         }
 
@@ -425,10 +429,87 @@ void MainWindow::readExpansionFiles()
         thisMap.atIndex(thisMap.mapSize()-1).value.addSouvenir(souvenir("Team pennant", 17.99));
         thisMap.atIndex(thisMap.mapSize()-1).value.addSouvenir(souvenir("Autographed baseball", 25.99));
         thisMap.atIndex(thisMap.mapSize()-1).value.addSouvenir(souvenir("Team jersey", 199.99));
-    }
 
+        newTeamCount++;
+    }
+    // reads in distances from input file
     if(!exists)
     {
+        // runs the amount of times new times were added to the map
+        for(int i = 0; i < newTeamCount; i++)
+        {
+            // runs through all the old teams and adds 0 to the end of distance vector
+            for(int k = 0; k < thisMap.mapSize()-newTeamCount; k++)
+            {
+                thisMap.atIndex(k).value.pushBackDistance();
+            }
+
+            thisMap.atIndex(thisMap.mapSize()-i-1).value.setInitialDistances(thisMap.mapSize());
+        }
+
+        ifstream csvFile2;
+        csvFile2.open(DISTANCES_EXPANSION_INPUT_FILE);
+
+        string iStadium1;
+        string iStadium2;
+        string iDistance;
+        int distance;
+        string previous;
+        bool found;
+        int index1;
+        int index2;
+
+        getline(csvFile2, iStadium1, ',');
+        while(!csvFile2.eof())
+        {
+            previous = iStadium1;
+            found = false;
+            index1 = 0;
+
+            // searches for the index of the first stadium
+            while(!found)
+            {
+                if(thisMap.atIndex(index1).value.getStadiumName() == iStadium1)
+                {
+                    found = true;
+                }
+                else
+                {
+                    index1++;
+                }
+            }
+
+            while(iStadium1 == previous)
+            {
+                getline(csvFile2, iStadium2, ',');
+                getline(csvFile2, iDistance, '\n');
+                distance = stoi(iDistance);
+
+                found = false;
+                index2 = 0;
+
+                // searches for the index of the second stadium
+                while(!found)
+                {
+                    if(thisMap.atIndex(index2).value.getStadiumName() == iStadium2)
+                    {
+                        found = true;
+                    }
+                    else
+                    {
+                        index2++;
+                    }
+                }
+
+                thisMap.atIndex(index1).value.setDistance(index2, distance);
+                thisMap.atIndex(index2).value.setDistance(index1, distance);
+
+                getline(csvFile2, iStadium1, ',');
+            }
+        }
+
+        csvFile2.close();
+
         QMessageBox::information(nullptr, "Success!", "Additional team(s) have been added!");
         writeToFiles();
     }
@@ -551,10 +632,8 @@ void MainWindow::on_actionLogout_triggered()
 
 //************************************ MANAGING STADIUMS (admin) ************************************************
 
-void MainWindow::on_AddTeamButton_clicked()
+void MainWindow::resetManageStadiumsInformation()
 {
-    readExpansionFiles();
-
     ui->stadiumListWidget->blockSignals(true);
     ui->stadiumListWidget->clear();
     ui->stadiumListWidget->blockSignals(false);
@@ -588,40 +667,16 @@ void MainWindow::on_AddTeamButton_clicked()
     }
 }
 
+void MainWindow::on_AddTeamButton_clicked()
+{
+    readExpansionFiles();
+    resetManageStadiumsInformation();
+}
+
 void MainWindow::on_ReinitializeButton_clicked()
 {
     readFromFiles(true);
-
-    ui->stadiumListWidget->blockSignals(true);
-    ui->stadiumListWidget->clear();
-    ui->stadiumListWidget->blockSignals(false);
-
-    ui->groupBox->setTitle("Stadium Attributes");
-    ui->capacityLineEdit->clear();
-    ui->surfaceLineEdit->clear();
-    ui->roofTypeLineEdit->clear();
-    ui->typologyLineEdit->clear();
-    ui->dateOpenedLineEdit->clear();
-    ui->distToCenterLineEdit->clear();
-    ui->newLocationLineEdit->clear();
-    ui->roofTypeLineEdit->clear();
-    ui->capacityLineEdit->setReadOnly(true);
-    ui->surfaceLineEdit->setReadOnly(true);
-    ui->roofTypeLineEdit->setReadOnly(true);
-    ui->typologyLineEdit->setReadOnly(true);
-    ui->dateOpenedLineEdit->setReadOnly(true);
-    ui->distToCenterLineEdit->setReadOnly(true);
-    ui->newLocationLineEdit->setReadOnly(true);
-    ui->roofTypeLineEdit->setReadOnly(true);
-
-    ui->souvenirListWidget->clear();
-    ui->souvenirPriceListWidget->clear();
-
-    //initialize all the data in the list widgets
-    for(int i = 0; i < thisMap.mapSize(); i++)
-    {
-        ui->stadiumListWidget->addItem(QString::fromStdString(thisMap.atIndex(i).key));
-    }
+    resetManageStadiumsInformation();
 }
 
 //this updates all the information in the vectors from the map
@@ -690,37 +745,7 @@ void MainWindow::updateVectors(){
 void MainWindow::on_manageStadiumsButton_clicked()
 {
     ui->adminStackedWidget->setCurrentIndex(1);
-
-    ui->stadiumListWidget->blockSignals(true);
-    ui->stadiumListWidget->clear();
-    ui->stadiumListWidget->blockSignals(false);
-
-    ui->groupBox->setTitle("Stadium Attributes");
-    ui->capacityLineEdit->clear();
-    ui->surfaceLineEdit->clear();
-    ui->roofTypeLineEdit->clear();
-    ui->typologyLineEdit->clear();
-    ui->dateOpenedLineEdit->clear();
-    ui->distToCenterLineEdit->clear();
-    ui->newLocationLineEdit->clear();
-    ui->roofTypeLineEdit->clear();
-    ui->capacityLineEdit->setReadOnly(true);
-    ui->surfaceLineEdit->setReadOnly(true);
-    ui->roofTypeLineEdit->setReadOnly(true);
-    ui->typologyLineEdit->setReadOnly(true);
-    ui->dateOpenedLineEdit->setReadOnly(true);
-    ui->distToCenterLineEdit->setReadOnly(true);
-    ui->newLocationLineEdit->setReadOnly(true);
-    ui->roofTypeLineEdit->setReadOnly(true);
-
-    ui->souvenirListWidget->clear();
-    ui->souvenirPriceListWidget->clear();
-
-    //initialize all the data in the list widgets
-    for(int i = 0; i < thisMap.mapSize(); i++)
-    {
-        ui->stadiumListWidget->addItem(QString::fromStdString(thisMap.atIndex(i).key));
-    }
+    resetManageStadiumsInformation();
 }
 
 void MainWindow::on_manageStadiumsBackButton_clicked()
@@ -956,9 +981,7 @@ void MainWindow::on_viewStadiumsButton_clicked()
     //initialize all the data in the list widgets
     for(int i = 0; i < thisMap.mapSize(); i++)
     {
-//        ui->stadiumListWidget_2->addItem(QString::fromStdString(thisMap.atIndex(i).value.getStadiumName()));
         ui->stadiumListWidget_2->addItem(QString::fromStdString(thisMap.atIndex(i).key));
-
     }
 }
 
@@ -1405,7 +1428,16 @@ void MainWindow::on_optimizeButton_clicked()
 
 void MainWindow::on_performdfsButton_clicked()
 {
+    ui->dfsPushButton->setEnabled(false);
+    ui->dfsTotalDistanceTraveledLineEdit->setReadOnly(true);
+    ui->dfsTotalDistanceTraveledLineEdit->clear();
+    ui->dfsStadiumsListWidget->blockSignals(true);
     ui->dfsStadiumsListWidget->clear();
+    ui->dfsStadiumsListWidget->blockSignals(false);
+    ui->dfsResultsListWidget->blockSignals(true);
+    ui->dfsResultsListWidget->clear();
+    ui->dfsResultsListWidget->blockSignals(false);
+    ui->startingStadiumLineEdit->clear();
     ui->takeTripStackedWidget->setCurrentIndex(3);
     for(int i = 0; i < thisMap.mapSize(); i++)
     {
@@ -1425,25 +1457,27 @@ void MainWindow::on_dfsStadiumsListWidget_currentItemChanged(QListWidgetItem *cu
     ui->dfsResultsListWidget->clear();
     ui->dfsTotalDistanceTraveledLineEdit->clear();
 
-
     //place the current item into the desired starting location line edit
     ui->startingStadiumLineEdit->clear();
     ui->startingStadiumLineEdit->setText(current->text());
+    ui->dfsPushButton->setEnabled(true);
 }
 
 void MainWindow::on_dfsPushButton_clicked()
 {
     ui->dfsResultsListWidget->clear();
+    ui->dfsTotalDistanceTraveledLineEdit->clear();
     createGraph();
+
+    graph.reinitializeTraversalDistance();
+
     vector<string> vertexList;
     //RUN DFS ALGORITHM ON STARTING LOCATION
     int totalDistance;
-    totalDistance = 0;
 
     totalDistance = graph.DepthFirstSearch(ui->startingStadiumLineEdit->text().toStdString(), vertexList);
     ui->dfsTotalDistanceTraveledLineEdit->setText(QString::number(totalDistance));
 
     for(int i = 0; i < vertexList.size(); i++)
     ui->dfsResultsListWidget->addItem(QString::fromStdString(vertexList[i]));
-
 }

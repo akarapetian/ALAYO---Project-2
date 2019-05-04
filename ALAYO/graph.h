@@ -153,6 +153,9 @@ class Graph
         //Will return a vector of all of the back edges back to main
         void printBackEdges(vector<string> &theGraph);
 
+        //Reinitializes traversal distance back to 0
+        void reinitializeTraversalDistance();
+
 
     private:
 

@@ -1026,3 +1026,8 @@ void Graph::printBackEdges(vector<string> &theGraph)
         cout << backEdgeVector.at(index) << endl;
     }
 }
+
+void Graph::reinitializeTraversalDistance()
+{
+    traversalDistance = 0;
+}

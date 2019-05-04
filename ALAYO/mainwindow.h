@@ -31,13 +31,13 @@ public:
     explicit MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
 
-    void reinitialize();
-
     void readFromFiles(bool readOriginal);
 
     void readExpansionFiles();
 
     void writeToFiles();
+
+    void resetManageStadiumsInformation();
 
     void updateVectors();
 

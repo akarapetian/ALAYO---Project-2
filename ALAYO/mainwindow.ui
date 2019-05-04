@@ -2214,7 +2214,7 @@
         <property name="geometry">
          <rect>
           <x>30</x>
-          <y>20</y>
+          <y>40</y>
           <width>121</width>
           <height>41</height>
          </rect>
@@ -2236,7 +2236,7 @@
          <enum>QTabWidget::North</enum>
         </property>
         <property name="currentIndex">
-         <number>9</number>
+         <number>5</number>
         </property>
         <widget class="QWidget" name="MajorLeagueTeam">
          <attribute name="title">

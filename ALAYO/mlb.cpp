@@ -131,12 +131,6 @@ void MLB::setRoofType(string newRoofType)
     this->roofType = newRoofType;
 }
 
-
-
-
-
-
-
 int MLB::getSouvenirListSize() const
 {
     return souvenirs.size();
@@ -188,4 +182,9 @@ void MLB::printDistances()
         }
     }
     cout << endl;
+}
+
+void MLB::pushBackDistance()
+{
+    distances.push_back(0);
 }
