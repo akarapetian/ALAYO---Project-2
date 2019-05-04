@@ -1,7 +1,7 @@
 /****************************************************************************
 ** Meta object code from reading C++ file 'mainwindow.h'
 **
-** Created by: The Qt Meta Object Compiler version 67 (Qt 5.12.0)
+** Created by: The Qt Meta Object Compiler version 67 (Qt 5.12.1)
 **
 ** WARNING! All changes made in this file will be lost!
 *****************************************************************************/
@@ -12,7 +12,7 @@
 #if !defined(Q_MOC_OUTPUT_REVISION)
 #error "The header file 'mainwindow.h' doesn't include <QObject>."
 #elif Q_MOC_OUTPUT_REVISION != 67
-#error "This file was generated using the moc from 5.12.0. It"
+#error "This file was generated using the moc from 5.12.1. It"
 #error "cannot be used with the include files from this version of Qt."
 #error "(The moc has changed too much.)"
 #endif
@@ -21,8 +21,8 @@ QT_BEGIN_MOC_NAMESPACE
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_DEPRECATED
 struct qt_meta_stringdata_MainWindow_t {
-    QByteArrayData data[42];
-    char stringdata0[1258];
+    QByteArrayData data[46];
+    char stringdata0[1384];
 };
 #define QT_MOC_LITERAL(idx, ofs, len) \
     Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
@@ -70,9 +70,13 @@ QT_MOC_LITERAL(35, 1016, 33), // "on_takeTripPageBackButton_cli..."
 QT_MOC_LITERAL(36, 1050, 40), // "on_singleSelectionPageBackBut..."
 QT_MOC_LITERAL(37, 1091, 25), // "on_optimizeButton_clicked"
 QT_MOC_LITERAL(38, 1117, 42), // "on_multipleSelectionPageBackB..."
-QT_MOC_LITERAL(39, 1160, 42), // "on_availibleTeamsStackedWidge..."
+QT_MOC_LITERAL(39, 1160, 42), // "on_availibleStadiumsListWidge..."
 QT_MOC_LITERAL(40, 1203, 24), // "on_AddTeamButton_clicked"
-QT_MOC_LITERAL(41, 1228, 29) // "on_ReinitializeButton_clicked"
+QT_MOC_LITERAL(41, 1228, 29), // "on_ReinitializeButton_clicked"
+QT_MOC_LITERAL(42, 1258, 27), // "on_performdfsButton_clicked"
+QT_MOC_LITERAL(43, 1286, 28), // "on_dfsPageBackButton_clicked"
+QT_MOC_LITERAL(44, 1315, 43), // "on_dfsStadiumsListWidget_curr..."
+QT_MOC_LITERAL(45, 1359, 24) // "on_dfsPushButton_clicked"
 
     },
     "MainWindow\0on_checkBox_showPW_stateChanged\0"
@@ -108,9 +112,13 @@ QT_MOC_LITERAL(41, 1228, 29) // "on_ReinitializeButton_clicked"
     "on_singleSelectionPageBackButton_clicked\0"
     "on_optimizeButton_clicked\0"
     "on_multipleSelectionPageBackButton_clicked\0"
-    "on_availibleTeamsStackedWidget_itemChanged\0"
+    "on_availibleStadiumsListWidget_itemChanged\0"
     "on_AddTeamButton_clicked\0"
-    "on_ReinitializeButton_clicked"
+    "on_ReinitializeButton_clicked\0"
+    "on_performdfsButton_clicked\0"
+    "on_dfsPageBackButton_clicked\0"
+    "on_dfsStadiumsListWidget_currentItemChanged\0"
+    "on_dfsPushButton_clicked"
 };
 #undef QT_MOC_LITERAL
 
@@ -120,7 +128,7 @@ static const uint qt_meta_data_MainWindow[] = {
        8,       // revision
        0,       // classname
        0,    0, // classinfo
-      35,   14, // methods
+      39,   14, // methods
        0,    0, // properties
        0,    0, // enums/sets
        0,    0, // constructors
@@ -128,41 +136,45 @@ static const uint qt_meta_data_MainWindow[] = {
        0,       // signalCount
 
  // slots: name, argc, parameters, tag, flags
-       1,    1,  189,    2, 0x08 /* Private */,
-       3,    0,  192,    2, 0x08 /* Private */,
-       4,    0,  193,    2, 0x08 /* Private */,
-       5,    0,  194,    2, 0x08 /* Private */,
-       6,    0,  195,    2, 0x08 /* Private */,
-       7,    2,  196,    2, 0x08 /* Private */,
-      11,    0,  201,    2, 0x08 /* Private */,
-      12,    0,  202,    2, 0x08 /* Private */,
-      13,    0,  203,    2, 0x08 /* Private */,
-      14,    0,  204,    2, 0x08 /* Private */,
-      15,    0,  205,    2, 0x08 /* Private */,
-      16,    2,  206,    2, 0x08 /* Private */,
-      17,    1,  211,    2, 0x08 /* Private */,
-      19,    1,  214,    2, 0x08 /* Private */,
-      20,    2,  217,    2, 0x08 /* Private */,
-      21,    1,  222,    2, 0x08 /* Private */,
-      22,    2,  225,    2, 0x08 /* Private */,
-      23,    1,  230,    2, 0x08 /* Private */,
-      25,    1,  233,    2, 0x08 /* Private */,
-      26,    1,  236,    2, 0x08 /* Private */,
-      27,    1,  239,    2, 0x08 /* Private */,
-      28,    1,  242,    2, 0x08 /* Private */,
-      29,    1,  245,    2, 0x08 /* Private */,
-      30,    1,  248,    2, 0x08 /* Private */,
-      31,    0,  251,    2, 0x08 /* Private */,
-      32,    0,  252,    2, 0x08 /* Private */,
-      33,    0,  253,    2, 0x08 /* Private */,
-      34,    0,  254,    2, 0x08 /* Private */,
-      35,    0,  255,    2, 0x08 /* Private */,
-      36,    0,  256,    2, 0x08 /* Private */,
-      37,    0,  257,    2, 0x08 /* Private */,
-      38,    0,  258,    2, 0x08 /* Private */,
-      39,    1,  259,    2, 0x08 /* Private */,
-      40,    0,  262,    2, 0x08 /* Private */,
-      41,    0,  263,    2, 0x08 /* Private */,
+       1,    1,  209,    2, 0x08 /* Private */,
+       3,    0,  212,    2, 0x08 /* Private */,
+       4,    0,  213,    2, 0x08 /* Private */,
+       5,    0,  214,    2, 0x08 /* Private */,
+       6,    0,  215,    2, 0x08 /* Private */,
+       7,    2,  216,    2, 0x08 /* Private */,
+      11,    0,  221,    2, 0x08 /* Private */,
+      12,    0,  222,    2, 0x08 /* Private */,
+      13,    0,  223,    2, 0x08 /* Private */,
+      14,    0,  224,    2, 0x08 /* Private */,
+      15,    0,  225,    2, 0x08 /* Private */,
+      16,    2,  226,    2, 0x08 /* Private */,
+      17,    1,  231,    2, 0x08 /* Private */,
+      19,    1,  234,    2, 0x08 /* Private */,
+      20,    2,  237,    2, 0x08 /* Private */,
+      21,    1,  242,    2, 0x08 /* Private */,
+      22,    2,  245,    2, 0x08 /* Private */,
+      23,    1,  250,    2, 0x08 /* Private */,
+      25,    1,  253,    2, 0x08 /* Private */,
+      26,    1,  256,    2, 0x08 /* Private */,
+      27,    1,  259,    2, 0x08 /* Private */,
+      28,    1,  262,    2, 0x08 /* Private */,
+      29,    1,  265,    2, 0x08 /* Private */,
+      30,    1,  268,    2, 0x08 /* Private */,
+      31,    0,  271,    2, 0x08 /* Private */,
+      32,    0,  272,    2, 0x08 /* Private */,
+      33,    0,  273,    2, 0x08 /* Private */,
+      34,    0,  274,    2, 0x08 /* Private */,
+      35,    0,  275,    2, 0x08 /* Private */,
+      36,    0,  276,    2, 0x08 /* Private */,
+      37,    0,  277,    2, 0x08 /* Private */,
+      38,    0,  278,    2, 0x08 /* Private */,
+      39,    1,  279,    2, 0x08 /* Private */,
+      40,    0,  282,    2, 0x08 /* Private */,
+      41,    0,  283,    2, 0x08 /* Private */,
+      42,    0,  284,    2, 0x08 /* Private */,
+      43,    0,  285,    2, 0x08 /* Private */,
+      44,    2,  286,    2, 0x08 /* Private */,
+      45,    0,  291,    2, 0x08 /* Private */,
 
  // slots: parameters
     QMetaType::Void, QMetaType::Int,    2,
@@ -200,6 +212,10 @@ static const uint qt_meta_data_MainWindow[] = {
     QMetaType::Void, 0x80000000 | 8,   18,
     QMetaType::Void,
     QMetaType::Void,
+    QMetaType::Void,
+    QMetaType::Void,
+    QMetaType::Void, 0x80000000 | 8, 0x80000000 | 8,    9,   10,
+    QMetaType::Void,
 
        0        // eod
 };
@@ -207,7 +223,7 @@ static const uint qt_meta_data_MainWindow[] = {
 void MainWindow::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, void **_a)
 {
     if (_c == QMetaObject::InvokeMetaMethod) {
-        MainWindow *_t = static_cast<MainWindow *>(_o);
+        auto *_t = static_cast<MainWindow *>(_o);
         Q_UNUSED(_t)
         switch (_id) {
         case 0: _t->on_checkBox_showPW_stateChanged((*reinterpret_cast< int(*)>(_a[1]))); break;
@@ -242,9 +258,13 @@ void MainWindow::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, 
         case 29: _t->on_singleSelectionPageBackButton_clicked(); break;
         case 30: _t->on_optimizeButton_clicked(); break;
         case 31: _t->on_multipleSelectionPageBackButton_clicked(); break;
-        case 32: _t->on_availibleTeamsStackedWidget_itemChanged((*reinterpret_cast< QListWidgetItem*(*)>(_a[1]))); break;
+        case 32: _t->on_availibleStadiumsListWidget_itemChanged((*reinterpret_cast< QListWidgetItem*(*)>(_a[1]))); break;
         case 33: _t->on_AddTeamButton_clicked(); break;
         case 34: _t->on_ReinitializeButton_clicked(); break;
+        case 35: _t->on_performdfsButton_clicked(); break;
+        case 36: _t->on_dfsPageBackButton_clicked(); break;
+        case 37: _t->on_dfsStadiumsListWidget_currentItemChanged((*reinterpret_cast< QListWidgetItem*(*)>(_a[1])),(*reinterpret_cast< QListWidgetItem*(*)>(_a[2]))); break;
+        case 38: _t->on_dfsPushButton_clicked(); break;
         default: ;
         }
     }
@@ -279,13 +299,13 @@ int MainWindow::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
     if (_id < 0)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {
-        if (_id < 35)
+        if (_id < 39)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 35;
+        _id -= 39;
     } else if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
-        if (_id < 35)
+        if (_id < 39)
             *reinterpret_cast<int*>(_a[0]) = -1;
-        _id -= 35;
+        _id -= 39;
     }
     return _id;
 }

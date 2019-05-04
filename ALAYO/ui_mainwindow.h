@@ -1,7 +1,7 @@
 /********************************************************************************
 ** Form generated from reading UI file 'mainwindow.ui'
 **
-** Created by: Qt User Interface Compiler version 5.12.0
+** Created by: Qt User Interface Compiler version 5.12.1
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
 ********************************************************************************/
@@ -96,15 +96,26 @@ public:
     QPushButton *visitMultipleButton;
     QLabel *label_29;
     QPushButton *takeTripPageBackButton;
+    QPushButton *performdfsButton;
     QWidget *multipleSelectionPage;
-    QListWidget *availibleTeamsStackedWidget;
+    QListWidget *availibleStadiumsListWidget;
     QLabel *label_30;
     QPushButton *optimizeButton;
     QPushButton *goButton;
-    QListWidget *selectedTeamsStackedWidget;
+    QListWidget *selectedStadiumsListWidget;
     QPushButton *multipleSelectionPageBackButton;
     QWidget *singleSelectionPage;
     QPushButton *singleSelectionPageBackButton;
+    QWidget *dfsPage;
+    QListWidget *dfsStadiumsListWidget;
+    QPushButton *dfsPageBackButton;
+    QLabel *label_33;
+    QLabel *label_34;
+    QLineEdit *startingStadiumLineEdit;
+    QPushButton *dfsPushButton;
+    QListWidget *dfsResultsListWidget;
+    QLabel *label_35;
+    QLineEdit *dfsTotalDistanceTraveledLineEdit;
     QWidget *informationPage;
     QPushButton *informationBackButton;
     QTabWidget *tabWidget;
@@ -225,7 +236,9 @@ public:
         palette.setBrush(QPalette::Active, QPalette::ToolTipText, brush);
         QBrush brush9(QColor(0, 0, 0, 128));
         brush9.setStyle(Qt::SolidPattern);
+#if QT_VERSION >= QT_VERSION_CHECK(5, 12, 0)
         palette.setBrush(QPalette::Active, QPalette::PlaceholderText, brush9);
+#endif
         palette.setBrush(QPalette::Inactive, QPalette::WindowText, brush);
         palette.setBrush(QPalette::Inactive, QPalette::Button, brush1);
         palette.setBrush(QPalette::Inactive, QPalette::Light, brush2);
@@ -241,7 +254,9 @@ public:
         palette.setBrush(QPalette::Inactive, QPalette::AlternateBase, brush7);
         palette.setBrush(QPalette::Inactive, QPalette::ToolTipBase, brush8);
         palette.setBrush(QPalette::Inactive, QPalette::ToolTipText, brush);
+#if QT_VERSION >= QT_VERSION_CHECK(5, 12, 0)
         palette.setBrush(QPalette::Inactive, QPalette::PlaceholderText, brush9);
+#endif
         palette.setBrush(QPalette::Disabled, QPalette::WindowText, brush4);
         palette.setBrush(QPalette::Disabled, QPalette::Button, brush1);
         palette.setBrush(QPalette::Disabled, QPalette::Light, brush2);
@@ -257,7 +272,9 @@ public:
         palette.setBrush(QPalette::Disabled, QPalette::AlternateBase, brush1);
         palette.setBrush(QPalette::Disabled, QPalette::ToolTipBase, brush8);
         palette.setBrush(QPalette::Disabled, QPalette::ToolTipText, brush);
+#if QT_VERSION >= QT_VERSION_CHECK(5, 12, 0)
         palette.setBrush(QPalette::Disabled, QPalette::PlaceholderText, brush9);
+#endif
         MainWindow->setPalette(palette);
         QFont font;
         font.setPointSize(10);
@@ -282,7 +299,9 @@ public:
         palette1.setBrush(QPalette::Active, QPalette::AlternateBase, brush7);
         palette1.setBrush(QPalette::Active, QPalette::ToolTipBase, brush8);
         palette1.setBrush(QPalette::Active, QPalette::ToolTipText, brush);
+#if QT_VERSION >= QT_VERSION_CHECK(5, 12, 0)
         palette1.setBrush(QPalette::Active, QPalette::PlaceholderText, brush9);
+#endif
         palette1.setBrush(QPalette::Inactive, QPalette::WindowText, brush);
         palette1.setBrush(QPalette::Inactive, QPalette::Button, brush1);
         palette1.setBrush(QPalette::Inactive, QPalette::Light, brush2);
@@ -298,7 +317,9 @@ public:
         palette1.setBrush(QPalette::Inactive, QPalette::AlternateBase, brush7);
         palette1.setBrush(QPalette::Inactive, QPalette::ToolTipBase, brush8);
         palette1.setBrush(QPalette::Inactive, QPalette::ToolTipText, brush);
+#if QT_VERSION >= QT_VERSION_CHECK(5, 12, 0)
         palette1.setBrush(QPalette::Inactive, QPalette::PlaceholderText, brush9);
+#endif
         palette1.setBrush(QPalette::Disabled, QPalette::WindowText, brush4);
         palette1.setBrush(QPalette::Disabled, QPalette::Button, brush1);
         palette1.setBrush(QPalette::Disabled, QPalette::Light, brush2);
@@ -314,7 +335,9 @@ public:
         palette1.setBrush(QPalette::Disabled, QPalette::AlternateBase, brush1);
         palette1.setBrush(QPalette::Disabled, QPalette::ToolTipBase, brush8);
         palette1.setBrush(QPalette::Disabled, QPalette::ToolTipText, brush);
+#if QT_VERSION >= QT_VERSION_CHECK(5, 12, 0)
         palette1.setBrush(QPalette::Disabled, QPalette::PlaceholderText, brush9);
+#endif
         centralWidget->setPalette(palette1);
         primaryPageStackedWidget = new QStackedWidget(centralWidget);
         primaryPageStackedWidget->setObjectName(QString::fromUtf8("primaryPageStackedWidget"));
@@ -340,7 +363,9 @@ public:
         palette2.setBrush(QPalette::Active, QPalette::AlternateBase, brush7);
         palette2.setBrush(QPalette::Active, QPalette::ToolTipBase, brush8);
         palette2.setBrush(QPalette::Active, QPalette::ToolTipText, brush);
+#if QT_VERSION >= QT_VERSION_CHECK(5, 12, 0)
         palette2.setBrush(QPalette::Active, QPalette::PlaceholderText, brush9);
+#endif
         palette2.setBrush(QPalette::Inactive, QPalette::WindowText, brush);
         palette2.setBrush(QPalette::Inactive, QPalette::Button, brush1);
         palette2.setBrush(QPalette::Inactive, QPalette::Light, brush2);
@@ -356,7 +381,9 @@ public:
         palette2.setBrush(QPalette::Inactive, QPalette::AlternateBase, brush7);
         palette2.setBrush(QPalette::Inactive, QPalette::ToolTipBase, brush8);
         palette2.setBrush(QPalette::Inactive, QPalette::ToolTipText, brush);
+#if QT_VERSION >= QT_VERSION_CHECK(5, 12, 0)
         palette2.setBrush(QPalette::Inactive, QPalette::PlaceholderText, brush9);
+#endif
         palette2.setBrush(QPalette::Disabled, QPalette::WindowText, brush4);
         palette2.setBrush(QPalette::Disabled, QPalette::Button, brush1);
         palette2.setBrush(QPalette::Disabled, QPalette::Light, brush2);
@@ -372,7 +399,9 @@ public:
         palette2.setBrush(QPalette::Disabled, QPalette::AlternateBase, brush1);
         palette2.setBrush(QPalette::Disabled, QPalette::ToolTipBase, brush8);
         palette2.setBrush(QPalette::Disabled, QPalette::ToolTipText, brush);
+#if QT_VERSION >= QT_VERSION_CHECK(5, 12, 0)
         palette2.setBrush(QPalette::Disabled, QPalette::PlaceholderText, brush9);
+#endif
         primaryPageStackedWidget->setPalette(palette2);
         loginPage = new QWidget();
         loginPage->setObjectName(QString::fromUtf8("loginPage"));
@@ -564,22 +593,25 @@ public:
         tripTypeSelectionPage->setObjectName(QString::fromUtf8("tripTypeSelectionPage"));
         visitSingleButton = new QPushButton(tripTypeSelectionPage);
         visitSingleButton->setObjectName(QString::fromUtf8("visitSingleButton"));
-        visitSingleButton->setGeometry(QRect(90, 560, 351, 101));
+        visitSingleButton->setGeometry(QRect(420, 110, 351, 101));
         visitMultipleButton = new QPushButton(tripTypeSelectionPage);
         visitMultipleButton->setObjectName(QString::fromUtf8("visitMultipleButton"));
-        visitMultipleButton->setGeometry(QRect(760, 560, 351, 101));
+        visitMultipleButton->setGeometry(QRect(420, 240, 351, 101));
         label_29 = new QLabel(tripTypeSelectionPage);
         label_29->setObjectName(QString::fromUtf8("label_29"));
         label_29->setGeometry(QRect(550, 70, 91, 16));
         takeTripPageBackButton = new QPushButton(tripTypeSelectionPage);
         takeTripPageBackButton->setObjectName(QString::fromUtf8("takeTripPageBackButton"));
         takeTripPageBackButton->setGeometry(QRect(50, 90, 121, 41));
+        performdfsButton = new QPushButton(tripTypeSelectionPage);
+        performdfsButton->setObjectName(QString::fromUtf8("performdfsButton"));
+        performdfsButton->setGeometry(QRect(420, 360, 351, 101));
         takeTripStackedWidget->addWidget(tripTypeSelectionPage);
         multipleSelectionPage = new QWidget();
         multipleSelectionPage->setObjectName(QString::fromUtf8("multipleSelectionPage"));
-        availibleTeamsStackedWidget = new QListWidget(multipleSelectionPage);
-        availibleTeamsStackedWidget->setObjectName(QString::fromUtf8("availibleTeamsStackedWidget"));
-        availibleTeamsStackedWidget->setGeometry(QRect(60, 140, 291, 591));
+        availibleStadiumsListWidget = new QListWidget(multipleSelectionPage);
+        availibleStadiumsListWidget->setObjectName(QString::fromUtf8("availibleStadiumsListWidget"));
+        availibleStadiumsListWidget->setGeometry(QRect(60, 140, 291, 591));
         label_30 = new QLabel(multipleSelectionPage);
         label_30->setObjectName(QString::fromUtf8("label_30"));
         label_30->setGeometry(QRect(180, 120, 61, 16));
@@ -589,9 +621,9 @@ public:
         goButton = new QPushButton(multipleSelectionPage);
         goButton->setObjectName(QString::fromUtf8("goButton"));
         goButton->setGeometry(QRect(970, 560, 161, 71));
-        selectedTeamsStackedWidget = new QListWidget(multipleSelectionPage);
-        selectedTeamsStackedWidget->setObjectName(QString::fromUtf8("selectedTeamsStackedWidget"));
-        selectedTeamsStackedWidget->setGeometry(QRect(440, 140, 291, 591));
+        selectedStadiumsListWidget = new QListWidget(multipleSelectionPage);
+        selectedStadiumsListWidget->setObjectName(QString::fromUtf8("selectedStadiumsListWidget"));
+        selectedStadiumsListWidget->setGeometry(QRect(440, 140, 291, 591));
         multipleSelectionPageBackButton = new QPushButton(multipleSelectionPage);
         multipleSelectionPageBackButton->setObjectName(QString::fromUtf8("multipleSelectionPageBackButton"));
         multipleSelectionPageBackButton->setGeometry(QRect(50, 30, 121, 41));
@@ -602,6 +634,37 @@ public:
         singleSelectionPageBackButton->setObjectName(QString::fromUtf8("singleSelectionPageBackButton"));
         singleSelectionPageBackButton->setGeometry(QRect(90, 60, 121, 41));
         takeTripStackedWidget->addWidget(singleSelectionPage);
+        dfsPage = new QWidget();
+        dfsPage->setObjectName(QString::fromUtf8("dfsPage"));
+        dfsStadiumsListWidget = new QListWidget(dfsPage);
+        dfsStadiumsListWidget->setObjectName(QString::fromUtf8("dfsStadiumsListWidget"));
+        dfsStadiumsListWidget->setGeometry(QRect(160, 80, 291, 591));
+        dfsPageBackButton = new QPushButton(dfsPage);
+        dfsPageBackButton->setObjectName(QString::fromUtf8("dfsPageBackButton"));
+        dfsPageBackButton->setGeometry(QRect(20, 50, 121, 41));
+        label_33 = new QLabel(dfsPage);
+        label_33->setObjectName(QString::fromUtf8("label_33"));
+        label_33->setGeometry(QRect(160, 55, 211, 21));
+        label_33->setStyleSheet(QString::fromUtf8("font: 75 11pt \"MS Shell Dlg 2\";"));
+        label_34 = new QLabel(dfsPage);
+        label_34->setObjectName(QString::fromUtf8("label_34"));
+        label_34->setGeometry(QRect(960, 50, 121, 31));
+        startingStadiumLineEdit = new QLineEdit(dfsPage);
+        startingStadiumLineEdit->setObjectName(QString::fromUtf8("startingStadiumLineEdit"));
+        startingStadiumLineEdit->setGeometry(QRect(860, 100, 321, 21));
+        dfsPushButton = new QPushButton(dfsPage);
+        dfsPushButton->setObjectName(QString::fromUtf8("dfsPushButton"));
+        dfsPushButton->setGeometry(QRect(900, 150, 241, 61));
+        dfsResultsListWidget = new QListWidget(dfsPage);
+        dfsResultsListWidget->setObjectName(QString::fromUtf8("dfsResultsListWidget"));
+        dfsResultsListWidget->setGeometry(QRect(450, 80, 256, 591));
+        label_35 = new QLabel(dfsPage);
+        label_35->setObjectName(QString::fromUtf8("label_35"));
+        label_35->setGeometry(QRect(880, 650, 141, 16));
+        dfsTotalDistanceTraveledLineEdit = new QLineEdit(dfsPage);
+        dfsTotalDistanceTraveledLineEdit->setObjectName(QString::fromUtf8("dfsTotalDistanceTraveledLineEdit"));
+        dfsTotalDistanceTraveledLineEdit->setGeometry(QRect(1040, 650, 113, 20));
+        takeTripStackedWidget->addWidget(dfsPage);
         userStackedWidget->addWidget(takeTripPage);
         informationPage = new QWidget();
         informationPage->setObjectName(QString::fromUtf8("informationPage"));
@@ -817,7 +880,9 @@ public:
         palette4.setBrush(QPalette::Active, QPalette::AlternateBase, brush6);
         palette4.setBrush(QPalette::Active, QPalette::ToolTipBase, brush8);
         palette4.setBrush(QPalette::Active, QPalette::ToolTipText, brush);
+#if QT_VERSION >= QT_VERSION_CHECK(5, 12, 0)
         palette4.setBrush(QPalette::Active, QPalette::PlaceholderText, brush9);
+#endif
         palette4.setBrush(QPalette::Inactive, QPalette::WindowText, brush);
         palette4.setBrush(QPalette::Inactive, QPalette::Button, brush6);
         palette4.setBrush(QPalette::Inactive, QPalette::Light, brush6);
@@ -833,7 +898,9 @@ public:
         palette4.setBrush(QPalette::Inactive, QPalette::AlternateBase, brush6);
         palette4.setBrush(QPalette::Inactive, QPalette::ToolTipBase, brush8);
         palette4.setBrush(QPalette::Inactive, QPalette::ToolTipText, brush);
+#if QT_VERSION >= QT_VERSION_CHECK(5, 12, 0)
         palette4.setBrush(QPalette::Inactive, QPalette::PlaceholderText, brush9);
+#endif
         palette4.setBrush(QPalette::Disabled, QPalette::WindowText, brush11);
         palette4.setBrush(QPalette::Disabled, QPalette::Button, brush6);
         palette4.setBrush(QPalette::Disabled, QPalette::Light, brush6);
@@ -849,7 +916,9 @@ public:
         palette4.setBrush(QPalette::Disabled, QPalette::AlternateBase, brush6);
         palette4.setBrush(QPalette::Disabled, QPalette::ToolTipBase, brush8);
         palette4.setBrush(QPalette::Disabled, QPalette::ToolTipText, brush);
+#if QT_VERSION >= QT_VERSION_CHECK(5, 12, 0)
         palette4.setBrush(QPalette::Disabled, QPalette::PlaceholderText, brush9);
+#endif
         stadiumListWidget_2->setPalette(palette4);
         groupBox_2 = new QGroupBox(viewStadiumsPage);
         groupBox_2->setObjectName(QString::fromUtf8("groupBox_2"));
@@ -929,9 +998,10 @@ public:
 
         retranslateUi(MainWindow);
 
-        primaryPageStackedWidget->setCurrentIndex(0);
-        adminStackedWidget->setCurrentIndex(1);
-        userStackedWidget->setCurrentIndex(3);
+        primaryPageStackedWidget->setCurrentIndex(2);
+        adminStackedWidget->setCurrentIndex(0);
+        userStackedWidget->setCurrentIndex(1);
+        takeTripStackedWidget->setCurrentIndex(3);
         tabWidget->setCurrentIndex(9);
 
 
@@ -973,11 +1043,17 @@ public:
         visitMultipleButton->setText(QApplication::translate("MainWindow", "Visit Multiple Stadiums", nullptr));
         label_29->setText(QApplication::translate("MainWindow", "Take Trip Page", nullptr));
         takeTripPageBackButton->setText(QApplication::translate("MainWindow", "Back", nullptr));
-        label_30->setText(QApplication::translate("MainWindow", "Teams", nullptr));
+        performdfsButton->setText(QApplication::translate("MainWindow", "Perform DFS", nullptr));
+        label_30->setText(QApplication::translate("MainWindow", "Stadiums", nullptr));
         optimizeButton->setText(QApplication::translate("MainWindow", "Optimize", nullptr));
         goButton->setText(QApplication::translate("MainWindow", "Go", nullptr));
         multipleSelectionPageBackButton->setText(QApplication::translate("MainWindow", "Back", nullptr));
         singleSelectionPageBackButton->setText(QApplication::translate("MainWindow", "Back", nullptr));
+        dfsPageBackButton->setText(QApplication::translate("MainWindow", "Back", nullptr));
+        label_33->setText(QApplication::translate("MainWindow", "Choose a starting stadium:", nullptr));
+        label_34->setText(QApplication::translate("MainWindow", "Starting Stadium", nullptr));
+        dfsPushButton->setText(QApplication::translate("MainWindow", "Perform DFS", nullptr));
+        label_35->setText(QApplication::translate("MainWindow", "Total Distance Traveleld", nullptr));
         informationBackButton->setText(QApplication::translate("MainWindow", "Back", nullptr));
         label_5->setText(QApplication::translate("MainWindow", "Size:", nullptr));
         label_19->setText(QString());

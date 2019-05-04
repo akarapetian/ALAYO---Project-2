@@ -661,3 +661,368 @@ vector<string> Graph::determineTripVector(string start, string end, int next[])
 
     return tempTripVec;
 }
+
+//******** DFS METHODS ***********************************
+int Graph::DepthFirstSearch(string beginLocation, vector<string> &theGraph)
+{
+    //Initializes currentVertex to our beginLocation variable
+    int currentVertex;
+
+    currentVertex = getVertex(beginLocation);
+
+    //We must mark our beginning city as visited, this will be updated with
+    //each new location visited during recursion
+    graph.at(currentVertex).isVisited = true;
+
+    //Create an iterator for our graph, starting at the first location passed in
+    vector<string>::iterator it =
+    find(theGraph.begin(), theGraph.end(), beginLocation);
+
+    //If the desired location is at the end of the graph, simply push the
+    //location into the graph
+    if (it == theGraph.end())
+    {
+        theGraph.push_back(beginLocation);
+    }
+
+    unsigned int visitedLocations;
+
+    visitedLocations = 0;
+
+    vector<vertex>::iterator itLoc = graph.begin();
+
+    while (itLoc != graph.end() && visitedLocations < graph.size())
+    {
+        if (itLoc->isVisited)
+        {
+            visitedLocations++;
+        }
+
+        itLoc++;
+    }
+
+    //As long as the number of visited locations does not equal the size of the
+    //graph, continue searching for the next vertex and recursively call the
+    //function again
+    if (visitedLocations < graph.size() -1)
+    {
+        int nextVertex = dfsHelper(currentVertex, theGraph);
+        DepthFirstSearch(graph.at(nextVertex).startingCity, theGraph);
+    }
+
+    //Return our total distance traveled
+    return traversalDistance;
+}
+
+/******************************************************************************
+ * METHOD printDFSList
+ * ----------------------------------------------------------------------------
+ * Method printDFSList will print out our entire list after it has been sorted
+ * as well as output the total distance
+ * ----------------------------------------------------------------------------
+ ******************************************************************************/
+void Graph::printDFSList(int distance, vector<string> &theGraph)
+{
+    cout << "\n\nPrinting the DFS search to show the travel path:\n\n";;
+
+    for (unsigned int index = 0; index < theGraph.size(); index++)
+    {
+        cout << theGraph.at(index) << endl;
+    }
+}
+
+void Graph::clear()
+{
+    graph.clear();
+}
+
+/******************************************************************************
+ * METHOD getSmallestEdge
+ * ----------------------------------------------------------------------------
+ * Method getSmallestEdge is a helper recursive function to assist the DFS
+ * search in always choosing the shortest mileage when encountered with
+ * multiple edges to choose from
+ * ----------------------------------------------------------------------------
+ ******************************************************************************/
+int Graph::dfsHelper(int vertex, vector<string> &theGraph)
+{
+    unsigned int totalCitiesVisited = 0;
+
+    //Checks our boolean value for each edge and increments a counter accordingly
+    for (unsigned int i = 0; i < graph.at(vertex).edgeVector.size(); i++)
+    {
+        if (graph.at(getVertex(graph.at(vertex).edgeVector.at(i).endingLocation)).isVisited)
+        {
+            totalCitiesVisited++;
+        }
+    }
+
+    if (totalCitiesVisited != graph.at(vertex).edgeVector.size())
+    {
+        //These index variables will be assist in comparing two vertices
+        int firstIndex;
+        int secondIndex;
+
+        //Initialize to default values
+        firstIndex = 0;
+        secondIndex = firstIndex + 1;
+
+        //Set the size to the size of the current edgeVector
+        int size;
+
+        size = graph.at(vertex).edgeVector.size();
+
+        while (secondIndex < size)
+        {
+            //Our first vertex to check
+            int firstVertex;
+
+            //Set firstVertex equal to the first element of the edge vector in
+            //our graph
+            firstVertex =
+            getVertex(graph.at(vertex).edgeVector.at(firstIndex).endingLocation);
+
+            //Our second vertex to check and compare with first vertex
+            int secondVertex;
+
+            //Set secondVertex equal to the element immediately following the
+            //firstIndex in edgeVector
+            secondVertex =
+            getVertex(graph.at(vertex).edgeVector.at(secondIndex).endingLocation);
+
+            //Make sure that the next destination is not visited
+            if (graph.at(firstVertex).isVisited)
+            {
+                //If it is, increment the first index to choose another possible
+                //path
+                firstIndex++;
+            }
+            else
+            {
+                //If the second location is not visited, then we can set our
+                //firstIndex equal to the secondIndex
+                if (!(graph.at(secondVertex).isVisited))
+                {
+                    if (graph.at(vertex).edgeVector.at(firstIndex).distanceBetween
+                        >= graph.at(vertex).edgeVector.at(secondIndex).distanceBetween)
+                    {
+                        firstIndex = secondIndex;
+                    }
+                }
+            }
+            secondIndex++;
+        }
+
+        //Now the new location is a discovery edge, meaning we have visited it
+        graph.at(vertex).edgeVector.at(firstIndex).isDiscoveryEdge = true;
+
+        //Increment the new total distance
+        traversalDistance += graph.at(vertex).edgeVector.at(firstIndex).distanceBetween;
+
+        string nextCity;
+
+        //Start our move to the next city
+        nextCity=
+        graph.at(vertex).edgeVector.at(firstIndex).endingLocation;
+
+        //Set our firstIndex to our new city vertex
+        firstIndex = getVertex(nextCity);
+
+        //Check if any of the new firstIndex holds any discovered edges and
+        //set them to true
+        for (unsigned int i = 0; i < graph.at(firstIndex).edgeVector.size(); i++)
+        {
+            if (graph.at(vertex).startingCity
+                    == graph.at(firstIndex).edgeVector.at(i).endingLocation)
+            {
+                graph.at(firstIndex).edgeVector.at(i).isDiscoveryEdge = true;
+            }
+        }
+
+        return firstIndex;
+    }
+    //If all of the possible paths are discovery edges, then we must backtrack
+    else
+    {
+        vector<string>::iterator it;
+
+        it = find(theGraph.begin(), theGraph.end(),
+                  graph.at(vertex).startingCity);
+        it--;
+
+        int backEdgeIndex;
+
+        backEdgeIndex = getVertex(*it);
+
+        return dfsHelper(backEdgeIndex, theGraph);
+    }
+}
+
+/******************************************************************************
+ * METHOD printDiscoveryEdges
+ * ----------------------------------------------------------------------------
+ * Method printDiscoveryEdges will print out a list of all the discovery edges,
+ * meaning the path that was taken during the trip and output them to the
+ * console
+ * ----------------------------------------------------------------------------
+ ******************************************************************************/
+void Graph::printDiscoveryEdges(vector<string> &theGraph)
+{
+    //Initialize another vector of edges for our discoveryEdge vector
+    vector<edge> discoveryEdgeVec;
+
+    for (unsigned int i = 0; i < graph.size(); i++)
+    {
+        int index;
+
+        //Set index equal to the vertex of the current location in the graph
+        index = getVertex(theGraph.at(i));
+
+        //Here we will use our boolean for discovery edges and as long as the
+        //boolean is true, we push those values into our discoveryVec
+        for (unsigned int j = 0; j < graph.at(index).edgeVector.size(); j++)
+        {
+            if (graph.at(index).edgeVector.at(j).isDiscoveryEdge)
+            {
+                discoveryEdgeVec.push_back(graph.at(index).edgeVector.at(j));
+            }
+        }
+    }
+
+    //Create our iterator in order to move through our edge vector
+    vector<edge>::iterator itDup = discoveryEdgeVec.begin();
+
+    //Check and make sure we don't reach the end of the list
+    while (itDup != discoveryEdgeVec.end())
+    {
+        //Create a second iterator to check the next element in the list
+        vector<edge>::iterator nextIt = itDup + 1;
+
+        bool deleted = false;
+
+        while (nextIt != discoveryEdgeVec.end() && !deleted)
+        {
+            //If both beginning and ending locations for the first and second
+            //iterators are matching, then delete them
+            if (itDup->beginningLocation == nextIt->endingLocation
+             && itDup->endingLocation    == nextIt->beginningLocation)
+            {
+                discoveryEdgeVec.erase(nextIt);
+
+                deleted = true;
+            }
+            else
+            {
+                nextIt++;
+            }
+        }
+
+        itDup++;
+    }
+
+    //This iterator will be used to find all our discovery edges
+    vector<edge>::iterator it = discoveryEdgeVec.begin();
+
+    //Create a vector for return
+    vector<string> disEdgeVector;
+
+    //This while loop will be used for formatting our output
+    while (it != discoveryEdgeVec.end())
+    {
+        disEdgeVector.push_back(it->beginningLocation + "--->" + it->endingLocation);
+        it++;
+    }
+
+    cout << "\nPrinting out a list of all discovery Edges...\n";
+    cout << "Note that discovery edges with the same edge will be paired together\n\n";
+
+    for (unsigned int index = 0; index < disEdgeVector.size(); index++)
+    {
+        cout << disEdgeVector.at(index) << endl;
+    }
+
+}
+
+/******************************************************************************
+ * METHOD printBackEdges
+ * ----------------------------------------------------------------------------
+ * Method printBackEdges will print a list of all of the back edges currently
+ * encountered during execution
+ * ----------------------------------------------------------------------------
+ ******************************************************************************/
+void Graph::printBackEdges(vector<string> &theGraph)
+{
+    //Initialize another vector of edges for our backEdge vector
+    vector<edge> backEdgeVec;
+
+    for (unsigned int i = 0; i < graph.size(); i++)
+    {
+        //Set index equal to the vertex of the current location in the graph
+        int index;
+
+        index = getVertex(theGraph.at(i));
+
+        //Here we will use our boolean for discovery edges and as long as the
+        //boolean is false, we push those values into our edgeVec
+        for (unsigned int j = 0; j < graph.at(index).edgeVector.size(); j++)
+        {
+            if (!(graph.at(index).edgeVector.at(j).isDiscoveryEdge))
+            {
+                backEdgeVec.push_back(graph.at(index).edgeVector.at(j));
+            }
+        }
+    }
+
+    //Create our iterator in order to move through our edge vector
+    vector<edge>::iterator itDup = backEdgeVec.begin();
+
+    //Check and make sure we don't reach the end of the list
+    while (itDup != backEdgeVec.end())
+    {
+        //Create a second iterator to check the next element in the list
+        vector<edge>::iterator nextIt = itDup + 1;
+
+        bool deleted = false;
+
+        while (nextIt != backEdgeVec.end() && !deleted)
+        {
+            //If both beginning locations for the first and second iterators
+            //are matching, then delete them
+            if (itDup->beginningLocation == nextIt->endingLocation
+             && itDup->endingLocation    == nextIt->beginningLocation)
+            {
+                backEdgeVec.erase(nextIt);
+
+                deleted = true;
+            }
+            else
+            {
+                nextIt++;
+            }
+        }
+
+        itDup++;
+    }
+
+    //This iterator will be used to find all our discovery edges
+    vector<edge>::iterator it = backEdgeVec.begin();
+
+    //Create a vector for return
+    vector<string> backEdgeVector;
+
+    //This while loop will be used for formatting our output
+    while (it != backEdgeVec.end())
+    {
+        backEdgeVector.push_back(it->beginningLocation + "--->" + it->endingLocation);
+
+        it++;
+    }
+
+    cout << "\nPrinting out a list of all back Edges...\n";
+    cout << "Note that back edges with the same edge will be paired together\n\n";
+
+    for (unsigned int index = 0; index < backEdgeVector.size(); index++)
+    {
+        cout << backEdgeVector.at(index) << endl;
+    }
+}

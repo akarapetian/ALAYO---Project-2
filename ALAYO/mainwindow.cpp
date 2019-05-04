@@ -9,23 +9,23 @@
 // ORIGINAL INPUT FILES
 //******************************
 // original MLB Information const
-const string MLB_INFORMATION_INPUT_FILE = "C:/Users/Oscar/Desktop/ALAYOAlek/ALAYO---Project-2-Alek/ALAYO/inputMLBInformation.csv";
+const string MLB_INFORMATION_INPUT_FILE = "D:/Programming/CS1D/ALAYO---Project-2-master/ALAYO/inputMLBInformation.csv";
 // original Distances const
-const string DISTANCES_INPUT_FILE = "C:/Users/Oscar/Desktop/ALAYOAlek/ALAYO---Project-2-Alek/ALAYO/inputDistance.csv";
+const string DISTANCES_INPUT_FILE = "D:/Programming/CS1D/ALAYO---Project-2-master/ALAYO/inputDistance.csv";
 //original MLB Information expansion const
-const string MLB_INFORMATION_EXPANSION_INPUT_FILE = "C:/Users/Oscar/Desktop/ALAYOAlek/ALAYO---Project-2-Alek/ALAYO/inputMLBInformationExpansion.csv";
+const string MLB_INFORMATION_EXPANSION_INPUT_FILE = "D:/Programming/CS1D/ALAYO---Project-2-master/ALAYO/inputDistanceExpansion.csv";
 //original Distances expansion const
-const string DISTANCES_EXPANSION_INPUT_FILE = "C:/Users/Oscar/Desktop/ALAYOAlek/ALAYO---Project-2-Alek/ALAYO/inputDistanceExpansion.csv";
+const string DISTANCES_EXPANSION_INPUT_FILE = "D:/Programming/CS1D/ALAYO---Project-2-master/ALAYO/inputDistanceExpansion.csv";
 
 //******************************
 // WRITE TO FILES
 //******************************
 // written to MLB Information const
-const string MODIFIED_MLB_INFORMATION_OUTPUT_FILE = "C:/Users/Oscar/Desktop/ALAYOAlek/ALAYO---Project-2-Alek/ALAYO/inputModifiedMLBInformation.csv";
+const string MODIFIED_MLB_INFORMATION_OUTPUT_FILE = "D:/Programming/CS1D/ALAYO---Project-2-master/ALAYO/inputModifiedMLBInformation.csv";
 // written to Distances const
-const string MODIFIED_DISTANCES_OUTPUT_FILE = "C:/Users/Oscar/Desktop/ALAYOAlek/ALAYO---Project-2-Alek/ALAYO/inputModifiedDistances.csv";
+const string MODIFIED_DISTANCES_OUTPUT_FILE = "D:/Programming/CS1D/ALAYO---Project-2-master/ALAYO/inputModifiedDistances.csv";
 // written to souvenirs const
-const string MODIFIED_SOUVENIRS_OUTPUT_FILE = "C:/Users/Oscar/Desktop/ALAYOAlek/ALAYO---Project-2-Alek/ALAYO/inputSouvenirs.csv";
+const string MODIFIED_SOUVENIRS_OUTPUT_FILE = "D:/Programming/CS1D/ALAYO---Project-2-master/ALAYO/inputSouvenirs.csv";
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -36,11 +36,11 @@ MainWindow::MainWindow(QWidget *parent) :
     readFromFiles(false);
 
     //allows user to move around items in the selected locations when taking a trip
-    ui->selectedTeamsStackedWidget->setSelectionMode(QAbstractItemView::SingleSelection);
-    ui->selectedTeamsStackedWidget->setDragEnabled(true);
-    ui->selectedTeamsStackedWidget->setDragDropMode(QAbstractItemView::InternalMove);
-    ui->selectedTeamsStackedWidget->viewport()->setAcceptDrops(true);
-    ui->selectedTeamsStackedWidget->setDropIndicatorShown(true);
+    ui->selectedStadiumsListWidget->setSelectionMode(QAbstractItemView::SingleSelection);
+    ui->selectedStadiumsListWidget->setDragEnabled(true);
+    ui->selectedStadiumsListWidget->setDragDropMode(QAbstractItemView::InternalMove);
+    ui->selectedStadiumsListWidget->viewport()->setAcceptDrops(true);
+    ui->selectedStadiumsListWidget->setDropIndicatorShown(true);
 
     ui->primaryPageStackedWidget->setCurrentIndex(0);
 }
@@ -1276,15 +1276,15 @@ void MainWindow::on_takeTripPageBackButton_clicked()
 
 void MainWindow::on_visitMultipleButton_clicked()
 {
-    ui->availibleTeamsStackedWidget->clear();
-    ui->selectedTeamsStackedWidget->clear();
+    ui->availibleStadiumsListWidget->clear();
+    ui->selectedStadiumsListWidget->clear();
 
     for(int i = 0; i < thisMap.mapSize(); i++)
     {
         //fill up the availible teams stacked widget
-        ui->availibleTeamsStackedWidget->addItem(QString::fromStdString(thisMap.atIndex(i).key));
-        ui->availibleTeamsStackedWidget->item(i)->setCheckState(Qt::Unchecked);
-        ui->availibleTeamsStackedWidget->item(i)->setFlags(Qt::ItemIsUserCheckable | Qt::ItemIsUserCheckable | Qt::ItemIsEnabled);
+        ui->availibleStadiumsListWidget->addItem(QString::fromStdString(thisMap.atIndex(i).key));
+        ui->availibleStadiumsListWidget->item(i)->setCheckState(Qt::Unchecked);
+        ui->availibleStadiumsListWidget->item(i)->setFlags(Qt::ItemIsUserCheckable | Qt::ItemIsUserCheckable | Qt::ItemIsEnabled);
     }
 
     ui->takeTripStackedWidget->setCurrentIndex(1);
@@ -1297,9 +1297,9 @@ void MainWindow::on_visitSingleButton_clicked()
     for(int i = 0; i < thisMap.mapSize(); i++)
     {
         //fill up the availible teams stacked widget
-        ui->availibleTeamsStackedWidget->addItem(QString::fromStdString(thisMap.atIndex(i).key));
-        ui->availibleTeamsStackedWidget->item(i)->setCheckState(Qt::Unchecked);
-        ui->availibleTeamsStackedWidget->item(i)->setFlags(Qt::ItemIsUserCheckable | Qt::ItemIsUserCheckable | Qt::ItemIsEnabled);
+        ui->availibleStadiumsListWidget->addItem(QString::fromStdString(thisMap.atIndex(i).key));
+        ui->availibleStadiumsListWidget->item(i)->setCheckState(Qt::Unchecked);
+        ui->availibleStadiumsListWidget->item(i)->setFlags(Qt::ItemIsUserCheckable | Qt::ItemIsUserCheckable | Qt::ItemIsEnabled);
     }
 }
 
@@ -1308,13 +1308,13 @@ void MainWindow::on_multipleSelectionPageBackButton_clicked()
     ui->takeTripStackedWidget->setCurrentIndex(0);
 }
 
-void MainWindow::on_availibleTeamsStackedWidget_itemChanged(QListWidgetItem *item)
+void MainWindow::on_availibleStadiumsListWidget_itemChanged(QListWidgetItem *item)
 {
     //when user checks a team, it moves it into the next list widget
     if(item->checkState() == 2)
     {
         //item is checked
-        ui->selectedTeamsStackedWidget->addItem(item->text());
+        ui->selectedStadiumsListWidget->addItem(item->text());
     }
     else if(item->checkState() == 0)
     {
@@ -1322,9 +1322,9 @@ void MainWindow::on_availibleTeamsStackedWidget_itemChanged(QListWidgetItem *ite
 
         bool found = false;
         int k = 0;
-        while(!found && k < ui->selectedTeamsStackedWidget->count())
+        while(!found && k < ui->selectedStadiumsListWidget->count())
         {
-            if(item->text() == ui->selectedTeamsStackedWidget->item(k)->text())
+            if(item->text() == ui->selectedStadiumsListWidget->item(k)->text())
             {
                 found = true;
             }
@@ -1333,7 +1333,7 @@ void MainWindow::on_availibleTeamsStackedWidget_itemChanged(QListWidgetItem *ite
             }
         }
 
-        ui->selectedTeamsStackedWidget->takeItem(k);
+        ui->selectedStadiumsListWidget->takeItem(k);
     }
 }
 
@@ -1357,26 +1357,27 @@ vector<vector<int>> MainWindow::createAdjacencyMatrix()
 
 void MainWindow::createGraph()
 {
-   ifstream file;
-   string startingLocation;
-   string endingLocation;
-   string distanceBetweenString;
-   int distanceBetween;
+    graph.clear();
+    ifstream file;
+    string startingLocation;
+    string endingLocation;
+    string distanceBetweenString;
+    int distanceBetween;
 
-   file.open(MODIFIED_DISTANCES_OUTPUT_FILE);
-   if(file.is_open())
-   {
-      while(!file.eof())
-      {
-          getline(file, startingLocation, ',');
-          getline(file, endingLocation, ',');
-          getline(file, distanceBetweenString, '\n');
+    file.open(MODIFIED_DISTANCES_OUTPUT_FILE);
+    if(file.is_open())
+    {
+       while(!file.eof())
+       {
+           getline(file, startingLocation, ',');
+           getline(file, endingLocation, ',');
+           getline(file, distanceBetweenString, '\n');
 
-          distanceBetween = stoi(distanceBetweenString);
+           distanceBetween = stoi(distanceBetweenString);
 
-          graph.insert(startingLocation, endingLocation, distanceBetween);
-      }
-   }
+           graph.insert(startingLocation, endingLocation, distanceBetween);
+       }
+    }
 
 
 }
@@ -1386,21 +1387,58 @@ void MainWindow::on_optimizeButton_clicked()
     //run optimization algorithm, return
     //steps to the shortest path algo
 
-
-
-
-    if(ui->selectedTeamsStackedWidget->count() > 0)
+    if(ui->selectedStadiumsListWidget->count() > 0)
     {
         string startingCity;
         vector<string> vertexList;
         vector<int> weights;
         vector<int> nextLocation;
 
-        startingCity = ui->selectedTeamsStackedWidget->item(0)->text().toStdString();
+        startingCity = ui->selectedStadiumsListWidget->item(0)->text().toStdString();
 
         //graph.dijkstraAlgorithm(startingCity, vertexList, )
 
 
     }
+
+}
+
+void MainWindow::on_performdfsButton_clicked()
+{
+    ui->dfsStadiumsListWidget->clear();
+    ui->takeTripStackedWidget->setCurrentIndex(3);
+    for(int i = 0; i < thisMap.mapSize(); i++)
+    {
+        //fill up the availible teams stacked widget
+        ui->dfsStadiumsListWidget->addItem(QString::fromStdString(thisMap.atIndex(i).value.getStadiumName()));
+    }
+}
+
+void MainWindow::on_dfsPageBackButton_clicked()
+{
+    ui->takeTripStackedWidget->setCurrentIndex(0);
+}
+
+
+void MainWindow::on_dfsStadiumsListWidget_currentItemChanged(QListWidgetItem *current, QListWidgetItem *previous)
+{
+    //place the current item into the desired starting location line edit
+    ui->startingStadiumLineEdit->clear();
+    ui->startingStadiumLineEdit->setText(current->text());
+}
+
+void MainWindow::on_dfsPushButton_clicked()
+{
+    createGraph();
+    vector<string> vertexList;
+    //RUN DFS ALGORITHM ON STARTING LOCATION
+    int totalDistance;
+    totalDistance = 0;
+
+    totalDistance = graph.DepthFirstSearch(ui->startingStadiumLineEdit->text().toStdString(), vertexList);
+    ui->dfsTotalDistanceTraveledLineEdit->setText(QString::number(totalDistance));
+
+    for(int i = 0; i < vertexList.size(); i++)
+    ui->dfsResultsListWidget->addItem(QString::fromStdString(vertexList[i]));
 
 }
