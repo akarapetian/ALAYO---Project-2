@@ -127,11 +127,14 @@ private slots:
 
     void on_dfsPushButton_clicked();
 
+    void on_selectAllTeamsCheckBox_stateChanged(int arg1);
+
 private:
     Ui::MainWindow *ui;
     Map thisMap;
     HashMap encryptionTable;
     bool isAdmin;
+    bool isAddedStadium;
 
     Graph graph;
 

@@ -1391,15 +1391,15 @@
      <widget class="QLabel" name="label">
       <property name="geometry">
        <rect>
-        <x>400</x>
-        <y>130</y>
-        <width>371</width>
-        <height>61</height>
+        <x>370</x>
+        <y>50</y>
+        <width>471</width>
+        <height>131</height>
        </rect>
       </property>
       <property name="font">
        <font>
-        <pointsize>28</pointsize>
+        <pointsize>36</pointsize>
         <weight>75</weight>
         <bold>true</bold>
        </font>
@@ -1495,6 +1495,25 @@
        <string>Login</string>
       </property>
      </widget>
+     <widget class="QLabel" name="label_29">
+      <property name="geometry">
+       <rect>
+        <x>550</x>
+        <y>160</y>
+        <width>101</width>
+        <height>71</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <family>Freestyle Script</family>
+        <pointsize>36</pointsize>
+       </font>
+      </property>
+      <property name="text">
+       <string>ALAYO</string>
+      </property>
+     </widget>
     </widget>
     <widget class="QWidget" name="adminPage">
      <widget class="QStackedWidget" name="adminStackedWidget">
@@ -1514,13 +1533,20 @@
         <property name="geometry">
          <rect>
           <x>520</x>
-          <y>70</y>
-          <width>101</width>
-          <height>16</height>
+          <y>30</y>
+          <width>181</width>
+          <height>31</height>
          </rect>
         </property>
+        <property name="font">
+         <font>
+          <pointsize>16</pointsize>
+          <weight>75</weight>
+          <bold>true</bold>
+         </font>
+        </property>
         <property name="text">
-         <string>Welcome Admin</string>
+         <string>Welcome, Admin!</string>
         </property>
        </widget>
        <widget class="QPushButton" name="informationButton_admin">
@@ -1560,7 +1586,7 @@
          <rect>
           <x>860</x>
           <y>510</y>
-          <width>301</width>
+          <width>291</width>
           <height>61</height>
          </rect>
         </property>
@@ -1572,6 +1598,19 @@
         </property>
         <property name="text">
          <string>Manage Stadiums</string>
+        </property>
+       </widget>
+       <widget class="QLabel" name="AlayoLogoLabel">
+        <property name="geometry">
+         <rect>
+          <x>380</x>
+          <y>90</y>
+          <width>461</width>
+          <height>381</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string/>
         </property>
        </widget>
       </widget>
@@ -1633,7 +1672,7 @@
         <property name="geometry">
          <rect>
           <x>40</x>
-          <y>20</y>
+          <y>30</y>
           <width>121</width>
           <height>41</height>
          </rect>
@@ -1860,20 +1899,20 @@
       <property name="geometry">
        <rect>
         <x>0</x>
-        <y>-30</y>
+        <y>-20</y>
         <width>1201</width>
         <height>781</height>
        </rect>
       </property>
       <property name="currentIndex">
-       <number>1</number>
+       <number>0</number>
       </property>
       <widget class="QWidget" name="welcomePage_user">
        <widget class="QPushButton" name="takeTripButton_user">
         <property name="geometry">
          <rect>
-          <x>60</x>
-          <y>540</y>
+          <x>50</x>
+          <y>530</y>
           <width>301</width>
           <height>61</height>
          </rect>
@@ -1891,8 +1930,8 @@
        <widget class="QPushButton" name="informationButton_user">
         <property name="geometry">
          <rect>
-          <x>440</x>
-          <y>540</y>
+          <x>460</x>
+          <y>530</y>
           <width>291</width>
           <height>61</height>
          </rect>
@@ -1901,24 +1940,11 @@
          <string>Information</string>
         </property>
        </widget>
-       <widget class="QLabel" name="label_11">
-        <property name="geometry">
-         <rect>
-          <x>550</x>
-          <y>100</y>
-          <width>141</width>
-          <height>16</height>
-         </rect>
-        </property>
-        <property name="text">
-         <string>Welcome Regular User</string>
-        </property>
-       </widget>
        <widget class="QPushButton" name="viewStadiumsButton">
         <property name="geometry">
          <rect>
-          <x>810</x>
-          <y>540</y>
+          <x>850</x>
+          <y>530</y>
           <width>291</width>
           <height>61</height>
          </rect>
@@ -1927,65 +1953,105 @@
          <string>View Stadiums</string>
         </property>
        </widget>
+       <widget class="QLabel" name="welcomeLabel_admin_2">
+        <property name="geometry">
+         <rect>
+          <x>520</x>
+          <y>50</y>
+          <width>181</width>
+          <height>31</height>
+         </rect>
+        </property>
+        <property name="font">
+         <font>
+          <pointsize>16</pointsize>
+          <weight>75</weight>
+          <bold>true</bold>
+         </font>
+        </property>
+        <property name="text">
+         <string>Welcome, User!</string>
+        </property>
+       </widget>
+       <widget class="QLabel" name="AlayoLogoLabel_2">
+        <property name="geometry">
+         <rect>
+          <x>370</x>
+          <y>110</y>
+          <width>461</width>
+          <height>381</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string/>
+        </property>
+       </widget>
       </widget>
       <widget class="QWidget" name="takeTripPage">
        <widget class="QStackedWidget" name="takeTripStackedWidget">
         <property name="geometry">
          <rect>
           <x>0</x>
-          <y>-10</y>
+          <y>-30</y>
           <width>1191</width>
           <height>761</height>
          </rect>
         </property>
         <property name="currentIndex">
-         <number>3</number>
+         <number>0</number>
         </property>
         <widget class="QWidget" name="tripTypeSelectionPage">
          <widget class="QPushButton" name="visitSingleButton">
           <property name="geometry">
            <rect>
-            <x>420</x>
-            <y>110</y>
-            <width>351</width>
-            <height>101</height>
+            <x>260</x>
+            <y>680</y>
+            <width>331</width>
+            <height>81</height>
            </rect>
           </property>
           <property name="text">
-           <string>Visit A Stadium</string>
+           <string>Visit One Stadium</string>
           </property>
          </widget>
          <widget class="QPushButton" name="visitMultipleButton">
           <property name="geometry">
            <rect>
-            <x>420</x>
-            <y>240</y>
-            <width>351</width>
-            <height>101</height>
+            <x>600</x>
+            <y>680</y>
+            <width>331</width>
+            <height>81</height>
            </rect>
           </property>
           <property name="text">
-           <string>Visit Multiple Stadiums</string>
+           <string>Visit Custom Stadiums</string>
           </property>
          </widget>
-         <widget class="QLabel" name="label_29">
+         <widget class="QLabel" name="TakeATripLabel">
           <property name="geometry">
            <rect>
-            <x>550</x>
-            <y>70</y>
-            <width>91</width>
-            <height>16</height>
+            <x>520</x>
+            <y>50</y>
+            <width>151</width>
+            <height>51</height>
            </rect>
           </property>
+          <property name="font">
+           <font>
+            <pointsize>20</pointsize>
+            <weight>75</weight>
+            <bold>true</bold>
+           </font>
+          </property>
           <property name="text">
-           <string>Take Trip Page</string>
+           <string>Take a Trip!</string>
           </property>
          </widget>
          <widget class="QPushButton" name="takeTripPageBackButton">
           <property name="geometry">
            <rect>
-            <x>50</x>
-            <y>90</y>
+            <x>60</x>
+            <y>50</y>
             <width>121</width>
             <height>41</height>
            </rect>
@@ -1997,14 +2063,53 @@
          <widget class="QPushButton" name="performdfsButton">
           <property name="geometry">
            <rect>
-            <x>420</x>
-            <y>360</y>
-            <width>351</width>
-            <height>101</height>
+            <x>90</x>
+            <y>590</y>
+            <width>331</width>
+            <height>81</height>
            </rect>
           </property>
           <property name="text">
            <string>Perform DFS</string>
+          </property>
+         </widget>
+         <widget class="QPushButton" name="performbfsButton">
+          <property name="geometry">
+           <rect>
+            <x>770</x>
+            <y>590</y>
+            <width>331</width>
+            <height>81</height>
+           </rect>
+          </property>
+          <property name="text">
+           <string>Perform BFS</string>
+          </property>
+         </widget>
+         <widget class="QPushButton" name="performbfsButton_2">
+          <property name="geometry">
+           <rect>
+            <x>430</x>
+            <y>590</y>
+            <width>331</width>
+            <height>81</height>
+           </rect>
+          </property>
+          <property name="text">
+           <string>Perform MST</string>
+          </property>
+         </widget>
+         <widget class="QLabel" name="MLBImageLabel">
+          <property name="geometry">
+           <rect>
+            <x>136</x>
+            <y>100</y>
+            <width>921</width>
+            <height>491</height>
+           </rect>
+          </property>
+          <property name="text">
+           <string/>
           </property>
          </widget>
         </widget>
@@ -2015,7 +2120,7 @@
             <x>60</x>
             <y>140</y>
             <width>291</width>
-            <height>591</height>
+            <height>521</height>
            </rect>
           </property>
          </widget>
@@ -2035,7 +2140,7 @@
          <widget class="QPushButton" name="optimizeButton">
           <property name="geometry">
            <rect>
-            <x>970</x>
+            <x>900</x>
             <y>450</y>
             <width>161</width>
             <height>71</height>
@@ -2048,7 +2153,7 @@
          <widget class="QPushButton" name="goButton">
           <property name="geometry">
            <rect>
-            <x>970</x>
+            <x>900</x>
             <y>560</y>
             <width>161</width>
             <height>71</height>
@@ -2064,15 +2169,15 @@
             <x>440</x>
             <y>140</y>
             <width>291</width>
-            <height>591</height>
+            <height>521</height>
            </rect>
           </property>
          </widget>
          <widget class="QPushButton" name="multipleSelectionPageBackButton">
           <property name="geometry">
            <rect>
-            <x>50</x>
-            <y>30</y>
+            <x>60</x>
+            <y>50</y>
             <width>121</width>
             <height>41</height>
            </rect>
@@ -2081,13 +2186,37 @@
            <string>Back</string>
           </property>
          </widget>
+         <widget class="QCheckBox" name="selectAllTeamsCheckBox">
+          <property name="geometry">
+           <rect>
+            <x>210</x>
+            <y>660</y>
+            <width>161</width>
+            <height>41</height>
+           </rect>
+          </property>
+          <property name="font">
+           <font>
+            <pointsize>12</pointsize>
+           </font>
+          </property>
+          <property name="text">
+           <string>Select All Teams</string>
+          </property>
+          <property name="iconSize">
+           <size>
+            <width>20</width>
+            <height>20</height>
+           </size>
+          </property>
+         </widget>
         </widget>
         <widget class="QWidget" name="singleSelectionPage">
          <widget class="QPushButton" name="singleSelectionPageBackButton">
           <property name="geometry">
            <rect>
-            <x>90</x>
-            <y>60</y>
+            <x>60</x>
+            <y>50</y>
             <width>121</width>
             <height>41</height>
            </rect>
@@ -2101,7 +2230,7 @@
          <widget class="QListWidget" name="dfsStadiumsListWidget">
           <property name="geometry">
            <rect>
-            <x>160</x>
+            <x>210</x>
             <y>80</y>
             <width>291</width>
             <height>591</height>
@@ -2111,7 +2240,7 @@
          <widget class="QPushButton" name="dfsPageBackButton">
           <property name="geometry">
            <rect>
-            <x>20</x>
+            <x>60</x>
             <y>50</y>
             <width>121</width>
             <height>41</height>
@@ -2124,7 +2253,7 @@
          <widget class="QLabel" name="label_33">
           <property name="geometry">
            <rect>
-            <x>160</x>
+            <x>210</x>
             <y>55</y>
             <width>211</width>
             <height>21</height>
@@ -2236,7 +2365,7 @@
          <enum>QTabWidget::North</enum>
         </property>
         <property name="currentIndex">
-         <number>5</number>
+         <number>2</number>
         </property>
         <widget class="QWidget" name="MajorLeagueTeam">
          <attribute name="title">
@@ -2245,7 +2374,7 @@
          <widget class="QLabel" name="label_5">
           <property name="geometry">
            <rect>
-            <x>890</x>
+            <x>900</x>
             <y>30</y>
             <width>111</width>
             <height>16</height>
@@ -2258,7 +2387,7 @@
          <widget class="QLabel" name="label_19">
           <property name="geometry">
            <rect>
-            <x>920</x>
+            <x>930</x>
             <y>30</y>
             <width>111</width>
             <height>16</height>
@@ -2304,7 +2433,7 @@
          <widget class="QLabel" name="label_6">
           <property name="geometry">
            <rect>
-            <x>890</x>
+            <x>900</x>
             <y>30</y>
             <width>111</width>
             <height>16</height>
@@ -2317,7 +2446,7 @@
          <widget class="QLabel" name="label_20">
           <property name="geometry">
            <rect>
-            <x>920</x>
+            <x>930</x>
             <y>30</y>
             <width>111</width>
             <height>16</height>
@@ -2363,7 +2492,7 @@
          <widget class="QLabel" name="label_7">
           <property name="geometry">
            <rect>
-            <x>890</x>
+            <x>900</x>
             <y>30</y>
             <width>111</width>
             <height>16</height>
@@ -2376,7 +2505,7 @@
          <widget class="QLabel" name="label_21">
           <property name="geometry">
            <rect>
-            <x>920</x>
+            <x>930</x>
             <y>30</y>
             <width>111</width>
             <height>16</height>
@@ -2422,7 +2551,7 @@
          <widget class="QLabel" name="label_4">
           <property name="geometry">
            <rect>
-            <x>890</x>
+            <x>900</x>
             <y>30</y>
             <width>111</width>
             <height>16</height>
@@ -2435,7 +2564,7 @@
          <widget class="QLabel" name="label_22">
           <property name="geometry">
            <rect>
-            <x>920</x>
+            <x>930</x>
             <y>30</y>
             <width>111</width>
             <height>16</height>
@@ -2481,7 +2610,7 @@
          <widget class="QLabel" name="label_8">
           <property name="geometry">
            <rect>
-            <x>890</x>
+            <x>900</x>
             <y>30</y>
             <width>111</width>
             <height>16</height>
@@ -2494,7 +2623,7 @@
          <widget class="QLabel" name="label_23">
           <property name="geometry">
            <rect>
-            <x>920</x>
+            <x>930</x>
             <y>30</y>
             <width>111</width>
             <height>16</height>
@@ -2540,7 +2669,7 @@
          <widget class="QLabel" name="label_9">
           <property name="geometry">
            <rect>
-            <x>890</x>
+            <x>900</x>
             <y>30</y>
             <width>111</width>
             <height>16</height>
@@ -2553,7 +2682,7 @@
          <widget class="QLabel" name="label_24">
           <property name="geometry">
            <rect>
-            <x>920</x>
+            <x>930</x>
             <y>30</y>
             <width>111</width>
             <height>16</height>
@@ -2599,7 +2728,7 @@
          <widget class="QLabel" name="label_15">
           <property name="geometry">
            <rect>
-            <x>890</x>
+            <x>900</x>
             <y>30</y>
             <width>111</width>
             <height>16</height>
@@ -2612,7 +2741,7 @@
          <widget class="QLabel" name="label_25">
           <property name="geometry">
            <rect>
-            <x>920</x>
+            <x>930</x>
             <y>30</y>
             <width>111</width>
             <height>16</height>
@@ -2658,7 +2787,7 @@
          <widget class="QLabel" name="label_16">
           <property name="geometry">
            <rect>
-            <x>890</x>
+            <x>900</x>
             <y>30</y>
             <width>111</width>
             <height>16</height>
@@ -2671,7 +2800,7 @@
          <widget class="QLabel" name="label_26">
           <property name="geometry">
            <rect>
-            <x>920</x>
+            <x>930</x>
             <y>30</y>
             <width>111</width>
             <height>16</height>
@@ -2712,7 +2841,7 @@
          <widget class="QLabel" name="label_31">
           <property name="geometry">
            <rect>
-            <x>890</x>
+            <x>900</x>
             <y>50</y>
             <width>141</width>
             <height>16</height>
@@ -2725,7 +2854,7 @@
          <widget class="QLabel" name="label_32">
           <property name="geometry">
            <rect>
-            <x>1030</x>
+            <x>1040</x>
             <y>50</y>
             <width>141</width>
             <height>16</height>
@@ -2771,7 +2900,7 @@
          <widget class="QLabel" name="label_17">
           <property name="geometry">
            <rect>
-            <x>890</x>
+            <x>900</x>
             <y>30</y>
             <width>111</width>
             <height>16</height>
@@ -2784,7 +2913,7 @@
          <widget class="QLabel" name="label_27">
           <property name="geometry">
            <rect>
-            <x>920</x>
+            <x>930</x>
             <y>30</y>
             <width>111</width>
             <height>16</height>
@@ -2802,7 +2931,7 @@
          <widget class="QLabel" name="label_18">
           <property name="geometry">
            <rect>
-            <x>890</x>
+            <x>900</x>
             <y>30</y>
             <width>111</width>
             <height>16</height>
@@ -2815,7 +2944,7 @@
          <widget class="QLabel" name="label_28">
           <property name="geometry">
            <rect>
-            <x>920</x>
+            <x>930</x>
             <y>30</y>
             <width>111</width>
             <height>16</height>

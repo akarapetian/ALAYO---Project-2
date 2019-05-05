@@ -27,6 +27,16 @@ const string MODIFIED_DISTANCES_OUTPUT_FILE = "C:/Users/Oscar/Desktop/ALAYO-May5
 // written to souvenirs const
 const string MODIFIED_SOUVENIRS_OUTPUT_FILE = "C:/Users/Oscar/Desktop/ALAYO-May5-AnthonyVersion/ALAYO/inputSouvenirs.csv";
 
+//******************************
+// IMAGES
+//******************************
+// unadded stadium image
+const char ORIGINAL_STADIUMS_IMAGE[] = {"C:/Users/Oscar/Desktop/ALAYO-May5-AnthonyVersion/ALAYO/BaseballStadiumGraph.jpg"};
+// modified stadiums image
+const char MODIFIED_STADIUMS_IMAGE[] = {"C:/Users/Oscar/Desktop/ALAYO-May5-AnthonyVersion/ALAYO/BaseballStadiumGraphLV.jpg"};
+// Alayo logo image
+const char ALAYO_LOGO[] = {"C:/Users/Oscar/Desktop/ALAYO-May5-AnthonyVersion/ALAYO/ALAYOLogo.png"};
+
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow)
@@ -63,6 +73,7 @@ void MainWindow::readFromFiles(bool readOriginal)
     if(readOriginal)
     {
         original = true;
+        isAddedStadium = false;
     }
     else
     {
@@ -327,6 +338,17 @@ void MainWindow::readFromFiles(bool readOriginal)
         QMessageBox::information(nullptr, "Success!", "All MLB teams have been reinitialized!");
         writeToFiles();
     }
+    else
+    {
+        if(thisMap.mapSize() == 31)
+        {
+            isAddedStadium = true;
+        }
+        else
+        {
+            isAddedStadium = false;
+        }
+    }
 }
 
 void MainWindow::readExpansionFiles()
@@ -511,6 +533,7 @@ void MainWindow::readExpansionFiles()
         csvFile2.close();
 
         QMessageBox::information(nullptr, "Success!", "Additional team(s) have been added!");
+        isAddedStadium = true;
         writeToFiles();
     }
     else
@@ -600,12 +623,20 @@ void MainWindow::on_loginPushButton_clicked()
         ui->primaryPageStackedWidget->setCurrentIndex(1);
         ui->adminStackedWidget->setCurrentIndex(0);
 
+        QPixmap pix(ALAYO_LOGO);
+        ui->AlayoLogoLabel->setPixmap(pix);
+        ui->AlayoLogoLabel->setScaledContents(true);
+
         isAdmin = true;
     }
     else if(ui->usernameLineEdit->text() == "user" && ui->passwordLineEdit->text() == "user")
     {
         ui->primaryPageStackedWidget->setCurrentIndex(2);
         ui->userStackedWidget->setCurrentIndex(0);
+
+        QPixmap pix(ALAYO_LOGO);
+        ui->AlayoLogoLabel_2->setPixmap(pix);
+        ui->AlayoLogoLabel_2->setScaledContents(true);
 
         isAdmin = false;
 
@@ -1273,6 +1304,18 @@ void MainWindow::on_informationBackButton_clicked()
 //************************************ TAKING TRIPS ************************************************
 void MainWindow::on_takeTripButton_admin_clicked()
 {
+    if(!isAddedStadium)
+    {
+        QPixmap pix(ORIGINAL_STADIUMS_IMAGE);
+        ui->MLBImageLabel->setPixmap(pix);
+        ui->MLBImageLabel->setScaledContents(true);
+    }
+    else
+    {
+        QPixmap pix(MODIFIED_STADIUMS_IMAGE);
+        ui->MLBImageLabel->setPixmap(pix);
+        ui->MLBImageLabel->setScaledContents(true);
+    }
     //function "reaches" into the user side of the program to re-use the user methods for taking a trip
     //changes page
     ui->primaryPageStackedWidget->setCurrentIndex(2);
@@ -1281,6 +1324,19 @@ void MainWindow::on_takeTripButton_admin_clicked()
 
 void MainWindow::on_takeTripButton_user_clicked()
 {
+    if(!isAddedStadium)
+    {
+        QPixmap pix(ORIGINAL_STADIUMS_IMAGE);
+        ui->MLBImageLabel->setPixmap(pix);
+        ui->MLBImageLabel->setScaledContents(true);
+    }
+    else
+    {
+        QPixmap pix(MODIFIED_STADIUMS_IMAGE);
+        ui->MLBImageLabel->setPixmap(pix);
+        ui->MLBImageLabel->setScaledContents(true);
+    }
+
     ui->userStackedWidget->setCurrentIndex(1);
     ui->takeTripStackedWidget->setCurrentIndex(0);
 }
@@ -1299,6 +1355,7 @@ void MainWindow::on_takeTripPageBackButton_clicked()
 
 void MainWindow::on_visitMultipleButton_clicked()
 {
+    ui->selectAllTeamsCheckBox->setChecked(false);
     ui->availibleStadiumsListWidget->clear();
     ui->selectedStadiumsListWidget->clear();
 
@@ -1480,4 +1537,22 @@ void MainWindow::on_dfsPushButton_clicked()
 
     for(int i = 0; i < vertexList.size(); i++)
     ui->dfsResultsListWidget->addItem(QString::fromStdString(vertexList[i]));
+}
+
+void MainWindow::on_selectAllTeamsCheckBox_stateChanged(int arg1)
+{
+    if(arg1)
+    {
+        for(int i = 0; i < thisMap.mapSize(); i++)
+        {
+            ui->availibleStadiumsListWidget->item(i)->setCheckState(Qt::Checked);
+        }
+    }
+    else
+    {
+        for(int i = 0; i < thisMap.mapSize(); i++)
+        {
+            ui->availibleStadiumsListWidget->item(i)->setCheckState(Qt::Unchecked);
+        }
+    }
 }
