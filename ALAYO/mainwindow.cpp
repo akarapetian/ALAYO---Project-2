@@ -9,23 +9,23 @@
 // ORIGINAL INPUT FILES
 //******************************
 // original MLB Information const
-const string MLB_INFORMATION_INPUT_FILE = "D:/Programming/CS1D/ALAYO---Project-2-master/ALAYO/inputMLBInformation.csv";
+const string MLB_INFORMATION_INPUT_FILE = "C:/Users/anthony/Desktop/ALAYO---Project-2-Anthony/ALAYO/inputMLBInformation.csv";
 // original Distances const
-const string DISTANCES_INPUT_FILE = "D:/Programming/CS1D/ALAYO---Project-2-master/ALAYO/inputDistance.csv";
+const string DISTANCES_INPUT_FILE = "C:/Users/anthony/Desktop/ALAYO---Project-2-Anthony/ALAYO/inputDistance.csv";
 //original MLB Information expansion const
-const string MLB_INFORMATION_EXPANSION_INPUT_FILE = "D:/Programming/CS1D/ALAYO---Project-2-master/ALAYO/inputMLBInformationExpansion.csv";
+const string MLB_INFORMATION_EXPANSION_INPUT_FILE = "C:/Users/anthony/Desktop/ALAYO---Project-2-Anthony/ALAYO/inputMLBInformationExpansion.csv";
 //original Distances expansion const
-const string DISTANCES_EXPANSION_INPUT_FILE = "D:/Programming/CS1D/ALAYO---Project-2-master/ALAYO/inputDistanceExpansion.csv";
+const string DISTANCES_EXPANSION_INPUT_FILE = "C:/Users/anthony/Desktop/ALAYO---Project-2-Anthony/ALAYO/inputDistanceExpansion.csv";
 
 //******************************
 // WRITE TO FILES
 //******************************
 // written to MLB Information const
-const string MODIFIED_MLB_INFORMATION_OUTPUT_FILE = "D:/Programming/CS1D/ALAYO---Project-2-master/ALAYO/inputModifiedMLBInformation.csv";
+const string MODIFIED_MLB_INFORMATION_OUTPUT_FILE = "C:/Users/anthony/Desktop/ALAYO---Project-2-Anthony/ALAYO/inputModifiedMLBInformation.csv";
 // written to Distances const
-const string MODIFIED_DISTANCES_OUTPUT_FILE = "D:/Programming/CS1D/ALAYO---Project-2-master/ALAYO/inputModifiedDistances.csv";
+const string MODIFIED_DISTANCES_OUTPUT_FILE = "C:/Users/anthony/Desktop/ALAYO---Project-2-Anthony/ALAYO/inputModifiedDistances.csv";
 // written to souvenirs const
-const string MODIFIED_SOUVENIRS_OUTPUT_FILE = "D:/Programming/CS1D/ALAYO---Project-2-master/ALAYO/inputSouvenirs.csv";
+const string MODIFIED_SOUVENIRS_OUTPUT_FILE = "C:/Users/anthony/Desktop/ALAYO---Project-2-Anthony/ALAYO/inputSouvenirs.csv";
 
 //******************************
 // IMAGES
@@ -1625,7 +1625,8 @@ void MainWindow::on_performdfsButton_clicked()
     ui->dfsResultsListWidget->clear();
     ui->dfsResultsListWidget->blockSignals(false);
     ui->startingStadiumLineEdit->clear();
-    ui->takeTripStackedWidget->setCurrentIndex(3);
+
+    ui->takeTripStackedWidget->setCurrentIndex(5);
     for(int i = 0; i < thisMap.mapSize(); i++)
     {
         //fill up the availible teams stacked widget
@@ -1738,7 +1739,7 @@ void MainWindow::on_performmstButton_clicked()
     ui->mstResultsListWidget->clear();
     ui->mstResultsListWidget->blockSignals(false);
     ui->mstStartingStadiumLineEdit->clear();
-    ui->takeTripStackedWidget->setCurrentIndex(5);
+    ui->takeTripStackedWidget->setCurrentIndex(6);
     for(int i = 0; i < thisMap.mapSize(); i++)
     {
         //fill up the availible teams stacked widget
