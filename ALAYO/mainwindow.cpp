@@ -13,7 +13,7 @@ const string MLB_INFORMATION_INPUT_FILE = "D:/Programming/CS1D/ALAYO---Project-2
 // original Distances const
 const string DISTANCES_INPUT_FILE = "D:/Programming/CS1D/ALAYO---Project-2-master/ALAYO/inputDistance.csv";
 //original MLB Information expansion const
-const string MLB_INFORMATION_EXPANSION_INPUT_FILE = "D:/Programming/CS1D/ALAYO---Project-2-master/ALAYO/inputDistanceExpansion.csv";
+const string MLB_INFORMATION_EXPANSION_INPUT_FILE = "D:/Programming/CS1D/ALAYO---Project-2-master/ALAYO/inputMLBInformationExpansion.csv";
 //original Distances expansion const
 const string DISTANCES_EXPANSION_INPUT_FILE = "D:/Programming/CS1D/ALAYO---Project-2-master/ALAYO/inputDistanceExpansion.csv";
 
@@ -26,6 +26,16 @@ const string MODIFIED_MLB_INFORMATION_OUTPUT_FILE = "D:/Programming/CS1D/ALAYO--
 const string MODIFIED_DISTANCES_OUTPUT_FILE = "D:/Programming/CS1D/ALAYO---Project-2-master/ALAYO/inputModifiedDistances.csv";
 // written to souvenirs const
 const string MODIFIED_SOUVENIRS_OUTPUT_FILE = "D:/Programming/CS1D/ALAYO---Project-2-master/ALAYO/inputSouvenirs.csv";
+
+//******************************
+// IMAGES
+//******************************
+// unadded stadium image
+const char ORIGINAL_STADIUMS_IMAGE[] = {"D:/Programming/CS1D/ALAYO---Project-2-master/ALAYO/BaseballStadiumGraph.jpg"};
+// modified stadiums image
+const char MODIFIED_STADIUMS_IMAGE[] = {"D:/Programming/CS1D/ALAYO---Project-2-master/ALAYO/BaseballStadiumGraphLV.jpg"};
+// Alayo logo image
+const char ALAYO_LOGO[] = {"D:/Programming/CS1D/ALAYO---Project-2-master/ALAYO/ALAYOLogo.png"};
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -63,6 +73,7 @@ void MainWindow::readFromFiles(bool readOriginal)
     if(readOriginal)
     {
         original = true;
+        isAddedStadium = false;
     }
     else
     {
@@ -174,7 +185,7 @@ void MainWindow::readFromFiles(bool readOriginal)
     }
     else
     {
-        QTextStream(stdout) << "file1 opening failed...\n";
+        QTextStream(stdout) << "***CHANGE FILE DIRECTORY IN \"mainwindow.cpp\"***\n";
     }
     for(int i = 0; i < thisMap.mapSize(); i++){
         thisEntry.key = thisMap.atIndex(i).key;
@@ -256,8 +267,9 @@ void MainWindow::readFromFiles(bool readOriginal)
             }
         }
     }
-    else {
-        QTextStream(stdout) << "file2 opening failed...";
+    else
+    {
+        QTextStream(stdout) << "***CHANGE FILE DIRECTORY IN \"mainwindow.cpp\"***\n";;
     }
 
     csvFile2.close();
@@ -326,6 +338,17 @@ void MainWindow::readFromFiles(bool readOriginal)
         QMessageBox::information(nullptr, "Success!", "All MLB teams have been reinitialized!");
         writeToFiles();
     }
+    else
+    {
+        if(thisMap.mapSize() == 31)
+        {
+            isAddedStadium = true;
+        }
+        else
+        {
+            isAddedStadium = false;
+        }
+    }
 }
 
 void MainWindow::readExpansionFiles()
@@ -333,6 +356,7 @@ void MainWindow::readExpansionFiles()
     ifstream csvFile1;
     csvFile1.open(MLB_INFORMATION_EXPANSION_INPUT_FILE);
 
+    int newTeamCount = 0;
     bool exists = false;
     int min = 1000000000, max = 0;
     string iStadiumName;
@@ -413,10 +437,12 @@ void MainWindow::readExpansionFiles()
             v6.push_back(thisEntry);
         }
 
-        if(thisMLB.getDistanceToCenterField() <= min){
+        if(thisMLB.getDistanceToCenterField() <= min)
+        {
             min = thisMLB.getDistanceToCenterField();
         }
-        if(thisMLB.getDistanceToCenterField() >= max){
+        if(thisMLB.getDistanceToCenterField() >= max)
+        {
             max = thisMLB.getDistanceToCenterField();
         }
 
@@ -425,11 +451,89 @@ void MainWindow::readExpansionFiles()
         thisMap.atIndex(thisMap.mapSize()-1).value.addSouvenir(souvenir("Team pennant", 17.99));
         thisMap.atIndex(thisMap.mapSize()-1).value.addSouvenir(souvenir("Autographed baseball", 25.99));
         thisMap.atIndex(thisMap.mapSize()-1).value.addSouvenir(souvenir("Team jersey", 199.99));
-    }
 
+        newTeamCount++;
+    }
+    // reads in distances from input file
     if(!exists)
     {
+        // runs the amount of times new times were added to the map
+        for(int i = 0; i < newTeamCount; i++)
+        {
+            // runs through all the old teams and adds 0 to the end of distance vector
+            for(int k = 0; k < thisMap.mapSize()-newTeamCount; k++)
+            {
+                thisMap.atIndex(k).value.pushBackDistance();
+            }
+
+            thisMap.atIndex(thisMap.mapSize()-i-1).value.setInitialDistances(thisMap.mapSize());
+        }
+
+        ifstream csvFile2;
+        csvFile2.open(DISTANCES_EXPANSION_INPUT_FILE);
+
+        string iStadium1;
+        string iStadium2;
+        string iDistance;
+        int distance;
+        string previous;
+        bool found;
+        int index1;
+        int index2;
+
+        getline(csvFile2, iStadium1, ',');
+        while(!csvFile2.eof())
+        {
+            previous = iStadium1;
+            found = false;
+            index1 = 0;
+
+            // searches for the index of the first stadium
+            while(!found)
+            {
+                if(thisMap.atIndex(index1).value.getStadiumName() == iStadium1)
+                {
+                    found = true;
+                }
+                else
+                {
+                    index1++;
+                }
+            }
+
+            while(iStadium1 == previous)
+            {
+                getline(csvFile2, iStadium2, ',');
+                getline(csvFile2, iDistance, '\n');
+                distance = stoi(iDistance);
+
+                found = false;
+                index2 = 0;
+
+                // searches for the index of the second stadium
+                while(!found)
+                {
+                    if(thisMap.atIndex(index2).value.getStadiumName() == iStadium2)
+                    {
+                        found = true;
+                    }
+                    else
+                    {
+                        index2++;
+                    }
+                }
+
+                thisMap.atIndex(index1).value.setDistance(index2, distance);
+                thisMap.atIndex(index2).value.setDistance(index1, distance);
+
+                getline(csvFile2, iStadium1, ',');
+            }
+        }
+
+        csvFile2.close();
+
         QMessageBox::information(nullptr, "Success!", "Additional team(s) have been added!");
+        isAddedStadium = true;
         writeToFiles();
     }
     else
@@ -519,12 +623,20 @@ void MainWindow::on_loginPushButton_clicked()
         ui->primaryPageStackedWidget->setCurrentIndex(1);
         ui->adminStackedWidget->setCurrentIndex(0);
 
+        QPixmap pix(ALAYO_LOGO);
+        ui->AlayoLogoLabel->setPixmap(pix);
+        ui->AlayoLogoLabel->setScaledContents(true);
+
         isAdmin = true;
     }
     else if(ui->usernameLineEdit->text() == "user" && ui->passwordLineEdit->text() == "user")
     {
         ui->primaryPageStackedWidget->setCurrentIndex(2);
         ui->userStackedWidget->setCurrentIndex(0);
+
+        QPixmap pix(ALAYO_LOGO);
+        ui->AlayoLogoLabel_2->setPixmap(pix);
+        ui->AlayoLogoLabel_2->setScaledContents(true);
 
         isAdmin = false;
 
@@ -551,10 +663,8 @@ void MainWindow::on_actionLogout_triggered()
 
 //************************************ MANAGING STADIUMS (admin) ************************************************
 
-void MainWindow::on_AddTeamButton_clicked()
+void MainWindow::resetManageStadiumsInformation()
 {
-    readExpansionFiles();
-
     ui->stadiumListWidget->blockSignals(true);
     ui->stadiumListWidget->clear();
     ui->stadiumListWidget->blockSignals(false);
@@ -588,40 +698,16 @@ void MainWindow::on_AddTeamButton_clicked()
     }
 }
 
+void MainWindow::on_AddTeamButton_clicked()
+{
+    readExpansionFiles();
+    resetManageStadiumsInformation();
+}
+
 void MainWindow::on_ReinitializeButton_clicked()
 {
     readFromFiles(true);
-
-    ui->stadiumListWidget->blockSignals(true);
-    ui->stadiumListWidget->clear();
-    ui->stadiumListWidget->blockSignals(false);
-
-    ui->groupBox->setTitle("Stadium Attributes");
-    ui->capacityLineEdit->clear();
-    ui->surfaceLineEdit->clear();
-    ui->roofTypeLineEdit->clear();
-    ui->typologyLineEdit->clear();
-    ui->dateOpenedLineEdit->clear();
-    ui->distToCenterLineEdit->clear();
-    ui->newLocationLineEdit->clear();
-    ui->roofTypeLineEdit->clear();
-    ui->capacityLineEdit->setReadOnly(true);
-    ui->surfaceLineEdit->setReadOnly(true);
-    ui->roofTypeLineEdit->setReadOnly(true);
-    ui->typologyLineEdit->setReadOnly(true);
-    ui->dateOpenedLineEdit->setReadOnly(true);
-    ui->distToCenterLineEdit->setReadOnly(true);
-    ui->newLocationLineEdit->setReadOnly(true);
-    ui->roofTypeLineEdit->setReadOnly(true);
-
-    ui->souvenirListWidget->clear();
-    ui->souvenirPriceListWidget->clear();
-
-    //initialize all the data in the list widgets
-    for(int i = 0; i < thisMap.mapSize(); i++)
-    {
-        ui->stadiumListWidget->addItem(QString::fromStdString(thisMap.atIndex(i).key));
-    }
+    resetManageStadiumsInformation();
 }
 
 //this updates all the information in the vectors from the map
@@ -690,37 +776,7 @@ void MainWindow::updateVectors(){
 void MainWindow::on_manageStadiumsButton_clicked()
 {
     ui->adminStackedWidget->setCurrentIndex(1);
-
-    ui->stadiumListWidget->blockSignals(true);
-    ui->stadiumListWidget->clear();
-    ui->stadiumListWidget->blockSignals(false);
-
-    ui->groupBox->setTitle("Stadium Attributes");
-    ui->capacityLineEdit->clear();
-    ui->surfaceLineEdit->clear();
-    ui->roofTypeLineEdit->clear();
-    ui->typologyLineEdit->clear();
-    ui->dateOpenedLineEdit->clear();
-    ui->distToCenterLineEdit->clear();
-    ui->newLocationLineEdit->clear();
-    ui->roofTypeLineEdit->clear();
-    ui->capacityLineEdit->setReadOnly(true);
-    ui->surfaceLineEdit->setReadOnly(true);
-    ui->roofTypeLineEdit->setReadOnly(true);
-    ui->typologyLineEdit->setReadOnly(true);
-    ui->dateOpenedLineEdit->setReadOnly(true);
-    ui->distToCenterLineEdit->setReadOnly(true);
-    ui->newLocationLineEdit->setReadOnly(true);
-    ui->roofTypeLineEdit->setReadOnly(true);
-
-    ui->souvenirListWidget->clear();
-    ui->souvenirPriceListWidget->clear();
-
-    //initialize all the data in the list widgets
-    for(int i = 0; i < thisMap.mapSize(); i++)
-    {
-        ui->stadiumListWidget->addItem(QString::fromStdString(thisMap.atIndex(i).key));
-    }
+    resetManageStadiumsInformation();
 }
 
 void MainWindow::on_manageStadiumsBackButton_clicked()
@@ -956,9 +1012,7 @@ void MainWindow::on_viewStadiumsButton_clicked()
     //initialize all the data in the list widgets
     for(int i = 0; i < thisMap.mapSize(); i++)
     {
-//        ui->stadiumListWidget_2->addItem(QString::fromStdString(thisMap.atIndex(i).value.getStadiumName()));
         ui->stadiumListWidget_2->addItem(QString::fromStdString(thisMap.atIndex(i).key));
-
     }
 }
 
@@ -1250,6 +1304,18 @@ void MainWindow::on_informationBackButton_clicked()
 //************************************ TAKING TRIPS ************************************************
 void MainWindow::on_takeTripButton_admin_clicked()
 {
+    if(!isAddedStadium)
+    {
+        QPixmap pix(ORIGINAL_STADIUMS_IMAGE);
+        ui->MLBImageLabel->setPixmap(pix);
+        ui->MLBImageLabel->setScaledContents(true);
+    }
+    else
+    {
+        QPixmap pix(MODIFIED_STADIUMS_IMAGE);
+        ui->MLBImageLabel->setPixmap(pix);
+        ui->MLBImageLabel->setScaledContents(true);
+    }
     //function "reaches" into the user side of the program to re-use the user methods for taking a trip
     //changes page
     ui->primaryPageStackedWidget->setCurrentIndex(2);
@@ -1258,6 +1324,19 @@ void MainWindow::on_takeTripButton_admin_clicked()
 
 void MainWindow::on_takeTripButton_user_clicked()
 {
+    if(!isAddedStadium)
+    {
+        QPixmap pix(ORIGINAL_STADIUMS_IMAGE);
+        ui->MLBImageLabel->setPixmap(pix);
+        ui->MLBImageLabel->setScaledContents(true);
+    }
+    else
+    {
+        QPixmap pix(MODIFIED_STADIUMS_IMAGE);
+        ui->MLBImageLabel->setPixmap(pix);
+        ui->MLBImageLabel->setScaledContents(true);
+    }
+
     ui->userStackedWidget->setCurrentIndex(1);
     ui->takeTripStackedWidget->setCurrentIndex(0);
 }
@@ -1276,18 +1355,37 @@ void MainWindow::on_takeTripPageBackButton_clicked()
 
 void MainWindow::on_visitMultipleButton_clicked()
 {
+    ui->selectAllTeamsCheckBox->setChecked(false);
     ui->availibleStadiumsListWidget->clear();
     ui->selectedStadiumsListWidget->clear();
 
     for(int i = 0; i < thisMap.mapSize(); i++)
     {
         //fill up the availible teams stacked widget
-        ui->availibleStadiumsListWidget->addItem(QString::fromStdString(thisMap.atIndex(i).key));
+        ui->availibleStadiumsListWidget->addItem(QString::fromStdString(thisMap.atIndex(i).value.getStadiumName() + ": " + thisMap.atIndex(i).key));
         ui->availibleStadiumsListWidget->item(i)->setCheckState(Qt::Unchecked);
         ui->availibleStadiumsListWidget->item(i)->setFlags(Qt::ItemIsUserCheckable | Qt::ItemIsUserCheckable | Qt::ItemIsEnabled);
     }
 
     ui->takeTripStackedWidget->setCurrentIndex(1);
+}
+
+void MainWindow::on_selectAllTeamsCheckBox_stateChanged(int arg1)
+{
+    if(arg1)
+    {
+        for(int i = 0; i < thisMap.mapSize(); i++)
+        {
+            ui->availibleStadiumsListWidget->item(i)->setCheckState(Qt::Checked);
+        }
+    }
+    else
+    {
+        for(int i = 0; i < thisMap.mapSize(); i++)
+        {
+            ui->availibleStadiumsListWidget->item(i)->setCheckState(Qt::Unchecked);
+        }
+    }
 }
 
 void MainWindow::on_visitSingleButton_clicked()
@@ -1386,26 +1484,147 @@ void MainWindow::on_optimizeButton_clicked()
 {
     //run optimization algorithm, return
     //steps to the shortest path algo
+/*
+    QStringList stadiumTeam1;
 
     if(ui->selectedStadiumsListWidget->count() > 0)
     {
-        string startingCity;
+        vector<string> teamsToVisit;
+        int i = 0; //counter variable
+        for(i = 0; i < ui->selectedStadiumsListWidget->count(); i++)
+        {
+            //fill a vector of teams to visit
+            stadiumTeam1 = ui->selectedStadiumsListWidget->item(i)->text().split(": ");
+
+            teamsToVisit.push_back(stadiumTeam1[1].toStdString());
+        }
+*/
+        createGraph();
+
         vector<string> vertexList;
-        vector<int> weights;
-        vector<int> nextLocation;
+        vector<int> weights(graph.getGraphSize());
+        vector<int> nextLocation(graph.getGraphSize());
 
-        startingCity = ui->selectedStadiumsListWidget->item(0)->text().toStdString();
+        //parallel vectors
+        vector<vector<string>> paths; //two dimensional vector of all possible paths
+        vector<int> pathWeights; //contains the weight of each of paths, indecies correspond
 
-        //graph.dijkstraAlgorithm(startingCity, vertexList, )
+        //find shortest pathweight
+        //find min number in vector
+        int smallestWeight = 100000000000000;
+        int smallestIndex;
+
+       QStringList stadiumTeam;
+
+        int i = 0;
+       // for(i = 0; i < ui->selectedStadiumsListWidget->count() - 1; i++)
+        {
+            stadiumTeam = ui->selectedStadiumsListWidget->item(i)->text().split(": ");
+            string startingCity = stadiumTeam[0].toStdString();
+             /*
+            //sequential search for item to remove
+            bool found = false;
+            int k = 0;
+            while(!found)
+            {
+                if(stadiumTeam[1].toStdString() == teamsToVisit[k])
+                {
+                    teamsToVisit.erase(teamsToVisit.begin() + k);
+                    found = true;
+                }
+                else {
+                    ++k;
+                }
+            }
+*/
+            graph.dijkstraAlgorithm(startingCity, vertexList, weights, nextLocation);
 
 
-    }
+
+            for(unsigned int index = 1; index < graph.getGraphSize(); index++)
+                {
+                    //Call our determineTripVector to collect the entire path of the
+                    //Dijkstra
+                    vector<string> outputVec =
+                    graph.determineTripVector(startingCity, vertexList[index], nextLocation);
+
+                    paths.push_back(outputVec);
+
+                    //pathWeights[index] = weights[graph.getVertex(vertexList[index])];
+                    pathWeights.push_back(weights[graph.getVertex(vertexList[index])]);
+                }
+
+            smallestWeight = 10000000000000;
+            smallestIndex = 0;
+
+            for(int count = 0; count < pathWeights.size(); count++)
+            {
+                if(pathWeights[count] < smallestWeight && pathWeights[count] != 0)
+                {
+                    smallestWeight = pathWeights[count];
+                    smallestIndex = count;
+                }
+            }
+
+            //use the smallest index to access the paths matrix, obtain the next team
+            string nextStadium = paths[smallestIndex][paths[smallestIndex].size() - 1];
+
+            /*
+            //find the row that contains the next stadium, remove it from its current place, and put it in the position after the the starting stadium
+            QStringList stadiumTeam2;
+            found = false;
+            k = 0;
+            while(!found)
+            {
+                stadiumTeam2 = ui->selectedStadiumsListWidget->item(k)->text().split(": ");
+                if(nextStadium == stadiumTeam2[0].toStdString())
+                {
+                    found = true;
+
+                    //removes and inserts the item into the correct position in the list
+                    ui->selectedStadiumsListWidget->insertItem(i + 1, ui->selectedStadiumsListWidget->takeItem(k));
+                }
+                else {
+                    ++k;
+                }
+            }
+
+            ui->totalTripDistanceLineEdit->setText(QString::number(ui->totalTripDistanceLineEdit->text().toInt() + smallestWeight));
+*/
+          //  ++i;
+            vertexList.clear();
+            weights.clear();
+            nextLocation.clear();
+            paths.clear();
+            pathWeights.clear();
+            stadiumTeam.clear();
+
+        }
+
+
+        //steps
+        //1: obtain the smallest weight, move that name to the next position after the starting location in the list widget
+        //2: add weight to total distance traveled, pop the name off of the teamsToVisit vector
+        //3: make the new starting city the city we just found and repeat until all cities in list have been visited
+
+
+
 
 }
 
 void MainWindow::on_performdfsButton_clicked()
 {
+    ui->dfsPushButton->setEnabled(false);
+    ui->startingStadiumLineEdit->setReadOnly(true);
+    ui->dfsTotalDistanceTraveledLineEdit->setReadOnly(true);
+    ui->dfsTotalDistanceTraveledLineEdit->clear();
+    ui->dfsStadiumsListWidget->blockSignals(true);
     ui->dfsStadiumsListWidget->clear();
+    ui->dfsStadiumsListWidget->blockSignals(false);
+    ui->dfsResultsListWidget->blockSignals(true);
+    ui->dfsResultsListWidget->clear();
+    ui->dfsResultsListWidget->blockSignals(false);
+    ui->startingStadiumLineEdit->clear();
     ui->takeTripStackedWidget->setCurrentIndex(3);
     for(int i = 0; i < thisMap.mapSize(); i++)
     {
@@ -1422,23 +1641,142 @@ void MainWindow::on_dfsPageBackButton_clicked()
 
 void MainWindow::on_dfsStadiumsListWidget_currentItemChanged(QListWidgetItem *current, QListWidgetItem *previous)
 {
+    ui->dfsResultsListWidget->clear();
+    ui->dfsTotalDistanceTraveledLineEdit->clear();
+
     //place the current item into the desired starting location line edit
     ui->startingStadiumLineEdit->clear();
     ui->startingStadiumLineEdit->setText(current->text());
+    ui->dfsPushButton->setEnabled(true);
 }
 
 void MainWindow::on_dfsPushButton_clicked()
 {
+    ui->dfsResultsListWidget->clear();
+    ui->dfsTotalDistanceTraveledLineEdit->clear();
     createGraph();
+
+    graph.reinitializeTraversalDistance();
+
     vector<string> vertexList;
     //RUN DFS ALGORITHM ON STARTING LOCATION
     int totalDistance;
-    totalDistance = 0;
 
     totalDistance = graph.DepthFirstSearch(ui->startingStadiumLineEdit->text().toStdString(), vertexList);
     ui->dfsTotalDistanceTraveledLineEdit->setText(QString::number(totalDistance));
 
     for(int i = 0; i < vertexList.size(); i++)
     ui->dfsResultsListWidget->addItem(QString::fromStdString(vertexList[i]));
+}
 
+void MainWindow::on_bfsPageBackButton_clicked()
+{
+    ui->takeTripStackedWidget->setCurrentIndex(0);
+}
+
+void MainWindow::on_performbfsButton_clicked()
+{
+    ui->bfsPushButton->setEnabled(false);
+    ui->bfsStartingStadiumLineEdit->setReadOnly(true);
+    ui->bfsTotalDistanceTraveledLineEdit->setReadOnly(true);
+    ui->bfsTotalDistanceTraveledLineEdit->clear();
+    ui->bfsStadiumListWidget->blockSignals(true);
+    ui->bfsStadiumListWidget->clear();
+    ui->bfsStadiumListWidget->blockSignals(false);
+    ui->bfsResultsListWidget->blockSignals(true);
+    ui->bfsResultsListWidget->clear();
+    ui->bfsResultsListWidget->blockSignals(false);
+    ui->bfsStartingStadiumLineEdit->clear();
+    ui->takeTripStackedWidget->setCurrentIndex(4);
+    for(int i = 0; i < thisMap.mapSize(); i++)
+    {
+        //fill up the availible teams stacked widget
+        ui->bfsStadiumListWidget->addItem(QString::fromStdString(thisMap.atIndex(i).value.getStadiumName()));
+    }
+}
+
+void MainWindow::on_bfsStadiumListWidget_currentItemChanged(QListWidgetItem *current, QListWidgetItem *previous)
+{
+    ui->bfsResultsListWidget->clear();
+    ui->bfsTotalDistanceTraveledLineEdit->clear();
+
+    //place the current item into the desired starting location line edit
+    ui->bfsStartingStadiumLineEdit->clear();
+    ui->bfsStartingStadiumLineEdit->setText(current->text());
+    ui->bfsPushButton->setEnabled(true);
+}
+
+void MainWindow::on_bfsPushButton_clicked()
+{
+    ui->bfsResultsListWidget->clear();
+    ui->bfsTotalDistanceTraveledLineEdit->clear();
+    createGraph();
+
+    graph.reinitializeTraversalDistance();
+
+    vector<string> vertexList;
+    //RUN BFS ALGORITHM ON STARTING LOCATION
+    int totalDistance;
+
+    totalDistance = graph.BreadthFirstSearch(ui->bfsStartingStadiumLineEdit->text().toStdString(), vertexList);
+    ui->bfsTotalDistanceTraveledLineEdit->setText(QString::number(totalDistance));
+
+    for(int i = 0; i < vertexList.size(); i++)
+    ui->bfsResultsListWidget->addItem(QString::fromStdString(vertexList[i]));
+}
+
+void MainWindow::on_performmstButton_clicked()
+{
+    ui->mstPushButton->setEnabled(false);
+    ui->mstStartingStadiumLineEdit->setReadOnly(true);
+    ui->mstTotalDistanceTraveledLineEdit->setReadOnly(true);
+    ui->mstTotalDistanceTraveledLineEdit->clear();
+    ui->mstStadiumListWidget->blockSignals(true);
+    ui->mstStadiumListWidget->clear();
+    ui->mstStadiumListWidget->blockSignals(false);
+    ui->mstResultsListWidget->blockSignals(true);
+    ui->mstResultsListWidget->clear();
+    ui->mstResultsListWidget->blockSignals(false);
+    ui->mstStartingStadiumLineEdit->clear();
+    ui->takeTripStackedWidget->setCurrentIndex(5);
+    for(int i = 0; i < thisMap.mapSize(); i++)
+    {
+        //fill up the availible teams stacked widget
+        ui->mstStadiumListWidget->addItem(QString::fromStdString(thisMap.atIndex(i).value.getStadiumName()));
+    }
+}
+
+void MainWindow::on_mstStadiumListWidget_currentItemChanged(QListWidgetItem *current, QListWidgetItem *previous)
+{
+    ui->mstResultsListWidget->clear();
+    ui->mstTotalDistanceTraveledLineEdit->clear();
+
+    //place the current item into the desired starting location line edit
+    ui->mstStartingStadiumLineEdit->clear();
+    ui->mstStartingStadiumLineEdit->setText(current->text());
+    ui->mstPushButton->setEnabled(true);
+}
+
+void MainWindow::on_mstPushButton_clicked()
+{
+    ui->mstResultsListWidget->clear();
+    ui->mstTotalDistanceTraveledLineEdit->clear();
+    createGraph();
+
+    graph.reinitializeTraversalDistance();
+
+    vector<string> vertexList;
+    //RUN BFS ALGORITHM ON STARTING LOCATION
+    int totalDistance;
+
+    totalDistance = graph.MinimumSpanningTree(ui->mstStartingStadiumLineEdit->text().toStdString(), vertexList);
+    ui->mstTotalDistanceTraveledLineEdit->setText(QString::number(totalDistance));
+
+    for(int i = 0; i < vertexList.size(); i++)
+    ui->mstResultsListWidget->addItem(QString::fromStdString(vertexList[i]));
+}
+
+void MainWindow::on_mstBackButton_clicked()
+{
+    ui->takeTripStackedWidget->setCurrentIndex(0);
 }

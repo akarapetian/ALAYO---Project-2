@@ -35,18 +35,21 @@ public:
         string nLeague, int nDateOpened, int nDistanceToCenterField, string nBallParkTypology, string nRoofType);
     ~MLB();
     // Getters
-    string getStadiumName();
-    int getSeatingCapacity();
-    string getLocation();
-    string getPlayingSurface();
-    string getLeague();
-    int getDateOpened();
-    int getDistanceToCenterField();
-    string getBallParkTypology();
-    string getRoofType();
-    int getDistanceSize();
-    int getDistance(int i);
+    string   getStadiumName();
+    int      getSeatingCapacity();
+    string   getLocation();
+    string   getPlayingSurface();
+    string   getLeague();
+    int      getDateOpened();
+    int      getDistanceToCenterField();
+    string   getBallParkTypology();
+    string   getRoofType();
+    int      getDistanceSize();
+    int      getDistance(int i);
+    int      getSouvenirListSize() const;
+    souvenir getSouvenir(int index) const;
 
+    // Setters
     void setStadiumName(string newStadiumName);
     void setSeatingCapacity(int newSeatingCapacity);
     void setLocation(string newLocation);
@@ -56,14 +59,12 @@ public:
     void setDistanceToCenterField(int newDistance);
     void setTypology(string newTypology);
     void setRoofType(string newRoofType);
-
-
-
-    int getSouvenirListSize() const;
-    souvenir getSouvenir(int index) const;
-    void addSouvenir(souvenir newSouvenir);
     void setInitialDistances(int size);
     void setDistance(int i, int distance);
+
+    // Other Methods
+    void pushBackDistance();
+    void addSouvenir(souvenir newSouvenir);
     void printDistances();
 
 private:
