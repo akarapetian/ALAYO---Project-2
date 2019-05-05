@@ -127,11 +127,32 @@ private slots:
 
     void on_dfsPushButton_clicked();
 
+    void on_selectAllTeamsCheckBox_stateChanged(int arg1);
+
+    void on_bfsStadiumListWidget_currentItemChanged(QListWidgetItem *current, QListWidgetItem *previous);
+
+    void on_bfsPushButton_clicked();
+
+    void on_performbfsButton_clicked();
+
+    void on_bfsPageBackButton_clicked();
+
+    void on_performmstButton_clicked();
+
+    void on_mstPerformMSTPushButton_clicked();
+
+    void on_mstStadiumListWidget_currentItemChanged(QListWidgetItem *current, QListWidgetItem *previous);
+
+    void on_mstPushButton_clicked();
+
+    void on_mstBackButton_clicked();
+
 private:
     Ui::MainWindow *ui;
     Map thisMap;
     HashMap encryptionTable;
     bool isAdmin;
+    bool isAddedStadium;
 
     Graph graph;
 

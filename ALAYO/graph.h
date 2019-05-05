@@ -99,7 +99,7 @@ class Graph
                                vector<int>    nextLocation);
 
         //Determines the minimum spanning tree and outputs total mileage and edges
-        int MST(string         startVertex,
+        int MinimumSpanningTree(string         startVertex,
                 vector<string> &temp);
 
         //Aids the MST method by calculating distance and finding the next
@@ -144,6 +144,15 @@ class Graph
         //distance between each edge
         int dfsHelper(int vertex, vector<string> &theGraph);
 
+        // Performs the BFS search and returns the total distance traveled to mainwindow.cpp
+        int BreadthFirstSearch(string begin, vector<string> &theGraph);
+
+        // Recursion to run through BFS search
+        int bfsHelper(vector<string> &bfs, vector<int> previousLevel);
+
+        // returns the opposite location from the starting city
+        string otherVertex(edge currEdge, string startingCity);
+
         //Prints the entire DFS list after sorting
         void printDFSList(int distance, vector<string> &theGraph);
 
@@ -153,8 +162,11 @@ class Graph
         //Will return a vector of all of the back edges back to main
         void printBackEdges(vector<string> &theGraph);
 
+        int distance(vertex * v1, vertex * v2);
+
         //Reinitializes traversal distance back to 0
         void reinitializeTraversalDistance();
+
 
 
     private:

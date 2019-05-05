@@ -1,7 +1,7 @@
 /****************************************************************************
 ** Meta object code from reading C++ file 'mainwindow.h'
 **
-** Created by: The Qt Meta Object Compiler version 67 (Qt 5.12.1)
+** Created by: The Qt Meta Object Compiler version 67 (Qt 5.12.0)
 **
 ** WARNING! All changes made in this file will be lost!
 *****************************************************************************/
@@ -12,7 +12,7 @@
 #if !defined(Q_MOC_OUTPUT_REVISION)
 #error "The header file 'mainwindow.h' doesn't include <QObject>."
 #elif Q_MOC_OUTPUT_REVISION != 67
-#error "This file was generated using the moc from 5.12.1. It"
+#error "This file was generated using the moc from 5.12.0. It"
 #error "cannot be used with the include files from this version of Qt."
 #error "(The moc has changed too much.)"
 #endif
@@ -21,8 +21,8 @@ QT_BEGIN_MOC_NAMESPACE
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_DEPRECATED
 struct qt_meta_stringdata_MainWindow_t {
-    QByteArrayData data[46];
-    char stringdata0[1384];
+    QByteArrayData data[56];
+    char stringdata0[1704];
 };
 #define QT_MOC_LITERAL(idx, ofs, len) \
     Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
@@ -76,7 +76,17 @@ QT_MOC_LITERAL(41, 1228, 29), // "on_ReinitializeButton_clicked"
 QT_MOC_LITERAL(42, 1258, 27), // "on_performdfsButton_clicked"
 QT_MOC_LITERAL(43, 1286, 28), // "on_dfsPageBackButton_clicked"
 QT_MOC_LITERAL(44, 1315, 43), // "on_dfsStadiumsListWidget_curr..."
-QT_MOC_LITERAL(45, 1359, 24) // "on_dfsPushButton_clicked"
+QT_MOC_LITERAL(45, 1359, 24), // "on_dfsPushButton_clicked"
+QT_MOC_LITERAL(46, 1384, 38), // "on_selectAllTeamsCheckBox_sta..."
+QT_MOC_LITERAL(47, 1423, 42), // "on_bfsStadiumListWidget_curre..."
+QT_MOC_LITERAL(48, 1466, 24), // "on_bfsPushButton_clicked"
+QT_MOC_LITERAL(49, 1491, 27), // "on_performbfsButton_clicked"
+QT_MOC_LITERAL(50, 1519, 28), // "on_bfsPageBackButton_clicked"
+QT_MOC_LITERAL(51, 1548, 27), // "on_performmstButton_clicked"
+QT_MOC_LITERAL(52, 1576, 34), // "on_mstPerformMSTPushButton_cl..."
+QT_MOC_LITERAL(53, 1611, 42), // "on_mstStadiumListWidget_curre..."
+QT_MOC_LITERAL(54, 1654, 24), // "on_mstPushButton_clicked"
+QT_MOC_LITERAL(55, 1679, 24) // "on_mstBackButton_clicked"
 
     },
     "MainWindow\0on_checkBox_showPW_stateChanged\0"
@@ -118,7 +128,17 @@ QT_MOC_LITERAL(45, 1359, 24) // "on_dfsPushButton_clicked"
     "on_performdfsButton_clicked\0"
     "on_dfsPageBackButton_clicked\0"
     "on_dfsStadiumsListWidget_currentItemChanged\0"
-    "on_dfsPushButton_clicked"
+    "on_dfsPushButton_clicked\0"
+    "on_selectAllTeamsCheckBox_stateChanged\0"
+    "on_bfsStadiumListWidget_currentItemChanged\0"
+    "on_bfsPushButton_clicked\0"
+    "on_performbfsButton_clicked\0"
+    "on_bfsPageBackButton_clicked\0"
+    "on_performmstButton_clicked\0"
+    "on_mstPerformMSTPushButton_clicked\0"
+    "on_mstStadiumListWidget_currentItemChanged\0"
+    "on_mstPushButton_clicked\0"
+    "on_mstBackButton_clicked"
 };
 #undef QT_MOC_LITERAL
 
@@ -128,7 +148,7 @@ static const uint qt_meta_data_MainWindow[] = {
        8,       // revision
        0,       // classname
        0,    0, // classinfo
-      39,   14, // methods
+      49,   14, // methods
        0,    0, // properties
        0,    0, // enums/sets
        0,    0, // constructors
@@ -136,45 +156,55 @@ static const uint qt_meta_data_MainWindow[] = {
        0,       // signalCount
 
  // slots: name, argc, parameters, tag, flags
-       1,    1,  209,    2, 0x08 /* Private */,
-       3,    0,  212,    2, 0x08 /* Private */,
-       4,    0,  213,    2, 0x08 /* Private */,
-       5,    0,  214,    2, 0x08 /* Private */,
-       6,    0,  215,    2, 0x08 /* Private */,
-       7,    2,  216,    2, 0x08 /* Private */,
-      11,    0,  221,    2, 0x08 /* Private */,
-      12,    0,  222,    2, 0x08 /* Private */,
-      13,    0,  223,    2, 0x08 /* Private */,
-      14,    0,  224,    2, 0x08 /* Private */,
-      15,    0,  225,    2, 0x08 /* Private */,
-      16,    2,  226,    2, 0x08 /* Private */,
-      17,    1,  231,    2, 0x08 /* Private */,
-      19,    1,  234,    2, 0x08 /* Private */,
-      20,    2,  237,    2, 0x08 /* Private */,
-      21,    1,  242,    2, 0x08 /* Private */,
-      22,    2,  245,    2, 0x08 /* Private */,
-      23,    1,  250,    2, 0x08 /* Private */,
-      25,    1,  253,    2, 0x08 /* Private */,
-      26,    1,  256,    2, 0x08 /* Private */,
-      27,    1,  259,    2, 0x08 /* Private */,
-      28,    1,  262,    2, 0x08 /* Private */,
-      29,    1,  265,    2, 0x08 /* Private */,
-      30,    1,  268,    2, 0x08 /* Private */,
-      31,    0,  271,    2, 0x08 /* Private */,
-      32,    0,  272,    2, 0x08 /* Private */,
-      33,    0,  273,    2, 0x08 /* Private */,
-      34,    0,  274,    2, 0x08 /* Private */,
-      35,    0,  275,    2, 0x08 /* Private */,
-      36,    0,  276,    2, 0x08 /* Private */,
-      37,    0,  277,    2, 0x08 /* Private */,
-      38,    0,  278,    2, 0x08 /* Private */,
-      39,    1,  279,    2, 0x08 /* Private */,
-      40,    0,  282,    2, 0x08 /* Private */,
-      41,    0,  283,    2, 0x08 /* Private */,
-      42,    0,  284,    2, 0x08 /* Private */,
-      43,    0,  285,    2, 0x08 /* Private */,
-      44,    2,  286,    2, 0x08 /* Private */,
-      45,    0,  291,    2, 0x08 /* Private */,
+       1,    1,  259,    2, 0x08 /* Private */,
+       3,    0,  262,    2, 0x08 /* Private */,
+       4,    0,  263,    2, 0x08 /* Private */,
+       5,    0,  264,    2, 0x08 /* Private */,
+       6,    0,  265,    2, 0x08 /* Private */,
+       7,    2,  266,    2, 0x08 /* Private */,
+      11,    0,  271,    2, 0x08 /* Private */,
+      12,    0,  272,    2, 0x08 /* Private */,
+      13,    0,  273,    2, 0x08 /* Private */,
+      14,    0,  274,    2, 0x08 /* Private */,
+      15,    0,  275,    2, 0x08 /* Private */,
+      16,    2,  276,    2, 0x08 /* Private */,
+      17,    1,  281,    2, 0x08 /* Private */,
+      19,    1,  284,    2, 0x08 /* Private */,
+      20,    2,  287,    2, 0x08 /* Private */,
+      21,    1,  292,    2, 0x08 /* Private */,
+      22,    2,  295,    2, 0x08 /* Private */,
+      23,    1,  300,    2, 0x08 /* Private */,
+      25,    1,  303,    2, 0x08 /* Private */,
+      26,    1,  306,    2, 0x08 /* Private */,
+      27,    1,  309,    2, 0x08 /* Private */,
+      28,    1,  312,    2, 0x08 /* Private */,
+      29,    1,  315,    2, 0x08 /* Private */,
+      30,    1,  318,    2, 0x08 /* Private */,
+      31,    0,  321,    2, 0x08 /* Private */,
+      32,    0,  322,    2, 0x08 /* Private */,
+      33,    0,  323,    2, 0x08 /* Private */,
+      34,    0,  324,    2, 0x08 /* Private */,
+      35,    0,  325,    2, 0x08 /* Private */,
+      36,    0,  326,    2, 0x08 /* Private */,
+      37,    0,  327,    2, 0x08 /* Private */,
+      38,    0,  328,    2, 0x08 /* Private */,
+      39,    1,  329,    2, 0x08 /* Private */,
+      40,    0,  332,    2, 0x08 /* Private */,
+      41,    0,  333,    2, 0x08 /* Private */,
+      42,    0,  334,    2, 0x08 /* Private */,
+      43,    0,  335,    2, 0x08 /* Private */,
+      44,    2,  336,    2, 0x08 /* Private */,
+      45,    0,  341,    2, 0x08 /* Private */,
+      46,    1,  342,    2, 0x08 /* Private */,
+      47,    2,  345,    2, 0x08 /* Private */,
+      48,    0,  350,    2, 0x08 /* Private */,
+      49,    0,  351,    2, 0x08 /* Private */,
+      50,    0,  352,    2, 0x08 /* Private */,
+      51,    0,  353,    2, 0x08 /* Private */,
+      52,    0,  354,    2, 0x08 /* Private */,
+      53,    2,  355,    2, 0x08 /* Private */,
+      54,    0,  360,    2, 0x08 /* Private */,
+      55,    0,  361,    2, 0x08 /* Private */,
 
  // slots: parameters
     QMetaType::Void, QMetaType::Int,    2,
@@ -216,6 +246,16 @@ static const uint qt_meta_data_MainWindow[] = {
     QMetaType::Void,
     QMetaType::Void, 0x80000000 | 8, 0x80000000 | 8,    9,   10,
     QMetaType::Void,
+    QMetaType::Void, QMetaType::Int,   24,
+    QMetaType::Void, 0x80000000 | 8, 0x80000000 | 8,    9,   10,
+    QMetaType::Void,
+    QMetaType::Void,
+    QMetaType::Void,
+    QMetaType::Void,
+    QMetaType::Void,
+    QMetaType::Void, 0x80000000 | 8, 0x80000000 | 8,    9,   10,
+    QMetaType::Void,
+    QMetaType::Void,
 
        0        // eod
 };
@@ -223,7 +263,7 @@ static const uint qt_meta_data_MainWindow[] = {
 void MainWindow::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, void **_a)
 {
     if (_c == QMetaObject::InvokeMetaMethod) {
-        auto *_t = static_cast<MainWindow *>(_o);
+        MainWindow *_t = static_cast<MainWindow *>(_o);
         Q_UNUSED(_t)
         switch (_id) {
         case 0: _t->on_checkBox_showPW_stateChanged((*reinterpret_cast< int(*)>(_a[1]))); break;
@@ -265,6 +305,15 @@ void MainWindow::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, 
         case 36: _t->on_dfsPageBackButton_clicked(); break;
         case 37: _t->on_dfsStadiumsListWidget_currentItemChanged((*reinterpret_cast< QListWidgetItem*(*)>(_a[1])),(*reinterpret_cast< QListWidgetItem*(*)>(_a[2]))); break;
         case 38: _t->on_dfsPushButton_clicked(); break;
+        case 39: _t->on_selectAllTeamsCheckBox_stateChanged((*reinterpret_cast< int(*)>(_a[1]))); break;
+        case 40: _t->on_bfsStadiumListWidget_currentItemChanged((*reinterpret_cast< QListWidgetItem*(*)>(_a[1])),(*reinterpret_cast< QListWidgetItem*(*)>(_a[2]))); break;
+        case 41: _t->on_bfsPushButton_clicked(); break;
+        case 42: _t->on_performbfsButton_clicked(); break;
+        case 43: _t->on_bfsPageBackButton_clicked(); break;
+        case 44: _t->on_performmstButton_clicked(); break;
+        case 46: _t->on_mstStadiumListWidget_currentItemChanged((*reinterpret_cast< QListWidgetItem*(*)>(_a[1])),(*reinterpret_cast< QListWidgetItem*(*)>(_a[2]))); break;
+        case 47: _t->on_mstPushButton_clicked(); break;
+        case 48: _t->on_mstBackButton_clicked(); break;
         default: ;
         }
     }
@@ -299,13 +348,13 @@ int MainWindow::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
     if (_id < 0)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {
-        if (_id < 39)
+        if (_id < 49)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 39;
+        _id -= 49;
     } else if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
-        if (_id < 39)
+        if (_id < 49)
             *reinterpret_cast<int*>(_a[0]) = -1;
-        _id -= 39;
+        _id -= 49;
     }
     return _id;
 }
