@@ -163,8 +163,8 @@ unsigned int Graph::getDiscoveryEdges(int desiredVertex)
  ******************************************************************************/
 void Graph::dijkstraAlgorithm(string         startVertex,
                               vector<string> &temp,
-                              vector<int>            weight,
-                              vector<int>            nextLocation)
+                              vector<int>            &weight,
+                              vector<int>            &nextLocation)
 {
     //Initialize our verticesReached
     unsigned int verticesReached = 0;
@@ -230,7 +230,7 @@ void Graph::dijkstraAlgorithm(string         startVertex,
  * the entire graph
  * ----------------------------------------------------------------------------
  ******************************************************************************/
-int Graph::MST(string startVertex, vector<string> &temp)
+int Graph::MinimumSpanningTree(string startVertex, vector<string> &temp)
 {
     //Initialize our verticesReached
     unsigned int verticesReached = 0;
@@ -284,7 +284,7 @@ int Graph::MST(string startVertex, vector<string> &temp)
         int nextVertex = mstHelper(temp);
 
         //Call our function with our nextVertex
-        MST(graph.at(nextVertex).startingCity, temp);
+        MinimumSpanningTree(graph.at(nextVertex).startingCity, temp);
     }
 
     //Return the total distance traveled along the MST
@@ -300,8 +300,8 @@ int Graph::MST(string startVertex, vector<string> &temp)
  * ----------------------------------------------------------------------------
  ******************************************************************************/
 void Graph::determineNearestVertex(vector<string> &temp,
-                                   vector<int>            weight,
-                                   vector<int>            nextLocation)
+                                   vector<int>            &weight,
+                                   vector<int>            &nextLocation)
 {
     //If the size is 1, then we can only find the one closest to the root which
     //will be the one that is passed in
@@ -420,8 +420,8 @@ void Graph::determineNearestVertex(vector<string> &temp,
  * ----------------------------------------------------------------------------
  ******************************************************************************/
 int Graph::determineStartingDistance(string desiredCity,
-                                     vector<int>    weight,
-                                     vector<int>    nextLocation)
+                                     vector<int>    &weight,
+                                     vector<int>    &nextLocation)
 {
     //Our starting distance variable to return
     int totalDistance = 0;
@@ -638,7 +638,7 @@ int Graph::determineDistanceBetween(int firstVertex, int secondVertex)
  * main goal is to be a helper function for the mst and reverse our path.
  * ----------------------------------------------------------------------------
  ******************************************************************************/
-vector<string> Graph::determineTripVector(string start, string end, int next[])
+vector<string> Graph::determineTripVector(string start, string end, vector<int> &next)
 {
     //Create our vector of strings for the cities
     vector<string> tempTripVec;
@@ -858,6 +858,125 @@ int Graph::dfsHelper(int vertex, vector<string> &theGraph)
     }
 }
 
+int Graph::BreadthFirstSearch(string startingCity, vector<string> &bfs)
+{
+    // Reset the graph, this should be its own function
+    for (unsigned int i=0; i<graph.size(); i++)
+    {
+        graph.at(i).isVisited = false;
+        for (unsigned int j=0; j< graph.at(i).edgeVector.size(); j++)
+        {
+            graph.at(i).edgeVector.at(j).isDiscoveryEdge = false;
+        }
+    }
+
+    // Get the graph index of the vertex being visited.
+    int currVertex = getVertex(startingCity);
+
+    // Visit the starting vertex
+    graph.at(currVertex).isVisited = true;
+
+    // Create a newLevel vector to hold the current level, containing only
+    // the 1st vertex, and add the first vertex to the bfs vector
+    vector<int> newLevel;
+    newLevel.push_back(currVertex);
+    bfs.push_back(startingCity);
+
+    // Start recursion
+    return bfsHelper(bfs, newLevel);
+}
+
+int Graph::bfsHelper(vector<string> &bfs, vector<int> previousLevel)
+{
+    vector<int> newLevel;
+    vector<int> currLevel;
+    int levelDistance = 0;
+
+    vector<edge> * currEdgeList;
+    vertex * startingVertex;
+    vertex * currVertex;
+    int currVertexID;
+
+    // Iterate through the previous level
+    for (unsigned int i=0; i<previousLevel.size(); i++)
+    {
+        startingVertex = &graph.at(previousLevel.at(i));
+        currEdgeList = &startingVertex->edgeVector;
+
+        // Iterate through the ith vertex's edge list
+        for (unsigned int j=0; j<currEdgeList->size(); j++)
+        {
+            // Add all non-visited levels to the next level, in closest order
+            currVertexID = getVertex(otherVertex(currEdgeList->at(j),startingVertex->startingCity));
+            currVertex = &graph.at(currVertexID);
+            if (!currVertex->isVisited)
+            {
+                // Add the edge length to the distance, including return trip
+                levelDistance += currEdgeList->at(j).distanceBetween;
+
+                // Mark the vertex as visited and the edge as a discovery edge
+                currVertex->isVisited = true;
+                currEdgeList->at(j).isDiscoveryEdge = true;
+
+                // Also mark the reverse edge as a discovery edge
+                for(unsigned int i = 0; i < currVertex->edgeVector.size(); i++)
+                {
+                    if(currVertex->edgeVector.at(i).endingLocation == startingVertex->startingCity)
+                    {
+                        currVertex->edgeVector.at(i).isDiscoveryEdge = true;
+                    }
+                }
+
+                // Insert the current vertex in the sorted position
+                bool inserted = false; // could do the same thing by changing the visited variable, but this is clearer
+                for (unsigned int k=0; k<currLevel.size() && !inserted; k++)
+                {
+                    if (currEdgeList->at(j).distanceBetween < distance(startingVertex, &graph.at(currLevel.at(k))))
+                    {
+                        currLevel.insert(currLevel.begin()+k,currVertexID);
+                        inserted = true;
+                    }
+                }
+                if (!inserted)
+                {
+                    currLevel.push_back(getVertex(currVertex->startingCity));
+                }
+            }
+        }
+        // Add the current level vertices to the the end of the bfs vector
+        for (unsigned int m=0; m<currLevel.size(); m++)
+        {
+            bfs.push_back(graph.at(currLevel.at(m)).startingCity);
+        }
+
+        // Add the current level vertices to the end of the newLevel vector
+        newLevel.insert(newLevel.end(),currLevel.begin(),currLevel.end());
+        currLevel.clear();
+    }
+
+    // If still has vertices, do recursive call
+    if (newLevel.size() > 0)
+    {
+        return levelDistance + bfsHelper(bfs, newLevel);
+    }
+    else
+    {
+        return levelDistance;
+    }
+}
+
+string Graph::otherVertex(edge currEdge, string startingCity)
+{
+    if (currEdge.beginningLocation == startingCity)
+    {
+        return currEdge.endingLocation;
+    }
+    else
+    {
+        return currEdge.beginningLocation;
+    }
+}
+
 /******************************************************************************
  * METHOD printDiscoveryEdges
  * ----------------------------------------------------------------------------
@@ -1025,6 +1144,17 @@ void Graph::printBackEdges(vector<string> &theGraph)
     {
         cout << backEdgeVector.at(index) << endl;
     }
+}
+
+int Graph::distance(vertex * v1, vertex * v2)
+{
+    for (unsigned int i = 0; i < v1->edgeVector.size(); i++)
+    {		// get connecting edge
+        if (v1->edgeVector.at(i).beginningLocation == v2->startingCity
+                || v1->edgeVector.at(i).endingLocation == v2->startingCity)
+            return v1->edgeVector.at(i).distanceBetween;
+    }
+    return -1;
 }
 
 void Graph::reinitializeTraversalDistance()
