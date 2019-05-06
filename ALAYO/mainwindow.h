@@ -41,12 +41,13 @@ public:
 
     void updateVectors();
 
-    bool isFloatNumber(const QString& Qstring);
-    bool isInteger(const QString &mystring);
-
     void createGraph();
 
     vector<vector<int>> createAdjacencyMatrix();
+
+    bool isInteger(const QString &string);
+
+    float getSubTotal();
 
 private slots:
     void on_checkBox_showPW_stateChanged(int);
@@ -73,16 +74,6 @@ private slots:
 
     void on_stadiumListWidget_2_currentItemChanged(QListWidgetItem *current, QListWidgetItem *previous);
 
-    void on_stadiumListWidget_itemDoubleClicked(QListWidgetItem *item);
-
-    void on_souvenirListWidget_itemDoubleClicked(QListWidgetItem *item);
-
-    void on_souvenirListWidget_currentItemChanged(QListWidgetItem *current, QListWidgetItem *previous);
-
-    void on_souvenirPriceListWidget_itemDoubleClicked(QListWidgetItem *item);
-
-    void on_souvenirPriceListWidget_currentItemChanged(QListWidgetItem *current, QListWidgetItem *previous);
-
     void on_capacityLineEdit_textEdited(const QString &arg1);
 
     void on_surfaceLineEdit_textEdited(const QString &arg1);
@@ -94,8 +85,6 @@ private slots:
     void on_dateOpenedLineEdit_textEdited(const QString &arg1);
 
     void on_distToCenterLineEdit_textEdited(const QString &arg1);
-
-    void on_newLocationLineEdit_textEdited(const QString &arg1);
 
     void on_actionLogout_triggered();
 
@@ -145,6 +134,39 @@ private slots:
 
     void on_mstBackButton_clicked();
 
+    void on_addSouvenirPushButton_clicked();
+
+    void on_deleteSouvenirPushButton_clicked();
+
+    void on_souvenirListWidget_currentItemChanged(QListWidgetItem *current, QListWidgetItem *previous);
+
+    void on_changeSouvenirPriceLineEdit_textEdited(const QString &arg1);
+
+    void on_changeSouvenirPushButton_clicked();
+
+    void on_locationLineEdit_textEdited(const QString &arg1);
+
+    void on_stadiumLineEdit_textEdited(const QString &arg1);
+
+    void on_leagueLineEdit_textEdited(const QString &arg1);
+
+    void on_goButton_clicked();
+
+    void nextStadium();
+
+
+
+    void on_tripSouvenirQuantityListWidget_itemDoubleClicked(QListWidgetItem *item);
+
+
+    void on_tripSouvenirQuantityListWidget_currentItemChanged(QListWidgetItem *current, QListWidgetItem *previous);
+
+
+
+    void on_checkoutButton_clicked();
+
+    void on_endTripButton_clicked();
+
 private:
     Ui::MainWindow *ui;
     Map thisMap;
@@ -153,6 +175,14 @@ private:
     bool isAddedStadium;
 
     Graph graph;
+
+    vector<string> orderedStadiumList;
+    vector<int> orderedWeightsList;
+
+    int currentLocationIndex;
+
+    //int totalDistanceTraveled;
+    float subTotal; //subtotal at current location
 
     QVector<MLB> allMLBTeamsAvailable;
     QVector<entry> v1;

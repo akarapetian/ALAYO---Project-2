@@ -21,8 +21,8 @@ QT_BEGIN_MOC_NAMESPACE
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_DEPRECATED
 struct qt_meta_stringdata_MainWindow_t {
-    QByteArrayData data[55];
-    char stringdata0[1669];
+    QByteArrayData data[63];
+    char stringdata0[1890];
 };
 #define QT_MOC_LITERAL(idx, ofs, len) \
     Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
@@ -48,44 +48,52 @@ QT_MOC_LITERAL(13, 312, 34), // "on_informationButton_admin_cl..."
 QT_MOC_LITERAL(14, 347, 33), // "on_viewStadiumsBackButton_cli..."
 QT_MOC_LITERAL(15, 381, 29), // "on_viewStadiumsButton_clicked"
 QT_MOC_LITERAL(16, 411, 41), // "on_stadiumListWidget_2_curren..."
-QT_MOC_LITERAL(17, 453, 38), // "on_stadiumListWidget_itemDoub..."
-QT_MOC_LITERAL(18, 492, 4), // "item"
-QT_MOC_LITERAL(19, 497, 39), // "on_souvenirListWidget_itemDou..."
-QT_MOC_LITERAL(20, 537, 40), // "on_souvenirListWidget_current..."
-QT_MOC_LITERAL(21, 578, 44), // "on_souvenirPriceListWidget_it..."
-QT_MOC_LITERAL(22, 623, 45), // "on_souvenirPriceListWidget_cu..."
-QT_MOC_LITERAL(23, 669, 30), // "on_capacityLineEdit_textEdited"
-QT_MOC_LITERAL(24, 700, 4), // "arg1"
-QT_MOC_LITERAL(25, 705, 29), // "on_surfaceLineEdit_textEdited"
-QT_MOC_LITERAL(26, 735, 30), // "on_roofTypeLineEdit_textEdited"
-QT_MOC_LITERAL(27, 766, 30), // "on_typologyLineEdit_textEdited"
-QT_MOC_LITERAL(28, 797, 32), // "on_dateOpenedLineEdit_textEdited"
-QT_MOC_LITERAL(29, 830, 34), // "on_distToCenterLineEdit_textE..."
-QT_MOC_LITERAL(30, 865, 33), // "on_newLocationLineEdit_textEd..."
-QT_MOC_LITERAL(31, 899, 25), // "on_actionLogout_triggered"
-QT_MOC_LITERAL(32, 925, 30), // "on_visitMultipleButton_clicked"
-QT_MOC_LITERAL(33, 956, 28), // "on_visitSingleButton_clicked"
-QT_MOC_LITERAL(34, 985, 30), // "on_takeTripButton_user_clicked"
-QT_MOC_LITERAL(35, 1016, 33), // "on_takeTripPageBackButton_cli..."
-QT_MOC_LITERAL(36, 1050, 40), // "on_singleSelectionPageBackBut..."
-QT_MOC_LITERAL(37, 1091, 25), // "on_optimizeButton_clicked"
-QT_MOC_LITERAL(38, 1117, 42), // "on_multipleSelectionPageBackB..."
-QT_MOC_LITERAL(39, 1160, 42), // "on_availibleStadiumsListWidge..."
-QT_MOC_LITERAL(40, 1203, 24), // "on_AddTeamButton_clicked"
-QT_MOC_LITERAL(41, 1228, 29), // "on_ReinitializeButton_clicked"
-QT_MOC_LITERAL(42, 1258, 27), // "on_performdfsButton_clicked"
-QT_MOC_LITERAL(43, 1286, 28), // "on_dfsPageBackButton_clicked"
-QT_MOC_LITERAL(44, 1315, 43), // "on_dfsStadiumsListWidget_curr..."
-QT_MOC_LITERAL(45, 1359, 24), // "on_dfsPushButton_clicked"
-QT_MOC_LITERAL(46, 1384, 38), // "on_selectAllTeamsCheckBox_sta..."
-QT_MOC_LITERAL(47, 1423, 42), // "on_bfsStadiumListWidget_curre..."
-QT_MOC_LITERAL(48, 1466, 24), // "on_bfsPushButton_clicked"
-QT_MOC_LITERAL(49, 1491, 27), // "on_performbfsButton_clicked"
-QT_MOC_LITERAL(50, 1519, 28), // "on_bfsPageBackButton_clicked"
-QT_MOC_LITERAL(51, 1548, 27), // "on_performmstButton_clicked"
-QT_MOC_LITERAL(52, 1576, 42), // "on_mstStadiumListWidget_curre..."
-QT_MOC_LITERAL(53, 1619, 24), // "on_mstPushButton_clicked"
-QT_MOC_LITERAL(54, 1644, 24) // "on_mstBackButton_clicked"
+QT_MOC_LITERAL(17, 453, 30), // "on_capacityLineEdit_textEdited"
+QT_MOC_LITERAL(18, 484, 4), // "arg1"
+QT_MOC_LITERAL(19, 489, 29), // "on_surfaceLineEdit_textEdited"
+QT_MOC_LITERAL(20, 519, 30), // "on_roofTypeLineEdit_textEdited"
+QT_MOC_LITERAL(21, 550, 30), // "on_typologyLineEdit_textEdited"
+QT_MOC_LITERAL(22, 581, 32), // "on_dateOpenedLineEdit_textEdited"
+QT_MOC_LITERAL(23, 614, 34), // "on_distToCenterLineEdit_textE..."
+QT_MOC_LITERAL(24, 649, 25), // "on_actionLogout_triggered"
+QT_MOC_LITERAL(25, 675, 30), // "on_visitMultipleButton_clicked"
+QT_MOC_LITERAL(26, 706, 28), // "on_visitSingleButton_clicked"
+QT_MOC_LITERAL(27, 735, 30), // "on_takeTripButton_user_clicked"
+QT_MOC_LITERAL(28, 766, 33), // "on_takeTripPageBackButton_cli..."
+QT_MOC_LITERAL(29, 800, 40), // "on_singleSelectionPageBackBut..."
+QT_MOC_LITERAL(30, 841, 25), // "on_optimizeButton_clicked"
+QT_MOC_LITERAL(31, 867, 42), // "on_multipleSelectionPageBackB..."
+QT_MOC_LITERAL(32, 910, 42), // "on_availibleStadiumsListWidge..."
+QT_MOC_LITERAL(33, 953, 4), // "item"
+QT_MOC_LITERAL(34, 958, 24), // "on_AddTeamButton_clicked"
+QT_MOC_LITERAL(35, 983, 29), // "on_ReinitializeButton_clicked"
+QT_MOC_LITERAL(36, 1013, 27), // "on_performdfsButton_clicked"
+QT_MOC_LITERAL(37, 1041, 28), // "on_dfsPageBackButton_clicked"
+QT_MOC_LITERAL(38, 1070, 43), // "on_dfsStadiumsListWidget_curr..."
+QT_MOC_LITERAL(39, 1114, 24), // "on_dfsPushButton_clicked"
+QT_MOC_LITERAL(40, 1139, 38), // "on_selectAllTeamsCheckBox_sta..."
+QT_MOC_LITERAL(41, 1178, 42), // "on_bfsStadiumListWidget_curre..."
+QT_MOC_LITERAL(42, 1221, 24), // "on_bfsPushButton_clicked"
+QT_MOC_LITERAL(43, 1246, 27), // "on_performbfsButton_clicked"
+QT_MOC_LITERAL(44, 1274, 28), // "on_bfsPageBackButton_clicked"
+QT_MOC_LITERAL(45, 1303, 27), // "on_performmstButton_clicked"
+QT_MOC_LITERAL(46, 1331, 42), // "on_mstStadiumListWidget_curre..."
+QT_MOC_LITERAL(47, 1374, 24), // "on_mstPushButton_clicked"
+QT_MOC_LITERAL(48, 1399, 24), // "on_mstBackButton_clicked"
+QT_MOC_LITERAL(49, 1424, 32), // "on_addSouvenirPushButton_clicked"
+QT_MOC_LITERAL(50, 1457, 35), // "on_deleteSouvenirPushButton_c..."
+QT_MOC_LITERAL(51, 1493, 40), // "on_souvenirListWidget_current..."
+QT_MOC_LITERAL(52, 1534, 41), // "on_changeSouvenirPriceLineEdi..."
+QT_MOC_LITERAL(53, 1576, 35), // "on_changeSouvenirPushButton_c..."
+QT_MOC_LITERAL(54, 1612, 30), // "on_locationLineEdit_textEdited"
+QT_MOC_LITERAL(55, 1643, 29), // "on_stadiumLineEdit_textEdited"
+QT_MOC_LITERAL(56, 1673, 28), // "on_leagueLineEdit_textEdited"
+QT_MOC_LITERAL(57, 1702, 19), // "on_goButton_clicked"
+QT_MOC_LITERAL(58, 1722, 11), // "nextStadium"
+QT_MOC_LITERAL(59, 1734, 51), // "on_tripSouvenirQuantityListWi..."
+QT_MOC_LITERAL(60, 1786, 52), // "on_tripSouvenirQuantityListWi..."
+QT_MOC_LITERAL(61, 1839, 25), // "on_checkoutButton_clicked"
+QT_MOC_LITERAL(62, 1865, 24) // "on_endTripButton_clicked"
 
     },
     "MainWindow\0on_checkBox_showPW_stateChanged\0"
@@ -101,18 +109,12 @@ QT_MOC_LITERAL(54, 1644, 24) // "on_mstBackButton_clicked"
     "on_viewStadiumsBackButton_clicked\0"
     "on_viewStadiumsButton_clicked\0"
     "on_stadiumListWidget_2_currentItemChanged\0"
-    "on_stadiumListWidget_itemDoubleClicked\0"
-    "item\0on_souvenirListWidget_itemDoubleClicked\0"
-    "on_souvenirListWidget_currentItemChanged\0"
-    "on_souvenirPriceListWidget_itemDoubleClicked\0"
-    "on_souvenirPriceListWidget_currentItemChanged\0"
     "on_capacityLineEdit_textEdited\0arg1\0"
     "on_surfaceLineEdit_textEdited\0"
     "on_roofTypeLineEdit_textEdited\0"
     "on_typologyLineEdit_textEdited\0"
     "on_dateOpenedLineEdit_textEdited\0"
     "on_distToCenterLineEdit_textEdited\0"
-    "on_newLocationLineEdit_textEdited\0"
     "on_actionLogout_triggered\0"
     "on_visitMultipleButton_clicked\0"
     "on_visitSingleButton_clicked\0"
@@ -122,7 +124,7 @@ QT_MOC_LITERAL(54, 1644, 24) // "on_mstBackButton_clicked"
     "on_optimizeButton_clicked\0"
     "on_multipleSelectionPageBackButton_clicked\0"
     "on_availibleStadiumsListWidget_itemChanged\0"
-    "on_AddTeamButton_clicked\0"
+    "item\0on_AddTeamButton_clicked\0"
     "on_ReinitializeButton_clicked\0"
     "on_performdfsButton_clicked\0"
     "on_dfsPageBackButton_clicked\0"
@@ -136,7 +138,20 @@ QT_MOC_LITERAL(54, 1644, 24) // "on_mstBackButton_clicked"
     "on_performmstButton_clicked\0"
     "on_mstStadiumListWidget_currentItemChanged\0"
     "on_mstPushButton_clicked\0"
-    "on_mstBackButton_clicked"
+    "on_mstBackButton_clicked\0"
+    "on_addSouvenirPushButton_clicked\0"
+    "on_deleteSouvenirPushButton_clicked\0"
+    "on_souvenirListWidget_currentItemChanged\0"
+    "on_changeSouvenirPriceLineEdit_textEdited\0"
+    "on_changeSouvenirPushButton_clicked\0"
+    "on_locationLineEdit_textEdited\0"
+    "on_stadiumLineEdit_textEdited\0"
+    "on_leagueLineEdit_textEdited\0"
+    "on_goButton_clicked\0nextStadium\0"
+    "on_tripSouvenirQuantityListWidget_itemDoubleClicked\0"
+    "on_tripSouvenirQuantityListWidget_currentItemChanged\0"
+    "on_checkoutButton_clicked\0"
+    "on_endTripButton_clicked"
 };
 #undef QT_MOC_LITERAL
 
@@ -146,7 +161,7 @@ static const uint qt_meta_data_MainWindow[] = {
        8,       // revision
        0,       // classname
        0,    0, // classinfo
-      48,   14, // methods
+      56,   14, // methods
        0,    0, // properties
        0,    0, // enums/sets
        0,    0, // constructors
@@ -154,54 +169,62 @@ static const uint qt_meta_data_MainWindow[] = {
        0,       // signalCount
 
  // slots: name, argc, parameters, tag, flags
-       1,    1,  254,    2, 0x08 /* Private */,
-       3,    0,  257,    2, 0x08 /* Private */,
-       4,    0,  258,    2, 0x08 /* Private */,
-       5,    0,  259,    2, 0x08 /* Private */,
-       6,    0,  260,    2, 0x08 /* Private */,
-       7,    2,  261,    2, 0x08 /* Private */,
-      11,    0,  266,    2, 0x08 /* Private */,
-      12,    0,  267,    2, 0x08 /* Private */,
-      13,    0,  268,    2, 0x08 /* Private */,
-      14,    0,  269,    2, 0x08 /* Private */,
-      15,    0,  270,    2, 0x08 /* Private */,
-      16,    2,  271,    2, 0x08 /* Private */,
-      17,    1,  276,    2, 0x08 /* Private */,
-      19,    1,  279,    2, 0x08 /* Private */,
-      20,    2,  282,    2, 0x08 /* Private */,
-      21,    1,  287,    2, 0x08 /* Private */,
-      22,    2,  290,    2, 0x08 /* Private */,
-      23,    1,  295,    2, 0x08 /* Private */,
-      25,    1,  298,    2, 0x08 /* Private */,
-      26,    1,  301,    2, 0x08 /* Private */,
-      27,    1,  304,    2, 0x08 /* Private */,
-      28,    1,  307,    2, 0x08 /* Private */,
-      29,    1,  310,    2, 0x08 /* Private */,
-      30,    1,  313,    2, 0x08 /* Private */,
-      31,    0,  316,    2, 0x08 /* Private */,
-      32,    0,  317,    2, 0x08 /* Private */,
-      33,    0,  318,    2, 0x08 /* Private */,
-      34,    0,  319,    2, 0x08 /* Private */,
-      35,    0,  320,    2, 0x08 /* Private */,
-      36,    0,  321,    2, 0x08 /* Private */,
-      37,    0,  322,    2, 0x08 /* Private */,
-      38,    0,  323,    2, 0x08 /* Private */,
-      39,    1,  324,    2, 0x08 /* Private */,
-      40,    0,  327,    2, 0x08 /* Private */,
-      41,    0,  328,    2, 0x08 /* Private */,
-      42,    0,  329,    2, 0x08 /* Private */,
-      43,    0,  330,    2, 0x08 /* Private */,
-      44,    2,  331,    2, 0x08 /* Private */,
-      45,    0,  336,    2, 0x08 /* Private */,
-      46,    1,  337,    2, 0x08 /* Private */,
-      47,    2,  340,    2, 0x08 /* Private */,
-      48,    0,  345,    2, 0x08 /* Private */,
-      49,    0,  346,    2, 0x08 /* Private */,
-      50,    0,  347,    2, 0x08 /* Private */,
-      51,    0,  348,    2, 0x08 /* Private */,
-      52,    2,  349,    2, 0x08 /* Private */,
-      53,    0,  354,    2, 0x08 /* Private */,
-      54,    0,  355,    2, 0x08 /* Private */,
+       1,    1,  294,    2, 0x08 /* Private */,
+       3,    0,  297,    2, 0x08 /* Private */,
+       4,    0,  298,    2, 0x08 /* Private */,
+       5,    0,  299,    2, 0x08 /* Private */,
+       6,    0,  300,    2, 0x08 /* Private */,
+       7,    2,  301,    2, 0x08 /* Private */,
+      11,    0,  306,    2, 0x08 /* Private */,
+      12,    0,  307,    2, 0x08 /* Private */,
+      13,    0,  308,    2, 0x08 /* Private */,
+      14,    0,  309,    2, 0x08 /* Private */,
+      15,    0,  310,    2, 0x08 /* Private */,
+      16,    2,  311,    2, 0x08 /* Private */,
+      17,    1,  316,    2, 0x08 /* Private */,
+      19,    1,  319,    2, 0x08 /* Private */,
+      20,    1,  322,    2, 0x08 /* Private */,
+      21,    1,  325,    2, 0x08 /* Private */,
+      22,    1,  328,    2, 0x08 /* Private */,
+      23,    1,  331,    2, 0x08 /* Private */,
+      24,    0,  334,    2, 0x08 /* Private */,
+      25,    0,  335,    2, 0x08 /* Private */,
+      26,    0,  336,    2, 0x08 /* Private */,
+      27,    0,  337,    2, 0x08 /* Private */,
+      28,    0,  338,    2, 0x08 /* Private */,
+      29,    0,  339,    2, 0x08 /* Private */,
+      30,    0,  340,    2, 0x08 /* Private */,
+      31,    0,  341,    2, 0x08 /* Private */,
+      32,    1,  342,    2, 0x08 /* Private */,
+      34,    0,  345,    2, 0x08 /* Private */,
+      35,    0,  346,    2, 0x08 /* Private */,
+      36,    0,  347,    2, 0x08 /* Private */,
+      37,    0,  348,    2, 0x08 /* Private */,
+      38,    2,  349,    2, 0x08 /* Private */,
+      39,    0,  354,    2, 0x08 /* Private */,
+      40,    1,  355,    2, 0x08 /* Private */,
+      41,    2,  358,    2, 0x08 /* Private */,
+      42,    0,  363,    2, 0x08 /* Private */,
+      43,    0,  364,    2, 0x08 /* Private */,
+      44,    0,  365,    2, 0x08 /* Private */,
+      45,    0,  366,    2, 0x08 /* Private */,
+      46,    2,  367,    2, 0x08 /* Private */,
+      47,    0,  372,    2, 0x08 /* Private */,
+      48,    0,  373,    2, 0x08 /* Private */,
+      49,    0,  374,    2, 0x08 /* Private */,
+      50,    0,  375,    2, 0x08 /* Private */,
+      51,    2,  376,    2, 0x08 /* Private */,
+      52,    1,  381,    2, 0x08 /* Private */,
+      53,    0,  384,    2, 0x08 /* Private */,
+      54,    1,  385,    2, 0x08 /* Private */,
+      55,    1,  388,    2, 0x08 /* Private */,
+      56,    1,  391,    2, 0x08 /* Private */,
+      57,    0,  394,    2, 0x08 /* Private */,
+      58,    0,  395,    2, 0x08 /* Private */,
+      59,    1,  396,    2, 0x08 /* Private */,
+      60,    2,  399,    2, 0x08 /* Private */,
+      61,    0,  404,    2, 0x08 /* Private */,
+      62,    0,  405,    2, 0x08 /* Private */,
 
  // slots: parameters
     QMetaType::Void, QMetaType::Int,    2,
@@ -216,18 +239,12 @@ static const uint qt_meta_data_MainWindow[] = {
     QMetaType::Void,
     QMetaType::Void,
     QMetaType::Void, 0x80000000 | 8, 0x80000000 | 8,    9,   10,
-    QMetaType::Void, 0x80000000 | 8,   18,
-    QMetaType::Void, 0x80000000 | 8,   18,
-    QMetaType::Void, 0x80000000 | 8, 0x80000000 | 8,    9,   10,
-    QMetaType::Void, 0x80000000 | 8,   18,
-    QMetaType::Void, 0x80000000 | 8, 0x80000000 | 8,    9,   10,
-    QMetaType::Void, QMetaType::QString,   24,
-    QMetaType::Void, QMetaType::QString,   24,
-    QMetaType::Void, QMetaType::QString,   24,
-    QMetaType::Void, QMetaType::QString,   24,
-    QMetaType::Void, QMetaType::QString,   24,
-    QMetaType::Void, QMetaType::QString,   24,
-    QMetaType::Void, QMetaType::QString,   24,
+    QMetaType::Void, QMetaType::QString,   18,
+    QMetaType::Void, QMetaType::QString,   18,
+    QMetaType::Void, QMetaType::QString,   18,
+    QMetaType::Void, QMetaType::QString,   18,
+    QMetaType::Void, QMetaType::QString,   18,
+    QMetaType::Void, QMetaType::QString,   18,
     QMetaType::Void,
     QMetaType::Void,
     QMetaType::Void,
@@ -236,19 +253,33 @@ static const uint qt_meta_data_MainWindow[] = {
     QMetaType::Void,
     QMetaType::Void,
     QMetaType::Void,
-    QMetaType::Void, 0x80000000 | 8,   18,
+    QMetaType::Void, 0x80000000 | 8,   33,
     QMetaType::Void,
     QMetaType::Void,
     QMetaType::Void,
     QMetaType::Void,
     QMetaType::Void, 0x80000000 | 8, 0x80000000 | 8,    9,   10,
     QMetaType::Void,
-    QMetaType::Void, QMetaType::Int,   24,
+    QMetaType::Void, QMetaType::Int,   18,
     QMetaType::Void, 0x80000000 | 8, 0x80000000 | 8,    9,   10,
     QMetaType::Void,
     QMetaType::Void,
     QMetaType::Void,
     QMetaType::Void,
+    QMetaType::Void, 0x80000000 | 8, 0x80000000 | 8,    9,   10,
+    QMetaType::Void,
+    QMetaType::Void,
+    QMetaType::Void,
+    QMetaType::Void,
+    QMetaType::Void, 0x80000000 | 8, 0x80000000 | 8,    9,   10,
+    QMetaType::Void, QMetaType::QString,   18,
+    QMetaType::Void,
+    QMetaType::Void, QMetaType::QString,   18,
+    QMetaType::Void, QMetaType::QString,   18,
+    QMetaType::Void, QMetaType::QString,   18,
+    QMetaType::Void,
+    QMetaType::Void,
+    QMetaType::Void, 0x80000000 | 8,   33,
     QMetaType::Void, 0x80000000 | 8, 0x80000000 | 8,    9,   10,
     QMetaType::Void,
     QMetaType::Void,
@@ -274,42 +305,50 @@ void MainWindow::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, 
         case 9: _t->on_viewStadiumsBackButton_clicked(); break;
         case 10: _t->on_viewStadiumsButton_clicked(); break;
         case 11: _t->on_stadiumListWidget_2_currentItemChanged((*reinterpret_cast< QListWidgetItem*(*)>(_a[1])),(*reinterpret_cast< QListWidgetItem*(*)>(_a[2]))); break;
-        case 12: _t->on_stadiumListWidget_itemDoubleClicked((*reinterpret_cast< QListWidgetItem*(*)>(_a[1]))); break;
-        case 13: _t->on_souvenirListWidget_itemDoubleClicked((*reinterpret_cast< QListWidgetItem*(*)>(_a[1]))); break;
-        case 14: _t->on_souvenirListWidget_currentItemChanged((*reinterpret_cast< QListWidgetItem*(*)>(_a[1])),(*reinterpret_cast< QListWidgetItem*(*)>(_a[2]))); break;
-        case 15: _t->on_souvenirPriceListWidget_itemDoubleClicked((*reinterpret_cast< QListWidgetItem*(*)>(_a[1]))); break;
-        case 16: _t->on_souvenirPriceListWidget_currentItemChanged((*reinterpret_cast< QListWidgetItem*(*)>(_a[1])),(*reinterpret_cast< QListWidgetItem*(*)>(_a[2]))); break;
-        case 17: _t->on_capacityLineEdit_textEdited((*reinterpret_cast< const QString(*)>(_a[1]))); break;
-        case 18: _t->on_surfaceLineEdit_textEdited((*reinterpret_cast< const QString(*)>(_a[1]))); break;
-        case 19: _t->on_roofTypeLineEdit_textEdited((*reinterpret_cast< const QString(*)>(_a[1]))); break;
-        case 20: _t->on_typologyLineEdit_textEdited((*reinterpret_cast< const QString(*)>(_a[1]))); break;
-        case 21: _t->on_dateOpenedLineEdit_textEdited((*reinterpret_cast< const QString(*)>(_a[1]))); break;
-        case 22: _t->on_distToCenterLineEdit_textEdited((*reinterpret_cast< const QString(*)>(_a[1]))); break;
-        case 23: _t->on_newLocationLineEdit_textEdited((*reinterpret_cast< const QString(*)>(_a[1]))); break;
-        case 24: _t->on_actionLogout_triggered(); break;
-        case 25: _t->on_visitMultipleButton_clicked(); break;
-        case 26: _t->on_visitSingleButton_clicked(); break;
-        case 27: _t->on_takeTripButton_user_clicked(); break;
-        case 28: _t->on_takeTripPageBackButton_clicked(); break;
-        case 29: _t->on_singleSelectionPageBackButton_clicked(); break;
-        case 30: _t->on_optimizeButton_clicked(); break;
-        case 31: _t->on_multipleSelectionPageBackButton_clicked(); break;
-        case 32: _t->on_availibleStadiumsListWidget_itemChanged((*reinterpret_cast< QListWidgetItem*(*)>(_a[1]))); break;
-        case 33: _t->on_AddTeamButton_clicked(); break;
-        case 34: _t->on_ReinitializeButton_clicked(); break;
-        case 35: _t->on_performdfsButton_clicked(); break;
-        case 36: _t->on_dfsPageBackButton_clicked(); break;
-        case 37: _t->on_dfsStadiumsListWidget_currentItemChanged((*reinterpret_cast< QListWidgetItem*(*)>(_a[1])),(*reinterpret_cast< QListWidgetItem*(*)>(_a[2]))); break;
-        case 38: _t->on_dfsPushButton_clicked(); break;
-        case 39: _t->on_selectAllTeamsCheckBox_stateChanged((*reinterpret_cast< int(*)>(_a[1]))); break;
-        case 40: _t->on_bfsStadiumListWidget_currentItemChanged((*reinterpret_cast< QListWidgetItem*(*)>(_a[1])),(*reinterpret_cast< QListWidgetItem*(*)>(_a[2]))); break;
-        case 41: _t->on_bfsPushButton_clicked(); break;
-        case 42: _t->on_performbfsButton_clicked(); break;
-        case 43: _t->on_bfsPageBackButton_clicked(); break;
-        case 44: _t->on_performmstButton_clicked(); break;
-        case 45: _t->on_mstStadiumListWidget_currentItemChanged((*reinterpret_cast< QListWidgetItem*(*)>(_a[1])),(*reinterpret_cast< QListWidgetItem*(*)>(_a[2]))); break;
-        case 46: _t->on_mstPushButton_clicked(); break;
-        case 47: _t->on_mstBackButton_clicked(); break;
+        case 12: _t->on_capacityLineEdit_textEdited((*reinterpret_cast< const QString(*)>(_a[1]))); break;
+        case 13: _t->on_surfaceLineEdit_textEdited((*reinterpret_cast< const QString(*)>(_a[1]))); break;
+        case 14: _t->on_roofTypeLineEdit_textEdited((*reinterpret_cast< const QString(*)>(_a[1]))); break;
+        case 15: _t->on_typologyLineEdit_textEdited((*reinterpret_cast< const QString(*)>(_a[1]))); break;
+        case 16: _t->on_dateOpenedLineEdit_textEdited((*reinterpret_cast< const QString(*)>(_a[1]))); break;
+        case 17: _t->on_distToCenterLineEdit_textEdited((*reinterpret_cast< const QString(*)>(_a[1]))); break;
+        case 18: _t->on_actionLogout_triggered(); break;
+        case 19: _t->on_visitMultipleButton_clicked(); break;
+        case 20: _t->on_visitSingleButton_clicked(); break;
+        case 21: _t->on_takeTripButton_user_clicked(); break;
+        case 22: _t->on_takeTripPageBackButton_clicked(); break;
+        case 23: _t->on_singleSelectionPageBackButton_clicked(); break;
+        case 24: _t->on_optimizeButton_clicked(); break;
+        case 25: _t->on_multipleSelectionPageBackButton_clicked(); break;
+        case 26: _t->on_availibleStadiumsListWidget_itemChanged((*reinterpret_cast< QListWidgetItem*(*)>(_a[1]))); break;
+        case 27: _t->on_AddTeamButton_clicked(); break;
+        case 28: _t->on_ReinitializeButton_clicked(); break;
+        case 29: _t->on_performdfsButton_clicked(); break;
+        case 30: _t->on_dfsPageBackButton_clicked(); break;
+        case 31: _t->on_dfsStadiumsListWidget_currentItemChanged((*reinterpret_cast< QListWidgetItem*(*)>(_a[1])),(*reinterpret_cast< QListWidgetItem*(*)>(_a[2]))); break;
+        case 32: _t->on_dfsPushButton_clicked(); break;
+        case 33: _t->on_selectAllTeamsCheckBox_stateChanged((*reinterpret_cast< int(*)>(_a[1]))); break;
+        case 34: _t->on_bfsStadiumListWidget_currentItemChanged((*reinterpret_cast< QListWidgetItem*(*)>(_a[1])),(*reinterpret_cast< QListWidgetItem*(*)>(_a[2]))); break;
+        case 35: _t->on_bfsPushButton_clicked(); break;
+        case 36: _t->on_performbfsButton_clicked(); break;
+        case 37: _t->on_bfsPageBackButton_clicked(); break;
+        case 38: _t->on_performmstButton_clicked(); break;
+        case 39: _t->on_mstStadiumListWidget_currentItemChanged((*reinterpret_cast< QListWidgetItem*(*)>(_a[1])),(*reinterpret_cast< QListWidgetItem*(*)>(_a[2]))); break;
+        case 40: _t->on_mstPushButton_clicked(); break;
+        case 41: _t->on_mstBackButton_clicked(); break;
+        case 42: _t->on_addSouvenirPushButton_clicked(); break;
+        case 43: _t->on_deleteSouvenirPushButton_clicked(); break;
+        case 44: _t->on_souvenirListWidget_currentItemChanged((*reinterpret_cast< QListWidgetItem*(*)>(_a[1])),(*reinterpret_cast< QListWidgetItem*(*)>(_a[2]))); break;
+        case 45: _t->on_changeSouvenirPriceLineEdit_textEdited((*reinterpret_cast< const QString(*)>(_a[1]))); break;
+        case 46: _t->on_changeSouvenirPushButton_clicked(); break;
+        case 47: _t->on_locationLineEdit_textEdited((*reinterpret_cast< const QString(*)>(_a[1]))); break;
+        case 48: _t->on_stadiumLineEdit_textEdited((*reinterpret_cast< const QString(*)>(_a[1]))); break;
+        case 49: _t->on_leagueLineEdit_textEdited((*reinterpret_cast< const QString(*)>(_a[1]))); break;
+        case 50: _t->on_goButton_clicked(); break;
+        case 51: _t->nextStadium(); break;
+        case 52: _t->on_tripSouvenirQuantityListWidget_itemDoubleClicked((*reinterpret_cast< QListWidgetItem*(*)>(_a[1]))); break;
+        case 53: _t->on_tripSouvenirQuantityListWidget_currentItemChanged((*reinterpret_cast< QListWidgetItem*(*)>(_a[1])),(*reinterpret_cast< QListWidgetItem*(*)>(_a[2]))); break;
+        case 54: _t->on_checkoutButton_clicked(); break;
+        case 55: _t->on_endTripButton_clicked(); break;
         default: ;
         }
     }
@@ -344,13 +383,13 @@ int MainWindow::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
     if (_id < 0)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {
-        if (_id < 48)
+        if (_id < 56)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 48;
+        _id -= 56;
     } else if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
-        if (_id < 48)
+        if (_id < 56)
             *reinterpret_cast<int*>(_a[0]) = -1;
-        _id -= 48;
+        _id -= 56;
     }
     return _id;
 }

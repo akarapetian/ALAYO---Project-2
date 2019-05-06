@@ -22,6 +22,11 @@ struct souvenir
         this->itemPrice = newPrice;
     }
 
+    void setItemName(string newName)
+    {
+        this->itemName = newName;
+    }
+
     string itemName;
     double  itemPrice;
 };
@@ -63,8 +68,10 @@ public:
     void setDistance(int i, int distance);
 
     // Other Methods
+    void changeSouvenir(string name, double price, int index);
     void pushBackDistance();
     void addSouvenir(souvenir newSouvenir);
+    void deleteSouvenir(int index);
     void printDistances();
 
 private:

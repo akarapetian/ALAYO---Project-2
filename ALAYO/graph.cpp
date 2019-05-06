@@ -207,7 +207,6 @@ void Graph::dijkstraAlgorithm(string         startVertex,
     //Create arrays to determine the weight of each edge and the location of the
     //next vertex
     weight[desiredVertex] = 0;
-
     nextLocation[desiredVertex] = -1;
 
     //Mark the desired vertex as visited for next time
