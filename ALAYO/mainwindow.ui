@@ -1998,7 +1998,7 @@
          </rect>
         </property>
         <property name="currentIndex">
-         <number>6</number>
+         <number>1</number>
         </property>
         <widget class="QWidget" name="tripTypeSelectionPage">
          <widget class="QPushButton" name="visitSingleButton">

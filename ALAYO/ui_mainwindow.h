@@ -1142,7 +1142,7 @@ public:
         primaryPageStackedWidget->setCurrentIndex(2);
         adminStackedWidget->setCurrentIndex(0);
         userStackedWidget->setCurrentIndex(1);
-        takeTripStackedWidget->setCurrentIndex(6);
+        takeTripStackedWidget->setCurrentIndex(1);
         tabWidget->setCurrentIndex(2);
 
 

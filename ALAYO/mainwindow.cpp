@@ -9,33 +9,33 @@
 // ORIGINAL INPUT FILES
 //******************************
 // original MLB Information const
-const string MLB_INFORMATION_INPUT_FILE = "C:/Users/anthony/Desktop/ALAYO---Project-2-Anthony/ALAYO/inputMLBInformation.csv";
+const string MLB_INFORMATION_INPUT_FILE = "D:/Programming/CS1D/ALAYO---Project-2-Anthony/ALAYO/inputMLBInformation.csv";
 // original Distances const
-const string DISTANCES_INPUT_FILE = "C:/Users/anthony/Desktop/ALAYO---Project-2-Anthony/ALAYO/inputDistance.csv";
+const string DISTANCES_INPUT_FILE = "D:/Programming/CS1D/ALAYO---Project-2-Anthony/ALAYO/inputDistance.csv";
 //original MLB Information expansion const
-const string MLB_INFORMATION_EXPANSION_INPUT_FILE = "C:/Users/anthony/Desktop/ALAYO---Project-2-Anthony/ALAYO/inputMLBInformationExpansion.csv";
+const string MLB_INFORMATION_EXPANSION_INPUT_FILE = "D:/Programming/CS1D/ALAYO---Project-2-Anthony/ALAYO/inputMLBInformationExpansion.csv";
 //original Distances expansion const
-const string DISTANCES_EXPANSION_INPUT_FILE = "C:/Users/anthony/Desktop/ALAYO---Project-2-Anthony/ALAYO/inputDistanceExpansion.csv";
+const string DISTANCES_EXPANSION_INPUT_FILE = "D:/Programming/CS1D/ALAYO---Project-2-Anthony/ALAYO/inputDistanceExpansion.csv";
 
 //******************************
 // WRITE TO FILES
 //******************************
 // written to MLB Information const
-const string MODIFIED_MLB_INFORMATION_OUTPUT_FILE = "C:/Users/anthony/Desktop/ALAYO---Project-2-Anthony/ALAYO/inputModifiedMLBInformation.csv";
+const string MODIFIED_MLB_INFORMATION_OUTPUT_FILE = "D:/Programming/CS1D/ALAYO---Project-2-Anthony/ALAYO/inputModifiedMLBInformation.csv";
 // written to Distances const
-const string MODIFIED_DISTANCES_OUTPUT_FILE = "C:/Users/anthony/Desktop/ALAYO---Project-2-Anthony/ALAYO/inputModifiedDistances.csv";
+const string MODIFIED_DISTANCES_OUTPUT_FILE = "D:/Programming/CS1D/ALAYO---Project-2-Anthony/ALAYO/inputModifiedDistances.csv";
 // written to souvenirs const
-const string MODIFIED_SOUVENIRS_OUTPUT_FILE = "C:/Users/anthony/Desktop/ALAYO---Project-2-Anthony/ALAYO/inputSouvenirs.csv";
+const string MODIFIED_SOUVENIRS_OUTPUT_FILE = "D:/Programming/CS1D/ALAYO---Project-2-Anthony/ALAYO/inputSouvenirs.csv";
 
 //******************************
 // IMAGES
 //******************************
 // unadded stadium image
-const char ORIGINAL_STADIUMS_IMAGE[] = {"D:/Programming/CS1D/ALAYO---Project-2-master/ALAYO/BaseballStadiumGraph.jpg"};
+const char ORIGINAL_STADIUMS_IMAGE[] = {"D:/Programming/CS1D/ALAYO---Project-2-Anthony/ALAYO/BaseballStadiumGraph.jpg"};
 // modified stadiums image
-const char MODIFIED_STADIUMS_IMAGE[] = {"D:/Programming/CS1D/ALAYO---Project-2-master/ALAYO/BaseballStadiumGraphLV.jpg"};
+const char MODIFIED_STADIUMS_IMAGE[] = {"D:/Programming/CS1D/ALAYO---Project-2-Anthony/ALAYO/BaseballStadiumGraphLV.jpg"};
 // Alayo logo image
-const char ALAYO_LOGO[] = {"D:/Programming/CS1D/ALAYO---Project-2-master/ALAYO/ALAYOLogo.png"};
+const char ALAYO_LOGO[] = {"D:/Programming/CS1D/ALAYO---Project-2-Anthony/ALAYO/ALAYOLogo.png"};
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -1368,6 +1368,9 @@ void MainWindow::on_visitMultipleButton_clicked()
     }
 
     ui->takeTripStackedWidget->setCurrentIndex(1);
+
+    ui->optimizeButton->setEnabled(false);
+    ui->goButton->setEnabled(false);
 }
 
 void MainWindow::on_selectAllTeamsCheckBox_stateChanged(int arg1)
@@ -1408,11 +1411,14 @@ void MainWindow::on_multipleSelectionPageBackButton_clicked()
 
 void MainWindow::on_availibleStadiumsListWidget_itemChanged(QListWidgetItem *item)
 {
+    QStringList stadiumTeam;
     //when user checks a team, it moves it into the next list widget
     if(item->checkState() == 2)
     {
         //item is checked
-        ui->selectedStadiumsListWidget->addItem(item->text());
+
+        stadiumTeam = item->text().split(": ");
+        ui->selectedStadiumsListWidget->addItem(stadiumTeam[0]);
     }
     else if(item->checkState() == 0)
     {
@@ -1422,7 +1428,8 @@ void MainWindow::on_availibleStadiumsListWidget_itemChanged(QListWidgetItem *ite
         int k = 0;
         while(!found && k < ui->selectedStadiumsListWidget->count())
         {
-            if(item->text() == ui->selectedStadiumsListWidget->item(k)->text())
+            stadiumTeam = item->text().split(": ");
+            if(stadiumTeam[0] == ui->selectedStadiumsListWidget->item(k)->text())
             {
                 found = true;
             }
@@ -1433,6 +1440,20 @@ void MainWindow::on_availibleStadiumsListWidget_itemChanged(QListWidgetItem *ite
 
         ui->selectedStadiumsListWidget->takeItem(k);
     }
+
+    //new stuff
+    ui->selectedStadiumsListWidget->setDragEnabled(true);
+
+    if(ui->selectedStadiumsListWidget->count() > 1)
+    {
+        ui->optimizeButton->setEnabled(true);
+        ui->goButton->setEnabled(false);
+    }
+    else {
+        ui->optimizeButton->setEnabled(false);
+    }
+
+
 }
 
 void MainWindow::on_singleSelectionPageBackButton_clicked()
@@ -1465,15 +1486,17 @@ void MainWindow::createGraph()
     file.open(MODIFIED_DISTANCES_OUTPUT_FILE);
     if(file.is_open())
     {
+       getline(file, startingLocation, ',');
        while(!file.eof())
        {
-           getline(file, startingLocation, ',');
+
            getline(file, endingLocation, ',');
            getline(file, distanceBetweenString, '\n');
 
            distanceBetween = stoi(distanceBetweenString);
 
            graph.insert(startingLocation, endingLocation, distanceBetween);
+           getline(file, startingLocation, ',');
        }
     }
 
@@ -1482,9 +1505,15 @@ void MainWindow::createGraph()
 
 void MainWindow::on_optimizeButton_clicked()
 {
+    //CHANGES I MADE
+    //i made it so that when you check the box, it just adds the stadium name to the selectedstadiumslistwidget
+    //that is found in availibleStadiumsListWidget_itemChanged
+
+    //i also modified visitmultiplebutton clicked, added one line
+
     //run optimization algorithm, return
     //steps to the shortest path algo
-/*
+    /*
     QStringList stadiumTeam1;
 
     if(ui->selectedStadiumsListWidget->count() > 0)
@@ -1498,7 +1527,7 @@ void MainWindow::on_optimizeButton_clicked()
 
             teamsToVisit.push_back(stadiumTeam1[1].toStdString());
         }
-*/
+
         createGraph();
 
         vector<string> vertexList;
@@ -1516,12 +1545,12 @@ void MainWindow::on_optimizeButton_clicked()
 
        QStringList stadiumTeam;
 
-        int i = 0;
-       // for(i = 0; i < ui->selectedStadiumsListWidget->count() - 1; i++)
+        i = 0;
+        for(i = 0; i < ui->selectedStadiumsListWidget->count() - 1; i++)
         {
             stadiumTeam = ui->selectedStadiumsListWidget->item(i)->text().split(": ");
             string startingCity = stadiumTeam[0].toStdString();
-             /*
+
             //sequential search for item to remove
             bool found = false;
             int k = 0;
@@ -1536,7 +1565,7 @@ void MainWindow::on_optimizeButton_clicked()
                     ++k;
                 }
             }
-*/
+
             graph.dijkstraAlgorithm(startingCity, vertexList, weights, nextLocation);
 
 
@@ -1569,7 +1598,7 @@ void MainWindow::on_optimizeButton_clicked()
             //use the smallest index to access the paths matrix, obtain the next team
             string nextStadium = paths[smallestIndex][paths[smallestIndex].size() - 1];
 
-            /*
+
             //find the row that contains the next stadium, remove it from its current place, and put it in the position after the the starting stadium
             QStringList stadiumTeam2;
             found = false;
@@ -1590,8 +1619,8 @@ void MainWindow::on_optimizeButton_clicked()
             }
 
             ui->totalTripDistanceLineEdit->setText(QString::number(ui->totalTripDistanceLineEdit->text().toInt() + smallestWeight));
-*/
-          //  ++i;
+
+            ++i;
             vertexList.clear();
             weights.clear();
             nextLocation.clear();
@@ -1607,9 +1636,173 @@ void MainWindow::on_optimizeButton_clicked()
         //2: add weight to total distance traveled, pop the name off of the teamsToVisit vector
         //3: make the new starting city the city we just found and repeat until all cities in list have been visited
 
+     }
+    */
+
+    //the algorithm takes in the starting location and visits every other location in the graph, using the shortest path
+    //need to obtain the shortest weighted path and visit that location IF it exists in the list of selected stadiums
+
+    if(ui->selectedStadiumsListWidget->count() > 1)
+    {
+        vector<string> orderedStadiumList;
+        vector<int> orderedWeightsList;
+
+        vector<string> stadiumsToVisit;
+
+        //obtain starting location
+        string startingStadium;
+
+        startingStadium = ui->selectedStadiumsListWidget->item(0)->text().toStdString();
+
+        for(int i = 0; i < ui->selectedStadiumsListWidget->count(); i++)
+        {
+            stadiumsToVisit.push_back(ui->selectedStadiumsListWidget->item(i)->text().toStdString());
+        }
+
+
+        createGraph();
+
+        vector<string> vertexList;
+
+        vector<int> weights(graph.getGraphSize());
+        vector<int> nextLocation(graph.getGraphSize());
+
+        vector<vector<string>> paths;
+        vector<int> pathWeights;
+
+        vector<vector<string>> properPaths;
+        vector<int> properPathWeights;
+
+        stadiumsToVisit.erase(stadiumsToVisit.begin());
+
+        int smallestWeight = 10000000000;
+        int smallestWeightIndex = 0;
+
+        int count = 0;
+        while(stadiumsToVisit.size() > 0)
+        {
+            vertexList.clear();
+
+            //might not want to do this
+            paths.clear();
+            pathWeights.clear();
+
+            weights.clear();
+            nextLocation.clear();
+            for(int m = 0; m < graph.getGraphSize(); m++)
+            {
+                weights.push_back(0);
+                nextLocation.push_back(0);
+            }
+
+            properPaths.clear();
+            properPathWeights.clear();
+
+            //set starting stadium
+            if(count > 0)
+            {
+                //begins on second loop
+                startingStadium = orderedStadiumList.back();
+            }
+
+            graph.dijkstraAlgorithm(startingStadium, vertexList, weights, nextLocation);
+
+            for(unsigned int index = 1; index < graph.getGraphSize(); index++)
+            {
+
+                //if the next location is not in the list widget, we do not care about the path
+                vector<string> outputVec = graph.determineTripVector(startingStadium, vertexList[index], nextLocation);
+
+                paths.push_back(outputVec);
+
+                pathWeights.push_back(weights[graph.getVertex(vertexList[index])]);
+            }
+
+
+            //loop through paths and remove the paths that visit locations not in the list widget
+            for(int i = 0; i < paths.size(); i++)
+            {
+                //search to see if the final location of path is in the teamstovisit vector
+                //sequential search
+
+                bool found = false;
+                int k = 0;
+                while(k < stadiumsToVisit.size() && !found)
+                {
+                    if(paths[i][paths[i].size() -1] == stadiumsToVisit[k])
+                    {
+                        //the final location exists in the teams to visit
+                        //do nothing to the paths vector
+                        found = true;
+
+                        properPaths.push_back(paths[i]);
+                        properPathWeights.push_back(pathWeights[i]);
+                    }
+                    else {
+                        ++k;
+                    }
+                }
+            }
+
+            smallestWeight = 10000000000;
+            smallestWeightIndex = 0;
+
+            if(properPaths.size() > 1)
+            {
+                //locate shortest path in properpaths, find index and weight
+                for(int i = 0; i < properPathWeights.size(); i++)
+                {
+                    if(properPathWeights[i] < smallestWeight && properPathWeights[i] != 0)
+                    {
+                        smallestWeight = properPathWeights[i];
+                        smallestWeightIndex = i;
+                    }
+                }
+            }
+            else
+            {
+                smallestWeight = properPathWeights[0];
+                smallestWeightIndex = 0;
+            }
 
 
 
+            //at this point, we have a list of paths, which all visit locations that are outlined by the user
+            //we also have the shortest path and the index to it
+
+            //next step is to save the location and weight into two final parallel vectors
+
+            orderedStadiumList.push_back(properPaths[smallestWeightIndex][properPaths[smallestWeightIndex].size() - 1]);
+            orderedWeightsList.push_back(smallestWeight);
+
+            //remove the stadium from the stadiumstovisit vector
+
+            for(int h = 0; h < stadiumsToVisit.size(); h++)
+            {
+                QTextStream(stdout) << QString::fromStdString(orderedStadiumList.back()) << endl;
+                if(orderedStadiumList.back() == stadiumsToVisit[h])
+                {
+                    stadiumsToVisit.erase(stadiumsToVisit.begin() + h);
+                }
+            }
+            count++;
+        }
+
+        //OPTIMIZATION ALGORITHM COMPLETE
+        // below is simply re-formatting the list widget into the correct order
+
+
+
+        QString firstStadium = ui->selectedStadiumsListWidget->item(0)->text();
+        ui->selectedStadiumsListWidget->clear();
+        ui->selectedStadiumsListWidget->addItem(firstStadium);
+
+        for(int l = 0; l < orderedStadiumList.size(); l++)
+        ui->selectedStadiumsListWidget->addItem(QString::fromStdString(orderedStadiumList[l]));
+    }
+    ui->optimizeButton->setEnabled(false);
+    ui->goButton->setEnabled(true);
+    ui->selectedStadiumsListWidget->setDragEnabled(false);
 }
 
 void MainWindow::on_performdfsButton_clicked()
