@@ -141,7 +141,6 @@ souvenir MLB::getSouvenir(int index) const
     return souvenirs[index];
 }
 
-
 void MLB::addSouvenir(souvenir newSouvenir)
 {
     souvenirs.push_back(newSouvenir);
@@ -187,4 +186,15 @@ void MLB::printDistances()
 void MLB::pushBackDistance()
 {
     distances.push_back(0);
+}
+
+void MLB::deleteSouvenir(int index)
+{
+    souvenirs.erase(souvenirs.begin()+index);
+}
+
+void MLB::changeSouvenir(string name, double price, int index)
+{
+    souvenirs.at(index).setItemName(name);
+    souvenirs.at(index).setItemPrice(price);
 }

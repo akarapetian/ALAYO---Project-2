@@ -163,8 +163,8 @@ unsigned int Graph::getDiscoveryEdges(int desiredVertex)
  ******************************************************************************/
 void Graph::dijkstraAlgorithm(string         startVertex,
                               vector<string> &temp,
-                              vector<int>            weight,
-                              vector<int>            nextLocation)
+                              vector<int>            &weight,
+                              vector<int>            &nextLocation)
 {
     //Initialize our verticesReached
     unsigned int verticesReached = 0;
@@ -300,8 +300,8 @@ int Graph::MinimumSpanningTree(string startVertex, vector<string> &temp)
  * ----------------------------------------------------------------------------
  ******************************************************************************/
 void Graph::determineNearestVertex(vector<string> &temp,
-                                   vector<int>            weight,
-                                   vector<int>            nextLocation)
+                                   vector<int>            &weight,
+                                   vector<int>            &nextLocation)
 {
     //If the size is 1, then we can only find the one closest to the root which
     //will be the one that is passed in
@@ -420,8 +420,8 @@ void Graph::determineNearestVertex(vector<string> &temp,
  * ----------------------------------------------------------------------------
  ******************************************************************************/
 int Graph::determineStartingDistance(string desiredCity,
-                                     vector<int>    weight,
-                                     vector<int>    nextLocation)
+                                     vector<int>    &weight,
+                                     vector<int>    &nextLocation)
 {
     //Our starting distance variable to return
     int totalDistance = 0;
@@ -638,7 +638,7 @@ int Graph::determineDistanceBetween(int firstVertex, int secondVertex)
  * main goal is to be a helper function for the mst and reverse our path.
  * ----------------------------------------------------------------------------
  ******************************************************************************/
-vector<string> Graph::determineTripVector(string start, string end, int next[])
+vector<string> Graph::determineTripVector(string start, string end, vector<int> &next)
 {
     //Create our vector of strings for the cities
     vector<string> tempTripVec;
@@ -704,7 +704,7 @@ int Graph::DepthFirstSearch(string beginLocation, vector<string> &theGraph)
     //As long as the number of visited locations does not equal the size of the
     //graph, continue searching for the next vertex and recursively call the
     //function again
-    if (visitedLocations < graph.size() -1)
+    if (visitedLocations < graph.size())
     {
         int nextVertex = dfsHelper(currentVertex, theGraph);
         DepthFirstSearch(graph.at(nextVertex).startingCity, theGraph);

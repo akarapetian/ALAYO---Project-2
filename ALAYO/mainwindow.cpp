@@ -9,33 +9,33 @@
 // ORIGINAL INPUT FILES
 //******************************
 // original MLB Information const
-const string MLB_INFORMATION_INPUT_FILE = "C:/Users/Oscar/Desktop/ALAYO-May5-AnthonyVersion/ALAYO/inputMLBInformation.csv";
+const string MLB_INFORMATION_INPUT_FILE = "C:/Users/Oscar/Desktop/ALAYO---Project-2-Anthony/ALAYO---Project-2-Anthony/ALAYO/inputMLBInformation.csv";
 // original Distances const
-const string DISTANCES_INPUT_FILE = "C:/Users/Oscar/Desktop/ALAYO-May5-AnthonyVersion/ALAYO/inputDistance.csv";
+const string DISTANCES_INPUT_FILE = "C:/Users/Oscar/Desktop/ALAYO---Project-2-Anthony/ALAYO---Project-2-Anthony/ALAYO/inputDistance.csv";
 //original MLB Information expansion const
-const string MLB_INFORMATION_EXPANSION_INPUT_FILE = "C:/Users/Oscar/Desktop/ALAYO-May5-AnthonyVersion/ALAYO/inputMLBInformationExpansion.csv";
+const string MLB_INFORMATION_EXPANSION_INPUT_FILE = "C:/Users/Oscar/Desktop/ALAYO---Project-2-Anthony/ALAYO---Project-2-Anthony/ALAYO/inputMLBInformationExpansion.csv";
 //original Distances expansion const
-const string DISTANCES_EXPANSION_INPUT_FILE = "C:/Users/Oscar/Desktop/ALAYO-May5-AnthonyVersion/ALAYO/inputDistanceExpansion.csv";
+const string DISTANCES_EXPANSION_INPUT_FILE = "C:/Users/Oscar/Desktop/ALAYO---Project-2-Anthony/ALAYO---Project-2-Anthony/ALAYO/inputDistanceExpansion.csv";
 
 //******************************
 // WRITE TO FILES
 //******************************
 // written to MLB Information const
-const string MODIFIED_MLB_INFORMATION_OUTPUT_FILE = "C:/Users/Oscar/Desktop/ALAYO-May5-AnthonyVersion/ALAYO/inputModifiedMLBInformation.csv";
+const string MODIFIED_MLB_INFORMATION_OUTPUT_FILE = "C:/Users/Oscar/Desktop/ALAYO---Project-2-Anthony/ALAYO---Project-2-Anthony/ALAYO/inputModifiedMLBInformation.csv";
 // written to Distances const
-const string MODIFIED_DISTANCES_OUTPUT_FILE = "C:/Users/Oscar/Desktop/ALAYO-May5-AnthonyVersion/ALAYO/inputModifiedDistances.csv";
+const string MODIFIED_DISTANCES_OUTPUT_FILE = "C:/Users/Oscar/Desktop/ALAYO---Project-2-Anthony/ALAYO---Project-2-Anthony/ALAYO/inputModifiedDistances.csv";
 // written to souvenirs const
-const string MODIFIED_SOUVENIRS_OUTPUT_FILE = "C:/Users/Oscar/Desktop/ALAYO-May5-AnthonyVersion/ALAYO/inputSouvenirs.csv";
+const string MODIFIED_SOUVENIRS_OUTPUT_FILE = "C:/Users/Oscar/Desktop/ALAYO---Project-2-Anthony/ALAYO---Project-2-Anthony/ALAYO/inputSouvenirs.csv";
 
 //******************************
 // IMAGES
 //******************************
 // unadded stadium image
-const char ORIGINAL_STADIUMS_IMAGE[] = {"C:/Users/Oscar/Desktop/ALAYO-May5-AnthonyVersion/ALAYO/BaseballStadiumGraph.jpg"};
+const char ORIGINAL_STADIUMS_IMAGE[] = {"C:/Users/Oscar/Desktop/ALAYO---Project-2-Anthony/ALAYO---Project-2-Anthony/ALAYO/BaseballStadiumGraph.jpg"};
 // modified stadiums image
-const char MODIFIED_STADIUMS_IMAGE[] = {"C:/Users/Oscar/Desktop/ALAYO-May5-AnthonyVersion/ALAYO/BaseballStadiumGraphLV.jpg"};
+const char MODIFIED_STADIUMS_IMAGE[] = {"C:/Users/Oscar/Desktop/ALAYO---Project-2-Anthony/ALAYO---Project-2-Anthony/ALAYO/BaseballStadiumGraphLV.jpg"};
 // Alayo logo image
-const char ALAYO_LOGO[] = {"C:/Users/Oscar/Desktop/ALAYO-May5-AnthonyVersion/ALAYO/ALAYOLogo.png"};
+const char ALAYO_LOGO[] = {"C:/Users/Oscar/Desktop/ALAYO---Project-2-Anthony/ALAYO---Project-2-Anthony/ALAYO/ALAYOLogo.png"};
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -677,19 +677,45 @@ void MainWindow::resetManageStadiumsInformation()
     ui->typologyLineEdit->clear();
     ui->dateOpenedLineEdit->clear();
     ui->distToCenterLineEdit->clear();
-    ui->newLocationLineEdit->clear();
+    ui->locationLineEdit->clear();
+    ui->stadiumLineEdit->clear();
     ui->roofTypeLineEdit->clear();
+    ui->souvenirAddItemNameTextEdit->clear();
+    ui->souvenirAddItemPriceTextEdit->clear();
+    ui->changeSouvenirNameLineEdit->clear();
+    ui->changeSouvenirPriceLineEdit->clear();
+    ui->souvenirChangingName->setText("");
+
+    ui->changeSouvenirPushButton->setEnabled(false);
+    ui->souvenirAddAllTeamsCheckbox->setCheckable(false);
+    ui->deleteSouvenirPushButton->setEnabled(false);
+    ui->addSouvenirPushButton->setEnabled(false);
+    ui->changeSouvenirNameLineEdit->setReadOnly(true);
+    ui->changeSouvenirPriceLineEdit->setReadOnly(true);
     ui->capacityLineEdit->setReadOnly(true);
     ui->surfaceLineEdit->setReadOnly(true);
     ui->roofTypeLineEdit->setReadOnly(true);
     ui->typologyLineEdit->setReadOnly(true);
     ui->dateOpenedLineEdit->setReadOnly(true);
     ui->distToCenterLineEdit->setReadOnly(true);
-    ui->newLocationLineEdit->setReadOnly(true);
+    ui->locationLineEdit->setReadOnly(true);
+    ui->stadiumLineEdit->setReadOnly(true);
     ui->roofTypeLineEdit->setReadOnly(true);
+    ui->souvenirAddItemNameTextEdit->setReadOnly(true);
+    ui->souvenirAddItemPriceTextEdit->setReadOnly(true);
+    ui->souvenirAddAllTeamsCheckbox->setChecked(false);
+    ui->souvenirChangeAllTeamsCheckbox->setCheckable(false);
+    ui->souvenirDeleteAllTeamsCheckbox->setCheckable(false);
+    ui->souvenirChangeAllTeamsCheckbox->setChecked(false);
+    ui->souvenirDeleteAllTeamsCheckbox->setChecked(false);
 
+    ui->souvenirListWidget->blockSignals(true);
     ui->souvenirListWidget->clear();
+    ui->souvenirListWidget->blockSignals(false);
+    ui->souvenirPriceListWidget->blockSignals(true);
     ui->souvenirPriceListWidget->clear();
+    ui->souvenirPriceListWidget->blockSignals(false);
+
 
     //initialize all the data in the list widgets
     for(int i = 0; i < thisMap.mapSize(); i++)
@@ -777,6 +803,12 @@ void MainWindow::on_manageStadiumsButton_clicked()
 {
     ui->adminStackedWidget->setCurrentIndex(1);
     resetManageStadiumsInformation();
+
+    ui->capacityLineEdit->setValidator(new QIntValidator(this));
+    ui->dateOpenedLineEdit->setValidator(new QIntValidator(this));
+    ui->distToCenterLineEdit->setValidator(new QIntValidator(this));
+    ui->souvenirAddItemPriceTextEdit->setValidator(new QDoubleValidator(this));
+    ui->changeSouvenirPriceLineEdit->setValidator(new QDoubleValidator(this));
 }
 
 void MainWindow::on_manageStadiumsBackButton_clicked()
@@ -786,39 +818,8 @@ void MainWindow::on_manageStadiumsBackButton_clicked()
     ui->adminStackedWidget->setCurrentIndex(0);
 }
 
-void MainWindow::on_stadiumListWidget_itemDoubleClicked(QListWidgetItem *item)
-{
-    ui->stadiumListWidget->openPersistentEditor(item);
-}
-
 void MainWindow::on_stadiumListWidget_currentItemChanged(QListWidgetItem *current, QListWidgetItem *previous)
 {
-    if(ui->stadiumListWidget->isPersistentEditorOpen(previous))
-    {
-        ui->stadiumListWidget->closePersistentEditor(previous);
-        thisMap.atIndex(previous->listWidget()->currentRow()).value.setStadiumName(previous->text().toStdString());
-    }
-
-    if(ui->souvenirListWidget->isPersistentEditorOpen(previous))
-    {
-        thisMap.atIndex(previous->listWidget()->currentRow()).value.getSouvenir(previous->listWidget()->currentRow()).itemName = previous->text().toStdString();
-        ui->souvenirListWidget->closePersistentEditor(previous);
-    }
-
-    if(ui->souvenirPriceListWidget->isPersistentEditorOpen(previous))
-    {
-         if(isFloatNumber(previous->text()))
-         {
-            thisMap.atIndex(previous->listWidget()->currentRow()).value.getSouvenir(previous->listWidget()->row(previous)).setItemPrice(previous->text().toDouble());
-         }
-         else {
-             QMessageBox::warning(nullptr, "Error", "Invalid Price Input! Please Enter a float");
-             previous->setText(QString::number(thisMap.atIndex(previous->listWidget()->currentRow()).value.getSouvenir(previous->listWidget()->row(previous)).itemPrice));
-         }
-
-        ui->souvenirPriceListWidget->closePersistentEditor(previous);
-    }
-
     ui->souvenirListWidget->blockSignals(true);
     ui->souvenirPriceListWidget->blockSignals(true);
     ui->souvenirListWidget->clear();
@@ -841,8 +842,26 @@ void MainWindow::on_stadiumListWidget_currentItemChanged(QListWidgetItem *curren
     ui->typologyLineEdit->setReadOnly(false);
     ui->dateOpenedLineEdit->setReadOnly(false);
     ui->distToCenterLineEdit->setReadOnly(false);
-    ui->newLocationLineEdit->setReadOnly(false);
+    ui->locationLineEdit->setReadOnly(false);
+    ui->stadiumLineEdit->setReadOnly(false);
     ui->roofTypeLineEdit->setReadOnly(false);
+    ui->souvenirAddItemNameTextEdit->setReadOnly(false);
+    ui->souvenirAddItemPriceTextEdit->setReadOnly(false);
+    ui->souvenirAddAllTeamsCheckbox->setCheckable(true);
+    ui->addSouvenirPushButton->setEnabled(true);
+    ui->locationLineEdit->clear();
+    ui->stadiumLineEdit->clear();
+    ui->souvenirAddItemNameTextEdit->clear();
+    ui->souvenirAddItemPriceTextEdit->clear();
+    ui->changeSouvenirNameLineEdit->setReadOnly(true);
+    ui->changeSouvenirPriceLineEdit->setReadOnly(true);
+    ui->changeSouvenirPushButton->setEnabled(false);
+    ui->deleteSouvenirPushButton->setEnabled(false);
+    ui->souvenirAddAllTeamsCheckbox->setChecked(false);
+    ui->souvenirChangeAllTeamsCheckbox->setCheckable(false);
+    ui->souvenirDeleteAllTeamsCheckbox->setCheckable(false);
+    ui->souvenirChangeAllTeamsCheckbox->setChecked(false);
+    ui->souvenirDeleteAllTeamsCheckbox->setChecked(false);
     ui->groupBox->setTitle(QString::fromStdString(thisMap.atIndex(current->listWidget()->currentRow()).value.getStadiumName()));
     ui->capacityLineEdit->setText(QString::number(thisMap.atIndex(current->listWidget()->currentRow()).value.getSeatingCapacity()));
     ui->surfaceLineEdit->setText(QString::fromStdString(thisMap.atIndex(current->listWidget()->currentRow()).value.getPlayingSurface()));
@@ -850,88 +869,33 @@ void MainWindow::on_stadiumListWidget_currentItemChanged(QListWidgetItem *curren
     ui->typologyLineEdit->setText(QString::fromStdString(thisMap.atIndex(current->listWidget()->currentRow()).value.getBallParkTypology()));
     ui->dateOpenedLineEdit->setText(QString::number(thisMap.atIndex(current->listWidget()->currentRow()).value.getDateOpened()));
     ui->distToCenterLineEdit->setText(QString::number(thisMap.atIndex(current->listWidget()->currentRow()).value.getDistanceToCenterField()));
-}
-
-void MainWindow::on_souvenirListWidget_itemDoubleClicked(QListWidgetItem *item)
-{
-    ui->souvenirListWidget->openPersistentEditor(item);
+    ui->stadiumLineEdit->setText(QString::fromStdString(thisMap.atIndex(current->listWidget()->currentRow()).value.getStadiumName()));
+    ui->locationLineEdit->setText(QString::fromStdString(thisMap.atIndex(current->listWidget()->currentRow()).value.getLocation()));
 }
 
 void MainWindow::on_souvenirListWidget_currentItemChanged(QListWidgetItem *current, QListWidgetItem *previous)
 {
-    if(ui->souvenirListWidget->isPersistentEditorOpen(previous))
-    {
-        thisMap.atIndex(previous->listWidget()->currentRow()).value.getSouvenir(previous->listWidget()->currentRow()).itemName = previous->text().toStdString();
-        ui->souvenirListWidget->closePersistentEditor(previous);
-    }
-    ui->souvenirPriceListWidget->setCurrentRow(current->listWidget()->currentRow());
-}
-
-void MainWindow::on_souvenirPriceListWidget_itemDoubleClicked(QListWidgetItem *item)
-{
-    ui->souvenirPriceListWidget->openPersistentEditor(item);
-}
-
-void MainWindow::on_souvenirPriceListWidget_currentItemChanged(QListWidgetItem *current, QListWidgetItem *previous)
-{
-    if(ui->souvenirPriceListWidget->isPersistentEditorOpen(previous))
-    {
-         if(isFloatNumber(previous->text()))
-         {
-            thisMap.atIndex(previous->listWidget()->currentRow()).value.getSouvenir(previous->listWidget()->row(previous)).setItemPrice(previous->text().toDouble());
-         }
-         else {
-             QMessageBox::warning(nullptr, "Error", "Invalid Price Input! Please Enter a float");
-             previous->setText(QString::number(thisMap.atIndex(previous->listWidget()->currentRow()).value.getSouvenir(previous->listWidget()->row(previous)).itemPrice));
-         }
-
-        ui->souvenirPriceListWidget->closePersistentEditor(previous);
-    }
-    ui->souvenirPriceListWidget->setCurrentRow(current->listWidget()->currentRow());
-}
-
-bool MainWindow::isFloatNumber(const QString& Qstring)
-{
-    string stdString = Qstring.toStdString();
-
-    string::const_iterator it = stdString.begin();
-    bool decimalPoint = false;
-    unsigned int minSize = 0;
-    if(stdString.size()>0 && (stdString[0] == '-' || stdString[0] == '+')){
-      it++;
-      minSize++;
-    }
-    while(it != stdString.end()){
-      if(*it == '.'){
-        if(!decimalPoint) decimalPoint = true;
-        else break;
-      }else if(!std::isdigit(*it) && ((*it!='f') || it+1 != stdString.end() || !decimalPoint)){
-        break;
-      }
-      ++it;
-    }
-    return stdString.size() > minSize && it == stdString.end();
-}
-
-bool MainWindow::isInteger(const QString &mystring)
-{
-   string s = mystring.toStdString();
-   if(s.empty() || ((!isdigit(s[0])) && (s[0] != '-') && (s[0] != '+'))) return false;
-
-   char * p;
-   strtol(s.c_str(), &p, 10);
-
-   return (*p == 0);
+    ui->changeSouvenirPushButton->setEnabled(true);
+    ui->changeSouvenirNameLineEdit->setReadOnly(false);
+    ui->changeSouvenirPriceLineEdit->setReadOnly(false);
+    ui->deleteSouvenirPushButton->setEnabled(true);
+    ui->souvenirChangeAllTeamsCheckbox->setCheckable(true);
+    ui->souvenirDeleteAllTeamsCheckbox->setCheckable(true);
+    ui->souvenirChangeAllTeamsCheckbox->setChecked(false);
+    ui->souvenirDeleteAllTeamsCheckbox->setChecked(false);
+    ui->souvenirChangingName->setText(QString::fromStdString(thisMap.atIndex(ui->stadiumListWidget->currentRow()).value.getSouvenir(ui->souvenirListWidget->currentRow()).itemName));
 }
 
 void MainWindow::on_capacityLineEdit_textEdited(const QString &arg1)
-{
-    if(isInteger(arg1))
+{    
+    if(arg1.toStdString() == "-")
+    {
+        QMessageBox::critical(nullptr, "Error!", "Capacity cannot be negative!");
+        ui->capacityLineEdit->clear();
+    }
+    else
     {
         thisMap.atIndex(ui->stadiumListWidget->currentRow()).value.setSeatingCapacity(arg1.toInt());
-    }
-    else {
-        QMessageBox::warning(nullptr, "Error", "Invalid Input! Please Enter an int");
     }
 }
 
@@ -939,7 +903,6 @@ void MainWindow::on_surfaceLineEdit_textEdited(const QString &arg1)
 {
     thisMap.atIndex(ui->stadiumListWidget->currentRow()).value.setPlayingSurface(arg1.toStdString());
 }
-
 
 void MainWindow::on_roofTypeLineEdit_textEdited(const QString &arg1)
 {
@@ -951,33 +914,193 @@ void MainWindow::on_typologyLineEdit_textEdited(const QString &arg1)
     thisMap.atIndex(ui->stadiumListWidget->currentRow()).value.setTypology(arg1.toStdString());
 }
 
+void MainWindow::on_locationLineEdit_textEdited(const QString &arg1)
+{
+    thisMap.atIndex(ui->stadiumListWidget->currentRow()).value.setLocation(arg1.toStdString());
+}
 
 void MainWindow::on_dateOpenedLineEdit_textEdited(const QString &arg1)
 {
-    if(isInteger(arg1))
+    if(arg1.toStdString() == "-")
+    {
+        QMessageBox::critical(nullptr, "Error!", "Date Opened cannot be negative!");
+        ui->dateOpenedLineEdit->clear();
+    }
+    else
     {
         thisMap.atIndex(ui->stadiumListWidget->currentRow()).value.setDateOpened(arg1.toInt());
     }
-    else {
-        QMessageBox::warning(nullptr, "Error", "Invalid Input! Please Enter an int");
-    }
-
 }
 
 void MainWindow::on_distToCenterLineEdit_textEdited(const QString &arg1)
 {
-    if(isInteger(arg1))
+    if(arg1.toStdString() == "-")
+    {
+        QMessageBox::critical(nullptr, "Error!", "Distance to center field cannot be negative!");
+        ui->distToCenterLineEdit->clear();
+    }
+    else
     {
         thisMap.atIndex(ui->stadiumListWidget->currentRow()).value.setDistanceToCenterField(arg1.toInt());
     }
-    else {
-        QMessageBox::warning(nullptr, "Error", "Invalid Input! Please Enter an int");
+}
+
+void MainWindow::on_stadiumLineEdit_textEdited(const QString &arg1)
+{
+    thisMap.atIndex(ui->stadiumListWidget->currentRow()).value.setStadiumName(arg1.toStdString());
+    ui->groupBox->setTitle(QString::fromStdString(thisMap.atIndex(ui->stadiumListWidget->currentRow()).value.getStadiumName()));
+}
+
+void MainWindow::on_addSouvenirPushButton_clicked()
+{
+    bool isExist = false;
+    bool isExisted = false;
+    bool isValid = true;
+
+    if(ui->souvenirAddItemNameTextEdit->text() == "" || ui->souvenirAddItemPriceTextEdit->text() == "")
+    {
+        QMessageBox::critical(nullptr, "Error!", "Please fill out both Name and Price for new souvenirs!");
+        isValid = false;
+    }
+
+    if(isValid)
+    {
+        if(ui->souvenirAddAllTeamsCheckbox->isChecked())
+        {
+            for(int i = 0; i < thisMap.mapSize(); i++)
+            {
+                isExist = false;
+                for(int k = 0; k < thisMap.atIndex(i).value.getSouvenirListSize(); k++)
+                {
+                    if(ui->souvenirAddItemNameTextEdit->text() == QString::fromStdString(thisMap.atIndex(i).value.getSouvenir(k).itemName))
+                    {
+                        isExisted = true;
+                        isExist = true;
+                        break;
+                    }
+                }
+
+                if(!isExist)
+                {
+                    thisMap.atIndex(i).value.addSouvenir(souvenir(ui->souvenirAddItemNameTextEdit->text().toStdString(),
+                                                                  ui->souvenirAddItemPriceTextEdit->text().toDouble()));
+                }
+            }
+        }
+        else
+        {
+            for(int k = 0; k < thisMap.atIndex(ui->stadiumListWidget->currentRow()).value.getSouvenirListSize(); k++)
+            {
+                if(ui->souvenirAddItemNameTextEdit->text() == QString::fromStdString(thisMap.atIndex(ui->stadiumListWidget->currentRow()).value.getSouvenir(k).itemName))
+                {
+                    QMessageBox::critical(nullptr, "Error!", "This team already exists!");
+                    isExist = true;
+                    break;
+                }
+            }
+
+            if(!isExist)
+            {
+                thisMap.atIndex(ui->stadiumListWidget->currentRow()).value.addSouvenir(souvenir(ui->souvenirAddItemNameTextEdit->text().toStdString(),
+                                                                                                ui->souvenirAddItemPriceTextEdit->text().toDouble()));
+            }
+
+        }
+    }
+    if(isExisted)
+    {
+        QMessageBox::information(nullptr, "Error!", "One or more teams already had this souvenir. All others have been added!");
+    }
+    resetManageStadiumsInformation();
+}
+
+void MainWindow::on_deleteSouvenirPushButton_clicked()
+{
+    if(ui->souvenirDeleteAllTeamsCheckbox->isChecked())
+    {
+        string deletedSouvenirName;
+        deletedSouvenirName = thisMap.atIndex(ui->stadiumListWidget->currentRow()).value.getSouvenir(ui->souvenirListWidget->currentRow()).itemName;
+        QMessageBox::StandardButton reply;
+        reply = QMessageBox::question(this, "Delete Souvenir", "Are you sure you would like to delete " + QString::fromStdString(deletedSouvenirName) + " from all teams?",
+                                    QMessageBox::Yes|QMessageBox::No);
+        if (reply == QMessageBox::Yes)
+        {
+            for(int i = 0; i < thisMap.mapSize(); i++)
+            {
+                for(int k = 0; k < thisMap.atIndex(i).value.getSouvenirListSize(); k++)
+                {
+                    if(thisMap.atIndex(i).value.getSouvenir(k).itemName == deletedSouvenirName)
+                    {
+                        thisMap.atIndex(i).value.deleteSouvenir(k);
+                        break;
+                    }
+                }
+            }
+            resetManageStadiumsInformation();
+        }
+    }
+    else
+    {
+        QMessageBox::StandardButton reply;
+        reply = QMessageBox::question(this, "Delete Souvenir", "Are you sure you would like to delete this souvenir?",
+                                    QMessageBox::Yes|QMessageBox::No);
+        if (reply == QMessageBox::Yes)
+        {
+            thisMap.atIndex(ui->stadiumListWidget->currentRow()).value.deleteSouvenir(ui->souvenirListWidget->currentRow());
+            resetManageStadiumsInformation();
+        }
     }
 }
 
-void MainWindow::on_newLocationLineEdit_textEdited(const QString &arg1)
+void MainWindow::on_changeSouvenirPriceLineEdit_textEdited(const QString &arg1)
 {
-    thisMap.atIndex(ui->stadiumListWidget->currentRow()).value.setDateOpened(arg1.toInt());
+    if(arg1.toStdString() == "-")
+    {
+        QMessageBox::critical(nullptr, "Error!", "New price cannot be negative!");
+        ui->changeSouvenirPriceLineEdit->clear();
+    }
+}
+
+void MainWindow::on_changeSouvenirPushButton_clicked()
+{
+    bool isValid = true;
+
+    if(ui->changeSouvenirNameLineEdit->text() == "" || ui->changeSouvenirPriceLineEdit->text() == "")
+    {
+        QMessageBox::critical(nullptr, "Error!", "Please fill out both name and Price for editing souvenirs!");
+        isValid = false;
+    }
+
+
+    if(isValid)
+    {
+        if(ui->souvenirChangeAllTeamsCheckbox->isChecked())
+        {
+            string check;
+            check = thisMap.atIndex(ui->stadiumListWidget->currentRow()).value.getSouvenir(ui->souvenirListWidget->currentRow()).itemName;
+            for(int i = 0; i < thisMap.mapSize(); i++)
+            {
+                for(int k = 0; k < thisMap.atIndex(i).value.getSouvenirListSize(); k++)
+                {
+                    if(thisMap.atIndex(i).value.getSouvenir(k).itemName == check)
+                    {
+                        thisMap.atIndex(i).value.changeSouvenir(ui->changeSouvenirNameLineEdit->text().toStdString(),
+                                                                ui->changeSouvenirPriceLineEdit->text().toDouble(),
+                                                                k);
+                        break;
+                    }
+                }
+            }
+            resetManageStadiumsInformation();
+        }
+        else
+        {
+            thisMap.atIndex(ui->stadiumListWidget->currentRow()).value.changeSouvenir(ui->changeSouvenirNameLineEdit->text().toStdString(),
+                                                                                      ui->changeSouvenirPriceLineEdit->text().toDouble(),
+                                                                                      ui->souvenirListWidget->currentRow());
+        }
+        resetManageStadiumsInformation();
+    }
 }
 
 //************************************ VIEWING STADIUMS (user) ************************************************
@@ -991,6 +1114,7 @@ void MainWindow::on_viewStadiumsButton_clicked()
     ui->roofTypeLineEdit_2->setReadOnly(true);
     ui->typologyLineEdit_2->setReadOnly(true);
     ui->dateOpenedLineEdit_2->setReadOnly(true);
+    ui->locationLineEdit_2->setReadOnly(true);
     ui->distToCenterLineEdit_2->setReadOnly(true);
 
     ui->stadiumListWidget_2->blockSignals(true);
@@ -1003,6 +1127,7 @@ void MainWindow::on_viewStadiumsButton_clicked()
     ui->roofTypeLineEdit_2->clear();
     ui->typologyLineEdit_2->clear();
     ui->dateOpenedLineEdit_2->clear();
+    ui->locationLineEdit_2->clear();
     ui->distToCenterLineEdit_2->clear();
     ui->roofTypeLineEdit_2->clear();
 
@@ -1039,8 +1164,8 @@ void MainWindow::on_stadiumListWidget_2_currentItemChanged(QListWidgetItem *curr
     ui->roofTypeLineEdit_2->setText(QString::fromStdString(thisMap.atIndex(current->listWidget()->currentRow()).value.getRoofType()));
     ui->typologyLineEdit_2->setText(QString::fromStdString(thisMap.atIndex(current->listWidget()->currentRow()).value.getBallParkTypology()));
     ui->dateOpenedLineEdit_2->setText(QString::number(thisMap.atIndex(current->listWidget()->currentRow()).value.getDateOpened()));
+    ui->locationLineEdit_2->setText(QString::fromStdString(thisMap.atIndex(current->listWidget()->currentRow()).value.getLocation()));
     ui->distToCenterLineEdit_2->setText(QString::number(thisMap.atIndex(current->listWidget()->currentRow()).value.getDistanceToCenterField()));
-    //ui->newLocationLineEdit->setText(QString::number(thisMap.atIndex(current->listWidget()->currentRow()).value.()));
 }
 
 //************************************ INFORMATION ************************************************
@@ -1320,6 +1445,7 @@ void MainWindow::on_takeTripButton_admin_clicked()
     //changes page
     ui->primaryPageStackedWidget->setCurrentIndex(2);
     ui->userStackedWidget->setCurrentIndex(1);
+    ui->takeTripStackedWidget->setCurrentIndex(0);
 }
 
 void MainWindow::on_takeTripButton_user_clicked()
@@ -1362,7 +1488,7 @@ void MainWindow::on_visitMultipleButton_clicked()
     for(int i = 0; i < thisMap.mapSize(); i++)
     {
         //fill up the availible teams stacked widget
-        ui->availibleStadiumsListWidget->addItem(QString::fromStdString(thisMap.atIndex(i).key));
+        ui->availibleStadiumsListWidget->addItem(QString::fromStdString(thisMap.atIndex(i).value.getStadiumName() + ": " + thisMap.atIndex(i).key));
         ui->availibleStadiumsListWidget->item(i)->setCheckState(Qt::Unchecked);
         ui->availibleStadiumsListWidget->item(i)->setFlags(Qt::ItemIsUserCheckable | Qt::ItemIsUserCheckable | Qt::ItemIsEnabled);
     }
@@ -1465,15 +1591,18 @@ void MainWindow::createGraph()
     file.open(MODIFIED_DISTANCES_OUTPUT_FILE);
     if(file.is_open())
     {
+       getline(file, startingLocation, ',');
+
        while(!file.eof())
        {
-           getline(file, startingLocation, ',');
            getline(file, endingLocation, ',');
            getline(file, distanceBetweenString, '\n');
 
            distanceBetween = stoi(distanceBetweenString);
 
            graph.insert(startingLocation, endingLocation, distanceBetween);
+
+           getline(file, startingLocation, ',');
        }
     }
 
@@ -1484,20 +1613,131 @@ void MainWindow::on_optimizeButton_clicked()
 {
     //run optimization algorithm, return
     //steps to the shortest path algo
+/*
+    QStringList stadiumTeam1;
 
     if(ui->selectedStadiumsListWidget->count() > 0)
     {
-        string startingCity;
+        vector<string> teamsToVisit;
+        int i = 0; //counter variable
+        for(i = 0; i < ui->selectedStadiumsListWidget->count(); i++)
+        {
+            //fill a vector of teams to visit
+            stadiumTeam1 = ui->selectedStadiumsListWidget->item(i)->text().split(": ");
+
+            teamsToVisit.push_back(stadiumTeam1[1].toStdString());
+        }
+*/
+        createGraph();
+
         vector<string> vertexList;
-        vector<int> weights;
-        vector<int> nextLocation;
+        vector<int> weights(graph.getGraphSize());
+        vector<int> nextLocation(graph.getGraphSize());
 
-        startingCity = ui->selectedStadiumsListWidget->item(0)->text().toStdString();
+        //parallel vectors
+        vector<vector<string>> paths; //two dimensional vector of all possible paths
+        vector<int> pathWeights; //contains the weight of each of paths, indecies correspond
 
-        //graph.dijkstraAlgorithm(startingCity, vertexList, )
+        //find shortest pathweight
+        //find min number in vector
+        int smallestWeight = 100000000000000;
+        int smallestIndex;
+
+       QStringList stadiumTeam;
+
+        int i = 0;
+       // for(i = 0; i < ui->selectedStadiumsListWidget->count() - 1; i++)
+        {
+            stadiumTeam = ui->selectedStadiumsListWidget->item(i)->text().split(": ");
+            string startingCity = stadiumTeam[0].toStdString();
+             /*
+            //sequential search for item to remove
+            bool found = false;
+            int k = 0;
+            while(!found)
+            {
+                if(stadiumTeam[1].toStdString() == teamsToVisit[k])
+                {
+                    teamsToVisit.erase(teamsToVisit.begin() + k);
+                    found = true;
+                }
+                else {
+                    ++k;
+                }
+            }
+*/
+            graph.dijkstraAlgorithm(startingCity, vertexList, weights, nextLocation);
 
 
-    }
+
+            for(unsigned int index = 1; index < graph.getGraphSize(); index++)
+                {
+                    //Call our determineTripVector to collect the entire path of the
+                    //Dijkstra
+                    vector<string> outputVec =
+                    graph.determineTripVector(startingCity, vertexList[index], nextLocation);
+
+                    paths.push_back(outputVec);
+
+                    //pathWeights[index] = weights[graph.getVertex(vertexList[index])];
+                    pathWeights.push_back(weights[graph.getVertex(vertexList[index])]);
+                }
+
+            smallestWeight = 10000000000000;
+            smallestIndex = 0;
+
+            for(int count = 0; count < pathWeights.size(); count++)
+            {
+                if(pathWeights[count] < smallestWeight && pathWeights[count] != 0)
+                {
+                    smallestWeight = pathWeights[count];
+                    smallestIndex = count;
+                }
+            }
+
+            //use the smallest index to access the paths matrix, obtain the next team
+            string nextStadium = paths[smallestIndex][paths[smallestIndex].size() - 1];
+
+            /*
+            //find the row that contains the next stadium, remove it from its current place, and put it in the position after the the starting stadium
+            QStringList stadiumTeam2;
+            found = false;
+            k = 0;
+            while(!found)
+            {
+                stadiumTeam2 = ui->selectedStadiumsListWidget->item(k)->text().split(": ");
+                if(nextStadium == stadiumTeam2[0].toStdString())
+                {
+                    found = true;
+
+                    //removes and inserts the item into the correct position in the list
+                    ui->selectedStadiumsListWidget->insertItem(i + 1, ui->selectedStadiumsListWidget->takeItem(k));
+                }
+                else {
+                    ++k;
+                }
+            }
+
+            ui->totalTripDistanceLineEdit->setText(QString::number(ui->totalTripDistanceLineEdit->text().toInt() + smallestWeight));
+*/
+          //  ++i;
+            vertexList.clear();
+            weights.clear();
+            nextLocation.clear();
+            paths.clear();
+            pathWeights.clear();
+            stadiumTeam.clear();
+
+        }
+
+
+        //steps
+        //1: obtain the smallest weight, move that name to the next position after the starting location in the list widget
+        //2: add weight to total distance traveled, pop the name off of the teamsToVisit vector
+        //3: make the new starting city the city we just found and repeat until all cities in list have been visited
+
+
+
 
 }
 
@@ -1514,7 +1754,8 @@ void MainWindow::on_performdfsButton_clicked()
     ui->dfsResultsListWidget->clear();
     ui->dfsResultsListWidget->blockSignals(false);
     ui->startingStadiumLineEdit->clear();
-    ui->takeTripStackedWidget->setCurrentIndex(3);
+
+    ui->takeTripStackedWidget->setCurrentIndex(5);
     for(int i = 0; i < thisMap.mapSize(); i++)
     {
         //fill up the availible teams stacked widget
@@ -1576,7 +1817,7 @@ void MainWindow::on_performbfsButton_clicked()
     ui->bfsResultsListWidget->clear();
     ui->bfsResultsListWidget->blockSignals(false);
     ui->bfsStartingStadiumLineEdit->clear();
-    ui->takeTripStackedWidget->setCurrentIndex(4);
+    ui->takeTripStackedWidget->setCurrentIndex(6);
     for(int i = 0; i < thisMap.mapSize(); i++)
     {
         //fill up the availible teams stacked widget
@@ -1627,7 +1868,7 @@ void MainWindow::on_performmstButton_clicked()
     ui->mstResultsListWidget->clear();
     ui->mstResultsListWidget->blockSignals(false);
     ui->mstStartingStadiumLineEdit->clear();
-    ui->takeTripStackedWidget->setCurrentIndex(5);
+    ui->takeTripStackedWidget->setCurrentIndex(7);
     for(int i = 0; i < thisMap.mapSize(); i++)
     {
         //fill up the availible teams stacked widget

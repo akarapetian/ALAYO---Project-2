@@ -41,9 +41,6 @@ public:
 
     void updateVectors();
 
-    bool isFloatNumber(const QString& Qstring);
-    bool isInteger(const QString &mystring);
-
     void createGraph();
 
     vector<vector<int>> createAdjacencyMatrix();
@@ -73,16 +70,6 @@ private slots:
 
     void on_stadiumListWidget_2_currentItemChanged(QListWidgetItem *current, QListWidgetItem *previous);
 
-    void on_stadiumListWidget_itemDoubleClicked(QListWidgetItem *item);
-
-    void on_souvenirListWidget_itemDoubleClicked(QListWidgetItem *item);
-
-    void on_souvenirListWidget_currentItemChanged(QListWidgetItem *current, QListWidgetItem *previous);
-
-    void on_souvenirPriceListWidget_itemDoubleClicked(QListWidgetItem *item);
-
-    void on_souvenirPriceListWidget_currentItemChanged(QListWidgetItem *current, QListWidgetItem *previous);
-
     void on_capacityLineEdit_textEdited(const QString &arg1);
 
     void on_surfaceLineEdit_textEdited(const QString &arg1);
@@ -94,8 +81,6 @@ private slots:
     void on_dateOpenedLineEdit_textEdited(const QString &arg1);
 
     void on_distToCenterLineEdit_textEdited(const QString &arg1);
-
-    void on_newLocationLineEdit_textEdited(const QString &arg1);
 
     void on_actionLogout_triggered();
 
@@ -139,13 +124,25 @@ private slots:
 
     void on_performmstButton_clicked();
 
-    void on_mstPerformMSTPushButton_clicked();
-
     void on_mstStadiumListWidget_currentItemChanged(QListWidgetItem *current, QListWidgetItem *previous);
 
     void on_mstPushButton_clicked();
 
     void on_mstBackButton_clicked();
+
+    void on_addSouvenirPushButton_clicked();
+
+    void on_deleteSouvenirPushButton_clicked();
+
+    void on_souvenirListWidget_currentItemChanged(QListWidgetItem *current, QListWidgetItem *previous);
+
+    void on_changeSouvenirPriceLineEdit_textEdited(const QString &arg1);
+
+    void on_changeSouvenirPushButton_clicked();
+
+    void on_locationLineEdit_textEdited(const QString &arg1);
+
+    void on_stadiumLineEdit_textEdited(const QString &arg1);
 
 private:
     Ui::MainWindow *ui;

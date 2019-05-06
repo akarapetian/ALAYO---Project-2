@@ -92,11 +92,10 @@ class Graph
         void clear();
 
         //Performs the dijkstras algorithm and finds the shortest distance
-        //from dallas to other cities
         void dijkstraAlgorithm(string startVertex,
                                vector<string> &temp,
-                               vector<int>    weight,
-                               vector<int>    nextLocation);
+                               vector<int>    &weight,
+                               vector<int>    &nextLocation);
 
         //Determines the minimum spanning tree and outputs total mileage and edges
         int MinimumSpanningTree(string         startVertex,
@@ -120,20 +119,20 @@ class Graph
 
         //Finds the closest vertex given the weight of all other edges
         void determineNearestVertex(vector<string> &temp,
-                                    vector<int>    weight,
-                                    vector<int>    nextLocation);
+                                    vector<int>    &weight,
+                                    vector<int>    &nextLocation);
         //Returns the distance of a city to the starting location, used as a
         //helper function for dijkstra and mst
         int determineStartingDistance(string desiredCity,
-                                      vector<int>    weight,
-                                      vector<int>    nextLocation);
+                                      vector<int>    &weight,
+                                      vector<int>    &nextLocation);
 
         //Returns the distance between one vertex and another
         int determineDistanceBetween(int firstVertex,
                                      int secondVertex);
 
         //Returns a vector of all the visited edges in the dijkstras algorithm
-        vector<string> determineTripVector(string start, string end, int next[]);
+        vector<string> determineTripVector(string start, string end, vector<int> &next);
 
 
         //DFS***********************************************************************
