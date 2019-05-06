@@ -154,8 +154,6 @@ void MainWindow::readFromFiles(bool readOriginal)
             //this makes it so vector 3 contains only american
             if(thisMLB.getLeague() == "American")
             {
-                v1.push_back(thisEntry);
-                v2.push_back(thisEntry);
                 v3.push_back(thisEntry);
                 v5.push_back(thisEntry);
                 v7 = v5;
@@ -164,13 +162,14 @@ void MainWindow::readFromFiles(bool readOriginal)
             //this makes it so vector 4 contain only national teams
             else if(thisMLB.getLeague() == "National")
             {
-                v1.push_back(thisEntry);
-                v2.push_back(thisEntry);
                 v4.push_back(thisEntry);
                 v5.push_back(thisEntry);
                 v7 = v5;
                 v8 = v5;
             }
+            v1.push_back(thisEntry);
+            v2.push_back(thisEntry);
+
             if(thisMLB.getRoofType() == "Open")
             {
                 v6.push_back(thisEntry);
@@ -415,8 +414,6 @@ void MainWindow::readExpansionFiles()
         //this makes it so vector 3 contains only american
         if(thisMLB.getLeague() == "American")
         {
-            v1.push_back(thisEntry);
-            v2.push_back(thisEntry);
             v3.push_back(thisEntry);
             v5.push_back(thisEntry);
             v7 = v5;
@@ -425,13 +422,15 @@ void MainWindow::readExpansionFiles()
         //this makes it so vector 4 contain only national teams
         else if(thisMLB.getLeague() == "National")
         {
-            v1.push_back(thisEntry);
-            v2.push_back(thisEntry);
             v4.push_back(thisEntry);
             v5.push_back(thisEntry);
             v7 = v5;
             v8 = v5;
         }
+
+        v1.push_back(thisEntry);
+        v2.push_back(thisEntry);
+
         if(thisMLB.getRoofType() == "Open")
         {
             v6.push_back(thisEntry);
@@ -676,6 +675,7 @@ void MainWindow::resetManageStadiumsInformation()
     ui->roofTypeLineEdit->clear();
     ui->typologyLineEdit->clear();
     ui->dateOpenedLineEdit->clear();
+    ui->leagueLineEdit->clear();
     ui->distToCenterLineEdit->clear();
     ui->locationLineEdit->clear();
     ui->stadiumLineEdit->clear();
@@ -697,6 +697,7 @@ void MainWindow::resetManageStadiumsInformation()
     ui->roofTypeLineEdit->setReadOnly(true);
     ui->typologyLineEdit->setReadOnly(true);
     ui->dateOpenedLineEdit->setReadOnly(true);
+    ui->leagueLineEdit->setReadOnly(true);
     ui->distToCenterLineEdit->setReadOnly(true);
     ui->locationLineEdit->setReadOnly(true);
     ui->stadiumLineEdit->setReadOnly(true);
@@ -760,8 +761,6 @@ void MainWindow::updateVectors(){
 
         //this makes it so vector 3 contains only american teams
         if(thisMap.atIndex(i).value.getLeague() == "American"){
-            v1.push_back(thisEntry);
-            v2.push_back(thisEntry);
             v3.push_back(thisEntry);
             v5.push_back(thisEntry);
             v7 = v5;
@@ -769,13 +768,15 @@ void MainWindow::updateVectors(){
         }
         //this makes it so vectors 4 containes national teams
         else if(thisMap.atIndex(i).value.getLeague() == "National"){
-            v1.push_back(thisEntry);
-            v2.push_back(thisEntry);
             v4.push_back(thisEntry);
             v5.push_back(thisEntry);
             v7 = v5;
             v8 = v5;
         }
+
+        v1.push_back(thisEntry);
+        v2.push_back(thisEntry);
+
         if(thisMap.atIndex(i).value.getRoofType() == "Open"){
             v6.push_back(thisEntry);
         }
@@ -841,6 +842,7 @@ void MainWindow::on_stadiumListWidget_currentItemChanged(QListWidgetItem *curren
     ui->roofTypeLineEdit->setReadOnly(false);
     ui->typologyLineEdit->setReadOnly(false);
     ui->dateOpenedLineEdit->setReadOnly(false);
+    ui->leagueLineEdit->setReadOnly(false);
     ui->distToCenterLineEdit->setReadOnly(false);
     ui->locationLineEdit->setReadOnly(false);
     ui->stadiumLineEdit->setReadOnly(false);
@@ -868,6 +870,7 @@ void MainWindow::on_stadiumListWidget_currentItemChanged(QListWidgetItem *curren
     ui->roofTypeLineEdit->setText(QString::fromStdString(thisMap.atIndex(current->listWidget()->currentRow()).value.getRoofType()));
     ui->typologyLineEdit->setText(QString::fromStdString(thisMap.atIndex(current->listWidget()->currentRow()).value.getBallParkTypology()));
     ui->dateOpenedLineEdit->setText(QString::number(thisMap.atIndex(current->listWidget()->currentRow()).value.getDateOpened()));
+    ui->leagueLineEdit->setText(QString::fromStdString(thisMap.atIndex(current->listWidget()->currentRow()).value.getLeague()));
     ui->distToCenterLineEdit->setText(QString::number(thisMap.atIndex(current->listWidget()->currentRow()).value.getDistanceToCenterField()));
     ui->stadiumLineEdit->setText(QString::fromStdString(thisMap.atIndex(current->listWidget()->currentRow()).value.getStadiumName()));
     ui->locationLineEdit->setText(QString::fromStdString(thisMap.atIndex(current->listWidget()->currentRow()).value.getLocation()));
@@ -930,6 +933,11 @@ void MainWindow::on_dateOpenedLineEdit_textEdited(const QString &arg1)
     {
         thisMap.atIndex(ui->stadiumListWidget->currentRow()).value.setDateOpened(arg1.toInt());
     }
+}
+
+void MainWindow::on_leagueLineEdit_textEdited(const QString &arg1)
+{
+    thisMap.atIndex(ui->stadiumListWidget->currentRow()).value.setLeague(arg1.toStdString());
 }
 
 void MainWindow::on_distToCenterLineEdit_textEdited(const QString &arg1)
@@ -1114,6 +1122,7 @@ void MainWindow::on_viewStadiumsButton_clicked()
     ui->roofTypeLineEdit_2->setReadOnly(true);
     ui->typologyLineEdit_2->setReadOnly(true);
     ui->dateOpenedLineEdit_2->setReadOnly(true);
+    ui->leagueLineEdit_2->setReadOnly(true);
     ui->locationLineEdit_2->setReadOnly(true);
     ui->distToCenterLineEdit_2->setReadOnly(true);
 
@@ -1127,6 +1136,7 @@ void MainWindow::on_viewStadiumsButton_clicked()
     ui->roofTypeLineEdit_2->clear();
     ui->typologyLineEdit_2->clear();
     ui->dateOpenedLineEdit_2->clear();
+    ui->leagueLineEdit_2->clear();
     ui->locationLineEdit_2->clear();
     ui->distToCenterLineEdit_2->clear();
     ui->roofTypeLineEdit_2->clear();
@@ -1164,6 +1174,7 @@ void MainWindow::on_stadiumListWidget_2_currentItemChanged(QListWidgetItem *curr
     ui->roofTypeLineEdit_2->setText(QString::fromStdString(thisMap.atIndex(current->listWidget()->currentRow()).value.getRoofType()));
     ui->typologyLineEdit_2->setText(QString::fromStdString(thisMap.atIndex(current->listWidget()->currentRow()).value.getBallParkTypology()));
     ui->dateOpenedLineEdit_2->setText(QString::number(thisMap.atIndex(current->listWidget()->currentRow()).value.getDateOpened()));
+    ui->leagueLineEdit_2->setText(QString::fromStdString(thisMap.atIndex(current->listWidget()->currentRow()).value.getLeague()));
     ui->locationLineEdit_2->setText(QString::fromStdString(thisMap.atIndex(current->listWidget()->currentRow()).value.getLocation()));
     ui->distToCenterLineEdit_2->setText(QString::number(thisMap.atIndex(current->listWidget()->currentRow()).value.getDistanceToCenterField()));
 }
@@ -1494,6 +1505,9 @@ void MainWindow::on_visitMultipleButton_clicked()
     }
 
     ui->takeTripStackedWidget->setCurrentIndex(1);
+
+    ui->optimizeButton->setEnabled(false);
+    ui->goButton->setEnabled(false);
 }
 
 void MainWindow::on_selectAllTeamsCheckBox_stateChanged(int arg1)
@@ -1534,11 +1548,14 @@ void MainWindow::on_multipleSelectionPageBackButton_clicked()
 
 void MainWindow::on_availibleStadiumsListWidget_itemChanged(QListWidgetItem *item)
 {
+    QStringList stadiumTeam;
     //when user checks a team, it moves it into the next list widget
     if(item->checkState() == 2)
     {
         //item is checked
-        ui->selectedStadiumsListWidget->addItem(item->text());
+
+        stadiumTeam = item->text().split(": ");
+        ui->selectedStadiumsListWidget->addItem(stadiumTeam[0]);
     }
     else if(item->checkState() == 0)
     {
@@ -1548,7 +1565,8 @@ void MainWindow::on_availibleStadiumsListWidget_itemChanged(QListWidgetItem *ite
         int k = 0;
         while(!found && k < ui->selectedStadiumsListWidget->count())
         {
-            if(item->text() == ui->selectedStadiumsListWidget->item(k)->text())
+            stadiumTeam = item->text().split(": ");
+            if(stadiumTeam[0] == ui->selectedStadiumsListWidget->item(k)->text())
             {
                 found = true;
             }
@@ -1558,6 +1576,18 @@ void MainWindow::on_availibleStadiumsListWidget_itemChanged(QListWidgetItem *ite
         }
 
         ui->selectedStadiumsListWidget->takeItem(k);
+    }
+
+    //new stuff
+    ui->selectedStadiumsListWidget->setDragEnabled(true);
+
+    if(ui->selectedStadiumsListWidget->count() > 1)
+    {
+        ui->optimizeButton->setEnabled(true);
+        ui->goButton->setEnabled(false);
+    }
+    else {
+        ui->optimizeButton->setEnabled(false);
     }
 }
 
@@ -1611,134 +1641,173 @@ void MainWindow::createGraph()
 
 void MainWindow::on_optimizeButton_clicked()
 {
-    //run optimization algorithm, return
-    //steps to the shortest path algo
-/*
-    QStringList stadiumTeam1;
+    //CHANGES I MADE
+    //i made it so that when you check the box, it just adds the stadium name to the selectedstadiumslistwidget
+    //that is found in availibleStadiumsListWidget_itemChanged
 
-    if(ui->selectedStadiumsListWidget->count() > 0)
+    //i also modified visitmultiplebutton clicked, added one line
+
+    if(ui->selectedStadiumsListWidget->count() > 1)
     {
-        vector<string> teamsToVisit;
-        int i = 0; //counter variable
-        for(i = 0; i < ui->selectedStadiumsListWidget->count(); i++)
-        {
-            //fill a vector of teams to visit
-            stadiumTeam1 = ui->selectedStadiumsListWidget->item(i)->text().split(": ");
+        vector<string> orderedStadiumList;
+        vector<int> orderedWeightsList;
 
-            teamsToVisit.push_back(stadiumTeam1[1].toStdString());
+        vector<string> stadiumsToVisit;
+
+        //obtain starting location
+        string startingStadium;
+
+        startingStadium = ui->selectedStadiumsListWidget->item(0)->text().toStdString();
+
+        for(int i = 0; i < ui->selectedStadiumsListWidget->count(); i++)
+        {
+            stadiumsToVisit.push_back(ui->selectedStadiumsListWidget->item(i)->text().toStdString());
         }
-*/
+
+
         createGraph();
 
         vector<string> vertexList;
+
         vector<int> weights(graph.getGraphSize());
         vector<int> nextLocation(graph.getGraphSize());
 
-        //parallel vectors
-        vector<vector<string>> paths; //two dimensional vector of all possible paths
-        vector<int> pathWeights; //contains the weight of each of paths, indecies correspond
+        vector<vector<string>> paths;
+        vector<int> pathWeights;
 
-        //find shortest pathweight
-        //find min number in vector
-        int smallestWeight = 100000000000000;
-        int smallestIndex;
+        vector<vector<string>> properPaths;
+        vector<int> properPathWeights;
 
-       QStringList stadiumTeam;
+        stadiumsToVisit.erase(stadiumsToVisit.begin());
 
-        int i = 0;
-       // for(i = 0; i < ui->selectedStadiumsListWidget->count() - 1; i++)
+        int smallestWeight = 10000000000;
+        int smallestWeightIndex = 0;
+
+        int count = 0;
+        while(stadiumsToVisit.size() > 0)
         {
-            stadiumTeam = ui->selectedStadiumsListWidget->item(i)->text().split(": ");
-            string startingCity = stadiumTeam[0].toStdString();
-             /*
-            //sequential search for item to remove
-            bool found = false;
-            int k = 0;
-            while(!found)
-            {
-                if(stadiumTeam[1].toStdString() == teamsToVisit[k])
-                {
-                    teamsToVisit.erase(teamsToVisit.begin() + k);
-                    found = true;
-                }
-                else {
-                    ++k;
-                }
-            }
-*/
-            graph.dijkstraAlgorithm(startingCity, vertexList, weights, nextLocation);
-
-
-
-            for(unsigned int index = 1; index < graph.getGraphSize(); index++)
-                {
-                    //Call our determineTripVector to collect the entire path of the
-                    //Dijkstra
-                    vector<string> outputVec =
-                    graph.determineTripVector(startingCity, vertexList[index], nextLocation);
-
-                    paths.push_back(outputVec);
-
-                    //pathWeights[index] = weights[graph.getVertex(vertexList[index])];
-                    pathWeights.push_back(weights[graph.getVertex(vertexList[index])]);
-                }
-
-            smallestWeight = 10000000000000;
-            smallestIndex = 0;
-
-            for(int count = 0; count < pathWeights.size(); count++)
-            {
-                if(pathWeights[count] < smallestWeight && pathWeights[count] != 0)
-                {
-                    smallestWeight = pathWeights[count];
-                    smallestIndex = count;
-                }
-            }
-
-            //use the smallest index to access the paths matrix, obtain the next team
-            string nextStadium = paths[smallestIndex][paths[smallestIndex].size() - 1];
-
-            /*
-            //find the row that contains the next stadium, remove it from its current place, and put it in the position after the the starting stadium
-            QStringList stadiumTeam2;
-            found = false;
-            k = 0;
-            while(!found)
-            {
-                stadiumTeam2 = ui->selectedStadiumsListWidget->item(k)->text().split(": ");
-                if(nextStadium == stadiumTeam2[0].toStdString())
-                {
-                    found = true;
-
-                    //removes and inserts the item into the correct position in the list
-                    ui->selectedStadiumsListWidget->insertItem(i + 1, ui->selectedStadiumsListWidget->takeItem(k));
-                }
-                else {
-                    ++k;
-                }
-            }
-
-            ui->totalTripDistanceLineEdit->setText(QString::number(ui->totalTripDistanceLineEdit->text().toInt() + smallestWeight));
-*/
-          //  ++i;
             vertexList.clear();
-            weights.clear();
-            nextLocation.clear();
+
+            //might not want to do this
             paths.clear();
             pathWeights.clear();
-            stadiumTeam.clear();
 
+            weights.clear();
+            nextLocation.clear();
+            for(int m = 0; m < graph.getGraphSize(); m++)
+            {
+                weights.push_back(0);
+                nextLocation.push_back(0);
+            }
+
+            properPaths.clear();
+            properPathWeights.clear();
+
+            //set starting stadium
+            if(count > 0)
+            {
+                //begins on second loop
+                startingStadium = orderedStadiumList.back();
+            }
+
+            graph.dijkstraAlgorithm(startingStadium, vertexList, weights, nextLocation);
+
+            for(unsigned int index = 1; index < graph.getGraphSize(); index++)
+            {
+
+                //if the next location is not in the list widget, we do not care about the path
+                vector<string> outputVec = graph.determineTripVector(startingStadium, vertexList[index], nextLocation);
+
+                paths.push_back(outputVec);
+
+                pathWeights.push_back(weights[graph.getVertex(vertexList[index])]);
+            }
+
+
+            //loop through paths and remove the paths that visit locations not in the list widget
+            for(int i = 0; i < paths.size(); i++)
+            {
+                //search to see if the final location of path is in the teamstovisit vector
+                //sequential search
+
+                bool found = false;
+                int k = 0;
+                while(k < stadiumsToVisit.size() && !found)
+                {
+                    if(paths[i][paths[i].size() -1] == stadiumsToVisit[k])
+                    {
+                        //the final location exists in the teams to visit
+                        //do nothing to the paths vector
+                        found = true;
+
+                        properPaths.push_back(paths[i]);
+                        properPathWeights.push_back(pathWeights[i]);
+                    }
+                    else {
+                        ++k;
+                    }
+                }
+            }
+
+            smallestWeight = 10000000000;
+            smallestWeightIndex = 0;
+
+            if(properPaths.size() > 1)
+            {
+                //locate shortest path in properpaths, find index and weight
+                for(int i = 0; i < properPathWeights.size(); i++)
+                {
+                    if(properPathWeights[i] < smallestWeight && properPathWeights[i] != 0)
+                    {
+                        smallestWeight = properPathWeights[i];
+                        smallestWeightIndex = i;
+                    }
+                }
+            }
+            else
+            {
+                smallestWeight = properPathWeights[0];
+                smallestWeightIndex = 0;
+            }
+
+
+
+            //at this point, we have a list of paths, which all visit locations that are outlined by the user
+            //we also have the shortest path and the index to it
+
+            //next step is to save the location and weight into two final parallel vectors
+
+            orderedStadiumList.push_back(properPaths[smallestWeightIndex][properPaths[smallestWeightIndex].size() - 1]);
+            orderedWeightsList.push_back(smallestWeight);
+
+            //remove the stadium from the stadiumstovisit vector
+
+            for(int h = 0; h < stadiumsToVisit.size(); h++)
+            {
+                QTextStream(stdout) << QString::fromStdString(orderedStadiumList.back()) << endl;
+                if(orderedStadiumList.back() == stadiumsToVisit[h])
+                {
+                    stadiumsToVisit.erase(stadiumsToVisit.begin() + h);
+                }
+            }
+            count++;
         }
 
-
-        //steps
-        //1: obtain the smallest weight, move that name to the next position after the starting location in the list widget
-        //2: add weight to total distance traveled, pop the name off of the teamsToVisit vector
-        //3: make the new starting city the city we just found and repeat until all cities in list have been visited
+        //OPTIMIZATION ALGORITHM COMPLETE
+        // below is simply re-formatting the list widget into the correct order
 
 
 
+        QString firstStadium = ui->selectedStadiumsListWidget->item(0)->text();
+        ui->selectedStadiumsListWidget->clear();
+        ui->selectedStadiumsListWidget->addItem(firstStadium);
 
+        for(int l = 0; l < orderedStadiumList.size(); l++)
+        ui->selectedStadiumsListWidget->addItem(QString::fromStdString(orderedStadiumList[l]));
+    }
+    ui->optimizeButton->setEnabled(false);
+    ui->goButton->setEnabled(true);
+    ui->selectedStadiumsListWidget->setDragEnabled(false);
 }
 
 void MainWindow::on_performdfsButton_clicked()

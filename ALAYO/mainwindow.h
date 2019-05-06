@@ -144,6 +144,8 @@ private slots:
 
     void on_stadiumLineEdit_textEdited(const QString &arg1);
 
+    void on_leagueLineEdit_textEdited(const QString &arg1);
+
 private:
     Ui::MainWindow *ui;
     Map thisMap;
