@@ -677,7 +677,8 @@ void MainWindow::resetManageStadiumsInformation()
     ui->typologyLineEdit->clear();
     ui->dateOpenedLineEdit->clear();
     ui->distToCenterLineEdit->clear();
-    ui->newLocationLineEdit->clear();
+    ui->locationLineEdit->clear();
+    ui->stadiumLineEdit->clear();
     ui->roofTypeLineEdit->clear();
     ui->souvenirAddItemNameTextEdit->clear();
     ui->souvenirAddItemPriceTextEdit->clear();
@@ -697,7 +698,8 @@ void MainWindow::resetManageStadiumsInformation()
     ui->typologyLineEdit->setReadOnly(true);
     ui->dateOpenedLineEdit->setReadOnly(true);
     ui->distToCenterLineEdit->setReadOnly(true);
-    ui->newLocationLineEdit->setReadOnly(true);
+    ui->locationLineEdit->setReadOnly(true);
+    ui->stadiumLineEdit->setReadOnly(true);
     ui->roofTypeLineEdit->setReadOnly(true);
     ui->souvenirAddItemNameTextEdit->setReadOnly(true);
     ui->souvenirAddItemPriceTextEdit->setReadOnly(true);
@@ -840,13 +842,15 @@ void MainWindow::on_stadiumListWidget_currentItemChanged(QListWidgetItem *curren
     ui->typologyLineEdit->setReadOnly(false);
     ui->dateOpenedLineEdit->setReadOnly(false);
     ui->distToCenterLineEdit->setReadOnly(false);
-    ui->newLocationLineEdit->setReadOnly(false);
+    ui->locationLineEdit->setReadOnly(false);
+    ui->stadiumLineEdit->setReadOnly(false);
     ui->roofTypeLineEdit->setReadOnly(false);
     ui->souvenirAddItemNameTextEdit->setReadOnly(false);
     ui->souvenirAddItemPriceTextEdit->setReadOnly(false);
     ui->souvenirAddAllTeamsCheckbox->setCheckable(true);
     ui->addSouvenirPushButton->setEnabled(true);
-    ui->newLocationLineEdit->clear();
+    ui->locationLineEdit->clear();
+    ui->stadiumLineEdit->clear();
     ui->souvenirAddItemNameTextEdit->clear();
     ui->souvenirAddItemPriceTextEdit->clear();
     ui->changeSouvenirNameLineEdit->setReadOnly(true);
@@ -865,6 +869,8 @@ void MainWindow::on_stadiumListWidget_currentItemChanged(QListWidgetItem *curren
     ui->typologyLineEdit->setText(QString::fromStdString(thisMap.atIndex(current->listWidget()->currentRow()).value.getBallParkTypology()));
     ui->dateOpenedLineEdit->setText(QString::number(thisMap.atIndex(current->listWidget()->currentRow()).value.getDateOpened()));
     ui->distToCenterLineEdit->setText(QString::number(thisMap.atIndex(current->listWidget()->currentRow()).value.getDistanceToCenterField()));
+    ui->stadiumLineEdit->setText(QString::fromStdString(thisMap.atIndex(current->listWidget()->currentRow()).value.getStadiumName()));
+    ui->locationLineEdit->setText(QString::fromStdString(thisMap.atIndex(current->listWidget()->currentRow()).value.getLocation()));
 }
 
 void MainWindow::on_souvenirListWidget_currentItemChanged(QListWidgetItem *current, QListWidgetItem *previous)
@@ -908,6 +914,11 @@ void MainWindow::on_typologyLineEdit_textEdited(const QString &arg1)
     thisMap.atIndex(ui->stadiumListWidget->currentRow()).value.setTypology(arg1.toStdString());
 }
 
+void MainWindow::on_locationLineEdit_textEdited(const QString &arg1)
+{
+    thisMap.atIndex(ui->stadiumListWidget->currentRow()).value.setLocation(arg1.toStdString());
+}
+
 void MainWindow::on_dateOpenedLineEdit_textEdited(const QString &arg1)
 {
     if(arg1.toStdString() == "-")
@@ -934,7 +945,7 @@ void MainWindow::on_distToCenterLineEdit_textEdited(const QString &arg1)
     }
 }
 
-void MainWindow::on_newLocationLineEdit_textEdited(const QString &arg1)
+void MainWindow::on_stadiumLineEdit_textEdited(const QString &arg1)
 {
     thisMap.atIndex(ui->stadiumListWidget->currentRow()).value.setStadiumName(arg1.toStdString());
     ui->groupBox->setTitle(QString::fromStdString(thisMap.atIndex(ui->stadiumListWidget->currentRow()).value.getStadiumName()));
@@ -1103,6 +1114,7 @@ void MainWindow::on_viewStadiumsButton_clicked()
     ui->roofTypeLineEdit_2->setReadOnly(true);
     ui->typologyLineEdit_2->setReadOnly(true);
     ui->dateOpenedLineEdit_2->setReadOnly(true);
+    ui->locationLineEdit_2->setReadOnly(true);
     ui->distToCenterLineEdit_2->setReadOnly(true);
 
     ui->stadiumListWidget_2->blockSignals(true);
@@ -1115,6 +1127,7 @@ void MainWindow::on_viewStadiumsButton_clicked()
     ui->roofTypeLineEdit_2->clear();
     ui->typologyLineEdit_2->clear();
     ui->dateOpenedLineEdit_2->clear();
+    ui->locationLineEdit_2->clear();
     ui->distToCenterLineEdit_2->clear();
     ui->roofTypeLineEdit_2->clear();
 
@@ -1151,8 +1164,8 @@ void MainWindow::on_stadiumListWidget_2_currentItemChanged(QListWidgetItem *curr
     ui->roofTypeLineEdit_2->setText(QString::fromStdString(thisMap.atIndex(current->listWidget()->currentRow()).value.getRoofType()));
     ui->typologyLineEdit_2->setText(QString::fromStdString(thisMap.atIndex(current->listWidget()->currentRow()).value.getBallParkTypology()));
     ui->dateOpenedLineEdit_2->setText(QString::number(thisMap.atIndex(current->listWidget()->currentRow()).value.getDateOpened()));
+    ui->locationLineEdit_2->setText(QString::fromStdString(thisMap.atIndex(current->listWidget()->currentRow()).value.getLocation()));
     ui->distToCenterLineEdit_2->setText(QString::number(thisMap.atIndex(current->listWidget()->currentRow()).value.getDistanceToCenterField()));
-    //ui->newLocationLineEdit->setText(QString::number(thisMap.atIndex(current->listWidget()->currentRow()).value.()));
 }
 
 //************************************ INFORMATION ************************************************
@@ -1578,15 +1591,18 @@ void MainWindow::createGraph()
     file.open(MODIFIED_DISTANCES_OUTPUT_FILE);
     if(file.is_open())
     {
+       getline(file, startingLocation, ',');
+
        while(!file.eof())
        {
-           getline(file, startingLocation, ',');
            getline(file, endingLocation, ',');
            getline(file, distanceBetweenString, '\n');
 
            distanceBetween = stoi(distanceBetweenString);
 
            graph.insert(startingLocation, endingLocation, distanceBetween);
+
+           getline(file, startingLocation, ',');
        }
     }
 

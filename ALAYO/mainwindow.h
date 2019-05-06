@@ -82,8 +82,6 @@ private slots:
 
     void on_distToCenterLineEdit_textEdited(const QString &arg1);
 
-    void on_newLocationLineEdit_textEdited(const QString &arg1);
-
     void on_actionLogout_triggered();
 
     void on_visitMultipleButton_clicked();
@@ -141,6 +139,10 @@ private slots:
     void on_changeSouvenirPriceLineEdit_textEdited(const QString &arg1);
 
     void on_changeSouvenirPushButton_clicked();
+
+    void on_locationLineEdit_textEdited(const QString &arg1);
+
+    void on_stadiumLineEdit_textEdited(const QString &arg1);
 
 private:
     Ui::MainWindow *ui;

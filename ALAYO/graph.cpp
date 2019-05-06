@@ -704,7 +704,7 @@ int Graph::DepthFirstSearch(string beginLocation, vector<string> &theGraph)
     //As long as the number of visited locations does not equal the size of the
     //graph, continue searching for the next vertex and recursively call the
     //function again
-    if (visitedLocations < graph.size() -1)
+    if (visitedLocations < graph.size())
     {
         int nextVertex = dfsHelper(currentVertex, theGraph);
         DepthFirstSearch(graph.at(nextVertex).startingCity, theGraph);
