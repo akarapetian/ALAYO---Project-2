@@ -3,6 +3,7 @@ Chase Field,Minute Maid Park,1115
 Chase Field,Oakland Alameda County Coliseum,650
 Chase Field,Petco Park,300
 Chase Field,Globe Life Park in Arlington,870
+Chase Field,Las Vegas Stadium,250
 Sun Trust Park,Great American Ball Park,375
 Sun Trust Park,Marlins Park,600
 Sun Trust Park,Globe Life Park in Arlington,740
@@ -48,6 +49,7 @@ Angel Stadium,Petco Park,110
 Dodger Stadium,Angel Stadium,50
 Dodger Stadium,Target Field,1500
 Dodger Stadium,Oakland Alameda County Coliseum,340
+Dodger Stadium,Las Vegas Stadium,300
 Marlins Park,Sun Trust Park,600
 Marlins Park,Fenway Park,1255
 Marlins Park,Minute Maid Park,965
@@ -68,6 +70,7 @@ Yankee Stadium,PNC Park,315
 Oakland Alameda County Coliseum,Chase Field,650
 Oakland Alameda County Coliseum,Dodger Stadium,340
 Oakland Alameda County Coliseum,AT&T Park,50
+Oakland Alameda County Coliseum,Las Vegas Stadium,325
 Citizens Bank Park,Oriole Park at Camden Yards,90
 Citizens Bank Park,Yankee Stadium,80
 PNC Park,Great American Ball Park,260
@@ -104,3 +107,6 @@ Nationals Park,Sun Trust Park,560
 Nationals Park,Oriole Park at Camden Yards,50
 Nationals Park,Marlins Park,930
 Nationals Park,PNC Park,195
+Las Vegas Stadium,Chase Field,250
+Las Vegas Stadium,Dodger Stadium,300
+Las Vegas Stadium,Oakland Alameda County Coliseum,325

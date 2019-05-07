@@ -1,3 +1,28 @@
+/*
+ *  Baseball Trip Project
+ *  Spring 2019
+ *
+ *  Oscar Lopez <olopez23@saddleback.edu>
+ *  Anthony Karapetian <akarapetian1@saddleback.edu>
+ *  Alek Peratoner <aperatoner0@saddleback.edu>
+ *  Luke Schrezenmeier <lschrezenmeier0@saddleback.edu>
+ *  Yuchen Yao <yyao7@ivc.edu>
+ *
+ *  Descr: Baseball Project for Spring 2019 CS1D
+ *  Professor: Jerry Lebowitz
+ *
+ *  This program is an application in which a baseball
+ *  can view information regarding any major league
+ *  baseball team as well as take a dream trip and
+ *  visit any stadium wanted.
+ *
+ **/
+/*
+    File: graph.h
+    Class holding the key algorithms of the program.
+    Dijkstra, BFS, DFS, MST
+*/
+
 #ifndef GRAPH_H
 #define GRAPH_H
 #include <iostream>
@@ -14,18 +39,24 @@ using namespace std;
  * to another(string) as well as the distance between them(int). It will also
  * have a boolean value(initialized to false) to account for discovery edges
  ******************************************************************************/
+
+/**
+ * @brief Struct edge - struct that holds the location of start and finish, as well
+ * as the discovery edges and distances between
+ */
 struct edge
 {
-    string beginningLocation;	//The starting city for each edge
+    string beginningLocation;	/**<The starting city for each edge*/
 
-    string endingLocation;		//The destination that connects each edge
+    string endingLocation;		/**<The destination that connects each edge*/
 
-    bool   isDiscoveryEdge;		//Checks if the edge has been visited before
+    bool   isDiscoveryEdge;		/**<Checks if the edge has been visited before*/
 
-    int    distanceBetween;		//Logs the distance between the beginning and
-                                //ending locations
+    int    distanceBetween;		/**<Logs the distance between the beginning and ending locations*/
 
-    //Constructor for our edge attributes
+    /**
+    * @brief Restaurant - default constructor for edge data
+    */
     edge()
     {
         beginningLocation = "Not Specified";
@@ -46,16 +77,21 @@ struct edge
  * information such as the discovery edges and back edges as well as outputting
  * the entire graph once the program has finished
  ******************************************************************************/
+
+/**
+* @brief Struct vertex - struct for the vertrex
+*/
 struct vertex
 {
-    string       startingCity; //The city for a given vertex
+    string       startingCity; /**<The city for a given vertex*/
 
-    bool         isVisited;    //Boolean value to check if its visited
+    bool         isVisited;    /**<Boolean value to check if its visited*/
 
-    vector<edge> edgeVector;   //Vector containing a list of all of our edges
-                               //connected to each iteration of a vertex
+    vector<edge> edgeVector;   /**<Vector containing a list of all of our edges connected to each iteration of a vertex*/
 
-    //Constructor for the vertex attributes
+    /**
+    * @brief Default constructor vertex
+    */
     vertex()
     {
         startingCity = "Not Specified";
@@ -73,106 +109,198 @@ struct vertex
  * to perform the Depth First Search of our graph(DFS) which will move through
  * the graph and returns the total distance traveled for the graph.
  ******************************************************************************/
+
+/**
+* @brief Struct vertex - struct for the vertrex
+*/
 class Graph
 {
     public:
-        //Default constructor for our graph class
+        /**
+        * @brief Default constructor for our graph class
+        */
         Graph();
 
-        //Default Destructor for our graph class
+        /**
+        * @brief Default Destructor for our graph class
+        */
         ~Graph();
 
-        //Inserts edges into the graph given a starting and ending location as
-        //well as the distance between each city
+        /**
+        * @brief Inserts edges into the graph given a starting
+        *        and ending location as well as the distance
+        *        between each city
+        * @param begin - beginning city
+        * @param end   - ending city
+        * @param distanceBetween - weight of the edges
+        */
         void insert(string begin,
                     string end,
                     int    distanceBetween);
 
-        //erases all entries in the graph
+
+        /**
+        * @brief erases all entries in the graph
+        */
         void clear();
 
-        //Performs the dijkstras algorithm and finds the shortest distance
+        /**
+        * @brief Dijkstras Algorithm. Finds the shortest path
+        * @param startVertex - starting location
+        * @param temp - vectorList
+        * @param weight   - vector holding weights
+        * @param nextLocation - vector holding the next location
+        */
         void dijkstraAlgorithm(string startVertex,
                                vector<string> &temp,
                                vector<int>    &weight,
                                vector<int>    &nextLocation);
 
-        //Determines the minimum spanning tree and outputs total mileage and edges
-        int MinimumSpanningTree(string         startVertex,
-                vector<string> &temp);
+        /**
+        * @brief MST - determins the minimum spanning tree as well
+        *              as displaying the total distance
+        * @param startVertex - start vertex
+        * @param weight   - vector holding weights
+        * @param nextLocation - vector holding the next location
+        * @return distance - returns total distance
+        */
+        int MinimumSpanningTree(string startVertex,
+                                vector<string> &temp);
 
-        //Aids the MST method by calculating distance and finding the next
-        //vertex
+        /**
+        * @brief Aids the MST method by calculating distance and finding the next vertex
+        * @param temp - temporary vector
+        * @return distance - distance traveled
+        */
         int mstHelper(vector<string> &temp);
 
-        //Returns the total size of the graph
+        /**
+        * @brief Returns the total size of the graph
+        * @return size - size of the graph
+        */
         unsigned int getGraphSize();
 
-        //Finds the location of the vertex given the name of the vertex
+        /**
+        * @brief Finds the location of the vertex given the name of the vertex
+        * @param desiredCity - city they would like to find
+        * @return returns the vertex
+        */
         unsigned int getVertex(string desiredCity);
 
-        //Returns the next smallest edge for a specific vertex
+        /**
+        * @brief Returns the next smallest edge for a specific vertex
+        * @param desiredVertex - vertex they would like to find
+        * @return returns the smallest edge
+        */
         int getSmallestEdge(int desiredVertex);
 
-        //Will return the number of discover edges within a specific vertex
+        /**
+        * @brief Will return the number of discover edges within a specific vertex
+        * @param desiredVertex - vertex they would like to find
+        * @return returns the Discovery edges
+        */
         unsigned int getDiscoveryEdges(int desiredVertex);
 
-        //Finds the closest vertex given the weight of all other edges
+        /**
+        * @brief Finds the closest vertex given the weight of all other edges
+        * @param temp - temporary vector
+        * @param weight - vector holding weights
+        * @param nextLocation - vector holding next location
+        */
         void determineNearestVertex(vector<string> &temp,
                                     vector<int>    &weight,
                                     vector<int>    &nextLocation);
-        //Returns the distance of a city to the starting location, used as a
-        //helper function for dijkstra and mst
+
+        /**
+        * @brief Returns the distance of a city to the starting location, used as a
+        *        helper function for dijkstra and mst
+        * @param desiredCity - city to start
+        * @param weight - vector holding weights
+        * @param nextLocation - vector holding next location
+        * @return distance
+        */
         int determineStartingDistance(string desiredCity,
                                       vector<int>    &weight,
                                       vector<int>    &nextLocation);
 
-        //Returns the distance between one vertex and another
+        /**
+        * @brief Returns the distance between one vertex and another
+        * @param firstVertex - start vertex
+        * @param secondVertex - end vertex
+        * @return returns the weight
+        */
         int determineDistanceBetween(int firstVertex,
                                      int secondVertex);
 
-        //Returns a vector of all the visited edges in the dijkstras algorithm
+        /**
+        * @brief Returns a vector of all the visited edges in the dijkstras algorithm
+        * @param start - starting city
+        * @param end - ending city
+        * @param next - vector holding the next
+        * @return returns the vector of all the visited edges
+        */
         vector<string> determineTripVector(string start, string end, vector<int> &next);
 
+        //DFS,BFS***********************************************************************
 
-        //DFS***********************************************************************
-        //Performs the DFS search and returns the total distance traveled to main
+        /**
+        * @brief Performs the DFS search and returns the total distance traveled to main
+        * @param begin - beginning location
+        * @param theGraph - vector holding all locations found in order
+        * @return returns the distance traveled
+        */
         int DepthFirstSearch(string begin, vector<string> &theGraph);
 
-        //Helper function for method DFS that finds the smallest possible
-        //distance between each edge
+        /**
+        * @brief Helper function for method DFS that finds the smallest possible
+        *        distance between each edge
+        * @param vertex - vertex to start
+        * @param theGraph - vector holding all locations found
+        * @return distance
+        */
         int dfsHelper(int vertex, vector<string> &theGraph);
 
-        // Performs the BFS search and returns the total distance traveled to mainwindow.cpp
+        /**
+        * @brief Performs the BFS search and returns the total distance traveled to mainwindow.cpp
+        * @param begin - beginning location
+        * @param theGraph - vector holding all locations found
+        * @return returns the distance traveled
+        */
         int BreadthFirstSearch(string begin, vector<string> &theGraph);
 
-        // Recursion to run through BFS search
+        /**
+        * @brief Recursion to run through BFS search
+        * @param bfs - bfs algorithm
+        * @param previousLevel - vector holding the level before
+        * @return returns distance
+        */
         int bfsHelper(vector<string> &bfs, vector<int> previousLevel);
 
-        // returns the opposite location from the starting city
+        /**
+        * @brief returns the opposite location from the starting city
+        * @param desiredVertex - vertex they would like to find
+        * @return returns the opposite location from startin city
+        */
         string otherVertex(edge currEdge, string startingCity);
 
-        //Prints the entire DFS list after sorting
-        void printDFSList(int distance, vector<string> &theGraph);
-
-        //Will return a vector of all the discovery edges back to main
-        void printDiscoveryEdges(vector<string> &theGraph);
-
-        //Will return a vector of all of the back edges back to main
-        void printBackEdges(vector<string> &theGraph);
-
+        /**
+        * @brief Will return the distance between vertex 1 and 2
+        * @param v1 - first vertex
+        * @param v2 - second vertex
+        * @return returns the distance
+        */
         int distance(vertex * v1, vertex * v2);
 
-        //Reinitializes traversal distance back to 0
+        /**
+        * @brief Reinitializes traversal distance back to 0
+        */
         void reinitializeTraversalDistance();
-
-
 
     private:
 
-        vector<vertex> graph;	//Our graph of vertices
+        vector<vertex> graph;	/** <Our graph of vertices*/
 
-        int traversalDistance;	//The total traversal distance
+        int traversalDistance;	/** <The total traversal distance*/
 };
 
 #endif // GRAPH_H

@@ -159,30 +159,6 @@ void MLB::setDistance(int i, int distance)
     distances.at(i) = distance;
 }
 
-void MLB::printDistances()
-{
-    for(unsigned long long i = 0; i < distances.size(); i++)
-    {
-        if(distances.at(i) == 0)
-        {
-            cout << "   0   ";
-        }
-        else if(distances.at(i) < 100)
-        {
-            cout << "   " << distances.at(i) << "  ";
-        }
-        else if(distances.at(i) < 1000)
-        {
-            cout << "  " << distances.at(i) << "  ";
-        }
-        else
-        {
-            cout << " " << distances.at(i) << "  ";
-        }
-    }
-    cout << endl;
-}
-
 void MLB::pushBackDistance()
 {
     distances.push_back(0);

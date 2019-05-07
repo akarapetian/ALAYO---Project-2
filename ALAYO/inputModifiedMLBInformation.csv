@@ -1,4 +1,4 @@
-Arizona Diamondbacks,Chase Field,48686,"Phoenix, Arizona",Grass,Something,1998,407,Retro Modern,Retractable
+Arizona Diamondbacks,Chase Field,48686,"Phoenix, Arizona",Grass,National,1998,407,Retro Modern,Retractable
 Atlanta Braves,Sun Trust Park,41149,"Cumberland, Georgia",Grass,National,2017,400,Retro Modern,Open
 Baltimore Orioles,Oriole Park at Camden Yards,45971,"Baltimore, Maryland",Grass,American,1992,410,Retro Classic,Open
 Boston Red Sox,Fenway Park,37731,"Boston, Massachusetts",Grass,American,1912,420,Jewel Box,Open
@@ -17,7 +17,7 @@ Milwaukee Brewers,Miller Park,41900,"Milwaukee, Wisconsin",Grass,National,2001,4
 Minnesota Twins,Target Field,38885,"Minneapolis, Minnesota",Grass,American,2010,404,Retro Modern,Open
 New York Mets,Citi Field,41922,"Queens, New York",Grass,National,2009,408,Retro Classic,Open
 New York Yankees,Yankee Stadium,47422,"Bronx, New York",Grass,American,2009,408,Retro Classic,Open
-Oakland Athletics,Oakland Alameda County Coliseum,47170,"Oakland, California",Grass,American,1966,400,Multipurpose,Open
+Oakland Athletics,Oakland Alameda County Coliseum,35000,"Oakland, California",Grass,American,1966,400,Multipurpose,Open
 Philadelphia Phillies,Citizens Bank Park,43651,"Philadelphia, Pennsylvania",Grass,National,2004,401,Retro Classic,Open
 Pittsburgh Pirates,PNC Park,38362,"Pittsburgh, Pennsylvania",Grass,National,2001,399,Retro Classic,Open
 San Diego Padres,Petco Park,40209,"San Diego, California",Grass,National,2004,396,Retro Modern,Open
@@ -28,3 +28,4 @@ Tampa Bay Rays,Tropicana Field,31042,"St. Petersburg, Florida",AstroTurf GameDay
 Texas Rangers,Globe Life Park in Arlington,48114,"Arlington, Texas",Grass,American,1994,400,Retro Classic,Open
 Toronto Blue Jays,Rogers Centre,49282,"Toronto, Ontario",AstroTurf GameDay Grass 3D,American,1989,400,Multipurpose,Retractable
 Washington Nationals,Nationals Park,41339,"Washington, D.C.",Grass,National,2008,402,Retro Modern,Open
+Las Vegas Gamblers,Las Vegas Stadium,41111,"Las Vegas, Nevada",Grass,National,2018,400,Retro Modern,Open
